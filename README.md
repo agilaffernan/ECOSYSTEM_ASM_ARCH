@@ -134,3 +134,60 @@ The source workspace is the architectural authority. Generated HTML, JSON, DOT, 
 ## Secure Hosting
 
 The package remains usable from the local filesystem, but publication should use HTTPS and the supplied security headers. Cloudflare Pages and Netlify can consume `_headers`; NGINX can include `hosting/nginx-security-headers.conf`. See `hosting/README.md` before adding HSTS or relaxing the Content Security Policy.
+
+## Updating the Complete Ecosystem with Codex
+
+Codex can extend this repository from the ASM+ baseline into an architecture portal for the complete Auritas ecosystem. The update must remain evidence-driven: deployed infrastructure and application repositories describe the implementation, while `workspace.dsl` remains the authoritative architecture model.
+
+### Evidence and Safety Rules
+
+1. Give Codex the repositories, deployment manifests, Helm values, Terraform, API specifications, and approved environment inventory for the systems being added.
+2. Cloud inspection must be read-only unless a separate request explicitly authorizes a change. Architecture maintenance must not create, update, restart, or delete cloud resources.
+3. Never place passwords, tokens, private keys, connection strings containing credentials, service-account JSON, secret values, or customer data in the model or generated artifacts.
+4. Record observed facts separately from supported-but-disabled capabilities, recommendations, assumptions, and gaps.
+5. Preserve existing Structurizr element and view identifiers whenever the represented responsibility has not changed. Stable identifiers keep links, comparisons, and review history useful.
+
+### Codex Update Workflow
+
+1. Inventory the ecosystem systems and their owners, users, repositories, APIs, data stores, integrations, runtime platforms, network entry points, identity controls, and observability services.
+2. Compare the evidence with `workspace.dsl`, `architecture-inventory.md`, `traceability-matrix.md`, and `assumptions-and-gaps.md`. Report contradictions before changing the model.
+3. Add each product or domain as a clearly named software system under `auritas.com`. Use system-context and container views for cross-system communication, then component views only where source evidence supports that level of detail.
+4. Create or update the ten architecture areas used by this package: System Context, Containers, Components, API/Integration, Data, Deployment, Network, Security, Runtime/Sequence, and Observability.
+5. Update `tools/site-content.mjs` so the manuals explain the new systems, relationships, protocols, trust boundaries, data ownership, deployment targets, failure paths, and operational controls.
+6. Add official vendor icons only for explicitly modeled vendor products. Store local copies under `assets/icons/vendors/`, document their origins in `assets/icons/vendors/SOURCES.md`, and use generic icons for Auritas-owned or provider-neutral components.
+7. Regenerate JSON, Mermaid, DOT, SVG, the Structurizr static site, manuals, and the SBOM with the pinned workflow documented above. Run DOT optimization before SVG rendering and hardening after every Structurizr static export.
+8. If the ecosystem adds legitimate manuals, diagrams, or icon categories, update the expected counts and required categories in `tools/verify-package.mjs` as part of the same reviewed change.
+9. Run `node .\tools\verify-package.mjs`, validate `workspace.dsl` with Structurizr vNext, scan the exact browser dependencies, and preview the site with `node .\tools\serve-secure.mjs 4173`.
+10. Use browser QA to open the overview, every changed manual, the interactive Structurizr viewer, and representative full-screen SVG diagrams. Confirm that images are nonblank, links resolve, labels remain readable, and the browser console has no CSP or runtime errors.
+11. Review the final Git diff for unintended generated changes and sensitive information. Commit the source model and all synchronized generated artifacts together so the repository never contains a partially regenerated architecture.
+
+### Recommended Codex Prompt
+
+```text
+Update the Auritas ecosystem architecture in this repository using the supplied
+source repositories, deployment files, and read-only cloud evidence.
+
+Do not modify any cloud resource or application repository. Do not include
+secret values or customer data. Preserve stable Structurizr identifiers.
+
+Update workspace.dsl, the architecture inventory, traceability matrix,
+assumptions and gaps, manuals, and icon sources. Cover System Context,
+Containers, Components, API/Integration, Data, Deployment, Network, Security,
+Runtime/Sequence, and Observability for every affected system.
+
+Regenerate and synchronize the Structurizr JSON/static export, Mermaid, DOT,
+decorated SVG diagrams, HTML manuals, and CycloneDX SBOM. Apply the hosting
+hardening step, run the package verifier and dependency audit, and perform
+browser QA under the supplied security headers.
+
+Before committing, summarize observed changes, assumptions, unresolved gaps,
+security findings, validation results, and the exact files changed.
+```
+
+### Completion Criteria
+
+- Every modeled relationship is supported by source, deployment, API, or approved operational evidence.
+- Provider-specific deployment views are separated from provider-neutral application views.
+- New systems are reachable from the `auritas.com` navigation tree and the relevant Structurizr views.
+- Generated JSON, Mermaid, DOT, SVG, HTML, static-viewer, and SBOM artifacts represent the same workspace revision.
+- Package verification, dependency audit, secret scan, link validation, CSP checks, and browser rendering tests pass before publication.
