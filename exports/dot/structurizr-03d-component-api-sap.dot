@@ -1,0 +1,48 @@
+digraph {
+  compound=true
+  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  node [fontname="Arial", shape=box, margin="0.4,0.3"]
+  edge [fontname="Arial"]
+  label=<<br /><font point-size="34">3D. Component Architecture - SAP API</font><br /><font point-size="24">Internal structure of the SAP ArchiveLink integration.</font>>
+
+  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+
+  subgraph cluster_13 {
+    margin=25
+    label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
+    labelloc=b
+    color="#444444"
+    fontcolor="#444444"
+    fillcolor="#444444"
+
+    subgraph cluster_47 {
+      margin=25
+      label=<<font point-size="24"><br />SAP API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3020]</font>>
+      labelloc=b
+      color="#444444"
+      fontcolor="#444444"
+      fillcolor="#444444"
+
+      48 [id=48,shape=component, label=<<font point-size="34">ArchiveLink HTTP<br />Interface</font><br /><font point-size="19">[Component: Express, raw/multipart HTTP]</font><br /><br /><font point-size="24">Exposes GET, PUT, and POST<br />/api/sap plus health and<br />administrative routes.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      49 [id=49,shape=component, label=<<font point-size="34">SAP Authentication</font><br /><font point-size="19">[Component: Basic Auth, X-Api-Key]</font><br /><br /><font point-size="24">Validates Basic Auth, trusted<br />service keys, and ArchiveLink<br />certificates.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      50 [id=50,shape=component, label=<<font point-size="34">SAP Metadata<br />Persistence</font><br /><font point-size="19">[Component: pg]</font><br /><br /><font point-size="24">Maps SAP systems,<br />repositories, documents, and<br />components into folders/files.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      51 [id=51,shape=component, label=<<font point-size="34">Viewer Token and<br />Redirect Service</font><br /><font point-size="19">[Component: HMAC-SHA256]</font><br /><br /><font point-size="24">Creates bounded HMAC viewer<br />tokens and redirects browser<br />launches to the Viewer.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      52 [id=52,shape=component, label=<<font point-size="34">ASM Storage Client</font><br /><font point-size="19">[Component: HTTP, X-Api-Key]</font><br /><br /><font point-size="24">Delegates binary and<br />certificate storage to<br />asm-api.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      53 [id=53,shape=component, label=<<font point-size="34">SAP Management UI and<br />Services</font><br /><font point-size="19">[Component: Static UI and Express]</font><br /><br /><font point-size="24">Provides service-user,<br />license, and certificate<br />administration endpoints.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      54 [id=54,shape=component, label=<<font point-size="34">Vector Integration<br />Client</font><br /><font point-size="19">[Component: HTTP, optional]</font><br /><br /><font point-size="24">Optional indexing adapter;<br />VECTOR_API_URL is empty in the<br />live deployment.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+    }
+
+    26 [id=26,shape=rect, label=<<font point-size="34">Document Viewer</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
+    63 [id=63,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#6d28d9", fillcolor="#7c3aed", fontcolor="#ffffff"]
+  }
+
+  48 -> 49 [id=186, label=<<font point-size="18">Authenticates requests</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  48 -> 50 [id=187, label=<<font point-size="18">Persists successful operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  48 -> 51 [id=188, label=<<font point-size="18">Creates browser redirects when<br />applicable</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  48 -> 52 [id=189, label=<<font point-size="18">Delegates document operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  50 -> 7 [id=190, label=<<font point-size="18">Queries</font><br /><font point-size="13">[PostgreSQL]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  52 -> 63 [id=191, label=<<font point-size="18">Calls</font><br /><font point-size="13">[HTTP, X-Api-Key]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  51 -> 26 [id=192, label=<<font point-size="18">Redirects</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  53 -> 52 [id=193, label=<<font point-size="18">Stores managed objects</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+
+}

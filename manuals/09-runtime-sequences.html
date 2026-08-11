@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Walks through the principal interactive and integration flows: SSO, document upload, document viewing, SAP ArchiveLink writes, and Salesforce writes.">
+  <title>9. Runtime and Sequence Architecture | ASM+ Architecture</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="layout">
+    <aside class="sidebar">
+    <a class="brand" href="../index.html">ASM+ Architecture</a>
+    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="nav-label">Manuals</p>
+    <ul class="nav-list">
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../manuals/01-system-context.html">1. System Context</a></li>
+<li><a href="../manuals/02-container-microservices.html">2. Container / Microservices</a></li>
+<li><a href="../manuals/03-component-architecture.html">3. Component Architecture</a></li>
+<li><a href="../manuals/04-api-integration.html">4. API / Integration</a></li>
+<li><a href="../manuals/05-data-architecture.html">5. Data Architecture</a></li>
+<li><a href="../manuals/06-deployment-architecture.html">6. Deployment Architecture</a></li>
+<li><a href="../manuals/07-network-architecture.html">7. Network Architecture</a></li>
+<li><a href="../manuals/08-security-architecture.html">8. Security Architecture</a></li>
+<li><a href="../manuals/09-runtime-sequences.html" aria-current="page">9. Runtime / Sequence</a></li>
+<li><a href="../manuals/10-observability.html">10. Observability</a></li>
+    </ul>
+    <p class="nav-label">Model and evidence</p>
+    <ul class="nav-list">
+      <li><a href="../structurizr-site/index.html">Interactive Structurizr</a></li>
+      <li><a href="../workspace.dsl">Structurizr DSL</a></li>
+      <li><a href="../architecture-inventory.md">Inventory</a></li>
+      <li><a href="../traceability-matrix.md">Traceability</a></li>
+      <li><a href="../assumptions-and-gaps.md">Assumptions and gaps</a></li>
+    </ul>
+  </aside>
+    <main class="main" id="content">
+      <div class="content">
+    <div class="title-row"><img class="title-icon" src="../assets/icons/api.svg" alt=""><div><p class="eyebrow">Architecture manual 9</p><h1>Runtime and Sequence Architecture</h1></div></div>
+    <p class="lead">Walks through the principal interactive and integration flows: SSO, document upload, document viewing, SAP ArchiveLink writes, and Salesforce writes.</p>
+    <div class="meta-row"><span><strong>Project:</strong> sap-ecosystem-asmplus</span><span><strong>Environment:</strong> Live GCP</span><span><strong>Observed:</strong> August 11, 2026</span></div>
+    <div class="status-key" aria-label="Evidence status key">
+      <span class="status observed">Observed live</span>
+      <span class="status optional">Optional capability</span>
+      <span class="status recommendation">Recommendation</span>
+      <span class="status gap">Observed gap</span>
+    </div>
+    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <section><h2>Architecture View</h2>
+    <section class="diagram-block" aria-labelledby="diagram-1">
+      <h3 id="diagram-1">SSO Login Flow</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09a-runtime-sso.svg&title=SSO%20Login%20Flow" aria-label="Open SSO Login Flow in the full-screen diagram viewer"><img src="../diagrams/structurizr-09a-runtime-sso.svg" alt="Dynamic diagram of ASM+ SSO login"></a>
+      </div>
+      <p class="diagram-caption">Figure 9a. Browser redirection to Auth, credential exchange, token callback, and application API use.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09a-runtime-sso.svg&title=SSO%20Login%20Flow">Open full-screen viewer</a><a href="../structurizr-site/index.html#09a-runtime-sso">Open this view in Structurizr</a></p>
+    </section>
+
+    <section class="diagram-block" aria-labelledby="diagram-2">
+      <h3 id="diagram-2">Folder and Document Upload Flow</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09b-runtime-upload.svg&title=Folder%20and%20Document%20Upload%20Flow" aria-label="Open Folder and Document Upload Flow in the full-screen diagram viewer"><img src="../diagrams/structurizr-09b-runtime-upload.svg" alt="Dynamic diagram of ASM+ upload"></a>
+      </div>
+      <p class="diagram-caption">Figure 9b. Metadata validation and persistence combined with internal GCS-backed object storage.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09b-runtime-upload.svg&title=Folder%20and%20Document%20Upload%20Flow">Open full-screen viewer</a><a href="../structurizr-site/index.html#09b-runtime-upload">Open this view in Structurizr</a></p>
+    </section>
+
+    <section class="diagram-block" aria-labelledby="diagram-3">
+      <h3 id="diagram-3">Document View Flow</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09c-runtime-view.svg&title=Document%20View%20Flow" aria-label="Open Document View Flow in the full-screen diagram viewer"><img src="../diagrams/structurizr-09c-runtime-view.svg" alt="Dynamic diagram of ASM+ document viewing"></a>
+      </div>
+      <p class="diagram-caption">Figure 9c. Viewer access validation, metadata lookup, and ranged binary retrieval.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09c-runtime-view.svg&title=Document%20View%20Flow">Open full-screen viewer</a><a href="../structurizr-site/index.html#09c-runtime-view">Open this view in Structurizr</a></p>
+    </section>
+
+    <section class="diagram-block" aria-labelledby="diagram-4">
+      <h3 id="diagram-4">SAP ArchiveLink Write Flow</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09d-runtime-sap.svg&title=SAP%20ArchiveLink%20Write%20Flow" aria-label="Open SAP ArchiveLink Write Flow in the full-screen diagram viewer"><img src="../diagrams/structurizr-09d-runtime-sap.svg" alt="Dynamic diagram of SAP document write"></a>
+      </div>
+      <p class="diagram-caption">Figure 9d. SAP authentication, object storage, and metadata persistence.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09d-runtime-sap.svg&title=SAP%20ArchiveLink%20Write%20Flow">Open full-screen viewer</a><a href="../structurizr-site/index.html#09d-runtime-sap">Open this view in Structurizr</a></p>
+    </section>
+
+    <section class="diagram-block" aria-labelledby="diagram-5">
+      <h3 id="diagram-5">Salesforce Token and Write Flow</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09e-runtime-salesforce.svg&title=Salesforce%20Token%20and%20Write%20Flow" aria-label="Open Salesforce Token and Write Flow in the full-screen diagram viewer"><img src="../diagrams/structurizr-09e-runtime-salesforce.svg" alt="Dynamic diagram of Salesforce document write"></a>
+      </div>
+      <p class="diagram-caption">Figure 9e. Managed-user token issuance followed by repository-scoped document persistence.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-09e-runtime-salesforce.svg&title=Salesforce%20Token%20and%20Write%20Flow">Open full-screen viewer</a><a href="../structurizr-site/index.html#09e-runtime-salesforce">Open this view in Structurizr</a></p>
+    </section></section>
+    <section><h2>SSO Login</h2><ol><li>The ASM+ frontend redirects the browser to the Auth Portal with an encoded return URL.</li><li>The Auth Portal submits credentials or initiates an available federated flow.</li><li>The Auth API verifies identity and signs a JWT.</li><li>The browser returns to the ASM+ callback with the bounded token.</li><li>The frontend confirms application access and uses the token for ASM+ API requests.</li></ol></section>
+<section><h2>Folder Creation and Upload</h2><ol><li>The user submits a folder or file operation from ASM+ Web.</li><li>ASM+ API validates JWT, application access, folder capability, and license requirements.</li><li>Metadata is read or written in Cloud SQL through the local proxy.</li><li>Binary content and manifests are delegated to <code>asm-api</code> with <code>X-Api-Key</code>.</li><li><code>asm-api</code> stores objects in GCS using ADC and generation preconditions.</li><li>The API returns identifiers and status to the frontend.</li></ol>
+        <div class="notice warning"><strong>Operational dependency.</strong> A missing or invalid ASM license can block protected storage operations even when folder metadata and the UI are otherwise healthy.</div></section>
+<section><h2>Document Viewing</h2><ol><li>ASM+ Web launches the Viewer with document context.</li><li>The Viewer validates or renews the Auth session and confirms application access.</li><li>The Viewer requests document metadata and content from ASM+ API or SAP API.</li><li>The domain API calls <code>asm-api</code> for the stored binary as needed.</li><li><code>asm-api</code> reads the GCS object and supports byte ranges for compatible clients.</li><li>The Viewer selects native browser rendering or the optional OnlyOffice path.</li></ol></section>
+<section><h2>SAP ArchiveLink Write</h2><ol><li>SAP sends an ArchiveLink request to the SAP API public hostname.</li><li>The API validates Basic Auth, certificate, or service-key context.</li><li>The SAP API delegates object storage to <code>asm-api</code>.</li><li>The storage API writes the document object and manifest to GCS.</li><li>The SAP API maps repository/document information into Cloud SQL folders/files and returns the ArchiveLink response.</li></ol></section>
+<section><h2>Salesforce Token and Write</h2><ol><li>Salesforce obtains a bounded token through the configured JWT/OAuth or SAML-bearer flow.</li><li>The SF API validates the managed user, public key, and allowed repository scope.</li><li>The document operation is delegated to <code>asm-api</code> for object storage.</li><li>The SF API persists repository, version, folder, and document metadata in Cloud SQL.</li><li>The integration response is returned to Salesforce.</li></ol></section>
+<section><h2>Failure Boundaries</h2><ul><li>Ingress readiness controls whether a pod receives new external traffic.</li><li>JWT, application access, folder permissions, integration credentials, internal API keys, and licenses fail at distinct layers.</li><li>A Cloud SQL proxy failure affects metadata operations for one API pod.</li><li>A GCS or Workload Identity failure affects object operations through <code>asm-api</code>.</li><li>Optional providers such as OnlyOffice, vector indexing, or enterprise SSO should not be assumed available when their runtime values are empty.</li></ul></section>
+    <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
+    </main>
+  </div>
+  <script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+digraph {
+  compound=true
+  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  node [fontname="Arial", shape=box, margin="0.4,0.3"]
+  edge [fontname="Arial"]
+  label=<<br /><font point-size="34">3G. Component Architecture - Auth Portal</font><br /><font point-size="24">Internal structure of the Auth Portal.</font>>
+
+  subgraph cluster_13 {
+    margin=25
+    label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
+    labelloc=b
+    color="#444444"
+    fontcolor="#444444"
+    fillcolor="#444444"
+
+    subgraph cluster_14 {
+      margin=25
+      label=<<font point-size="24"><br />Auth Portal</font><br /><font point-size="19">[Container: React, Vite, NGINX]</font>>
+      labelloc=b
+      color="#444444"
+      fontcolor="#444444"
+      fillcolor="#444444"
+
+      15 [id=15,shape=folder, label=<<font point-size="34">Runtime Configuration<br />Loader</font><br /><font point-size="19">[Component: JavaScript]</font><br /><br /><font point-size="24">Loads API_BASE_URL and UI<br />settings from<br />runtime-config.js.</font>>, style=filled, color="#64748b", fillcolor="#e2e8f0", fontcolor="#172033"]
+      16 [id=16,shape=component, label=<<font point-size="34">Portal Application</font><br /><font point-size="19">[Component: React]</font><br /><br /><font point-size="24">Routes login, users, roles,<br />applications, structures, and<br />connections pages.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      17 [id=17,shape=component, label=<<font point-size="34">Authentication and<br />SSO Context</font><br /><font point-size="19">[Component: React Context]</font><br /><br /><font point-size="24">Maintains the JWT/session<br />state and coordinates local,<br />SAML, and Microsoft flows.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      18 [id=18,shape=component, label=<<font point-size="34">Auth API Client</font><br /><font point-size="19">[Component: Fetch/JSON]</font><br /><br /><font point-size="24">Calls authentication and<br />administration endpoints.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+    }
+
+    32 [id=32,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+    71 [id=71,shape=folder, label=<<font point-size="34">Runtime Configuration</font><br /><font point-size="19">[Container: Kubernetes ConfigMaps]</font><br /><br /><font point-size="24">Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</font>>, style=filled, color="#326ce5", fillcolor="#ffffff", fontcolor="#172033"]
+  }
+
+  71 -> 32 [id=114, label=<<font point-size="18">Injects non-secret runtime<br />configuration</font><br /><font point-size="13">[Environment variables]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  15 -> 71 [id=142, label=<<font point-size="18">Reads startup configuration</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  16 -> 17 [id=144, label=<<font point-size="18">Uses</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  16 -> 18 [id=145, label=<<font point-size="18">Uses</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  17 -> 18 [id=146, label=<<font point-size="18">Authenticates through</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  18 -> 32 [id=147, label=<<font point-size="18">Calls</font><br /><font point-size="13">[HTTPS/JSON]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+
+}

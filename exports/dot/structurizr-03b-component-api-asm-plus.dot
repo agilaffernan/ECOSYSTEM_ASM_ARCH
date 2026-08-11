@@ -1,0 +1,52 @@
+digraph {
+  compound=true
+  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  node [fontname="Arial", shape=box, margin="0.4,0.3"]
+  edge [fontname="Arial"]
+  label=<<br /><font point-size="34">3B. Component Architecture - ASM+ API</font><br /><font point-size="24">Internal structure of the ASM+ orchestration API.</font>>
+
+  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+
+  subgraph cluster_13 {
+    margin=25
+    label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
+    labelloc=b
+    color="#444444"
+    fontcolor="#444444"
+    fillcolor="#444444"
+
+    subgraph cluster_38 {
+      margin=25
+      label=<<font point-size="24"><br />ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font>>
+      labelloc=b
+      color="#444444"
+      fontcolor="#444444"
+      fillcolor="#444444"
+
+      39 [id=39,shape=component, label=<<font point-size="34">Routes and<br />Controllers</font><br /><font point-size="19">[Component: Express]</font><br /><br /><font point-size="24">Exposes file, folder, audit,<br />workflow, report, RBAC, user,<br />and metadata endpoints.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      40 [id=40,shape=component, label=<<font point-size="34">JWT and Authorization<br />Middleware</font><br /><font point-size="19">[Component: jsonwebtoken]</font><br /><br /><font point-size="24">Validates shared JWTs, role<br />policy, folder capabilities,<br />and service-user home scope.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      41 [id=41,shape=component, label=<<font point-size="34">License Middleware</font><br /><font point-size="19">[Component: TypeScript middleware]</font><br /><br /><font point-size="24">Blocks licensed operations<br />when the shared ASM license is<br />not valid.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      42 [id=42,shape=component, label=<<font point-size="34">Document and Access<br />Services</font><br /><font point-size="19">[Component: TypeScript services]</font><br /><br /><font point-size="24">Coordinates folders, files,<br />permissions, role groups,<br />notifications, workflows, and<br />audit.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      43 [id=43,shape=component, label=<<font point-size="34">Search and Reporting<br />Services</font><br /><font point-size="19">[Component: TypeScript services]</font><br /><br /><font point-size="24">Builds reports, durable<br />summaries, and folder/search<br />scopes.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      44 [id=44,shape=component, label=<<font point-size="34">ASM Storage Client</font><br /><font point-size="19">[Component: HTTP, X-Api-Key]</font><br /><br /><font point-size="24">Delegates binary and manifest<br />operations to asm-api with the<br />internal API key.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      45 [id=45,shape=component, label=<<font point-size="34">PostgreSQL Adapter</font><br /><font point-size="19">[Component: pg]</font><br /><br /><font point-size="24">Reads and writes the 23-table<br />application schema.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      46 [id=46,shape=component, label=<<font point-size="34">Vector Integration<br />Client</font><br /><font point-size="19">[Component: HTTP, optional]</font><br /><br /><font point-size="24">Optional indexing/reindexing<br />adapter; VECTOR_API_URL is<br />empty in the live deployment.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+    }
+
+    63 [id=63,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#6d28d9", fillcolor="#7c3aed", fontcolor="#ffffff"]
+  }
+
+  39 -> 40 [id=174, label=<<font point-size="18">Applies authentication and<br />authorization</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  39 -> 41 [id=175, label=<<font point-size="18">Applies license checks</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  39 -> 42 [id=176, label=<<font point-size="18">Delegates document and access<br />operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  39 -> 43 [id=177, label=<<font point-size="18">Delegates search and reports</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  40 -> 45 [id=178, label=<<font point-size="18">Loads authorization context</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  42 -> 45 [id=179, label=<<font point-size="18">Reads and writes metadata</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  42 -> 44 [id=180, label=<<font point-size="18">Reads and writes binary objects</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  43 -> 45 [id=181, label=<<font point-size="18">Queries and writes durable summaries</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  43 -> 44 [id=182, label=<<font point-size="18">Reads source objects when required</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  41 -> 44 [id=183, label=<<font point-size="18">Checks the shared ASM license</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  44 -> 63 [id=184, label=<<font point-size="18">Calls</font><br /><font point-size="13">[HTTP, X-Api-Key]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  45 -> 7 [id=185, label=<<font point-size="18">Queries</font><br /><font point-size="13">[PostgreSQL]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+
+}

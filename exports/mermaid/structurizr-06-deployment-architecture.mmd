@@ -1,0 +1,227 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["6. Deployment Architecture"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    subgraph 211 ["Auritas DNS Provider"]
+      style 211 fill:#ffffff,stroke:#64748b,color:#172033
+
+      212["<div style='font-weight: bold'>Auritas DNS</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Publishes seven A records<br />under<br />asmplus-demo.auritas.com.</div>"]
+      style 212 fill:#e2e8f0,stroke:#64748b,color:#172033
+    end
+
+    subgraph 213 ["GCP Project: sap-ecosystem-asmplus"]
+      style 213 fill:#ffffff,stroke:#64748b,color:#172033
+
+      subgraph 214 ["VPC: default"]
+        style 214 fill:#ffffff,stroke:#4285f4,color:#172033
+
+        215["<div style='font-weight: bold'>Managed Certificate</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node: GKE ManagedCertificate]</div><div style='font-size: 80%; margin-top:10px'>Active certificate<br />asmplus-demo-certificate-v2<br />for all seven hostnames.</div>"]
+        style 215 fill:#ffffff,stroke:#4285f4,color:#172033
+        216["<div style='font-weight: bold'>Global External Application Load Balancer</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node: GCE Ingress, FrontendConfig]</div><div style='font-size: 80%; margin-top:10px'>Static IPv4 34.36.209.159;<br />HTTP redirects permanently to<br />HTTPS.</div>"]
+        style 216 fill:#ffffff,stroke:#4285f4,color:#172033
+        subgraph 217 ["GKE: asmplus-demo-gke"]
+          style 217 fill:#ffffff,stroke:#4285f4,color:#172033
+
+          subgraph 218 ["Node pool: default-pool"]
+            style 218 fill:#ffffff,stroke:#4285f4,color:#172033
+
+            219["<div style='font-weight: bold'>Kubelet and containerd</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node: GKE node runtime]</div><div style='font-size: 80%; margin-top:10px'>Pulls images, runs<br />containers, reports logs and<br />metrics.</div>"]
+            style 219 fill:#ffffff,stroke:#326ce5,color:#172033
+            subgraph 220 ["Namespace: asm-plus-demo"]
+              style 220 fill:#ffffff,stroke:#0f1689,color:#172033
+
+              221["<div style='font-weight: bold'>Helm Release: asm-plus-demo</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node: Helm]</div><div style='font-size: 80%; margin-top:10px'>Renders and manages the ASM+<br />Kubernetes resources from the<br />ecosystem chart and GCP<br />values files.</div>"]
+              style 221 fill:#ffffff,stroke:#0f1689,color:#172033
+              222["<div style='font-weight: bold'>Runtime Configuration</div><div style='font-size: 70%; margin-top: 0px'>[Container: Kubernetes ConfigMaps]</div><div style='font-size: 80%; margin-top:10px'>Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</div>"]
+              style 222 fill:#ffffff,stroke:#326ce5,color:#172033
+              223[("<div style='font-weight: bold'>Runtime Secrets</div><div style='font-size: 70%; margin-top: 0px'>[Container: Kubernetes Opaque Secret]</div><div style='font-size: 80%; margin-top:10px'>Namespace-scoped secret<br />containing the seven keys<br />observed in the live<br />deployment; values are not<br />modeled.</div>")]
+              style 223 fill:#ffffff,stroke:#326ce5,color:#172033
+              subgraph 224 ["front-auth Pod"]
+                style 224 fill:#ffffff,stroke:#326ce5,color:#172033
+
+                225["<div style='font-weight: bold'>Auth Portal</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, NGINX]</div><div style='font-size: 80%; margin-top:10px'>Login, SSO, and<br />access-administration web<br />application.</div>"]
+                style 225 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+              end
+
+              subgraph 228 ["front-asm-plus Pod"]
+                style 228 fill:#ffffff,stroke:#326ce5,color:#172033
+
+                229["<div style='font-weight: bold'>ASM+ Web Application</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Primary document, workflow,<br />report, search, and<br />administration UI.</div>"]
+                style 229 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+              end
+
+              subgraph 234 ["front-viewer Pod"]
+                style 234 fill:#ffffff,stroke:#326ce5,color:#172033
+
+                235["<div style='font-weight: bold'>Document Viewer</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</div>"]
+                style 235 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+              end
+
+              subgraph 240 ["api-auth Pod"]
+                style 240 fill:#ffffff,stroke:#326ce5,color:#172033
+
+                241["<div style='font-weight: bold'>Auth API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</div>"]
+                style 241 fill:#0f766e,stroke:#115e59,color:#ffffff
+                247["<div style='font-weight: bold'>Cloud SQL Auth Proxy</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node: cloud-sql-proxy 2.14.1]</div><div style='font-size: 80%; margin-top:10px'>Uses private IP and<br />cloudsql-client Workload<br />Identity.</div>"]
+                style 247 fill:#ffffff,stroke:#4285f4,color:#172033
+              end
+
+              subgraph 248 ["api-asm-plus Pod"]
+                style 248 fill:#ffffff,stroke:#326ce5,color:#172033
+
+                249["<div style='font-weight: bold'>ASM+ API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Orchestrates document<br />metadata, access, workflows,<br />notifications, reports,<br />audit, and binary operations.</div>"]
+                style 249 fill:#0f766e,stroke:#115e59,color:#ffffff
+                254["<div style='font-weight: bold'>Cloud SQL Auth Proxy</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node: cloud-sql-proxy 2.14.1]</div><div style='font-size: 80%; margin-top:10px'>Uses private IP and<br />cloudsql-client Workload<br />Identity.</div>"]
+                style 254 fill:#ffffff,stroke:#4285f4,color:#172033
+              end
+
+              subgraph 255 ["api-sap Pod"]
+                style 255 fill:#ffffff,stroke:#326ce5,color:#172033
+
+                256["<div style='font-weight: bold'>SAP API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3020]</div><div style='font-size: 80%; margin-top:10px'>Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</div>"]
+                style 256 fill:#b45309,stroke:#92400e,color:#ffffff
+                261["<div style='font-weight: bold'>Cloud SQL Auth Proxy</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node: cloud-sql-proxy 2.14.1]</div><div style='font-size: 80%; margin-top:10px'>Uses private IP and<br />cloudsql-client Workload<br />Identity.</div>"]
+                style 261 fill:#ffffff,stroke:#4285f4,color:#172033
+              end
+
+              subgraph 262 ["api-sf Pod"]
+                style 262 fill:#ffffff,stroke:#326ce5,color:#172033
+
+                263["<div style='font-weight: bold'>Salesforce API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3030]</div><div style='font-size: 80%; margin-top:10px'>Provides Salesforce<br />repository/document<br />operations and token<br />issuance.</div>"]
+                style 263 fill:#b45309,stroke:#92400e,color:#ffffff
+                266["<div style='font-weight: bold'>Cloud SQL Auth Proxy</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node: cloud-sql-proxy 2.14.1]</div><div style='font-size: 80%; margin-top:10px'>Uses private IP and<br />cloudsql-client Workload<br />Identity.</div>"]
+                style 266 fill:#ffffff,stroke:#4285f4,color:#172033
+              end
+
+              subgraph 267 ["asm-api Pod"]
+                style 267 fill:#ffffff,stroke:#326ce5,color:#172033
+
+                268["<div style='font-weight: bold'>ASM Storage API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</div>"]
+                style 268 fill:#7c3aed,stroke:#6d28d9,color:#ffffff
+                274["<div style='font-weight: bold'>Workload Identity / GKE metadata server</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node: GKE Workload Identity Federation]</div><div style='font-size: 80%; margin-top:10px'>Provides short-lived<br />Application Default<br />Credentials; no JSON key is<br />mounted.</div>"]
+                style 274 fill:#ffffff,stroke:#4285f4,color:#172033
+              end
+
+            end
+
+          end
+
+        end
+
+        subgraph 275 ["Cloud SQL: asmplus-demo-postgres"]
+          style 275 fill:#ffffff,stroke:#4285f4,color:#172033
+
+          276[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
+          style 276 fill:#ffffff,stroke:#4285f4,color:#172033
+        end
+
+      end
+
+      subgraph 281 ["Cloud Storage: sap-ecosystem-asmplus-asm-binaries"]
+        style 281 fill:#ffffff,stroke:#4285f4,color:#172033
+
+        282[("<div style='font-weight: bold'>Cloud Storage</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</div>")]
+        style 282 fill:#ffffff,stroke:#4285f4,color:#172033
+      end
+
+      subgraph 284 ["Secret Manager"]
+        style 284 fill:#ffffff,stroke:#4285f4,color:#172033
+
+        285[("<div style='font-weight: bold'>Secret Manager</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Stores the five observed core<br />secret objects; secret values<br />are not represented in this<br />model.</div>")]
+        style 285 fill:#ffffff,stroke:#4285f4,color:#172033
+      end
+
+      subgraph 287 ["Artifact Registry: asm-plus"]
+        style 287 fill:#ffffff,stroke:#4285f4,color:#172033
+
+        288["<div style='font-weight: bold'>Artifact Registry</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Repository<br />us-east1-docker.pkg.dev/sap-ecosystem-asmplus/asm-plus<br />stores the deployed images.</div>"]
+        style 288 fill:#ffffff,stroke:#4285f4,color:#172033
+      end
+
+      subgraph 289 ["Cloud Operations"]
+        style 289 fill:#ffffff,stroke:#4285f4,color:#172033
+
+        290["<div style='font-weight: bold'>Cloud Logging and Monitoring</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Receives GKE system/workload<br />logs and platform metrics. No<br />custom alert policies were<br />observed.</div>"]
+        style 290 fill:#ffffff,stroke:#4285f4,color:#172033
+        299["<div style='font-weight: bold'>GKE Health Management</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Runs Kubernetes readiness and<br />liveness probes and controls<br />rollout availability.</div>"]
+        style 299 fill:#ffffff,stroke:#4285f4,color:#172033
+      end
+
+    end
+
+    225-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->222
+    222-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->225
+    229-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->222
+    222-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->229
+    223-. "<div>Injects the Auth client key</div><div style='font-size: 70%'>[Environment variable]</div>" .->229
+    229-. "<div>Redirects the browser to the<br />SSO portal</div><div style='font-size: 70%'>[HTTPS]</div>" .->225
+    235-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->222
+    222-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->235
+    235-. "<div>Redirects the browser to SSO<br />when a session is absent</div><div style='font-size: 70%'>[HTTPS]</div>" .->225
+    229-. "<div>Launches the selected<br />document</div><div style='font-size: 70%'>[HTTPS]</div>" .->235
+    222-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->241
+    223-. "<div>Injects database, JWT,<br />superadmin, and client-key<br />secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->241
+    225-. "<div>Authenticates users and<br />administers identity/access<br />data</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->241
+    229-. "<div>Authenticates and checks<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->241
+    235-. "<div>Validates authentication and<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->241
+    222-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->249
+    223-. "<div>Injects database, JWT,<br />internal API, and optional<br />vector secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->249
+    229-. "<div>Performs document, workflow,<br />report, search, and audit<br />operations</div><div style='font-size: 70%'>[HTTPS/JSON and binary]</div>" .->249
+    235-. "<div>Retrieves ASM+ metadata and<br />file content</div><div style='font-size: 70%'>[HTTPS/JSON and HTTP range]</div>" .->249
+    222-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->256
+    223-. "<div>Injects database, JWT,<br />internal API, and SAP user<br />secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->256
+    256-. "<div>Redirects browser-origin SAP<br />launch requests</div><div style='font-size: 70%'>[HTTPS with bounded viewer token]</div>" .->235
+    235-. "<div>Retrieves SAP-origin document<br />components</div><div style='font-size: 70%'>[HTTPS/ArchiveLink]</div>" .->256
+    222-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->263
+    223-. "<div>Injects database, internal<br />API, Salesforce user, and<br />optional vector secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->263
+    222-. "<div>Selects GCP/GCS and supplies<br />bucket/project configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->268
+    223-. "<div>Injects the internal ASM API<br />key</div><div style='font-size: 70%'>[Environment variables]</div>" .->268
+    249-. "<div>Reads and writes document<br />objects, manifests, licenses,<br />and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->268
+    256-. "<div>Reads and writes SAP document<br />objects and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->268
+    263-. "<div>Reads and writes Salesforce<br />document and registry objects</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->268
+    241-. "<div>Reads and writes identity and<br />access tables through a local<br />Cloud SQL Auth Proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->276
+    249-. "<div>Reads and writes document<br />metadata, RBAC, workflow,<br />audit, and reporting tables<br />through a local proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->276
+    256-. "<div>Persists SAP document<br />hierarchy and metadata<br />through a local proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->276
+    263-. "<div>Persists Salesforce document<br />hierarchy and metadata<br />through a local proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->276
+    268-. "<div>Stores and retrieves<br />binaries, manifests,<br />licenses, and certificates<br />using ADC</div><div style='font-size: 70%'>[GCS API over HTTPS]</div>" .->282
+    285-. "<div>Provides approved core secret<br />material during provisioning</div><div style='font-size: 70%'>[Administrative provisioning path]</div>" .->223
+    225-. "<div>Writes web-server logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->290
+    229-. "<div>Writes web-server logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->290
+    235-. "<div>Writes web-server logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->290
+    241-. "<div>Writes structured/application<br />logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->290
+    249-. "<div>Writes application logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->290
+    256-. "<div>Writes trace-aware<br />integration logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->290
+    263-. "<div>Writes structured integration<br />logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->290
+    268-. "<div>Writes storage request and<br />health logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->290
+    299-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->225
+    299-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->229
+    299-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->235
+    299-. "<div>Checks /health and /health/db</div><div style='font-size: 70%'>[HTTP]</div>" .->241
+    299-. "<div>Checks /health/live and<br />/health/ready</div><div style='font-size: 70%'>[HTTP]</div>" .->249
+    299-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->256
+    299-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->263
+    299-. "<div>Checks /health and /ready</div><div style='font-size: 70%'>[HTTP]</div>" .->268
+    212-. "<div>Resolves all public hostnames</div><div style='font-size: 70%'>[DNS A records]</div>" .->216
+    215-. "<div>Provides TLS certificate</div><div style='font-size: 70%'>[Google-managed TLS]</div>" .->216
+    216-. "<div>Routes<br />auth.asmplus-demo.auritas.com</div><div style='font-size: 70%'>[HTTPS to NEG port 80]</div>" .->225
+    216-. "<div>Routes<br />api-auth.asmplus-demo.auritas.com</div><div style='font-size: 70%'>[HTTPS to NEG port 3000]</div>" .->241
+    216-. "<div>Routes<br />app.asmplus-demo.auritas.com</div><div style='font-size: 70%'>[HTTPS to NEG port 8080]</div>" .->229
+    216-. "<div>Routes<br />api-asm-plus.asmplus-demo.auritas.com</div><div style='font-size: 70%'>[HTTPS to NEG port 3000]</div>" .->249
+    216-. "<div>Routes<br />viewer.asmplus-demo.auritas.com</div><div style='font-size: 70%'>[HTTPS to NEG port 8080]</div>" .->235
+    216-. "<div>Routes<br />api-sap.asmplus-demo.auritas.com</div><div style='font-size: 70%'>[HTTPS to NEG port 3020]</div>" .->256
+    216-. "<div>Routes<br />api-sf.asmplus-demo.auritas.com</div><div style='font-size: 70%'>[HTTPS to NEG port 3030]</div>" .->263
+    241-. "<div>Connects to localhost:5432</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->247
+    249-. "<div>Connects to localhost:5432</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->254
+    256-. "<div>Connects to localhost:5432</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->261
+    263-. "<div>Connects to localhost:5432</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->266
+    247-. "<div>Creates a private encrypted<br />connector channel</div><div style='font-size: 70%'>[Cloud SQL Connector]</div>" .->276
+    254-. "<div>Creates a private encrypted<br />connector channel</div><div style='font-size: 70%'>[Cloud SQL Connector]</div>" .->276
+    261-. "<div>Creates a private encrypted<br />connector channel</div><div style='font-size: 70%'>[Cloud SQL Connector]</div>" .->276
+    266-. "<div>Creates a private encrypted<br />connector channel</div><div style='font-size: 70%'>[Cloud SQL Connector]</div>" .->276
+    268-. "<div>Obtains short-lived<br />credentials</div><div style='font-size: 70%'>[GKE metadata server]</div>" .->274
+    274-. "<div>Authorizes object<br />administration</div><div style='font-size: 70%'>[Workload Identity, roles/storage.objectAdmin]</div>" .->282
+    219-. "<div>Pulls OCI images</div><div style='font-size: 70%'>[HTTPS]</div>" .->288
+
+  end

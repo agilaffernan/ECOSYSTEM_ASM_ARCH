@@ -1,0 +1,51 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["3B. Component Architecture - ASM+ API"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    7[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
+    style 7 fill:#ffffff,stroke:#4285f4,color:#172033
+
+    subgraph 13 ["ASM+"]
+      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+
+      subgraph 38 ["ASM+ API"]
+        style 38 fill:#ffffff,stroke:#115e59,color:#115e59
+
+        39["<div style='font-weight: bold'>Routes and Controllers</div><div style='font-size: 70%; margin-top: 0px'>[Component: Express]</div><div style='font-size: 80%; margin-top:10px'>Exposes file, folder, audit,<br />workflow, report, RBAC, user,<br />and metadata endpoints.</div>"]
+        style 39 fill:#f8fafc,stroke:#64748b,color:#172033
+        40["<div style='font-weight: bold'>JWT and Authorization Middleware</div><div style='font-size: 70%; margin-top: 0px'>[Component: jsonwebtoken]</div><div style='font-size: 80%; margin-top:10px'>Validates shared JWTs, role<br />policy, folder capabilities,<br />and service-user home scope.</div>"]
+        style 40 fill:#f8fafc,stroke:#64748b,color:#172033
+        41["<div style='font-weight: bold'>License Middleware</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript middleware]</div><div style='font-size: 80%; margin-top:10px'>Blocks licensed operations<br />when the shared ASM license<br />is not valid.</div>"]
+        style 41 fill:#f8fafc,stroke:#64748b,color:#172033
+        42["<div style='font-weight: bold'>Document and Access Services</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript services]</div><div style='font-size: 80%; margin-top:10px'>Coordinates folders, files,<br />permissions, role groups,<br />notifications, workflows, and<br />audit.</div>"]
+        style 42 fill:#f8fafc,stroke:#64748b,color:#172033
+        43["<div style='font-weight: bold'>Search and Reporting Services</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript services]</div><div style='font-size: 80%; margin-top:10px'>Builds reports, durable<br />summaries, and folder/search<br />scopes.</div>"]
+        style 43 fill:#f8fafc,stroke:#64748b,color:#172033
+        44["<div style='font-weight: bold'>ASM Storage Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: HTTP, X-Api-Key]</div><div style='font-size: 80%; margin-top:10px'>Delegates binary and manifest<br />operations to asm-api with<br />the internal API key.</div>"]
+        style 44 fill:#f8fafc,stroke:#64748b,color:#172033
+        45["<div style='font-weight: bold'>PostgreSQL Adapter</div><div style='font-size: 70%; margin-top: 0px'>[Component: pg]</div><div style='font-size: 80%; margin-top:10px'>Reads and writes the 23-table<br />application schema.</div>"]
+        style 45 fill:#f8fafc,stroke:#64748b,color:#172033
+        46["<div style='font-weight: bold'>Vector Integration Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: HTTP, optional]</div><div style='font-size: 80%; margin-top:10px'>Optional indexing/reindexing<br />adapter; VECTOR_API_URL is<br />empty in the live deployment.</div>"]
+        style 46 fill:#f8fafc,stroke:#64748b,color:#172033
+      end
+
+      63["<div style='font-weight: bold'>ASM Storage API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</div>"]
+      style 63 fill:#7c3aed,stroke:#6d28d9,color:#ffffff
+    end
+
+    39-. "<div>Applies authentication and<br />authorization</div><div style='font-size: 70%'></div>" .->40
+    39-. "<div>Applies license checks</div><div style='font-size: 70%'></div>" .->41
+    39-. "<div>Delegates document and access<br />operations</div><div style='font-size: 70%'></div>" .->42
+    39-. "<div>Delegates search and reports</div><div style='font-size: 70%'></div>" .->43
+    40-. "<div>Loads authorization context</div><div style='font-size: 70%'></div>" .->45
+    42-. "<div>Reads and writes metadata</div><div style='font-size: 70%'></div>" .->45
+    42-. "<div>Reads and writes binary<br />objects</div><div style='font-size: 70%'></div>" .->44
+    43-. "<div>Queries and writes durable<br />summaries</div><div style='font-size: 70%'></div>" .->45
+    43-. "<div>Reads source objects when<br />required</div><div style='font-size: 70%'></div>" .->44
+    41-. "<div>Checks the shared ASM license</div><div style='font-size: 70%'></div>" .->44
+    44-. "<div>Calls</div><div style='font-size: 70%'>[HTTP, X-Api-Key]</div>" .->63
+    45-. "<div>Queries</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->7
+
+  end

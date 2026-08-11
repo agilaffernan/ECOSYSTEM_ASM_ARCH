@@ -1,0 +1,44 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["3A. Component Architecture - ASM Storage API"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    8[("<div style='font-weight: bold'>Cloud Storage</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</div>")]
+    style 8 fill:#ffffff,stroke:#4285f4,color:#172033
+
+    subgraph 13 ["ASM+"]
+      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+
+      subgraph 63 ["ASM Storage API"]
+        style 63 fill:#ffffff,stroke:#6d28d9,color:#6d28d9
+
+        64["<div style='font-weight: bold'>ASM HTTP Contract</div><div style='font-size: 70%; margin-top: 0px'>[Component: Express, raw/multipart HTTP]</div><div style='font-size: 80%; margin-top:10px'>Implements GET, PUT, and POST<br />on /api/asm plus health,<br />readiness, license, and<br />certificate routes.</div>"]
+        style 64 fill:#f8fafc,stroke:#64748b,color:#172033
+        65["<div style='font-weight: bold'>Internal API Key Guard</div><div style='font-size: 70%; margin-top: 0px'>[Component: Express middleware]</div><div style='font-size: 80%; margin-top:10px'>Requires X-Api-Key for<br />storage operations.</div>"]
+        style 65 fill:#f8fafc,stroke:#64748b,color:#172033
+        66["<div style='font-weight: bold'>License Service</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript service]</div><div style='font-size: 80%; margin-top:10px'>Stores and validates the ASM<br />license before write<br />operations.</div>"]
+        style 66 fill:#f8fafc,stroke:#64748b,color:#172033
+        67["<div style='font-weight: bold'>Certificate Store</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript service]</div><div style='font-size: 80%; margin-top:10px'>Stores and manages<br />ArchiveLink certificates.</div>"]
+        style 67 fill:#f8fafc,stroke:#64748b,color:#172033
+        68["<div style='font-weight: bold'>Document and Manifest Service</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript service]</div><div style='font-size: 80%; margin-top:10px'>Maintains document manifests,<br />versions, components, ranges,<br />and optimistic concurrency.</div>"]
+        style 68 fill:#f8fafc,stroke:#64748b,color:#172033
+        69["<div style='font-weight: bold'>Object Storage Abstraction</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript adapter]</div><div style='font-size: 80%; margin-top:10px'>Selects the configured<br />storage provider and exposes<br />a common object contract.</div>"]
+        style 69 fill:#f8fafc,stroke:#64748b,color:#172033
+        70["<div style='font-weight: bold'>GCS Repository</div><div style='font-size: 70%; margin-top: 0px'>[Component: Google Cloud Storage client]</div><div style='font-size: 80%; margin-top:10px'>Uses @google-cloud/storage<br />with Application Default<br />Credentials and generation<br />preconditions.</div>"]
+        style 70 fill:#ffffff,stroke:#4285f4,color:#172033
+      end
+
+    end
+
+    64-. "<div>Authenticates storage<br />requests</div><div style='font-size: 70%'></div>" .->65
+    65-. "<div>Requires a valid license for<br />writes</div><div style='font-size: 70%'></div>" .->66
+    65-. "<div>Authorizes document<br />operations</div><div style='font-size: 70%'></div>" .->68
+    64-. "<div>Delegates certificate<br />administration</div><div style='font-size: 70%'></div>" .->67
+    66-. "<div>Stores and reads the license</div><div style='font-size: 70%'></div>" .->69
+    67-. "<div>Stores and reads certificates</div><div style='font-size: 70%'></div>" .->69
+    68-. "<div>Stores and reads document<br />objects and manifests</div><div style='font-size: 70%'></div>" .->69
+    69-. "<div>Selects when<br />BTP_HYPERSCALER=GCP</div><div style='font-size: 70%'></div>" .->70
+    70-. "<div>Uses Application Default<br />Credentials</div><div style='font-size: 70%'>[GCS API over HTTPS]</div>" .->8
+
+  end

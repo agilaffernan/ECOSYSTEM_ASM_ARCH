@@ -1,0 +1,51 @@
+digraph {
+  compound=true
+  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  node [fontname="Arial", shape=box, margin="0.4,0.3"]
+  edge [fontname="Arial"]
+  label=<<br /><font point-size="34">9E. Runtime Sequence - Salesforce Write</font><br /><font point-size="24">Salesforce token and document write flow.</font>>
+
+  subgraph cluster_13 {
+    margin=25
+    label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
+    labelloc=b
+    color="#444444"
+    fontcolor="#444444"
+    fillcolor="#444444"
+
+    subgraph "cluster_group_Application APIs" {
+      margin=25
+      label=<<font point-size="24"><br />Application APIs</font>>
+      labelloc=b
+      color="#cccccc"
+      fontcolor="#cccccc"
+      fillcolor="#ffffff"
+      style="dashed"
+
+      55 [id=55,shape=hexagon, label=<<font point-size="34">Salesforce API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3030]</font><br /><br /><font point-size="24">Provides Salesforce<br />repository/document operations<br />and token issuance.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
+    }
+
+    subgraph "cluster_group_Storage Core" {
+      margin=25
+      label=<<font point-size="24"><br />Storage Core</font>>
+      labelloc=b
+      color="#cccccc"
+      fontcolor="#cccccc"
+      fillcolor="#ffffff"
+      style="dashed"
+
+      63 [id=63,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#6d28d9", fillcolor="#7c3aed", fontcolor="#ffffff"]
+    }
+
+  }
+
+  4 [id=4,shape=rect, label=<<font point-size="34">Salesforce</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Calls the Salesforce<br />document/repository<br />integration and token<br />endpoints.</font>>, style=filled, color="#b45309", fillcolor="#f59e0b", fontcolor="#172033"]
+  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+  8 [id=8,shape=cylinder, label=<<font point-size="34">Cloud Storage</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+
+  4 -> 55 [id=88, label=<<font point-size="18">1. Requests a token and submits a<br />document operation</font><br /><font point-size="13">[HTTPS, OAuth/JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  55 -> 63 [id=103, label=<<font point-size="18">2. Writes the document or<br />managed-user registry object</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
+  63 -> 8 [id=108, label=<<font point-size="18">3. Stores the binary and manifest</font><br /><font point-size="13">[GCS API over HTTPS]</font>>, style="dashed", color="#047857", fontcolor="#047857"]
+  55 -> 7 [id=107, label=<<font point-size="18">4. Persists repository, folder,<br />document, and version metadata</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
+
+}

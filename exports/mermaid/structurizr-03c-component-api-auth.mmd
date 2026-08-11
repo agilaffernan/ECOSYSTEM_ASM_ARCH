@@ -1,0 +1,41 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["3C. Component Architecture - Auth API"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    5["<div style='font-weight: bold'>Enterprise Identity Provider</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Optional SAML or Microsoft<br />identity provider supported<br />by Auth; active provider<br />configuration was not<br />verified.</div>"]
+    style 5 fill:#f8fafc,stroke:#94a3b8,color:#475569
+    7[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
+    style 7 fill:#ffffff,stroke:#4285f4,color:#172033
+
+    subgraph 13 ["ASM+"]
+      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+
+      subgraph 32 ["Auth API"]
+        style 32 fill:#ffffff,stroke:#115e59,color:#115e59
+
+        33["<div style='font-weight: bold'>HTTP Routes and OpenAPI</div><div style='font-size: 70%; margin-top: 0px'>[Component: Express]</div><div style='font-size: 80%; margin-top:10px'>Exposes health, auth, users,<br />roles, applications,<br />structures, connections,<br />directory, and access routes.</div>"]
+        style 33 fill:#f8fafc,stroke:#64748b,color:#172033
+        34["<div style='font-weight: bold'>Authentication and JWT Service</div><div style='font-size: 70%; margin-top: 0px'>[Component: bcrypt, jsonwebtoken]</div><div style='font-size: 80%; margin-top:10px'>Verifies password hashes,<br />enforces password policy, and<br />signs JWTs.</div>"]
+        style 34 fill:#f8fafc,stroke:#64748b,color:#172033
+        35["<div style='font-weight: bold'>Identity and Access Services</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript services]</div><div style='font-size: 80%; margin-top:10px'>Manages users, applications,<br />roles, structures, service<br />connections, and generic<br />access.</div>"]
+        style 35 fill:#f8fafc,stroke:#64748b,color:#172033
+        36["<div style='font-weight: bold'>SSO Adapter</div><div style='font-size: 70%; margin-top: 0px'>[Component: node-saml, Microsoft integration]</div><div style='font-size: 80%; margin-top:10px'>Stores SSO configuration and<br />supports SAML and Microsoft<br />identity flows.</div>"]
+        style 36 fill:#f8fafc,stroke:#64748b,color:#172033
+        37["<div style='font-weight: bold'>PostgreSQL Adapter</div><div style='font-size: 70%; margin-top: 0px'>[Component: pg]</div><div style='font-size: 80%; margin-top:10px'>Reads and writes Auth and<br />access-control tables.</div>"]
+        style 37 fill:#f8fafc,stroke:#64748b,color:#172033
+      end
+
+    end
+
+    33-. "<div>Delegates authentication</div><div style='font-size: 70%'></div>" .->34
+    33-. "<div>Delegates administration and<br />access</div><div style='font-size: 70%'></div>" .->35
+    33-. "<div>Delegates SSO operations</div><div style='font-size: 70%'></div>" .->36
+    34-. "<div>Reads users and writes login<br />state</div><div style='font-size: 70%'></div>" .->37
+    35-. "<div>Reads and writes access data</div><div style='font-size: 70%'></div>" .->37
+    36-. "<div>Reads and writes SSO<br />configuration</div><div style='font-size: 70%'></div>" .->37
+    36-. "<div>Exchanges assertions when<br />configured</div><div style='font-size: 70%'>[SAML/Microsoft]</div>" .->5
+    37-. "<div>Queries</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->7
+
+  end

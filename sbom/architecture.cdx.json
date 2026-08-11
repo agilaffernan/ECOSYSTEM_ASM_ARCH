@@ -1,0 +1,531 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "serialNumber": "urn:uuid:0e692c18-1cea-5a7c-b34b-5d651df292c1",
+  "metadata": {
+    "component": {
+      "type": "application",
+      "name": "ASM+ GCP Architecture Documentation",
+      "group": "Auritas",
+      "version": "2026.08.11",
+      "bom-ref": "pkg:generic/auritas/asm-plus-gcp-architecture@2026.08.11",
+      "purl": "pkg:generic/auritas/asm-plus-gcp-architecture@2026.08.11",
+      "properties": [
+        {
+          "name": "auritas:deployment-project",
+          "value": "sap-ecosystem-asmplus"
+        },
+        {
+          "name": "auritas:artifact-kind",
+          "value": "Static architecture documentation"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "Structurizr static viewer",
+      "version": "2026.06.28",
+      "bom-ref": "pkg:generic/structurizr-static-viewer@2026.06.28",
+      "purl": "pkg:generic/structurizr-static-viewer@2026.06.28",
+      "scope": "required",
+      "components": [
+        {
+          "type": "file",
+          "name": "structurizr-site/js/structurizr.js",
+          "bom-ref": "file:structurizr-site/js/structurizr.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "0f1b876cc092348fb86f68b6c9a959a0bf87045f1a3f46e2ccfb858879b0bdbc"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/js/structurizr-diagram.js",
+          "bom-ref": "file:structurizr-site/js/structurizr-diagram.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "668c3200eaa1a044d1156914182e13a53bae429ff28604a95f60d6c64dd13b98"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/js/structurizr-embed.js",
+          "bom-ref": "file:structurizr-site/js/structurizr-embed.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "3f182e78bbe6fecf3e1efe479ffef05453e415f08ba2f223eecbcb70c15bda8e"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/js/structurizr-navigation.js",
+          "bom-ref": "file:structurizr-site/js/structurizr-navigation.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "5315de86abb6a0b8479fc6af5807cf63fddad5e77d9424e8214eab0cd962f2b0"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/js/structurizr-quick-navigation.js",
+          "bom-ref": "file:structurizr-site/js/structurizr-quick-navigation.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "16a3a91d325f98b2df13054499b41c4f639477f60a9c5355dc0d447925affaa6"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/js/structurizr-tooltip.js",
+          "bom-ref": "file:structurizr-site/js/structurizr-tooltip.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "248036b6d09952ccb3729f8368544dbe6eb49a5804aab8f155c403e0a670656d"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/js/structurizr-ui.js",
+          "bom-ref": "file:structurizr-site/js/structurizr-ui.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "17f59f1d9ac1b02873ad7f978e238e493a957be602d68b9f459e241c0faf0ed4"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/js/structurizr-util.js",
+          "bom-ref": "file:structurizr-site/js/structurizr-util.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "5be828c9a03d802537a2d9d5294c83376d9bed1df8ecc44dbf65485259d0005a"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/js/structurizr-workspace.js",
+          "bom-ref": "file:structurizr-site/js/structurizr-workspace.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "22bd48496681dc106a196515fc4c923da8531a27685d557eb791de803a88293b"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/css/structurizr.css",
+          "bom-ref": "file:structurizr-site/css/structurizr.css",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "2945cefbb29b08b25694802f44c424cfe50ba20b9c8104c75536196598cfa1ff"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/css/structurizr-static.css",
+          "bom-ref": "file:structurizr-site/css/structurizr-static.css",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "bf568937d1f6b463841c19df42bcf1d857982a972127d6c24a4f4adc2a9eb9e1"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/css/structurizr-static-dark.css",
+          "bom-ref": "file:structurizr-site/css/structurizr-static-dark.css",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "c6f321ef518fd66ccecbc607883d0d21e82dc28e2d64e6a20ca362abb490aed6"
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "Bootstrap",
+      "version": "5.3.7",
+      "bom-ref": "pkg:npm/bootstrap@5.3.7",
+      "purl": "pkg:npm/bootstrap@5.3.7",
+      "scope": "required",
+      "components": [
+        {
+          "type": "file",
+          "name": "structurizr-site/js/bootstrap-5.3.7.min.js",
+          "bom-ref": "file:structurizr-site/js/bootstrap-5.3.7.min.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "35f4547d9364111aca4850347356bc5660a994f0d8b694d88f995098a7b547fa"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "structurizr-site/css/bootstrap-5.3.7.min.css",
+          "bom-ref": "file:structurizr-site/css/bootstrap-5.3.7.min.css",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "cd1826581e4f2b80af4f1e05897b316c7698441063cffaefbbdeec382ee4cd72"
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "CryptoJS",
+      "version": "4.2.0",
+      "bom-ref": "pkg:npm/crypto-js@4.2.0",
+      "purl": "pkg:npm/crypto-js@4.2.0",
+      "scope": "required",
+      "components": [
+        {
+          "type": "file",
+          "name": "structurizr-site/js/crypto-js-4.2.0.js",
+          "bom-ref": "file:structurizr-site/js/crypto-js-4.2.0.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "ee02257ffbaf0a9b481c7039b0f3bb20c360c9674fe4be8b38ae709b2ea59bbe"
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "Dagre",
+      "version": "1.1.8",
+      "bom-ref": "pkg:npm/%40dagrejs/dagre@1.1.8",
+      "purl": "pkg:npm/%40dagrejs/dagre@1.1.8",
+      "scope": "required",
+      "components": [
+        {
+          "type": "file",
+          "name": "structurizr-site/js/dagre-1.1.8.js",
+          "bom-ref": "file:structurizr-site/js/dagre-1.1.8.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "a320edfd25eec8705149c1a79afabcbac902d34753fb7c55a4208be09ff37ab2"
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "Graphlib",
+      "version": "2.2.4",
+      "bom-ref": "pkg:npm/%40dagrejs/graphlib@2.2.4",
+      "purl": "pkg:npm/%40dagrejs/graphlib@2.2.4",
+      "scope": "required",
+      "components": [
+        {
+          "type": "file",
+          "name": "structurizr-site/js/graphlib-2.2.4.min.js",
+          "bom-ref": "file:structurizr-site/js/graphlib-2.2.4.min.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "a3d7212b653dc8e28d59cdc92b420e470e1b924eea99ba0a8ef985aec4589918"
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "JointJS Core",
+      "version": "4.1.3",
+      "bom-ref": "pkg:npm/%40joint/core@4.1.3",
+      "purl": "pkg:npm/%40joint/core@4.1.3",
+      "scope": "required",
+      "components": [
+        {
+          "type": "file",
+          "name": "structurizr-site/js/jointjs-Core-4.1.3.js",
+          "bom-ref": "file:structurizr-site/js/jointjs-Core-4.1.3.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "661bf5a94865819a6101b4472f0e440357d6f271b4e2193a6a27ad7b53d41c5a"
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "JointJS Directed Graph",
+      "version": "4.1.3",
+      "bom-ref": "pkg:npm/%40joint/layout-directed-graph@4.1.3",
+      "purl": "pkg:npm/%40joint/layout-directed-graph@4.1.3",
+      "scope": "required",
+      "components": [
+        {
+          "type": "file",
+          "name": "structurizr-site/js/jointjs-DirectedGraph-4.1.3.min.js",
+          "bom-ref": "file:structurizr-site/js/jointjs-DirectedGraph-4.1.3.min.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "dab86fa3878710fd5c37ed30928c3ec9a79430695416e9072e5abdfab5d4264c"
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jQuery",
+      "version": "3.7.1",
+      "bom-ref": "pkg:npm/jquery@3.7.1",
+      "purl": "pkg:npm/jquery@3.7.1",
+      "scope": "required",
+      "components": [
+        {
+          "type": "file",
+          "name": "structurizr-site/js/jquery-3.7.1.min.js",
+          "bom-ref": "file:structurizr-site/js/jquery-3.7.1.min.js",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "fc9a93dd241f6b045cbff0481cf4e1901becd0e12fb45166a8f17f95823f0b1a"
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "name": "Structurizr vNext",
+      "version": "2026.06.28",
+      "bom-ref": "pkg:generic/structurizr-vnext@2026.06.28?scope=build",
+      "purl": "pkg:generic/structurizr-vnext@2026.06.28",
+      "scope": "excluded",
+      "properties": [
+        {
+          "name": "auritas:usage",
+          "value": "Build-time validation and JSON, Mermaid, and static-site export"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "name": "Structurizr CLI legacy DOT exporter",
+      "version": "2025.11.09",
+      "bom-ref": "pkg:generic/structurizr-cli@2025.11.09?scope=build",
+      "purl": "pkg:generic/structurizr-cli@2025.11.09",
+      "scope": "excluded",
+      "properties": [
+        {
+          "name": "auritas:usage",
+          "value": "Build-time DOT export only; not shipped or executed by the hosted site"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "name": "Graphviz",
+      "version": "15.1.1",
+      "bom-ref": "pkg:generic/graphviz@15.1.1?scope=build",
+      "purl": "pkg:generic/graphviz@15.1.1",
+      "scope": "excluded",
+      "properties": [
+        {
+          "name": "auritas:usage",
+          "value": "Build-time SVG rendering only"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "name": "Eclipse Temurin JRE",
+      "version": "21.0.12+8",
+      "bom-ref": "pkg:generic/eclipse-temurin-jre@21.0.12%2B8?scope=build",
+      "purl": "pkg:generic/eclipse-temurin-jre@21.0.12%2B8",
+      "scope": "excluded",
+      "properties": [
+        {
+          "name": "auritas:usage",
+          "value": "Build-time Structurizr runtime only"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:generic/auritas/asm-plus-gcp-architecture@2026.08.11",
+      "dependsOn": [
+        "pkg:generic/structurizr-static-viewer@2026.06.28",
+        "pkg:npm/bootstrap@5.3.7",
+        "pkg:npm/crypto-js@4.2.0",
+        "pkg:npm/%40dagrejs/dagre@1.1.8",
+        "pkg:npm/%40dagrejs/graphlib@2.2.4",
+        "pkg:npm/%40joint/core@4.1.3",
+        "pkg:npm/%40joint/layout-directed-graph@4.1.3",
+        "pkg:npm/jquery@3.7.1"
+      ]
+    },
+    {
+      "ref": "pkg:generic/structurizr-static-viewer@2026.06.28",
+      "dependsOn": [
+        "file:structurizr-site/js/structurizr.js",
+        "file:structurizr-site/js/structurizr-diagram.js",
+        "file:structurizr-site/js/structurizr-embed.js",
+        "file:structurizr-site/js/structurizr-navigation.js",
+        "file:structurizr-site/js/structurizr-quick-navigation.js",
+        "file:structurizr-site/js/structurizr-tooltip.js",
+        "file:structurizr-site/js/structurizr-ui.js",
+        "file:structurizr-site/js/structurizr-util.js",
+        "file:structurizr-site/js/structurizr-workspace.js",
+        "file:structurizr-site/css/structurizr.css",
+        "file:structurizr-site/css/structurizr-static.css",
+        "file:structurizr-site/css/structurizr-static-dark.css"
+      ]
+    },
+    {
+      "ref": "pkg:npm/bootstrap@5.3.7",
+      "dependsOn": [
+        "file:structurizr-site/js/bootstrap-5.3.7.min.js",
+        "file:structurizr-site/css/bootstrap-5.3.7.min.css"
+      ]
+    },
+    {
+      "ref": "pkg:npm/crypto-js@4.2.0",
+      "dependsOn": [
+        "file:structurizr-site/js/crypto-js-4.2.0.js"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40dagrejs/dagre@1.1.8",
+      "dependsOn": [
+        "file:structurizr-site/js/dagre-1.1.8.js"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40dagrejs/graphlib@2.2.4",
+      "dependsOn": [
+        "file:structurizr-site/js/graphlib-2.2.4.min.js"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40joint/core@4.1.3",
+      "dependsOn": [
+        "file:structurizr-site/js/jointjs-Core-4.1.3.js"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40joint/layout-directed-graph@4.1.3",
+      "dependsOn": [
+        "file:structurizr-site/js/jointjs-DirectedGraph-4.1.3.min.js"
+      ]
+    },
+    {
+      "ref": "pkg:npm/jquery@3.7.1",
+      "dependsOn": [
+        "file:structurizr-site/js/jquery-3.7.1.min.js"
+      ]
+    },
+    {
+      "ref": "pkg:generic/structurizr-vnext@2026.06.28?scope=build",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/structurizr-cli@2025.11.09?scope=build",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/graphviz@15.1.1?scope=build",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/eclipse-temurin-jre@21.0.12%2B8?scope=build",
+      "dependsOn": []
+    }
+  ]
+}

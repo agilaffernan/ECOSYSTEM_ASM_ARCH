@@ -1,0 +1,42 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["3H. Component Architecture - Document Viewer"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    subgraph 13 ["ASM+"]
+      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+
+      subgraph 26 ["Document Viewer"]
+        style 26 fill:#ffffff,stroke:#1d4ed8,color:#1d4ed8
+
+        27["<div style='font-weight: bold'>Runtime Configuration Loader</div><div style='font-size: 70%; margin-top: 0px'>[Component: JavaScript]</div><div style='font-size: 80%; margin-top:10px'>Loads Auth, ASM+, SAP, and<br />optional OnlyOffice<br />endpoints.</div>"]
+        style 27 fill:#e2e8f0,stroke:#64748b,color:#172033
+        28["<div style='font-weight: bold'>Viewer Shell and Parameter Parser</div><div style='font-size: 70%; margin-top: 0px'>[Component: React]</div><div style='font-size: 80%; margin-top:10px'>Validates route parameters<br />and selects a viewer<br />implementation.</div>"]
+        style 28 fill:#f8fafc,stroke:#64748b,color:#172033
+        29["<div style='font-weight: bold'>Document API Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: Fetch/HTTP range]</div><div style='font-size: 80%; margin-top:10px'>Retrieves metadata and binary<br />content from ASM+ or SAP<br />APIs.</div>"]
+        style 29 fill:#f8fafc,stroke:#64748b,color:#172033
+        30["<div style='font-weight: bold'>Native Browser Viewer</div><div style='font-size: 70%; margin-top: 0px'>[Component: React]</div><div style='font-size: 80%; margin-top:10px'>Renders supported non-Office<br />content in the browser.</div>"]
+        style 30 fill:#f8fafc,stroke:#64748b,color:#172033
+        31["<div style='font-weight: bold'>OnlyOffice Adapter</div><div style='font-size: 70%; margin-top: 0px'>[Component: React, optional]</div><div style='font-size: 80%; margin-top:10px'>Optional Office document<br />integration; endpoint is<br />empty in the live<br />configuration.</div>"]
+        style 31 fill:#f8fafc,stroke:#64748b,color:#172033
+      end
+
+      38["<div style='font-weight: bold'>ASM+ API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Orchestrates document<br />metadata, access, workflows,<br />notifications, reports,<br />audit, and binary operations.</div>"]
+      style 38 fill:#0f766e,stroke:#115e59,color:#ffffff
+      47["<div style='font-weight: bold'>SAP API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3020]</div><div style='font-size: 80%; margin-top:10px'>Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</div>"]
+      style 47 fill:#b45309,stroke:#92400e,color:#ffffff
+      71["<div style='font-weight: bold'>Runtime Configuration</div><div style='font-size: 70%; margin-top: 0px'>[Container: Kubernetes ConfigMaps]</div><div style='font-size: 80%; margin-top:10px'>Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</div>"]
+      style 71 fill:#ffffff,stroke:#326ce5,color:#172033
+    end
+
+    71-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->38
+    71-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->47
+    27-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->71
+    28-. "<div>Uses</div><div style='font-size: 70%'></div>" .->29
+    28-. "<div>Selects for supported content</div><div style='font-size: 70%'></div>" .->30
+    28-. "<div>Selects when configured</div><div style='font-size: 70%'></div>" .->31
+    29-. "<div>Reads ASM+ documents</div><div style='font-size: 70%'>[HTTPS/JSON and range]</div>" .->38
+    29-. "<div>Reads SAP documents</div><div style='font-size: 70%'>[HTTPS/ArchiveLink]</div>" .->47
+
+  end

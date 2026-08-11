@@ -1,0 +1,15 @@
+sequenceDiagram
+
+  actor 1 as ASM+ User<br />[Person]
+  participant 19 as ASM+ Web Application<br />[Container: React, Vite, Node static server]
+  participant 38 as ASM+ API<br />[Container: Node.js, TypeScript, Express; port 3000]
+  participant 7 as Cloud SQL for PostgreSQL<br />[Software System]
+  participant 63 as ASM Storage API<br />[Container: Node.js, TypeScript, Express; port 3000]
+  participant 8 as Cloud Storage<br />[Software System]
+
+  1->>19: Selects a folder and uploads a file<br />[HTTPS]
+  19->>38: Creates metadata and sends file content<br />[HTTPS/JSON and binary]
+  38->>7: Checks folder access and records metadata/audit data<br />[PostgreSQL on 127.0.0.1:5432]
+  38->>63: Writes the document component and manifest<br />[HTTP/REST, X-Api-Key]
+  63->>8: Stores the binary and manifest using ADC<br />[GCS API over HTTPS]
+  38->>7: Finalizes file status and workflow data<br />[PostgreSQL on 127.0.0.1:5432]

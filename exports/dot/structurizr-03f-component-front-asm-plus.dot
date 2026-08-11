@@ -1,0 +1,53 @@
+digraph {
+  compound=true
+  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  node [fontname="Arial", shape=box, margin="0.4,0.3"]
+  edge [fontname="Arial"]
+  label=<<br /><font point-size="34">3F. Component Architecture - ASM+ Web Application</font><br /><font point-size="24">Internal structure of the main ASM+ web application.</font>>
+
+  subgraph cluster_13 {
+    margin=25
+    label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
+    labelloc=b
+    color="#444444"
+    fontcolor="#444444"
+    fillcolor="#444444"
+
+    subgraph cluster_19 {
+      margin=25
+      label=<<font point-size="24"><br />ASM+ Web Application</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font>>
+      labelloc=b
+      color="#444444"
+      fontcolor="#444444"
+      fillcolor="#444444"
+
+      20 [id=20,shape=folder, label=<<font point-size="34">Runtime Configuration<br />Loader</font><br /><font point-size="19">[Component: JavaScript]</font><br /><br /><font point-size="24">Loads public endpoint URLs and<br />feature switches from<br />runtime-config.js.</font>>, style=filled, color="#64748b", fillcolor="#e2e8f0", fontcolor="#172033"]
+      21 [id=21,shape=component, label=<<font point-size="34">Application Shell and<br />Router</font><br /><font point-size="19">[Component: React]</font><br /><br /><font point-size="24">Coordinates navigation,<br />layouts, notifications, and<br />error handling.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      22 [id=22,shape=component, label=<<font point-size="34">Authentication<br />Context</font><br /><font point-size="19">[Component: React Context]</font><br /><br /><font point-size="24">Processes SSO callbacks,<br />retains the JWT, and applies<br />client-side authorization.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      23 [id=23,shape=component, label=<<font point-size="34">Document and Workflow<br />UI</font><br /><font point-size="19">[Component: React]</font><br /><br /><font point-size="24">Implements folders, files,<br />recycle bin, workflows,<br />reports, audit, and search<br />experiences.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      24 [id=24,shape=component, label=<<font point-size="34">ASM+ API Client</font><br /><font point-size="19">[Component: Fetch/JSON and binary]</font><br /><br /><font point-size="24">Calls the ASM+ API and<br />notification/workflow<br />endpoints.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      25 [id=25,shape=component, label=<<font point-size="34">Viewer URL Builder</font><br /><font point-size="19">[Component: JavaScript]</font><br /><br /><font point-size="24">Launches the document viewer<br />with the selected document<br />context.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+    }
+
+    26 [id=26,shape=rect, label=<<font point-size="34">Document Viewer</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
+    32 [id=32,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+    38 [id=38,shape=hexagon, label=<<font point-size="34">ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Orchestrates document<br />metadata, access, workflows,<br />notifications, reports, audit,<br />and binary operations.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+    71 [id=71,shape=folder, label=<<font point-size="34">Runtime Configuration</font><br /><font point-size="19">[Container: Kubernetes ConfigMaps]</font><br /><br /><font point-size="24">Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</font>>, style=filled, color="#326ce5", fillcolor="#ffffff", fontcolor="#172033"]
+  }
+
+  71 -> 26 [id=113, label=<<font point-size="18">Injects non-secret runtime<br />configuration</font><br /><font point-size="13">[Environment variables]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  71 -> 32 [id=114, label=<<font point-size="18">Injects non-secret runtime<br />configuration</font><br /><font point-size="13">[Environment variables]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  71 -> 38 [id=115, label=<<font point-size="18">Injects non-secret runtime<br />configuration</font><br /><font point-size="13">[Environment variables]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  20 -> 71 [id=148, label=<<font point-size="18">Reads startup configuration</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  21 -> 22 [id=150, label=<<font point-size="18">Uses</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  21 -> 23 [id=151, label=<<font point-size="18">Hosts</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  23 -> 24 [id=152, label=<<font point-size="18">Uses</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  23 -> 25 [id=153, label=<<font point-size="18">Uses</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  22 -> 32 [id=154, label=<<font point-size="18">Authenticates and checks access</font><br /><font point-size="13">[HTTPS/JSON]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  24 -> 38 [id=155, label=<<font point-size="18">Calls</font><br /><font point-size="13">[HTTPS/JSON and binary]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  25 -> 26 [id=156, label=<<font point-size="18">Launches</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  26 -> 71 [id=158, label=<<font point-size="18">Reads startup configuration</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  26 -> 32 [id=97, label=<<font point-size="18">Validates authentication and<br />application access</font><br /><font point-size="13">[HTTPS/JSON, JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  26 -> 38 [id=98, label=<<font point-size="18">Retrieves ASM+ metadata and file<br />content</font><br /><font point-size="13">[HTTPS/JSON and HTTP range]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+
+}

@@ -1,0 +1,45 @@
+digraph {
+  compound=true
+  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  node [fontname="Arial", shape=box, margin="0.4,0.3"]
+  edge [fontname="Arial"]
+  label=<<br /><font point-size="34">3C. Component Architecture - Auth API</font><br /><font point-size="24">Internal structure of the Auth API.</font>>
+
+  5 [id=5,shape=rect, label=<<font point-size="34">Enterprise Identity<br />Provider</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Optional SAML or Microsoft<br />identity provider supported by<br />Auth; active provider<br />configuration was not<br />verified.</font>>, style=filled, color="#94a3b8", fillcolor="#f8fafc", fontcolor="#475569"]
+  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+
+  subgraph cluster_13 {
+    margin=25
+    label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
+    labelloc=b
+    color="#444444"
+    fontcolor="#444444"
+    fillcolor="#444444"
+
+    subgraph cluster_32 {
+      margin=25
+      label=<<font point-size="24"><br />Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font>>
+      labelloc=b
+      color="#444444"
+      fontcolor="#444444"
+      fillcolor="#444444"
+
+      33 [id=33,shape=component, label=<<font point-size="34">HTTP Routes and<br />OpenAPI</font><br /><font point-size="19">[Component: Express]</font><br /><br /><font point-size="24">Exposes health, auth, users,<br />roles, applications,<br />structures, connections,<br />directory, and access routes.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      34 [id=34,shape=component, label=<<font point-size="34">Authentication and<br />JWT Service</font><br /><font point-size="19">[Component: bcrypt, jsonwebtoken]</font><br /><br /><font point-size="24">Verifies password hashes,<br />enforces password policy, and<br />signs JWTs.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      35 [id=35,shape=component, label=<<font point-size="34">Identity and Access<br />Services</font><br /><font point-size="19">[Component: TypeScript services]</font><br /><br /><font point-size="24">Manages users, applications,<br />roles, structures, service<br />connections, and generic<br />access.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      36 [id=36,shape=component, label=<<font point-size="34">SSO Adapter</font><br /><font point-size="19">[Component: node-saml, Microsoft integration]</font><br /><br /><font point-size="24">Stores SSO configuration and<br />supports SAML and Microsoft<br />identity flows.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      37 [id=37,shape=component, label=<<font point-size="34">PostgreSQL Adapter</font><br /><font point-size="19">[Component: pg]</font><br /><br /><font point-size="24">Reads and writes Auth and<br />access-control tables.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+    }
+
+  }
+
+  33 -> 34 [id=164, label=<<font point-size="18">Delegates authentication</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  33 -> 35 [id=165, label=<<font point-size="18">Delegates administration and access</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  33 -> 36 [id=166, label=<<font point-size="18">Delegates SSO operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  34 -> 37 [id=167, label=<<font point-size="18">Reads users and writes login state</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  35 -> 37 [id=168, label=<<font point-size="18">Reads and writes access data</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  36 -> 37 [id=169, label=<<font point-size="18">Reads and writes SSO configuration</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  36 -> 5 [id=170, label=<<font point-size="18">Exchanges assertions when configured</font><br /><font point-size="13">[SAML/Microsoft]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  37 -> 7 [id=173, label=<<font point-size="18">Queries</font><br /><font point-size="13">[PostgreSQL]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+
+}

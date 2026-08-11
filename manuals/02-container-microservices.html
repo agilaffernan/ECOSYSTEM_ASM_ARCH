@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shows the eight deployed workloads, their responsibilities, public or internal exposure, and their principal runtime dependencies.">
+  <title>2. Container and Microservices Architecture | ASM+ Architecture</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="layout">
+    <aside class="sidebar">
+    <a class="brand" href="../index.html">ASM+ Architecture</a>
+    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="nav-label">Manuals</p>
+    <ul class="nav-list">
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../manuals/01-system-context.html">1. System Context</a></li>
+<li><a href="../manuals/02-container-microservices.html" aria-current="page">2. Container / Microservices</a></li>
+<li><a href="../manuals/03-component-architecture.html">3. Component Architecture</a></li>
+<li><a href="../manuals/04-api-integration.html">4. API / Integration</a></li>
+<li><a href="../manuals/05-data-architecture.html">5. Data Architecture</a></li>
+<li><a href="../manuals/06-deployment-architecture.html">6. Deployment Architecture</a></li>
+<li><a href="../manuals/07-network-architecture.html">7. Network Architecture</a></li>
+<li><a href="../manuals/08-security-architecture.html">8. Security Architecture</a></li>
+<li><a href="../manuals/09-runtime-sequences.html">9. Runtime / Sequence</a></li>
+<li><a href="../manuals/10-observability.html">10. Observability</a></li>
+    </ul>
+    <p class="nav-label">Model and evidence</p>
+    <ul class="nav-list">
+      <li><a href="../structurizr-site/index.html">Interactive Structurizr</a></li>
+      <li><a href="../workspace.dsl">Structurizr DSL</a></li>
+      <li><a href="../architecture-inventory.md">Inventory</a></li>
+      <li><a href="../traceability-matrix.md">Traceability</a></li>
+      <li><a href="../assumptions-and-gaps.md">Assumptions and gaps</a></li>
+    </ul>
+  </aside>
+    <main class="main" id="content">
+      <div class="content">
+    <div class="title-row"><img class="title-icon" src="../assets/icons/api.svg" alt=""><div><p class="eyebrow">Architecture manual 2</p><h1>Container and Microservices Architecture</h1></div></div>
+    <p class="lead">Shows the eight deployed workloads, their responsibilities, public or internal exposure, and their principal runtime dependencies.</p>
+    <div class="meta-row"><span><strong>Project:</strong> sap-ecosystem-asmplus</span><span><strong>Environment:</strong> Live GCP</span><span><strong>Observed:</strong> August 11, 2026</span></div>
+    <div class="status-key" aria-label="Evidence status key">
+      <span class="status observed">Observed live</span>
+      <span class="status optional">Optional capability</span>
+      <span class="status recommendation">Recommendation</span>
+      <span class="status gap">Observed gap</span>
+    </div>
+    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <section><h2>Architecture View</h2>
+    <section class="diagram-block" aria-labelledby="diagram-1">
+      <h3 id="diagram-1">Deployed Containers and Service Dependencies</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-02-container-microservices.svg&title=Deployed%20Containers%20and%20Service%20Dependencies" aria-label="Open Deployed Containers and Service Dependencies in the full-screen diagram viewer"><img src="../diagrams/structurizr-02-container-microservices.svg" alt="C4 container diagram for the ASM+ microservices"></a>
+      </div>
+      <p class="diagram-caption">Figure 2. Eight deployed workloads, configuration stores, managed data services, and external integrations.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-02-container-microservices.svg&title=Deployed%20Containers%20and%20Service%20Dependencies">Open full-screen viewer</a><a href="../structurizr-site/index.html#02-container-microservices">Open this view in Structurizr</a></p>
+    </section></section>
+    <section><h2>Live Workload Inventory</h2><div class="table-scroll"><table><thead><tr><th>Deployment</th><th>Purpose</th><th>Service</th><th>Live image tag</th></tr></thead><tbody>
+          <tr><td><code>front-auth</code></td><td>Login, SSO, and identity/access administration portal.</td><td>Public; port 80</td><td><code>front-auth:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>api-auth</code></td><td>Authentication, JWT issuance, users, roles, apps, structures, connections, and SSO.</td><td>Public; port 3000</td><td><code>api-auth:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>front-asm-plus</code></td><td>Main document, workflow, search, report, and audit web application.</td><td>Public; port 8080</td><td><code>front-asm-plus:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>api-asm-plus</code></td><td>Document metadata, permissions, workflows, notifications, reports, and storage orchestration.</td><td>Public; port 3000</td><td><code>api-asm-plus:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>front-viewer</code></td><td>Document display for ASM+ and SAP-origin content.</td><td>Public; port 8080</td><td><code>front-viewer:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>api-sap</code></td><td>SAP ArchiveLink-compatible document integration and viewer launch.</td><td>Public; port 3020</td><td><code>api-sap:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>api-sf</code></td><td>Salesforce token, repository, document, and managed-user integration.</td><td>Public; port 3030</td><td><code>api-sf:dockerhub-dev-20260805-195902-sf-managed-users-rootfix</code></td></tr>
+          <tr><td><code>asm-api</code></td><td>Internal binary, manifest, license, and certificate storage service.</td><td>Internal ClusterIP; port 3000</td><td><code>api-asm:dockerhub-dev-20260805-195902</code></td></tr>
+        </tbody></table></div>
+        <p>All eight deployments were observed at <code>1/1</code> Ready. The public services are NEG-backed through GKE Ingress. <code>asm-api</code> remains internal.</p></section>
+<section><h2>Primary Communication Paths</h2><div class="table-scroll"><table><thead><tr><th>Caller</th><th>Target</th><th>Purpose</th><th>Protocol / control</th></tr></thead><tbody>
+          <tr><td>Auth Portal</td><td>Auth API</td><td>Login and identity administration</td><td>HTTPS JSON</td></tr>
+          <tr><td>ASM+ Web</td><td>Auth API</td><td>Authentication and application access checks</td><td>HTTPS JSON, JWT</td></tr>
+          <tr><td>ASM+ Web</td><td>ASM+ API</td><td>Document and workflow operations</td><td>HTTPS JSON and binary</td></tr>
+          <tr><td>Viewer</td><td>Auth, ASM+ API, SAP API</td><td>Access validation and content retrieval</td><td>HTTPS, JSON, HTTP range</td></tr>
+          <tr><td>ASM+ API, SAP API, SF API</td><td>ASM Storage API</td><td>Binary, manifest, certificate, and license operations</td><td>Internal HTTP with <code>X-Api-Key</code></td></tr>
+          <tr><td>Auth, ASM+, SAP, SF APIs</td><td>Cloud SQL</td><td>Metadata persistence</td><td>Local proxy at <code>127.0.0.1:5432</code></td></tr>
+          <tr><td>ASM Storage API</td><td>GCS</td><td>Object persistence</td><td>GCS API with ADC / Workload Identity</td></tr>
+        </tbody></table></div></section>
+<section><h2>Configuration and Secret Injection</h2><p>Non-secret runtime settings are supplied from Kubernetes ConfigMaps. Sensitive values are injected from the namespace-scoped <code>asmplus-runtime-secrets</code> Secret. The observed key names are documented in the Security manual; values are intentionally excluded.</p>
+        <p>Four database-backed APIs run a Cloud SQL Auth Proxy <code>2.14.1</code> sidecar. The proxy uses private IP and the <code>cloudsql-client</code> Workload Identity mapping. The application process connects only to localhost.</p></section>
+<section><h2>Scaling and Availability Characteristics</h2><p>Each workload currently has one application replica. Three <code>e2-medium</code> nodes were Ready in the zonal GKE cluster. Readiness and liveness probes gate availability, but a single application replica means a rollout or pod disruption can temporarily reduce that workload to zero ready replicas.</p>
+        <div class="notice warning"><strong>Current topology.</strong> The cluster is zonal in <code>us-east1-b</code> and Cloud SQL is zonal. This is a functional deployment, not a multi-zone high-availability design.</div></section>
+    <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
+    </main>
+  </div>
+  <script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Separates relational metadata from binary object storage, groups the live PostgreSQL tables by domain, and explains how application APIs coordinate both stores.">
+  <title>5. Data Architecture | ASM+ Architecture</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="layout">
+    <aside class="sidebar">
+    <a class="brand" href="../index.html">ASM+ Architecture</a>
+    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="nav-label">Manuals</p>
+    <ul class="nav-list">
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../manuals/01-system-context.html">1. System Context</a></li>
+<li><a href="../manuals/02-container-microservices.html">2. Container / Microservices</a></li>
+<li><a href="../manuals/03-component-architecture.html">3. Component Architecture</a></li>
+<li><a href="../manuals/04-api-integration.html">4. API / Integration</a></li>
+<li><a href="../manuals/05-data-architecture.html" aria-current="page">5. Data Architecture</a></li>
+<li><a href="../manuals/06-deployment-architecture.html">6. Deployment Architecture</a></li>
+<li><a href="../manuals/07-network-architecture.html">7. Network Architecture</a></li>
+<li><a href="../manuals/08-security-architecture.html">8. Security Architecture</a></li>
+<li><a href="../manuals/09-runtime-sequences.html">9. Runtime / Sequence</a></li>
+<li><a href="../manuals/10-observability.html">10. Observability</a></li>
+    </ul>
+    <p class="nav-label">Model and evidence</p>
+    <ul class="nav-list">
+      <li><a href="../structurizr-site/index.html">Interactive Structurizr</a></li>
+      <li><a href="../workspace.dsl">Structurizr DSL</a></li>
+      <li><a href="../architecture-inventory.md">Inventory</a></li>
+      <li><a href="../traceability-matrix.md">Traceability</a></li>
+      <li><a href="../assumptions-and-gaps.md">Assumptions and gaps</a></li>
+    </ul>
+  </aside>
+    <main class="main" id="content">
+      <div class="content">
+    <div class="title-row"><img class="title-icon" src="../assets/icons/database.svg" alt=""><div><p class="eyebrow">Architecture manual 5</p><h1>Data Architecture</h1></div></div>
+    <p class="lead">Separates relational metadata from binary object storage, groups the live PostgreSQL tables by domain, and explains how application APIs coordinate both stores.</p>
+    <div class="meta-row"><span><strong>Project:</strong> sap-ecosystem-asmplus</span><span><strong>Environment:</strong> Live GCP</span><span><strong>Observed:</strong> August 11, 2026</span></div>
+    <div class="status-key" aria-label="Evidence status key">
+      <span class="status observed">Observed live</span>
+      <span class="status optional">Optional capability</span>
+      <span class="status recommendation">Recommendation</span>
+      <span class="status gap">Observed gap</span>
+    </div>
+    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <section><h2>Architecture View</h2>
+    <section class="diagram-block" aria-labelledby="diagram-1">
+      <h3 id="diagram-1">Metadata and Binary Data Paths</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-05-data-architecture.svg&title=Metadata%20and%20Binary%20Data%20Paths" aria-label="Open Metadata and Binary Data Paths in the full-screen diagram viewer"><img src="../diagrams/structurizr-05-data-architecture.svg" alt="ASM+ data architecture diagram"></a>
+      </div>
+      <p class="diagram-caption">Figure 5. Database-backed APIs persist metadata while the internal storage API persists objects and manifests in GCS.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-05-data-architecture.svg&title=Metadata%20and%20Binary%20Data%20Paths">Open full-screen viewer</a><a href="../structurizr-site/index.html#05-data-architecture">Open this view in Structurizr</a></p>
+    </section></section>
+    <section><h2>Live Data Stores</h2><div class="table-scroll"><table><thead><tr><th>Store</th><th>Live configuration</th><th>Content</th></tr></thead><tbody>
+          <tr><td>Cloud SQL</td><td><code>asmplus-demo-postgres</code>, PostgreSQL 18, private IP <code>10.61.176.3</code>, 60 GB PD-SSD, zonal <code>db-g1-small</code></td><td>Identity, access, document metadata, folders, workflow, audit, notifications, reports, and integration mappings.</td></tr>
+          <tr><td>Cloud Storage</td><td><code>sap-ecosystem-asmplus-asm-binaries</code>, region <code>US-EAST1</code>, uniform access, public access prevention</td><td>Document binaries, manifests, licenses, certificates, and integration-managed objects.</td></tr>
+        </tbody></table></div></section>
+<section><h2>Observed PostgreSQL Tables</h2><div class="table-scroll"><table><thead><tr><th>Domain</th><th>Tables</th></tr></thead><tbody>
+          <tr><td>Identity and application access</td><td><code>applications</code>, <code>users</code>, <code>roles</code>, <code>structures</code>, <code>client_connections</code>, <code>user_application_access</code>, <code>generic_access</code>, <code>sso_configurations</code>, <code>sso_identity_providers</code></td></tr>
+          <tr><td>Document hierarchy</td><td><code>folders</code>, <code>files</code></td></tr>
+          <tr><td>Folder and role-group authorization</td><td><code>folder_access</code>, <code>role_groups</code>, <code>role_group_users</code>, <code>role_group_folder_roles</code></td></tr>
+          <tr><td>Workflow</td><td><code>workflow</code>, <code>workflow_step</code></td></tr>
+          <tr><td>Audit and notifications</td><td><code>audit_logs</code>, <code>notifications</code>, <code>notification_recipients</code></td></tr>
+          <tr><td>Search, metadata, and reports</td><td><code>metadata_key_mappings</code>, <code>folder_search_preferences</code>, <code>document_report_rollups</code></td></tr>
+        </tbody></table></div>
+        <p>The inventory contains 23 public-schema tables. Only catalog metadata was queried; no application rows or credentials are included in this package.</p></section>
+<section><h2>Relational Integrity</h2><p>Foreign keys connect users to roles and service connections, applications to roles and structures, files to folders, folder access to users/folders, role groups to users/folders/roles, notifications to creators and recipients, workflows to folders and users, and workflow steps to workflows. These constraints keep identity, authorization, hierarchy, and workflow state coherent.</p></section>
+<section><h2>Write and Read Coordination</h2><ol><li>A domain API validates the caller and the operation.</li><li>The domain API writes or reads relational metadata through its local Cloud SQL Auth Proxy.</li><li>For binary or manifest operations, the API calls <code>asm-api</code> with the internal API key.</li><li><code>asm-api</code> uses the GCS repository with ADC and generation preconditions.</li><li>The API returns a result only after the relevant metadata/object operation succeeds according to that route's transaction strategy.</li></ol>
+        <p>For exact compensation or partial-failure behavior, consult the service implementation for the route being changed; the architecture does not claim a distributed transaction across PostgreSQL and GCS.</p></section>
+<section><h2>Protection and Recovery Characteristics</h2><ul><li>Cloud SQL automated backups are enabled at 03:00.</li><li>Seven backups are retained, and point-in-time recovery keeps seven days of transaction logs.</li><li>Cloud SQL requires encrypted connections and has no public IPv4 address.</li><li>The GCS bucket blocks public access, uses uniform bucket-level access, and has a seven-day soft-delete policy.</li></ul>
+        <div class="notice warning"><strong>Verification boundary.</strong> GCS versioning was not returned as enabled by the live bucket inventory. Do not treat versioning in a reusable Terraform target as evidence that it is active in this deployment.</div></section>
+    <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
+    </main>
+  </div>
+  <script src="../assets/site.js"></script>
+</body>
+</html>

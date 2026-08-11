@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Documents the health probes, logs, platform metrics, and monitoring coverage that exist today, together with the custom alerting and dashboard gaps still present.">
+  <title>10. Observability Architecture | ASM+ Architecture</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="layout">
+    <aside class="sidebar">
+    <a class="brand" href="../index.html">ASM+ Architecture</a>
+    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="nav-label">Manuals</p>
+    <ul class="nav-list">
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../manuals/01-system-context.html">1. System Context</a></li>
+<li><a href="../manuals/02-container-microservices.html">2. Container / Microservices</a></li>
+<li><a href="../manuals/03-component-architecture.html">3. Component Architecture</a></li>
+<li><a href="../manuals/04-api-integration.html">4. API / Integration</a></li>
+<li><a href="../manuals/05-data-architecture.html">5. Data Architecture</a></li>
+<li><a href="../manuals/06-deployment-architecture.html">6. Deployment Architecture</a></li>
+<li><a href="../manuals/07-network-architecture.html">7. Network Architecture</a></li>
+<li><a href="../manuals/08-security-architecture.html">8. Security Architecture</a></li>
+<li><a href="../manuals/09-runtime-sequences.html">9. Runtime / Sequence</a></li>
+<li><a href="../manuals/10-observability.html" aria-current="page">10. Observability</a></li>
+    </ul>
+    <p class="nav-label">Model and evidence</p>
+    <ul class="nav-list">
+      <li><a href="../structurizr-site/index.html">Interactive Structurizr</a></li>
+      <li><a href="../workspace.dsl">Structurizr DSL</a></li>
+      <li><a href="../architecture-inventory.md">Inventory</a></li>
+      <li><a href="../traceability-matrix.md">Traceability</a></li>
+      <li><a href="../assumptions-and-gaps.md">Assumptions and gaps</a></li>
+    </ul>
+  </aside>
+    <main class="main" id="content">
+      <div class="content">
+    <div class="title-row"><img class="title-icon" src="../assets/icons/observability.svg" alt=""><div><p class="eyebrow">Architecture manual 10</p><h1>Observability Architecture</h1></div></div>
+    <p class="lead">Documents the health probes, logs, platform metrics, and monitoring coverage that exist today, together with the custom alerting and dashboard gaps still present.</p>
+    <div class="meta-row"><span><strong>Project:</strong> sap-ecosystem-asmplus</span><span><strong>Environment:</strong> Live GCP</span><span><strong>Observed:</strong> August 11, 2026</span></div>
+    <div class="status-key" aria-label="Evidence status key">
+      <span class="status observed">Observed live</span>
+      <span class="status optional">Optional capability</span>
+      <span class="status recommendation">Recommendation</span>
+      <span class="status gap">Observed gap</span>
+    </div>
+    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <section><h2>Architecture View</h2>
+    <section class="diagram-block" aria-labelledby="diagram-1">
+      <h3 id="diagram-1">Health, Logs, and Metrics</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-10-observability-architecture.svg&title=Health%2C%20Logs%2C%20and%20Metrics" aria-label="Open Health, Logs, and Metrics in the full-screen diagram viewer"><img src="../diagrams/structurizr-10-observability-architecture.svg" alt="Observability architecture diagram for ASM+"></a>
+      </div>
+      <p class="diagram-caption">Figure 10. Kubernetes probes and workload telemetry flow into GKE health management and Cloud Operations.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-10-observability-architecture.svg&title=Health%2C%20Logs%2C%20and%20Metrics">Open full-screen viewer</a><a href="../structurizr-site/index.html#10-observability-architecture">Open this view in Structurizr</a></p>
+    </section></section>
+    <section><h2>Health Probe Matrix</h2><div class="table-scroll"><table><thead><tr><th>Deployment</th><th>Readiness</th><th>Liveness</th></tr></thead><tbody>
+          <tr><td><code>api-asm-plus</code></td><td><code>/health/ready</code></td><td><code>/health/live</code></td></tr>
+          <tr><td><code>api-auth</code></td><td><code>/health/db</code></td><td><code>/health</code></td></tr>
+          <tr><td><code>api-sap</code></td><td><code>/health</code></td><td><code>/health</code></td></tr>
+          <tr><td><code>api-sf</code></td><td><code>/health</code></td><td><code>/health</code></td></tr>
+          <tr><td><code>asm-api</code></td><td><code>/ready</code></td><td><code>/health</code></td></tr>
+          <tr><td><code>front-auth</code></td><td><code>/health</code></td><td><code>/health</code></td></tr>
+          <tr><td><code>front-asm-plus</code></td><td><code>/health</code></td><td><code>/health</code></td></tr>
+          <tr><td><code>front-viewer</code></td><td><code>/health</code></td><td><code>/health</code></td></tr>
+        </tbody></table></div></section>
+<section><h2>Telemetry Present Today</h2><ul><li>GKE system logging and workload logging are enabled.</li><li>Application and web-server stdout/stderr are collected by the platform.</li><li>Cloud SQL proxy sidecars emit structured logs.</li><li>GKE monitoring components and Managed Service for Prometheus are enabled.</li><li>Kubernetes Deployment and Pod status provide rollout and availability signals.</li><li>Backend health and ManagedCertificate status provide public-entry signals.</li></ul></section>
+<section><h2>Observed Monitoring Gaps</h2><div class="table-scroll"><table><thead><tr><th>Capability</th><th>Observed state</th></tr></thead><tbody>
+          <tr><td>Custom alert policies</td><td>None observed</td></tr>
+          <tr><td>Custom dashboards</td><td>None observed</td></tr>
+          <tr><td>Uptime checks</td><td>None observed</td></tr>
+          <tr><td>Log-based metrics</td><td>None observed</td></tr>
+          <tr><td>Notification channels</td><td>None observed</td></tr>
+          <tr><td>Managed Prometheus automatic application monitoring</td><td>Scope reported as <code>NONE</code></td></tr>
+          <tr><td>Cloud SQL Query Insights</td><td>Not verified as enabled in the live configuration</td></tr>
+        </tbody></table></div></section>
+<section><h2>Operator Investigation Path</h2><ol><li>Check Deployment readiness and recent rollouts in namespace <code>asm-plus-demo</code>.</li><li>Inspect Pod events before application logs when a container does not start.</li><li>Inspect both the application and <code>cloud-sql-proxy</code> containers for database-backed APIs.</li><li>Check Ingress backend health and certificate status for public availability issues.</li><li>Check Cloud SQL connections, CPU/storage, and backup state for metadata failures.</li><li>Check GCS IAM and <code>asm-api</code> logs for binary-operation failures.</li></ol></section>
+<section><h2>Recommended Monitoring Baseline</h2><p class="status recommendation">Recommendation</p><ul><li>Create HTTPS uptime checks for the three frontends and health endpoints for the four public APIs.</li><li>Alert on Deployment unavailable replicas, repeated container restarts, and failed readiness probes.</li><li>Alert on load-balancer 5xx rate and latency, Cloud SQL CPU/connections/storage, backup failure, and GCS permission errors.</li><li>Create log-based metrics for authentication failures, license failures, internal API-key failures, and integration 5xx responses.</li><li>Configure notification channels and an operational ownership matrix before relying on alerts.</li><li>Define service-level objectives for login, document upload, document retrieval, SAP integration, and Salesforce integration.</li></ul>
+        <div class="notice"><strong>Not applied.</strong> These recommendations are documentation only. No monitoring resources or alert policies were created during this work.</div></section>
+    <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
+    </main>
+  </div>
+  <script src="../assets/site.js"></script>
+</body>
+</html>

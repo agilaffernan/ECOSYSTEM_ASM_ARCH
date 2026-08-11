@@ -1,0 +1,47 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["3D. Component Architecture - SAP API"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    7[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
+    style 7 fill:#ffffff,stroke:#4285f4,color:#172033
+
+    subgraph 13 ["ASM+"]
+      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+
+      subgraph 47 ["SAP API"]
+        style 47 fill:#ffffff,stroke:#92400e,color:#92400e
+
+        48["<div style='font-weight: bold'>ArchiveLink HTTP Interface</div><div style='font-size: 70%; margin-top: 0px'>[Component: Express, raw/multipart HTTP]</div><div style='font-size: 80%; margin-top:10px'>Exposes GET, PUT, and POST<br />/api/sap plus health and<br />administrative routes.</div>"]
+        style 48 fill:#f8fafc,stroke:#64748b,color:#172033
+        49["<div style='font-weight: bold'>SAP Authentication</div><div style='font-size: 70%; margin-top: 0px'>[Component: Basic Auth, X-Api-Key]</div><div style='font-size: 80%; margin-top:10px'>Validates Basic Auth, trusted<br />service keys, and ArchiveLink<br />certificates.</div>"]
+        style 49 fill:#f8fafc,stroke:#64748b,color:#172033
+        50["<div style='font-weight: bold'>SAP Metadata Persistence</div><div style='font-size: 70%; margin-top: 0px'>[Component: pg]</div><div style='font-size: 80%; margin-top:10px'>Maps SAP systems,<br />repositories, documents, and<br />components into<br />folders/files.</div>"]
+        style 50 fill:#f8fafc,stroke:#64748b,color:#172033
+        51["<div style='font-weight: bold'>Viewer Token and Redirect Service</div><div style='font-size: 70%; margin-top: 0px'>[Component: HMAC-SHA256]</div><div style='font-size: 80%; margin-top:10px'>Creates bounded HMAC viewer<br />tokens and redirects browser<br />launches to the Viewer.</div>"]
+        style 51 fill:#f8fafc,stroke:#64748b,color:#172033
+        52["<div style='font-weight: bold'>ASM Storage Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: HTTP, X-Api-Key]</div><div style='font-size: 80%; margin-top:10px'>Delegates binary and<br />certificate storage to<br />asm-api.</div>"]
+        style 52 fill:#f8fafc,stroke:#64748b,color:#172033
+        53["<div style='font-weight: bold'>SAP Management UI and Services</div><div style='font-size: 70%; margin-top: 0px'>[Component: Static UI and Express]</div><div style='font-size: 80%; margin-top:10px'>Provides service-user,<br />license, and certificate<br />administration endpoints.</div>"]
+        style 53 fill:#f8fafc,stroke:#64748b,color:#172033
+        54["<div style='font-weight: bold'>Vector Integration Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: HTTP, optional]</div><div style='font-size: 80%; margin-top:10px'>Optional indexing adapter;<br />VECTOR_API_URL is empty in<br />the live deployment.</div>"]
+        style 54 fill:#f8fafc,stroke:#64748b,color:#172033
+      end
+
+      26["<div style='font-weight: bold'>Document Viewer</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</div>"]
+      style 26 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+      63["<div style='font-weight: bold'>ASM Storage API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</div>"]
+      style 63 fill:#7c3aed,stroke:#6d28d9,color:#ffffff
+    end
+
+    48-. "<div>Authenticates requests</div><div style='font-size: 70%'></div>" .->49
+    48-. "<div>Persists successful<br />operations</div><div style='font-size: 70%'></div>" .->50
+    48-. "<div>Creates browser redirects<br />when applicable</div><div style='font-size: 70%'></div>" .->51
+    48-. "<div>Delegates document operations</div><div style='font-size: 70%'></div>" .->52
+    50-. "<div>Queries</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->7
+    52-. "<div>Calls</div><div style='font-size: 70%'>[HTTP, X-Api-Key]</div>" .->63
+    51-. "<div>Redirects</div><div style='font-size: 70%'>[HTTPS]</div>" .->26
+    53-. "<div>Stores managed objects</div><div style='font-size: 70%'></div>" .->52
+
+  end

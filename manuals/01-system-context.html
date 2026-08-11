@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explains where ASM+ lives, who uses it, which enterprise systems connect to it, and which Google Cloud services form its external operating context.">
+  <title>1. System Context Architecture | ASM+ Architecture</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="layout">
+    <aside class="sidebar">
+    <a class="brand" href="../index.html">ASM+ Architecture</a>
+    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="nav-label">Manuals</p>
+    <ul class="nav-list">
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../manuals/01-system-context.html" aria-current="page">1. System Context</a></li>
+<li><a href="../manuals/02-container-microservices.html">2. Container / Microservices</a></li>
+<li><a href="../manuals/03-component-architecture.html">3. Component Architecture</a></li>
+<li><a href="../manuals/04-api-integration.html">4. API / Integration</a></li>
+<li><a href="../manuals/05-data-architecture.html">5. Data Architecture</a></li>
+<li><a href="../manuals/06-deployment-architecture.html">6. Deployment Architecture</a></li>
+<li><a href="../manuals/07-network-architecture.html">7. Network Architecture</a></li>
+<li><a href="../manuals/08-security-architecture.html">8. Security Architecture</a></li>
+<li><a href="../manuals/09-runtime-sequences.html">9. Runtime / Sequence</a></li>
+<li><a href="../manuals/10-observability.html">10. Observability</a></li>
+    </ul>
+    <p class="nav-label">Model and evidence</p>
+    <ul class="nav-list">
+      <li><a href="../structurizr-site/index.html">Interactive Structurizr</a></li>
+      <li><a href="../workspace.dsl">Structurizr DSL</a></li>
+      <li><a href="../architecture-inventory.md">Inventory</a></li>
+      <li><a href="../traceability-matrix.md">Traceability</a></li>
+      <li><a href="../assumptions-and-gaps.md">Assumptions and gaps</a></li>
+    </ul>
+  </aside>
+    <main class="main" id="content">
+      <div class="content">
+    <div class="title-row"><img class="title-icon" src="../assets/icons/system.svg" alt=""><div><p class="eyebrow">Architecture manual 1</p><h1>System Context Architecture</h1></div></div>
+    <p class="lead">Explains where ASM+ lives, who uses it, which enterprise systems connect to it, and which Google Cloud services form its external operating context.</p>
+    <div class="meta-row"><span><strong>Project:</strong> sap-ecosystem-asmplus</span><span><strong>Environment:</strong> Live GCP</span><span><strong>Observed:</strong> August 11, 2026</span></div>
+    <div class="status-key" aria-label="Evidence status key">
+      <span class="status observed">Observed live</span>
+      <span class="status optional">Optional capability</span>
+      <span class="status recommendation">Recommendation</span>
+      <span class="status gap">Observed gap</span>
+    </div>
+    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <section><h2>Architecture View</h2>
+    <section class="diagram-block" aria-labelledby="diagram-1">
+      <h3 id="diagram-1">ASM+ System Context</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-01-system-context.svg&title=ASM%2B%20System%20Context" aria-label="Open ASM+ System Context in the full-screen diagram viewer"><img src="../diagrams/structurizr-01-system-context.svg" alt="C4 system context diagram for ASM+ on Google Cloud"></a>
+      </div>
+      <p class="diagram-caption">Figure 1. People, external systems, and managed-service dependencies around the ASM+ software system.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-01-system-context.svg&title=ASM%2B%20System%20Context">Open full-screen viewer</a><a href="../structurizr-site/index.html#01-system-context">Open this view in Structurizr</a></p>
+    </section></section>
+    <section><h2>What This View Answers</h2><p>ASM+ is a document-management and integration platform running in project <code>sap-ecosystem-asmplus</code>. Users reach its web applications and APIs through seven HTTPS hostnames. The application tier runs on GKE; Cloud SQL stores metadata; Cloud Storage stores binaries and ASM objects; Cloud Operations receives platform and workload telemetry.</p>
+        <div class="fact-grid">
+          <article class="fact"><h3>Primary users</h3><p>Business users manage and view documents. Platform administrators operate application access, Kubernetes workloads, and GCP resources.</p></article>
+          <article class="fact"><h3>Enterprise integrations</h3><p>SAP uses the ArchiveLink-compatible API. Salesforce uses repository, document, and token endpoints.</p></article>
+          <article class="fact"><h3>Data services</h3><p>Private Cloud SQL PostgreSQL stores application metadata. A private GCS bucket stores binary objects and manifests.</p></article>
+          <article class="fact"><h3>Entry point</h3><p>Auritas DNS resolves seven A records to the external load balancer at <code>34.36.209.159</code>.</p></article>
+        </div></section>
+<section><h2>Actors and External Systems</h2><div class="table-scroll"><table><thead><tr><th>Element</th><th>Role</th><th>Status</th></tr></thead><tbody>
+          <tr><td>ASM+ User</td><td>Creates folders, uploads files, searches content, and opens the document viewer.</td><td>Observed use case</td></tr>
+          <tr><td>Platform Administrator</td><td>Administers applications, roles, users, GKE, Cloud SQL, GCS, and operational evidence.</td><td>Observed use case</td></tr>
+          <tr><td>SAP System</td><td>Calls the SAP ArchiveLink-compatible integration over HTTPS.</td><td>Deployed API</td></tr>
+          <tr><td>Salesforce</td><td>Calls Salesforce document/repository endpoints and obtains bounded tokens.</td><td>Deployed API</td></tr>
+          <tr><td>Enterprise Identity Provider</td><td>Can provide SAML or Microsoft identity assertions to Auth.</td><td>Optional; active provider not verified</td></tr>
+          <tr><td>Auritas DNS</td><td>Publishes the public <code>asmplus-demo.auritas.com</code> names.</td><td>Observed live</td></tr>
+        </tbody></table></div></section>
+<section><h2>System Boundary and Ownership</h2><p>The ASM+ boundary includes the eight application workloads, their runtime configuration, and the Kubernetes secret used by those workloads. GKE, Cloud SQL, GCS, Artifact Registry, Secret Manager, the external load balancer, DNS, and Cloud Operations are platform dependencies outside the software-system boundary.</p>
+        <div class="notice warning"><strong>Important distinction.</strong> Product support for SAML, Microsoft identity, vector indexing, and OnlyOffice does not prove that those options are active. The live runtime configuration left the vector and OnlyOffice endpoints empty, and no active enterprise identity provider was verified.</div></section>
+<section><h2>Evidence Basis</h2><ul><li>Read-only GKE, Kubernetes, Ingress, ManagedCertificate, Cloud SQL, GCS, IAM, Artifact Registry, Logging, and Monitoring inventory.</li><li>Read-only PostgreSQL catalog queries for schema structure only.</li><li>Helm values/templates and the currently deployed image tags.</li><li>Read-only source review of the eight application repositories and active development branches.</li></ul></section>
+    <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
+    </main>
+  </div>
+  <script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+digraph {
+  compound=true
+  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  node [fontname="Arial", shape=box, margin="0.4,0.3"]
+  edge [fontname="Arial"]
+  label=<<br /><font point-size="34">9D. Runtime Sequence - SAP ArchiveLink Write</font><br /><font point-size="24">SAP ArchiveLink document write flow.</font>>
+
+  subgraph cluster_13 {
+    margin=25
+    label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
+    labelloc=b
+    color="#444444"
+    fontcolor="#444444"
+    fillcolor="#444444"
+
+    subgraph "cluster_group_Application APIs" {
+      margin=25
+      label=<<font point-size="24"><br />Application APIs</font>>
+      labelloc=b
+      color="#cccccc"
+      fontcolor="#cccccc"
+      fillcolor="#ffffff"
+      style="dashed"
+
+      47 [id=47,shape=hexagon, label=<<font point-size="34">SAP API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3020]</font><br /><br /><font point-size="24">Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
+    }
+
+    subgraph "cluster_group_Storage Core" {
+      margin=25
+      label=<<font point-size="24"><br />Storage Core</font>>
+      labelloc=b
+      color="#cccccc"
+      fontcolor="#cccccc"
+      fillcolor="#ffffff"
+      style="dashed"
+
+      63 [id=63,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#6d28d9", fillcolor="#7c3aed", fontcolor="#ffffff"]
+    }
+
+  }
+
+  3 [id=3,shape=rect, label=<<font point-size="34">SAP System</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Calls the SAP<br />ArchiveLink-compatible<br />interface for document storage<br />and retrieval.</font>>, style=filled, color="#0070b1", fillcolor="#ffffff", fontcolor="#172033"]
+  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+  8 [id=8,shape=cylinder, label=<<font point-size="34">Cloud Storage</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+
+  3 -> 47 [id=87, label=<<font point-size="18">1. Sends PUT or multipart POST<br />/api/sap</font><br /><font point-size="13">[HTTPS, Basic Auth or certificate]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  47 -> 63 [id=102, label=<<font point-size="18">2. Writes the component with the<br />trusted internal key</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
+  63 -> 8 [id=108, label=<<font point-size="18">3. Stores the binary and manifest</font><br /><font point-size="13">[GCS API over HTTPS]</font>>, style="dashed", color="#047857", fontcolor="#047857"]
+  47 -> 7 [id=106, label=<<font point-size="18">4. Persists the SAP<br />system/repository/document hierarchy</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
+
+}

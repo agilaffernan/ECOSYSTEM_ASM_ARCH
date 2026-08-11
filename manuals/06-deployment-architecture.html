@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Maps the logical services to their live GCP resources: DNS, load balancer, zonal GKE cluster, pods and sidecars, Cloud SQL, GCS, Artifact Registry, Secret Manager, and Cloud Operations.">
+  <title>6. Deployment Architecture | ASM+ Architecture</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="layout">
+    <aside class="sidebar">
+    <a class="brand" href="../index.html">ASM+ Architecture</a>
+    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="nav-label">Manuals</p>
+    <ul class="nav-list">
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../manuals/01-system-context.html">1. System Context</a></li>
+<li><a href="../manuals/02-container-microservices.html">2. Container / Microservices</a></li>
+<li><a href="../manuals/03-component-architecture.html">3. Component Architecture</a></li>
+<li><a href="../manuals/04-api-integration.html">4. API / Integration</a></li>
+<li><a href="../manuals/05-data-architecture.html">5. Data Architecture</a></li>
+<li><a href="../manuals/06-deployment-architecture.html" aria-current="page">6. Deployment Architecture</a></li>
+<li><a href="../manuals/07-network-architecture.html">7. Network Architecture</a></li>
+<li><a href="../manuals/08-security-architecture.html">8. Security Architecture</a></li>
+<li><a href="../manuals/09-runtime-sequences.html">9. Runtime / Sequence</a></li>
+<li><a href="../manuals/10-observability.html">10. Observability</a></li>
+    </ul>
+    <p class="nav-label">Model and evidence</p>
+    <ul class="nav-list">
+      <li><a href="../structurizr-site/index.html">Interactive Structurizr</a></li>
+      <li><a href="../workspace.dsl">Structurizr DSL</a></li>
+      <li><a href="../architecture-inventory.md">Inventory</a></li>
+      <li><a href="../traceability-matrix.md">Traceability</a></li>
+      <li><a href="../assumptions-and-gaps.md">Assumptions and gaps</a></li>
+    </ul>
+  </aside>
+    <main class="main" id="content">
+      <div class="content">
+    <div class="title-row"><img class="title-icon" src="../assets/icons/system.svg" alt=""><div><p class="eyebrow">Architecture manual 6</p><h1>Deployment Architecture</h1></div></div>
+    <p class="lead">Maps the logical services to their live GCP resources: DNS, load balancer, zonal GKE cluster, pods and sidecars, Cloud SQL, GCS, Artifact Registry, Secret Manager, and Cloud Operations.</p>
+    <div class="meta-row"><span><strong>Project:</strong> sap-ecosystem-asmplus</span><span><strong>Environment:</strong> Live GCP</span><span><strong>Observed:</strong> August 11, 2026</span></div>
+    <div class="status-key" aria-label="Evidence status key">
+      <span class="status observed">Observed live</span>
+      <span class="status optional">Optional capability</span>
+      <span class="status recommendation">Recommendation</span>
+      <span class="status gap">Observed gap</span>
+    </div>
+    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <section><h2>Architecture View</h2>
+    <section class="diagram-block" aria-labelledby="diagram-1">
+      <h3 id="diagram-1">Live GCP Deployment Topology</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-06-deployment-architecture.svg&title=Live%20GCP%20Deployment%20Topology" aria-label="Open Live GCP Deployment Topology in the full-screen diagram viewer"><img src="../diagrams/structurizr-06-deployment-architecture.svg" alt="Deployment diagram of ASM+ on Google Cloud"></a>
+      </div>
+      <p class="diagram-caption">Figure 6. Physical deployment nodes and workload instances in the live project. Repetitive configuration, health, logging, and application-flow lines are shown in their focused manuals instead of this physical view.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-06-deployment-architecture.svg&title=Live%20GCP%20Deployment%20Topology">Open full-screen viewer</a><a href="../structurizr-site/index.html#06-deployment-architecture">Open this view in Structurizr</a></p>
+    </section></section>
+    <section><h2>Deployment Baseline</h2><div class="table-scroll"><table><thead><tr><th>Layer</th><th>Observed live resource</th></tr></thead><tbody>
+          <tr><td>Project</td><td><code>sap-ecosystem-asmplus</code></td></tr>
+          <tr><td>Region / zone</td><td><code>us-east1</code> / <code>us-east1-b</code></td></tr>
+          <tr><td>GKE</td><td><code>asmplus-demo-gke</code>, Standard, version <code>1.35.6-gke.1250000</code>, Regular channel</td></tr>
+          <tr><td>Namespace / Helm release</td><td><code>asm-plus-demo</code> / <code>asm-plus-demo</code></td></tr>
+          <tr><td>Node pool</td><td><code>default-pool</code>; three Ready <code>e2-medium</code> nodes; COS_CONTAINERD</td></tr>
+          <tr><td>Ingress</td><td><code>asm-plus-ingress</code>, static IPv4 <code>34.36.209.159</code></td></tr>
+          <tr><td>Cloud SQL</td><td><code>asmplus-demo-postgres</code>, PostgreSQL 18, private IP</td></tr>
+          <tr><td>GCS</td><td><code>sap-ecosystem-asmplus-asm-binaries</code></td></tr>
+          <tr><td>Artifact Registry</td><td><code>us-east1-docker.pkg.dev/sap-ecosystem-asmplus/asm-plus</code></td></tr>
+        </tbody></table></div></section>
+<section><h2>Pod Composition</h2><p>The three frontends and <code>asm-api</code> run one application container each. The four database-backed APIs run an application container and a <code>cloud-sql-proxy:2.14.1</code> sidecar. The proxy is configured for private IP, structured logs, and local port 5432.</p>
+        <p>Every deployment was observed at one desired and one ready replica. Kubernetes Services provide stable ClusterIP endpoints; seven Services are connected to the external load balancer through NEGs.</p></section>
+<section><h2>Delivery Path</h2><ol><li>Application images are stored in the regional Artifact Registry repository.</li><li>Helm renders Deployments, Services, ConfigMaps, service accounts, Ingress, BackendConfig, FrontendConfig, and ManagedCertificate resources.</li><li>GKE nodes pull OCI images and start application and proxy containers.</li><li>Readiness probes determine when NEG endpoints can receive traffic.</li><li>The Google-managed certificate and load balancer expose the ready services over HTTPS.</li></ol></section>
+<section><h2>Live Deployment Versus Reusable Terraform Target</h2><div class="notice warning"><strong>Do not merge these baselines.</strong> The live deployment uses the <code>default</code> VPC, PostgreSQL 18, and <code>e2-medium</code> nodes. The reusable Terraform package under <code>DeploymentDocs/GCPTerraform</code> describes a future/portable target with a dedicated VPC, PostgreSQL 16, and different node sizing. This manual depicts the live deployment.</div></section>
+<section><h2>Availability Implications</h2><ul><li>The GKE control plane and node pool are zonal in <code>us-east1-b</code>.</li><li>Cloud SQL is a zonal instance, not regional HA.</li><li>One application replica per deployment simplifies the demonstration footprint but limits disruption tolerance.</li><li>Cloud SQL backups and PITR protect database recovery; they do not make the runtime highly available.</li></ul></section>
+    <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
+    </main>
+  </div>
+  <script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+sequenceDiagram
+
+  participant 3 as SAP System<br />[Software System]
+  participant 47 as SAP API<br />[Container: Node.js, TypeScript, Express; port 3020]
+  participant 63 as ASM Storage API<br />[Container: Node.js, TypeScript, Express; port 3000]
+  participant 8 as Cloud Storage<br />[Software System]
+  participant 7 as Cloud SQL for PostgreSQL<br />[Software System]
+
+  3->>47: Sends PUT or multipart POST /api/sap<br />[HTTPS, Basic Auth or certificate]
+  47->>63: Writes the component with the trusted internal key<br />[HTTP/REST, X-Api-Key]
+  63->>8: Stores the binary and manifest<br />[GCS API over HTTPS]
+  47->>7: Persists the SAP system/repository/document hierarchy<br />[PostgreSQL on 127.0.0.1:5432]

@@ -1,0 +1,16 @@
+sequenceDiagram
+
+  actor 1 as ASM+ User<br />[Person]
+  participant 19 as ASM+ Web Application<br />[Container: React, Vite, Node static server]
+  participant 26 as Document Viewer<br />[Container: React, Vite, Node static server]
+  participant 32 as Auth API<br />[Container: Node.js, TypeScript, Express; port 3000]
+  participant 38 as ASM+ API<br />[Container: Node.js, TypeScript, Express; port 3000]
+  participant 63 as ASM Storage API<br />[Container: Node.js, TypeScript, Express; port 3000]
+  participant 8 as Cloud Storage<br />[Software System]
+
+  1->>19: Chooses a document<br />[HTTPS]
+  19->>26: Launches the Viewer with document context<br />[HTTPS]
+  26->>32: Validates the user/application session<br />[HTTPS/JSON, JWT]
+  26->>38: Requests metadata and binary content<br />[HTTPS/JSON and HTTP range]
+  38->>63: Requests the stored component<br />[HTTP/REST, X-Api-Key]
+  63->>8: Streams the object, including HTTP range support<br />[GCS API over HTTPS]

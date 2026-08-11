@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Traces public traffic from DNS and the external load balancer to GKE NEGs, and traces private service traffic to Cloud SQL and GCS.">
+  <title>7. Network Architecture | ASM+ Architecture</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="layout">
+    <aside class="sidebar">
+    <a class="brand" href="../index.html">ASM+ Architecture</a>
+    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="nav-label">Manuals</p>
+    <ul class="nav-list">
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../manuals/01-system-context.html">1. System Context</a></li>
+<li><a href="../manuals/02-container-microservices.html">2. Container / Microservices</a></li>
+<li><a href="../manuals/03-component-architecture.html">3. Component Architecture</a></li>
+<li><a href="../manuals/04-api-integration.html">4. API / Integration</a></li>
+<li><a href="../manuals/05-data-architecture.html">5. Data Architecture</a></li>
+<li><a href="../manuals/06-deployment-architecture.html">6. Deployment Architecture</a></li>
+<li><a href="../manuals/07-network-architecture.html" aria-current="page">7. Network Architecture</a></li>
+<li><a href="../manuals/08-security-architecture.html">8. Security Architecture</a></li>
+<li><a href="../manuals/09-runtime-sequences.html">9. Runtime / Sequence</a></li>
+<li><a href="../manuals/10-observability.html">10. Observability</a></li>
+    </ul>
+    <p class="nav-label">Model and evidence</p>
+    <ul class="nav-list">
+      <li><a href="../structurizr-site/index.html">Interactive Structurizr</a></li>
+      <li><a href="../workspace.dsl">Structurizr DSL</a></li>
+      <li><a href="../architecture-inventory.md">Inventory</a></li>
+      <li><a href="../traceability-matrix.md">Traceability</a></li>
+      <li><a href="../assumptions-and-gaps.md">Assumptions and gaps</a></li>
+    </ul>
+  </aside>
+    <main class="main" id="content">
+      <div class="content">
+    <div class="title-row"><img class="title-icon" src="../assets/icons/network.svg" alt=""><div><p class="eyebrow">Architecture manual 7</p><h1>Network Architecture</h1></div></div>
+    <p class="lead">Traces public traffic from DNS and the external load balancer to GKE NEGs, and traces private service traffic to Cloud SQL and GCS.</p>
+    <div class="meta-row"><span><strong>Project:</strong> sap-ecosystem-asmplus</span><span><strong>Environment:</strong> Live GCP</span><span><strong>Observed:</strong> August 11, 2026</span></div>
+    <div class="status-key" aria-label="Evidence status key">
+      <span class="status observed">Observed live</span>
+      <span class="status optional">Optional capability</span>
+      <span class="status recommendation">Recommendation</span>
+      <span class="status gap">Observed gap</span>
+    </div>
+    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <section><h2>Architecture View</h2>
+    <section class="diagram-block" aria-labelledby="diagram-1">
+      <h3 id="diagram-1">Public and Private Network Paths</h3>
+      <div class="diagram-frame">
+        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-07-network-architecture.svg&title=Public%20and%20Private%20Network%20Paths" aria-label="Open Public and Private Network Paths in the full-screen diagram viewer"><img src="../diagrams/structurizr-07-network-architecture.svg" alt="Network architecture diagram for ASM+ on GCP"></a>
+      </div>
+      <p class="diagram-caption">Figure 7. DNS, TLS load balancing, GKE Ingress and NEGs, internal Services, proxy sidecars, and managed-service paths. Configuration, health, logging, image-delivery, and identity-control lines are documented in their focused views.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-07-network-architecture.svg&title=Public%20and%20Private%20Network%20Paths">Open full-screen viewer</a><a href="../structurizr-site/index.html#07-network-architecture">Open this view in Structurizr</a></p>
+    </section></section>
+    <section><h2>Public Request Path</h2><ol><li>A client resolves one of seven <code>asmplus-demo.auritas.com</code> names to <code>34.36.209.159</code>.</li><li>The global external Application Load Balancer terminates TLS with <code>asmplus-demo-certificate-v2</code>.</li><li>Plain HTTP is permanently redirected to HTTPS by the GKE FrontendConfig.</li><li>GCE Ingress selects a backend by hostname.</li><li>The backend sends the request to a GKE Network Endpoint Group and then to a ready pod endpoint.</li></ol></section>
+<section><h2>Host Routing</h2><div class="table-scroll"><table><thead><tr><th>Host class</th><th>Destinations</th></tr></thead><tbody>
+          <tr><td>Web</td><td>Auth Portal, ASM+ Web, Document Viewer</td></tr>
+          <tr><td>Core APIs</td><td>Auth API, ASM+ API</td></tr>
+          <tr><td>Integration APIs</td><td>SAP API, Salesforce API</td></tr>
+          <tr><td>Internal only</td><td><code>asm-api</code> ClusterIP; not present in public Ingress</td></tr>
+        </tbody></table></div></section>
+<section><h2>Private Service Paths</h2><ul><li>Database-backed APIs connect to a sidecar on <code>127.0.0.1:5432</code>.</li><li>The sidecar opens the Cloud SQL connector path using private IP and Workload Identity.</li><li><code>asm-api</code> reaches GCS over the Google API endpoint using short-lived ADC credentials.</li><li>API-to-<code>asm-api</code> traffic remains inside Kubernetes through a ClusterIP Service.</li></ul></section>
+<section><h2>Cluster Addressing</h2><p>The cluster is VPC-native. The observed Pod secondary range is <code>10.104.128.0/17</code>; the service range is <code>34.118.224.0/20</code>. Intra-node visibility is enabled. The cluster uses the regional <code>default</code> subnet in <code>us-east1</code>.</p></section>
+<section><h2>Current Network Controls</h2><p>GKE-created firewall rules and the load-balancer health-check rule are present. The default VPC also retains broad default SSH, RDP, and ICMP rules. No Kubernetes NetworkPolicies were observed in the application namespace, and no FQDN network policy was enabled.</p>
+        <div class="notice risk"><strong>Observed gaps.</strong> The deployment functions correctly, but workload east-west traffic is not restricted by namespace NetworkPolicy, and the default VPC has a broader firewall posture than a purpose-built application VPC. Any hardening change should be tested separately because it can interrupt Ingress, node, proxy, or GCS connectivity.</div></section>
+    <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
+    </main>
+  </div>
+  <script src="../assets/site.js"></script>
+</body>
+</html>

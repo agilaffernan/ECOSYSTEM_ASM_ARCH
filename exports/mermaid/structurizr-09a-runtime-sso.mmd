@@ -1,0 +1,15 @@
+sequenceDiagram
+
+  actor 1 as ASM+ User<br />[Person]
+  participant 19 as ASM+ Web Application<br />[Container: React, Vite, Node static server]
+  participant 14 as Auth Portal<br />[Container: React, Vite, NGINX]
+  participant 32 as Auth API<br />[Container: Node.js, TypeScript, Express; port 3000]
+  participant 7 as Cloud SQL for PostgreSQL<br />[Software System]
+
+  1->>19: Opens the application<br />[HTTPS]
+  19->>14: Redirects to /sso with callback URL<br />[HTTPS]
+  1->>14: Submits credentials or starts configured federation<br />[HTTPS]
+  14->>32: Authenticates and requests an application token<br />[HTTPS/JSON]
+  32->>7: Validates user and application access<br />[PostgreSQL on 127.0.0.1:5432]
+  1->>19: Returns to /sso/callback with the token<br />[HTTPS]
+  19->>32: Loads identity and access context<br />[HTTPS/JSON, JWT]
