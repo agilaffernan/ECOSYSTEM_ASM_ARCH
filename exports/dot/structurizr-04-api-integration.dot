@@ -1,16 +1,15 @@
 digraph {
   compound=true
-  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  graph [fontname="Arial", rankdir=TB, ranksep=0.62, nodesep=0.56, newrank=true, remincross=true, mclimit=8.0, splines=ortho, outputorder=edgesfirst]
   node [fontname="Arial", shape=box, margin="0.4,0.3"]
   edge [fontname="Arial"]
   label=<<br /><font point-size="34">4. API and Integration Architecture</font><br /><font point-size="24">Public APIs, internal service calls, protocols, and external integrations.</font>>
 
   1 [id=1,shape=rect, label=<<font point-size="34">ASM+ User</font><br /><font point-size="19">[Person]</font><br /><br /><font point-size="24">Creates folders, uploads<br />files, searches content, and<br />views documents.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
   3 [id=3,shape=rect, label=<<font point-size="34">SAP System</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Calls the SAP<br />ArchiveLink-compatible<br />interface for document storage<br />and retrieval.</font>>, style=filled, color="#0070b1", fillcolor="#ffffff", fontcolor="#172033"]
-  4 [id=4,shape=rect, label=<<font point-size="34">Salesforce</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Calls the Salesforce<br />document/repository<br />integration and token<br />endpoints.</font>>, style=filled, color="#b45309", fillcolor="#f59e0b", fontcolor="#172033"]
-  5 [id=5,shape=rect, label=<<font point-size="34">Enterprise Identity<br />Provider</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Optional SAML or Microsoft<br />identity provider supported by<br />Auth; active provider<br />configuration was not<br />verified.</font>>, style=filled, color="#94a3b8", fillcolor="#f8fafc", fontcolor="#475569"]
+  4 [id=4,shape=rect, label=<<br /><br /><br /><font point-size="34">SAP SuccessFactors</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Calls the SAP SuccessFactors<br />document/repository<br />integration and token<br />endpoints.</font>>, style=filled, color="#0070b1", fillcolor="#ffffff", fontcolor="#172033"]
 
-  subgraph cluster_13 {
+  subgraph cluster_12 {
     margin=25
     label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
     labelloc=b
@@ -27,10 +26,10 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      32 [id=32,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
-      38 [id=38,shape=hexagon, label=<<font point-size="34">ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Orchestrates document<br />metadata, access, workflows,<br />notifications, reports, audit,<br />and binary operations.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
-      47 [id=47,shape=hexagon, label=<<font point-size="34">SAP API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3020]</font><br /><br /><font point-size="24">Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
-      55 [id=55,shape=hexagon, label=<<font point-size="34">Salesforce API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3030]</font><br /><br /><font point-size="24">Provides Salesforce<br />repository/document operations<br />and token issuance.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
+      31 [id=31,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+      37 [id=37,shape=hexagon, label=<<font point-size="34">ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Orchestrates document<br />metadata, access, workflows,<br />notifications, reports, audit,<br />and binary operations.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+      46 [id=46,shape=hexagon, label=<<font point-size="34">SAP API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3020]</font><br /><br /><font point-size="24">Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
+      54 [id=54,shape=hexagon, label=<<font point-size="34">SAP SuccessFactors<br />API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3030]</font><br /><br /><font point-size="24">Provides SAP SuccessFactors<br />repository/document operations<br />and token issuance.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
     }
 
     subgraph "cluster_group_Storage Core" {
@@ -42,7 +41,7 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      63 [id=63,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#6d28d9", fillcolor="#7c3aed", fontcolor="#ffffff"]
+      62 [id=62,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#4c1d95", fillcolor="#6d28d9", fontcolor="#ffffff", penwidth=5, peripheries=2]
     }
 
     subgraph "cluster_group_Web Experience" {
@@ -54,32 +53,24 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      14 [id=14,shape=rect, label=<<font point-size="34">Auth Portal</font><br /><font point-size="19">[Container: React, Vite, NGINX]</font><br /><br /><font point-size="24">Login, SSO, and<br />access-administration web<br />application.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
-      19 [id=19,shape=rect, label=<<font point-size="34">ASM+ Web Application</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Primary document, workflow,<br />report, search, and<br />administration UI.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
-      26 [id=26,shape=rect, label=<<font point-size="34">Document Viewer</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
+      13 [id=13,shape=rect, label=<<font point-size="34">Auth Portal</font><br /><font point-size="19">[Container: React, Vite, NGINX]</font><br /><br /><font point-size="24">Login, SSO, and<br />access-administration web<br />application.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
+      18 [id=18,shape=rect, label=<<br /><br /><br /><font point-size="34">ASM+ Web Application</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Primary document, workflow,<br />report, search, and<br />administration UI.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
+      25 [id=25,shape=rect, label=<<font point-size="34">Document Viewer</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
     }
 
   }
 
-  47 -> 26 [id=100, label=<<font point-size="18">Redirects browser-origin SAP launch<br />requests</font><br /><font point-size="13">[HTTPS with bounded viewer token]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  38 -> 63 [id=101, label=<<font point-size="18">Reads and writes document objects,<br />manifests, licenses, and<br />certificates</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
-  47 -> 63 [id=102, label=<<font point-size="18">Reads and writes SAP document<br />objects and certificates</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
-  55 -> 63 [id=103, label=<<font point-size="18">Reads and writes Salesforce document<br />and registry objects</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
-  32 -> 5 [id=171, label=<<font point-size="18">Exchanges assertions when configured</font><br /><font point-size="13">[SAML/Microsoft]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  1 -> 19 [id=82, label=<<font point-size="18">Uses the main application</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  1 -> 14 [id=83, label=<<font point-size="18">Signs in and manages a profile</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  1 -> 26 [id=84, label=<<font point-size="18">Views document content</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  3 -> 47 [id=87, label=<<font point-size="18">Performs ArchiveLink operations</font><br /><font point-size="13">[HTTPS, Basic Auth or certificate]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  4 -> 55 [id=88, label=<<font point-size="18">Requests tokens and performs<br />repository/document operations</font><br /><font point-size="13">[HTTPS, OAuth/JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  5 -> 32 [id=89, label=<<font point-size="18">Provides optional federated identity<br />assertions</font><br /><font point-size="13">[SAML 2.0 or Microsoft identity]</font>>, style="dashed", color="#94a3b8", fontcolor="#94a3b8"]
-  14 -> 32 [id=91, label=<<font point-size="18">Authenticates users and administers<br />identity/access data</font><br /><font point-size="13">[HTTPS/JSON]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  19 -> 14 [id=92, label=<<font point-size="18">Redirects the browser to the SSO<br />portal</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#b91c1c", fontcolor="#b91c1c"]
-  19 -> 32 [id=93, label=<<font point-size="18">Authenticates and checks application<br />access</font><br /><font point-size="13">[HTTPS/JSON, JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  19 -> 38 [id=94, label=<<font point-size="18">Performs document, workflow, report,<br />search, and audit operations</font><br /><font point-size="13">[HTTPS/JSON and binary]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  19 -> 26 [id=95, label=<<font point-size="18">Launches the selected document</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  26 -> 14 [id=96, label=<<font point-size="18">Redirects the browser to SSO when a<br />session is absent</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#b91c1c", fontcolor="#b91c1c"]
-  26 -> 32 [id=97, label=<<font point-size="18">Validates authentication and<br />application access</font><br /><font point-size="13">[HTTPS/JSON, JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  26 -> 38 [id=98, label=<<font point-size="18">Retrieves ASM+ metadata and file<br />content</font><br /><font point-size="13">[HTTPS/JSON and HTTP range]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  26 -> 47 [id=99, label=<<font point-size="18">Retrieves SAP-origin document<br />components</font><br /><font point-size="13">[HTTPS/ArchiveLink]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  54 -> 62 [id=100, label=<<font point-size="18">Reads and writes SAP SuccessFactors<br />document and registry objects</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
+  1 -> 18 [id=81, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  3 -> 46 [id=86, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  4 -> 54 [id=87, label=<<font point-size="18">Requests tokens and performs<br />repository/document operations</font><br /><font point-size="13">[HTTPS, OAuth/JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  13 -> 31 [id=88, label=<<font point-size="18">Authenticates users and administers<br />identity/access data</font><br /><font point-size="13">[HTTPS/JSON]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  18 -> 31 [id=90, label=<<font point-size="18">Authenticates and checks application<br />access</font><br /><font point-size="13">[HTTPS/JSON, JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  18 -> 37 [id=91, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  25 -> 31 [id=94, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  25 -> 37 [id=95, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  25 -> 46 [id=96, label=<<font point-size="18">Retrieves SAP-origin document<br />components</font><br /><font point-size="13">[HTTPS/ArchiveLink]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  37 -> 62 [id=98, label=<<font point-size="18">Reads and writes document objects,<br />manifests, licenses, and<br />certificates</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
+  46 -> 62 [id=99, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
 
 }

@@ -4,33 +4,33 @@ graph LR
   subgraph diagram ["3G. Component Architecture - Auth Portal"]
     style diagram fill:#ffffff,stroke:#ffffff
 
-    subgraph 13 ["ASM+"]
-      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+    subgraph 12 ["ASM+"]
+      style 12 fill:#ffffff,stroke:#991b1b,color:#991b1b
 
-      subgraph 14 ["Auth Portal"]
-        style 14 fill:#ffffff,stroke:#1d4ed8,color:#1d4ed8
+      subgraph 13 ["Auth Portal"]
+        style 13 fill:#ffffff,stroke:#1d4ed8,color:#1d4ed8
 
-        15["<div style='font-weight: bold'>Runtime Configuration Loader</div><div style='font-size: 70%; margin-top: 0px'>[Component: JavaScript]</div><div style='font-size: 80%; margin-top:10px'>Loads API_BASE_URL and UI<br />settings from<br />runtime-config.js.</div>"]
-        style 15 fill:#e2e8f0,stroke:#64748b,color:#172033
-        16["<div style='font-weight: bold'>Portal Application</div><div style='font-size: 70%; margin-top: 0px'>[Component: React]</div><div style='font-size: 80%; margin-top:10px'>Routes login, users, roles,<br />applications, structures, and<br />connections pages.</div>"]
+        14["<div style='font-weight: bold'>Runtime Configuration Loader</div><div style='font-size: 70%; margin-top: 0px'>[Component: JavaScript]</div><div style='font-size: 80%; margin-top:10px'>Loads API_BASE_URL and UI<br />settings from<br />runtime-config.js.</div>"]
+        style 14 fill:#e2e8f0,stroke:#64748b,color:#172033
+        15["<div style='font-weight: bold'>Portal Application</div><div style='font-size: 70%; margin-top: 0px'>[Component: React]</div><div style='font-size: 80%; margin-top:10px'>Routes login, users, roles,<br />applications, structures, and<br />connections pages.</div>"]
+        style 15 fill:#f8fafc,stroke:#64748b,color:#172033
+        16["<div style='font-weight: bold'>Authentication and SSO Context</div><div style='font-size: 70%; margin-top: 0px'>[Component: React Context]</div><div style='font-size: 80%; margin-top:10px'>Maintains the JWT/session<br />state and coordinates local,<br />SAML, and Microsoft flows.</div>"]
         style 16 fill:#f8fafc,stroke:#64748b,color:#172033
-        17["<div style='font-weight: bold'>Authentication and SSO Context</div><div style='font-size: 70%; margin-top: 0px'>[Component: React Context]</div><div style='font-size: 80%; margin-top:10px'>Maintains the JWT/session<br />state and coordinates local,<br />SAML, and Microsoft flows.</div>"]
+        17["<div style='font-weight: bold'>Auth API Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: Fetch/JSON]</div><div style='font-size: 80%; margin-top:10px'>Calls authentication and<br />administration endpoints.</div>"]
         style 17 fill:#f8fafc,stroke:#64748b,color:#172033
-        18["<div style='font-weight: bold'>Auth API Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: Fetch/JSON]</div><div style='font-size: 80%; margin-top:10px'>Calls authentication and<br />administration endpoints.</div>"]
-        style 18 fill:#f8fafc,stroke:#64748b,color:#172033
       end
 
-      32["<div style='font-weight: bold'>Auth API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</div>"]
-      style 32 fill:#0f766e,stroke:#115e59,color:#ffffff
-      71["<div style='font-weight: bold'>Runtime Configuration</div><div style='font-size: 70%; margin-top: 0px'>[Container: Kubernetes ConfigMaps]</div><div style='font-size: 80%; margin-top:10px'>Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</div>"]
-      style 71 fill:#ffffff,stroke:#326ce5,color:#172033
+      31["<div style='font-weight: bold'>Auth API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</div>"]
+      style 31 fill:#0f766e,stroke:#115e59,color:#ffffff
+      70["<div style='font-weight: bold'>Runtime Configuration</div><div style='font-size: 70%; margin-top: 0px'>[Container: Kubernetes ConfigMaps]</div><div style='font-size: 80%; margin-top:10px'>Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</div>"]
+      style 70 fill:#ffffff,stroke:#326ce5,color:#172033
     end
 
-    71-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->32
-    15-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->71
-    16-. "<div>Uses</div><div style='font-size: 70%'></div>" .->17
-    16-. "<div>Uses</div><div style='font-size: 70%'></div>" .->18
-    17-. "<div>Authenticates through</div><div style='font-size: 70%'></div>" .->18
-    18-. "<div>Calls</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->32
+    70-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->31
+    14-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->70
+    15-. "<div>Uses</div><div style='font-size: 70%'></div>" .->16
+    15-. "<div>Uses</div><div style='font-size: 70%'></div>" .->17
+    16-. "<div>Authenticates through</div><div style='font-size: 70%'></div>" .->17
+    17-. "<div>Calls</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->31
 
   end

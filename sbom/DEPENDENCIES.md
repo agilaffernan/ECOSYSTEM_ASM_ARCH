@@ -21,7 +21,7 @@ This inventory accompanies the CycloneDX 1.6 SBOM in `architecture.cdx.json`. Ru
 |---|---:|---|
 | Structurizr vNext | 2026.06.28 | Build-time validation and JSON, Mermaid, and static-site export |
 | Structurizr CLI legacy DOT exporter | 2025.11.09 | Build-time DOT export only; not shipped or executed by the hosted site |
-| Graphviz | 15.1.1 | Build-time SVG rendering only |
+| Graphviz | 15.1.0 | Build-time SVG rendering only |
 | Eclipse Temurin JRE | 21.0.12+8 | Build-time Structurizr runtime only |
 
 ## Security note

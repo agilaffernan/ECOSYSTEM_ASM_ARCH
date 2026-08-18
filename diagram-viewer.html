@@ -30,12 +30,16 @@
       <a class="icon-button" id="raw-svg-link" href="diagrams/structurizr-01-system-context.svg" target="_blank" rel="noopener" aria-label="Open raw SVG in a new tab" title="Open raw SVG">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
       </a>
+      <a class="icon-button" id="download-svg-link" href="diagrams/structurizr-01-system-context.svg" download="structurizr-01-system-context.svg" aria-label="Download diagram as SVG" title="Download SVG">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+      </a>
     </div>
   </header>
   <main class="viewer-stage" id="viewer-stage" aria-label="Architecture diagram canvas">
     <img id="diagram-image" alt="" draggable="false">
     <p class="viewer-error" id="viewer-error" hidden>Unable to open this diagram.</p>
   </main>
+  <script src="assets/diagram-downloads.js"></script>
   <script src="assets/diagram-viewer.js"></script>
 </body>
 </html>

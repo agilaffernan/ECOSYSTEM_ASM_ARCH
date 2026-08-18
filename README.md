@@ -98,7 +98,7 @@ node .\tools\serve-secure.mjs 4173
 
 ## Validate and Re-export Structurizr
 
-Use Structurizr vNext 2026.06.28 with Java 21 for validation and the supported JSON, Mermaid, and static exports. Structurizr CLI 2025.11.09 is retained only as a trusted build-time DOT exporter because vNext does not expose DOT through its export command. Graphviz 15.1.1 renders the local DOT files. None of these build tools are shipped to the browser.
+Use Structurizr vNext 2026.06.28 with Java 21 for validation and the supported JSON, Mermaid, and static exports. Structurizr CLI 2025.11.09 is retained only as a trusted build-time DOT exporter because vNext does not expose DOT through its export command. Graphviz 15.1.0 renders the local DOT files. None of these build tools are shipped to the browser.
 
 ```powershell
 java -jar .\structurizr-2026.06.28.war validate -w .\workspace.dsl
@@ -118,7 +118,7 @@ Render a DOT view to SVG with Graphviz:
 dot -Tsvg .\exports\dot\structurizr-01-system-context.dot -o .\diagrams\structurizr-01-system-context.svg
 ```
 
-The DOT optimization step increases node separation and gives Graphviz additional crossing-minimization passes, with extra spacing for the dense Deployment and Network views. It also removes repeated configuration, health, logging, and other out-of-scope relationship lines from those two static physical diagrams; the same relationships remain documented in the focused Container, Security, Runtime, and Observability views and in the authoritative Structurizr model. Run it after every DOT export and before rendering SVG files.
+The DOT optimization step preserves the approved System Context layout and applies compact, layered, orthogonal routing to the other static views. Component and physical diagrams flow top-to-bottom, runtime sequences remain left-to-right, and repeated relationship labels are retained only on representative paths. Every view containing ASM Storage API gives the primary storage service a stronger visual treatment; focused component layouts place it centrally when that does not alter the meaning of the flow. The focused API, Deployment, Network, Security, and Observability views also omit relationships that belong to another concern, while the complete relationship set remains in the authoritative Structurizr model and its specialized views. Run the optimization after every DOT export and before rendering SVG files.
 
 After rendering all DOT files, restore the local icon directory in `structurizr-site/assets/icons`, then run:
 

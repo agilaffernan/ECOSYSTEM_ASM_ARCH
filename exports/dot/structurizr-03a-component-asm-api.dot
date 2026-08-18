@@ -1,13 +1,13 @@
 digraph {
   compound=true
-  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
-  node [fontname="Arial", shape=box, margin="0.4,0.3"]
+  graph [fontname="Arial", rankdir=LR, ranksep=0.48, nodesep=0.48, newrank=true, remincross=true, mclimit=8.0, splines=ortho, outputorder=edgesfirst]
+  node [fontname="Arial", shape=box, margin="0.24,0.16"]
   edge [fontname="Arial"]
   label=<<br /><font point-size="34">3A. Component Architecture - ASM Storage API</font><br /><font point-size="24">Internal structure of asm-api and its GCS adapter.</font>>
 
-  8 [id=8,shape=cylinder, label=<<font point-size="34">Cloud Storage</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+  7 [id=7,shape=cylinder, label=<<font point-size="27">Cloud Storage</font><br /><font point-size="15">[Software System]</font><br /><br /><font point-size="18">Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
 
-  subgraph cluster_13 {
+  subgraph cluster_12 {
     margin=25
     label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
     labelloc=b
@@ -15,33 +15,35 @@ digraph {
     fontcolor="#444444"
     fillcolor="#444444"
 
-    subgraph cluster_63 {
+    subgraph cluster_62 {
       margin=25
+      penwidth=5
+      style="rounded,bold"
       label=<<font point-size="24"><br />ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font>>
       labelloc=b
-      color="#444444"
-      fontcolor="#444444"
+      color="#6d28d9"
+      fontcolor="#6d28d9"
       fillcolor="#444444"
 
-      64 [id=64,shape=component, label=<<font point-size="34">ASM HTTP Contract</font><br /><font point-size="19">[Component: Express, raw/multipart HTTP]</font><br /><br /><font point-size="24">Implements GET, PUT, and POST<br />on /api/asm plus health,<br />readiness, license, and<br />certificate routes.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      65 [id=65,shape=component, label=<<font point-size="34">Internal API Key<br />Guard</font><br /><font point-size="19">[Component: Express middleware]</font><br /><br /><font point-size="24">Requires X-Api-Key for storage<br />operations.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      66 [id=66,shape=component, label=<<font point-size="34">License Service</font><br /><font point-size="19">[Component: TypeScript service]</font><br /><br /><font point-size="24">Stores and validates the ASM<br />license before write<br />operations.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      67 [id=67,shape=component, label=<<font point-size="34">Certificate Store</font><br /><font point-size="19">[Component: TypeScript service]</font><br /><br /><font point-size="24">Stores and manages ArchiveLink<br />certificates.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      68 [id=68,shape=component, label=<<font point-size="34">Document and Manifest<br />Service</font><br /><font point-size="19">[Component: TypeScript service]</font><br /><br /><font point-size="24">Maintains document manifests,<br />versions, components, ranges,<br />and optimistic concurrency.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      69 [id=69,shape=component, label=<<font point-size="34">Object Storage<br />Abstraction</font><br /><font point-size="19">[Component: TypeScript adapter]</font><br /><br /><font point-size="24">Selects the configured storage<br />provider and exposes a common<br />object contract.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      70 [id=70,shape=component, label=<<font point-size="34">GCS Repository</font><br /><font point-size="19">[Component: Google Cloud Storage client]</font><br /><br /><font point-size="24">Uses @google-cloud/storage<br />with Application Default<br />Credentials and generation<br />preconditions.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+      63 [id=63,shape=component, label=<<br /><br /><br /><font point-size="27">ASM HTTP Contract</font><br /><font point-size="15">[Component: Express, raw/multipart HTTP]</font><br /><br /><font point-size="18">Implements GET, PUT, and POST<br />on /api/asm plus health,<br />readiness, license, and<br />certificate routes.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      64 [id=64,shape=component, label=<<font point-size="27">Internal API Key<br />Guard</font><br /><font point-size="15">[Component: Express middleware]</font><br /><br /><font point-size="18">Requires X-Api-Key for storage<br />operations.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      65 [id=65,shape=component, label=<<br /><br /><br /><font point-size="27">License Service</font><br /><font point-size="15">[Component: TypeScript service]</font><br /><br /><font point-size="18">Stores and validates the ASM<br />license before write<br />operations.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      66 [id=66,shape=component, label=<<font point-size="27">Certificate Store</font><br /><font point-size="15">[Component: TypeScript service]</font><br /><br /><font point-size="18">Stores and manages ArchiveLink<br />certificates.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      67 [id=67,shape=component, label=<<br /><br /><br /><font point-size="27">Document and Manifest<br />Service</font><br /><font point-size="15">[Component: TypeScript service]</font><br /><br /><font point-size="18">Maintains document manifests,<br />versions, components, ranges,<br />and optimistic concurrency.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      68 [id=68,shape=component, label=<<font point-size="27">Object Storage<br />Abstraction</font><br /><font point-size="15">[Component: TypeScript adapter]</font><br /><br /><font point-size="18">Selects the configured storage<br />provider and exposes a common<br />object contract.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      69 [id=69,shape=component, label=<<br /><br /><br /><font point-size="27">GCS Repository</font><br /><font point-size="15">[Component: Google Cloud Storage client]</font><br /><br /><font point-size="18">Uses @google-cloud/storage<br />with Application Default<br />Credentials and generation<br />preconditions.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
     }
 
   }
 
-  64 -> 65 [id=202, label=<<font point-size="18">Authenticates storage requests</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  65 -> 66 [id=203, label=<<font point-size="18">Requires a valid license for writes</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  65 -> 68 [id=204, label=<<font point-size="18">Authorizes document operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  64 -> 67 [id=205, label=<<font point-size="18">Delegates certificate administration</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  66 -> 69 [id=206, label=<<font point-size="18">Stores and reads the license</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  67 -> 69 [id=207, label=<<font point-size="18">Stores and reads certificates</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  68 -> 69 [id=208, label=<<font point-size="18">Stores and reads document objects<br />and manifests</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  69 -> 70 [id=209, label=<<font point-size="18">Selects when BTP_HYPERSCALER=GCP</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  70 -> 8 [id=210, label=<<font point-size="18">Uses Application Default Credentials</font><br /><font point-size="13">[GCS API over HTTPS]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  63 -> 64 [id=196, label=<<font point-size="18">Authenticates storage requests</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  64 -> 65 [id=197, label=<<font point-size="18">Requires a valid license for writes</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  64 -> 67 [id=198, label=<<font point-size="18">Authorizes document operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  63 -> 66 [id=199, label=<<font point-size="18">Delegates certificate administration</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  65 -> 68 [id=200, label=<<font point-size="18">Stores and reads the license</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  66 -> 68 [id=201, label=<<font point-size="18">Stores and reads certificates</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  67 -> 68 [id=202, label=<<font point-size="18">Stores and reads document objects<br />and manifests</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  68 -> 69 [id=203, label=<<font point-size="18">Selects when BTP_HYPERSCALER=GCP</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  69 -> 7 [id=204, label=<<font point-size="18">Uses Application Default Credentials</font><br /><font point-size="13">[GCS API over HTTPS]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
 
 }

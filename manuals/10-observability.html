@@ -12,7 +12,7 @@
   <div class="layout">
     <aside class="sidebar">
     <a class="brand" href="../index.html">ASM+ Architecture</a>
-    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="brand-subtitle">Auritas Storage Manager</p>
     <p class="nav-label">Manuals</p>
     <ul class="nav-list">
       <li><a href="../index.html">Overview</a></li>
@@ -47,12 +47,15 @@
       <span class="status recommendation">Recommendation</span>
       <span class="status gap">Observed gap</span>
     </div>
-    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <div class="icon-legend" aria-label="Icon key for the diagrams on this page"><span class="icon-legend-item" data-icon-category="user"><img src="../assets/icons/user.svg" alt="">User or administrator</span><span class="icon-legend-item" data-icon-category="system"><img src="../assets/icons/system.svg" alt="">System or deployment boundary</span><span class="icon-legend-item" data-icon-category="api"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item" data-icon-category="frontend"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item" data-icon-category="object-storage"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item" data-icon-category="gcp-gke"><img src="../assets/icons/vendors/gcp-gke.svg" alt="">Google Kubernetes Engine (official)</span><span class="icon-legend-item" data-icon-category="gcp-cloud-monitoring"><img src="../assets/icons/vendors/gcp-cloud-monitoring.svg" alt="">Cloud Monitoring (official)</span></div>
     <section><h2>Architecture View</h2>
     <section class="diagram-block" aria-labelledby="diagram-1">
       <h3 id="diagram-1">Health, Logs, and Metrics</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-10-observability-architecture.svg&title=Health%2C%20Logs%2C%20and%20Metrics" aria-label="Open Health, Logs, and Metrics in the full-screen diagram viewer"><img src="../diagrams/structurizr-10-observability-architecture.svg" alt="Observability architecture diagram for ASM+"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-10-observability-architecture.svg" download="structurizr-10-observability-architecture.svg" aria-label="Download Health, Logs, and Metrics as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-10-observability-architecture.svg&title=Health%2C%20Logs%2C%20and%20Metrics" aria-label="Open Health, Logs, and Metrics in the full-screen diagram viewer"><img src="../diagrams/structurizr-10-observability-architecture.svg" alt="Observability architecture diagram for ASM+"></a>
       </div>
       <p class="diagram-caption">Figure 10. Kubernetes probes and workload telemetry flow into GKE health management and Cloud Operations.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-10-observability-architecture.svg&title=Health%2C%20Logs%2C%20and%20Metrics">Open full-screen viewer</a><a href="../structurizr-site/index.html#10-observability-architecture">Open this view in Structurizr</a></p>
@@ -78,11 +81,12 @@
           <tr><td>Cloud SQL Query Insights</td><td>Not verified as enabled in the live configuration</td></tr>
         </tbody></table></div></section>
 <section><h2>Operator Investigation Path</h2><ol><li>Check Deployment readiness and recent rollouts in namespace <code>asm-plus-demo</code>.</li><li>Inspect Pod events before application logs when a container does not start.</li><li>Inspect both the application and <code>cloud-sql-proxy</code> containers for database-backed APIs.</li><li>Check Ingress backend health and certificate status for public availability issues.</li><li>Check Cloud SQL connections, CPU/storage, and backup state for metadata failures.</li><li>Check GCS IAM and <code>asm-api</code> logs for binary-operation failures.</li></ol></section>
-<section><h2>Recommended Monitoring Baseline</h2><p class="status recommendation">Recommendation</p><ul><li>Create HTTPS uptime checks for the three frontends and health endpoints for the four public APIs.</li><li>Alert on Deployment unavailable replicas, repeated container restarts, and failed readiness probes.</li><li>Alert on load-balancer 5xx rate and latency, Cloud SQL CPU/connections/storage, backup failure, and GCS permission errors.</li><li>Create log-based metrics for authentication failures, license failures, internal API-key failures, and integration 5xx responses.</li><li>Configure notification channels and an operational ownership matrix before relying on alerts.</li><li>Define service-level objectives for login, document upload, document retrieval, SAP integration, and Salesforce integration.</li></ul>
+<section><h2>Recommended Monitoring Baseline</h2><p class="status recommendation">Recommendation</p><ul><li>Create HTTPS uptime checks for the three frontends and health endpoints for the four public APIs.</li><li>Alert on Deployment unavailable replicas, repeated container restarts, and failed readiness probes.</li><li>Alert on load-balancer 5xx rate and latency, Cloud SQL CPU/connections/storage, backup failure, and GCS permission errors.</li><li>Create log-based metrics for authentication failures, license failures, internal API-key failures, and integration 5xx responses.</li><li>Configure notification channels and an operational ownership matrix before relying on alerts.</li><li>Define service-level objectives for login, document upload, document retrieval, SAP ArchiveLink integration, and SAP SuccessFactors integration.</li></ul>
         <div class="notice"><strong>Not applied.</strong> These recommendations are documentation only. No monitoring resources or alert policies were created during this work.</div></section>
     <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
     </main>
   </div>
+  <script src="../assets/diagram-downloads.js"></script>
   <script src="../assets/site.js"></script>
 </body>
 </html>

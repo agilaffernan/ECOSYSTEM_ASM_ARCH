@@ -12,7 +12,7 @@
   <div class="layout">
     <aside class="sidebar">
     <a class="brand" href="../index.html">ASM+ Architecture</a>
-    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="brand-subtitle">Auritas Storage Manager</p>
     <p class="nav-label">Manuals</p>
     <ul class="nav-list">
       <li><a href="../index.html">Overview</a></li>
@@ -47,12 +47,15 @@
       <span class="status recommendation">Recommendation</span>
       <span class="status gap">Observed gap</span>
     </div>
-    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <div class="icon-legend" aria-label="Icon key for the diagrams on this page"><span class="icon-legend-item" data-icon-category="system"><img src="../assets/icons/system.svg" alt="">System or deployment boundary</span><span class="icon-legend-item" data-icon-category="api"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item" data-icon-category="frontend"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item" data-icon-category="database"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item" data-icon-category="object-storage"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item" data-icon-category="security"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item" data-icon-category="configuration"><img src="../assets/icons/configuration.svg" alt="">Runtime configuration</span><span class="icon-legend-item" data-icon-category="kubernetes-official"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item" data-icon-category="gcp-cloud-storage"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item" data-icon-category="gcp-cloud-sql"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span></div>
     <section><h2>Architecture View</h2>
     <section class="diagram-block" aria-labelledby="diagram-1">
       <h3 id="diagram-1">ASM Storage API Components</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03a-component-asm-api.svg&title=ASM%20Storage%20API%20Components" aria-label="Open ASM Storage API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03a-component-asm-api.svg" alt="Component diagram of asm-api"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-03a-component-asm-api.svg" download="structurizr-03a-component-asm-api.svg" aria-label="Download ASM Storage API Components as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03a-component-asm-api.svg&title=ASM%20Storage%20API%20Components" aria-label="Open ASM Storage API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03a-component-asm-api.svg" alt="Component diagram of asm-api"></a>
       </div>
       <p class="diagram-caption">Figure 3a. Internal storage contract, license and certificate services, document manifests, and the GCS repository.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03a-component-asm-api.svg&title=ASM%20Storage%20API%20Components">Open full-screen viewer</a><a href="../structurizr-site/index.html#03a-component-asm-api">Open this view in Structurizr</a></p>
@@ -61,7 +64,10 @@
     <section class="diagram-block" aria-labelledby="diagram-2">
       <h3 id="diagram-2">ASM+ API Components</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03b-component-api-asm-plus.svg&title=ASM%2B%20API%20Components" aria-label="Open ASM+ API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03b-component-api-asm-plus.svg" alt="Component diagram of api-asm-plus"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-03b-component-api-asm-plus.svg" download="structurizr-03b-component-api-asm-plus.svg" aria-label="Download ASM+ API Components as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03b-component-api-asm-plus.svg&title=ASM%2B%20API%20Components" aria-label="Open ASM+ API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03b-component-api-asm-plus.svg" alt="Component diagram of api-asm-plus"></a>
       </div>
       <p class="diagram-caption">Figure 3b. API routing, authorization, domain services, reporting, persistence, and storage delegation.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03b-component-api-asm-plus.svg&title=ASM%2B%20API%20Components">Open full-screen viewer</a><a href="../structurizr-site/index.html#03b-component-api-asm-plus">Open this view in Structurizr</a></p>
@@ -70,7 +76,10 @@
     <section class="diagram-block" aria-labelledby="diagram-3">
       <h3 id="diagram-3">Auth API Components</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03c-component-api-auth.svg&title=Auth%20API%20Components" aria-label="Open Auth API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03c-component-api-auth.svg" alt="Component diagram of api-auth"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-03c-component-api-auth.svg" download="structurizr-03c-component-api-auth.svg" aria-label="Download Auth API Components as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03c-component-api-auth.svg&title=Auth%20API%20Components" aria-label="Open Auth API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03c-component-api-auth.svg" alt="Component diagram of api-auth"></a>
       </div>
       <p class="diagram-caption">Figure 3c. Authentication, access administration, SSO, and PostgreSQL persistence.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03c-component-api-auth.svg&title=Auth%20API%20Components">Open full-screen viewer</a><a href="../structurizr-site/index.html#03c-component-api-auth">Open this view in Structurizr</a></p>
@@ -79,25 +88,34 @@
     <section class="diagram-block" aria-labelledby="diagram-4">
       <h3 id="diagram-4">SAP API Components</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03d-component-api-sap.svg&title=SAP%20API%20Components" aria-label="Open SAP API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03d-component-api-sap.svg" alt="Component diagram of api-sap"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-03d-component-api-sap.svg" download="structurizr-03d-component-api-sap.svg" aria-label="Download SAP API Components as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03d-component-api-sap.svg&title=SAP%20API%20Components" aria-label="Open SAP API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03d-component-api-sap.svg" alt="Component diagram of api-sap"></a>
       </div>
       <p class="diagram-caption">Figure 3d. ArchiveLink HTTP, SAP authentication, metadata persistence, viewer tokens, and ASM storage calls.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03d-component-api-sap.svg&title=SAP%20API%20Components">Open full-screen viewer</a><a href="../structurizr-site/index.html#03d-component-api-sap">Open this view in Structurizr</a></p>
     </section>
 
     <section class="diagram-block" aria-labelledby="diagram-5">
-      <h3 id="diagram-5">Salesforce API Components</h3>
+      <h3 id="diagram-5">SAP SuccessFactors API Components</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03e-component-api-sf.svg&title=Salesforce%20API%20Components" aria-label="Open Salesforce API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03e-component-api-sf.svg" alt="Component diagram of api-sf"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-03e-component-api-sf.svg" download="structurizr-03e-component-api-sf.svg" aria-label="Download SAP SuccessFactors API Components as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03e-component-api-sf.svg&title=SAP%20SuccessFactors%20API%20Components" aria-label="Open SAP SuccessFactors API Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03e-component-api-sf.svg" alt="Component diagram of api-sf"></a>
       </div>
-      <p class="diagram-caption">Figure 3e. Salesforce API, token service, managed users, persistence, and ASM storage calls.</p>
-      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03e-component-api-sf.svg&title=Salesforce%20API%20Components">Open full-screen viewer</a><a href="../structurizr-site/index.html#03e-component-api-sf">Open this view in Structurizr</a></p>
+      <p class="diagram-caption">Figure 3e. SAP SuccessFactors API, token service, managed users, persistence, and ASM storage calls.</p>
+      <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03e-component-api-sf.svg&title=SAP%20SuccessFactors%20API%20Components">Open full-screen viewer</a><a href="../structurizr-site/index.html#03e-component-api-sf">Open this view in Structurizr</a></p>
     </section>
 
     <section class="diagram-block" aria-labelledby="diagram-6">
       <h3 id="diagram-6">ASM+ Web Components</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03f-component-front-asm-plus.svg&title=ASM%2B%20Web%20Components" aria-label="Open ASM+ Web Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03f-component-front-asm-plus.svg" alt="Component diagram of front-asm-plus"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-03f-component-front-asm-plus.svg" download="structurizr-03f-component-front-asm-plus.svg" aria-label="Download ASM+ Web Components as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03f-component-front-asm-plus.svg&title=ASM%2B%20Web%20Components" aria-label="Open ASM+ Web Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03f-component-front-asm-plus.svg" alt="Component diagram of front-asm-plus"></a>
       </div>
       <p class="diagram-caption">Figure 3f. Runtime configuration, application shell, authentication, document UI, API client, and Viewer launch.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03f-component-front-asm-plus.svg&title=ASM%2B%20Web%20Components">Open full-screen viewer</a><a href="../structurizr-site/index.html#03f-component-front-asm-plus">Open this view in Structurizr</a></p>
@@ -106,7 +124,10 @@
     <section class="diagram-block" aria-labelledby="diagram-7">
       <h3 id="diagram-7">Auth Portal Components</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03g-component-front-auth.svg&title=Auth%20Portal%20Components" aria-label="Open Auth Portal Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03g-component-front-auth.svg" alt="Component diagram of front-auth"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-03g-component-front-auth.svg" download="structurizr-03g-component-front-auth.svg" aria-label="Download Auth Portal Components as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03g-component-front-auth.svg&title=Auth%20Portal%20Components" aria-label="Open Auth Portal Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03g-component-front-auth.svg" alt="Component diagram of front-auth"></a>
       </div>
       <p class="diagram-caption">Figure 3g. Runtime configuration, portal routes, authentication context, and Auth API client.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03g-component-front-auth.svg&title=Auth%20Portal%20Components">Open full-screen viewer</a><a href="../structurizr-site/index.html#03g-component-front-auth">Open this view in Structurizr</a></p>
@@ -115,7 +136,10 @@
     <section class="diagram-block" aria-labelledby="diagram-8">
       <h3 id="diagram-8">Document Viewer Components</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03h-component-front-viewer.svg&title=Document%20Viewer%20Components" aria-label="Open Document Viewer Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03h-component-front-viewer.svg" alt="Component diagram of front-viewer"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-03h-component-front-viewer.svg" download="structurizr-03h-component-front-viewer.svg" aria-label="Download Document Viewer Components as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03h-component-front-viewer.svg&title=Document%20Viewer%20Components" aria-label="Open Document Viewer Components in the full-screen diagram viewer"><img src="../diagrams/structurizr-03h-component-front-viewer.svg" alt="Component diagram of front-viewer"></a>
       </div>
       <p class="diagram-caption">Figure 3h. Runtime configuration, parameter parsing, document retrieval, native rendering, and optional OnlyOffice integration.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-03h-component-front-viewer.svg&title=Document%20Viewer%20Components">Open full-screen viewer</a><a href="../structurizr-site/index.html#03h-component-front-viewer">Open this view in Structurizr</a></p>
@@ -123,20 +147,21 @@
     <section><h2>Backend Responsibility Map</h2><div class="table-scroll"><table><thead><tr><th>Service</th><th>Core responsibilities</th><th>Data / downstream dependency</th></tr></thead><tbody>
           <tr><td>ASM Storage API</td><td>Internal API-key guard, license validation, certificates, document components, manifests, versions, ranges, and optimistic concurrency.</td><td>GCS via <code>@google-cloud/storage</code> and ADC.</td></tr>
           <tr><td>ASM+ API</td><td>Folders, files, authorization, role groups, workflows, notifications, reports, audit, search, and metadata mappings.</td><td>Cloud SQL plus ASM Storage API.</td></tr>
-          <tr><td>Auth API</td><td>Password verification, JWT signing, users, applications, roles, structures, connections, access, and optional SSO.</td><td>Cloud SQL and optional enterprise IdP.</td></tr>
+          <tr><td>Auth API</td><td>Password verification, JWT signing, users, applications, roles, structures, connections, access, and optional SSO.</td><td>Cloud SQL.</td></tr>
           <tr><td>SAP API</td><td>ArchiveLink interface, Basic/certificate authentication, SAP hierarchy persistence, HMAC viewer launch, and administration.</td><td>Cloud SQL, ASM Storage API, Viewer.</td></tr>
-          <tr><td>Salesforce API</td><td>Repository/document interface, OAuth/SAML bearer token handling, managed users, public keys, repository scope, and administration.</td><td>Cloud SQL and ASM Storage API.</td></tr>
+          <tr><td>SAP SuccessFactors API</td><td>Repository/document interface, OAuth/SAML bearer token handling, managed users, public keys, repository scope, and administration.</td><td>Cloud SQL and ASM Storage API.</td></tr>
         </tbody></table></div></section>
 <section><h2>Frontend Responsibility Map</h2><div class="table-scroll"><table><thead><tr><th>Frontend</th><th>Core responsibilities</th><th>Runtime dependencies</th></tr></thead><tbody>
           <tr><td>Auth Portal</td><td>Login, SSO initiation, user/role/application/structure/connection administration.</td><td><code>runtime-config.js</code> and Auth API.</td></tr>
           <tr><td>ASM+ Web</td><td>Document tree, uploads, recycle bin, permissions, workflows, notifications, reporting, audit, and search.</td><td><code>runtime-config.js</code>, Auth API, ASM+ API, Viewer.</td></tr>
           <tr><td>Document Viewer</td><td>Parses launch parameters, validates access, retrieves content, and selects a rendering path.</td><td>Auth API, ASM+ API, SAP API, optional OnlyOffice.</td></tr>
         </tbody></table></div></section>
-<section><h2>Cross-Cutting Controls</h2><ul><li>JWT validation and application access are shared concepts between Auth, ASM+ API, and the frontends.</li><li>The internal <code>X-Api-Key</code> separates business APIs from the storage API.</li><li>License checks protect write paths that depend on the ASM storage service.</li><li>Database access is isolated behind a Cloud SQL Auth Proxy sidecar for each database-backed API.</li><li>Optional vector adapters exist in the ASM+, SAP, and Salesforce APIs, but <code>VECTOR_API_URL</code> was empty in the live configuration.</li></ul></section>
+<section><h2>Cross-Cutting Controls</h2><ul><li>JWT validation and application access are shared concepts between Auth, ASM+ API, and the frontends.</li><li>The internal <code>X-Api-Key</code> separates business APIs from the storage API.</li><li>License checks protect write paths that depend on the ASM storage service.</li><li>Database access is isolated behind a Cloud SQL Auth Proxy sidecar for each database-backed API.</li><li>Optional vector adapters exist in the ASM+, SAP, and SAP SuccessFactors APIs, but <code>VECTOR_API_URL</code> was empty in the live configuration.</li></ul></section>
 <section><h2>Source Alignment</h2><p>The component decomposition reflects source-level routes, middleware, services, adapters, and frontend contexts from the deployed development-line repositories. It is a logical map rather than a class diagram; components group code by responsibility so operators and developers can trace runtime behavior without exposing implementation noise.</p></section>
     <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
     </main>
   </div>
+  <script src="../assets/diagram-downloads.js"></script>
   <script src="../assets/site.js"></script>
 </body>
 </html>

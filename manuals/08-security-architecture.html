@@ -12,7 +12,7 @@
   <div class="layout">
     <aside class="sidebar">
     <a class="brand" href="../index.html">ASM+ Architecture</a>
-    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="brand-subtitle">Auritas Storage Manager</p>
     <p class="nav-label">Manuals</p>
     <ul class="nav-list">
       <li><a href="../index.html">Overview</a></li>
@@ -47,12 +47,15 @@
       <span class="status recommendation">Recommendation</span>
       <span class="status gap">Observed gap</span>
     </div>
-    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <div class="icon-legend" aria-label="Icon key for the diagrams on this page"><span class="icon-legend-item" data-icon-category="user"><img src="../assets/icons/user.svg" alt="">User or administrator</span><span class="icon-legend-item" data-icon-category="system"><img src="../assets/icons/system.svg" alt="">System or deployment boundary</span><span class="icon-legend-item" data-icon-category="api"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item" data-icon-category="frontend"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item" data-icon-category="object-storage"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item" data-icon-category="kubernetes-official"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item" data-icon-category="gcp-cloud-storage"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item" data-icon-category="gcp-cloud-sql"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item" data-icon-category="gcp-secret-manager"><img src="../assets/icons/vendors/gcp-secret-manager.svg" alt="">Secret Manager (official)</span></div>
     <section><h2>Architecture View</h2>
     <section class="diagram-block" aria-labelledby="diagram-1">
       <h3 id="diagram-1">Identity, Secret, and Data Protection Controls</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-08-security-architecture.svg&title=Identity%2C%20Secret%2C%20and%20Data%20Protection%20Controls" aria-label="Open Identity, Secret, and Data Protection Controls in the full-screen diagram viewer"><img src="../diagrams/structurizr-08-security-architecture.svg" alt="Security architecture diagram for ASM+"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-08-security-architecture.svg" download="structurizr-08-security-architecture.svg" aria-label="Download Identity, Secret, and Data Protection Controls as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-08-security-architecture.svg&title=Identity%2C%20Secret%2C%20and%20Data%20Protection%20Controls" aria-label="Open Identity, Secret, and Data Protection Controls in the full-screen diagram viewer"><img src="../diagrams/structurizr-08-security-architecture.svg" alt="Security architecture diagram for ASM+"></a>
       </div>
       <p class="diagram-caption">Figure 8. Authentication mechanisms, secret stores, Workload Identity mappings, and protected service boundaries.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-08-security-architecture.svg&title=Identity%2C%20Secret%2C%20and%20Data%20Protection%20Controls">Open full-screen viewer</a><a href="../structurizr-site/index.html#08-security-architecture">Open this view in Structurizr</a></p>
@@ -62,7 +65,7 @@
           <tr><td>Auth API</td><td>Password hashes with bcrypt, password policy, signed JWTs, and optional SSO adapters.</td></tr>
           <tr><td>Business APIs to storage API</td><td>Internal <code>X-Api-Key</code> plus license enforcement for protected writes.</td></tr>
           <tr><td>SAP integration</td><td>Basic Auth, ArchiveLink certificates, or trusted service key depending on route.</td></tr>
-          <tr><td>Salesforce integration</td><td>OAuth/JWT and SAML bearer support with managed-user public keys and repository restrictions.</td></tr>
+          <tr><td>SAP SuccessFactors integration</td><td>OAuth/JWT and SAML bearer support with managed-user public keys and repository restrictions.</td></tr>
         </tbody></table></div></section>
 <section><h2>Secrets</h2><p>Secret values are excluded. The observed Kubernetes Secret <code>asmplus-runtime-secrets</code> contains these key names:</p>
         <p><code>ASM_API_KEY</code>, <code>AUTH_CLIENT_KEY</code>, <code>AUTH_SUPER_ADMIN_PASSWORD</code>, <code>JWT_SECRET</code>, <code>PGPASSWORD</code>, <code>SAP_BASIC_AUTH_USERS_JSON</code>, and <code>SF_MANAGED_USERS_JSON</code>.</p>
@@ -80,10 +83,11 @@
           <tr><td>GKE application-layer secret encryption state was <code>DECRYPTED</code>.</td><td>Kubernetes secrets are not protected with a customer-controlled application-layer key.</td></tr>
           <tr><td>Default VPC firewall rules remain.</td><td>The network perimeter is broader than a dedicated least-privilege VPC baseline.</td></tr>
         </tbody></table></div>
-        <div class="notice risk"><strong>Change discipline.</strong> These are observations, not automatic remediation instructions. Security hardening should be applied in an isolated environment and validated against GKE health checks, Ingress, Cloud SQL, GCS, SAP, Salesforce, and SSO flows before production rollout.</div></section>
+        <div class="notice risk"><strong>Change discipline.</strong> These are observations, not automatic remediation instructions. Security hardening should be applied in an isolated environment and validated against GKE health checks, Ingress, Cloud SQL, GCS, SAP ArchiveLink, SAP SuccessFactors, and SSO flows before production rollout.</div></section>
     <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
     </main>
   </div>
+  <script src="../assets/diagram-downloads.js"></script>
   <script src="../assets/site.js"></script>
 </body>
 </html>

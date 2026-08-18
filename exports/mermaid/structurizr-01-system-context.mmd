@@ -6,35 +6,31 @@ graph LR
 
     1["<div style='font-weight: bold'>ASM+ User</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Creates folders, uploads<br />files, searches content, and<br />views documents.</div>"]
     style 1 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
-    11["<div style='font-weight: bold'>Cloud Logging and Monitoring</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Receives GKE system/workload<br />logs and platform metrics. No<br />custom alert policies were<br />observed.</div>"]
-    style 11 fill:#ffffff,stroke:#4285f4,color:#172033
-    13("<div style='font-weight: bold'>ASM+</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Document management,<br />authentication, viewing, and<br />SAP/Salesforce integrations<br />deployed on GKE.</div>")
-    style 13 fill:#b91c1c,stroke:#991b1b,color:#ffffff
+    10["<div style='font-weight: bold'>Cloud Logging and Monitoring</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Receives GKE system/workload<br />logs and platform metrics. No<br />custom alert policies were<br />observed.</div>"]
+    style 10 fill:#ffffff,stroke:#4285f4,color:#172033
+    12("<div style='font-weight: bold'>ASM+</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Document management,<br />authentication, viewing, and<br />SAP ArchiveLink/SAP<br />SuccessFactors integrations<br />deployed on GKE.</div>")
+    style 12 fill:#b91c1c,stroke:#991b1b,color:#ffffff
     2["<div style='font-weight: bold'>Platform Administrator</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Operates ASM+, Kubernetes,<br />and Google Cloud resources.</div>"]
     style 2 fill:#334155,stroke:#1e293b,color:#ffffff
     3["<div style='font-weight: bold'>SAP System</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Calls the SAP<br />ArchiveLink-compatible<br />interface for document<br />storage and retrieval.</div>"]
     style 3 fill:#ffffff,stroke:#0070b1,color:#172033
-    4["<div style='font-weight: bold'>Salesforce</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Calls the Salesforce<br />document/repository<br />integration and token<br />endpoints.</div>"]
-    style 4 fill:#f59e0b,stroke:#b45309,color:#172033
-    5["<div style='font-weight: bold'>Enterprise Identity Provider</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Optional SAML or Microsoft<br />identity provider supported<br />by Auth; active provider<br />configuration was not<br />verified.</div>"]
-    style 5 fill:#f8fafc,stroke:#94a3b8,color:#475569
-    6["<div style='font-weight: bold'>Auritas DNS</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Publishes seven A records<br />under<br />asmplus-demo.auritas.com.</div>"]
-    style 6 fill:#e2e8f0,stroke:#64748b,color:#172033
-    7[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
+    4["<div style='font-weight: bold'>SAP SuccessFactors</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Calls the SAP SuccessFactors<br />document/repository<br />integration and token<br />endpoints.</div>"]
+    style 4 fill:#ffffff,stroke:#0070b1,color:#172033
+    5["<div style='font-weight: bold'>Auritas DNS</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Publishes seven A records<br />under<br />asmplus-demo.auritas.com.</div>"]
+    style 5 fill:#e2e8f0,stroke:#64748b,color:#172033
+    6[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
+    style 6 fill:#ffffff,stroke:#4285f4,color:#172033
+    7[("<div style='font-weight: bold'>Cloud Storage</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</div>")]
     style 7 fill:#ffffff,stroke:#4285f4,color:#172033
-    8[("<div style='font-weight: bold'>Cloud Storage</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</div>")]
-    style 8 fill:#ffffff,stroke:#4285f4,color:#172033
 
-    13-. "<div>Exchanges assertions when<br />configured</div><div style='font-size: 70%'>[SAML/Microsoft]</div>" .->5
-    1-. "<div>Uses document management and<br />viewing capabilities</div><div style='font-size: 70%'>[HTTPS]</div>" .->13
-    2-. "<div>Administers application<br />access and operations</div><div style='font-size: 70%'>[HTTPS and kubectl]</div>" .->13
-    3-. "<div>Stores and retrieves SAP<br />documents</div><div style='font-size: 70%'>[ArchiveLink over HTTPS]</div>" .->13
-    4-. "<div>Stores and retrieves<br />Salesforce documents</div><div style='font-size: 70%'>[REST over HTTPS]</div>" .->13
-    13-. "<div>Stores application metadata</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->7
-    13-. "<div>Stores document binaries and<br />manifests</div><div style='font-size: 70%'>[GCS JSON API over HTTPS]</div>" .->8
-    13-. "<div>Emits workload logs and<br />metrics</div><div style='font-size: 70%'>[Cloud Operations agents]</div>" .->11
-    6-. "<div>Resolves seven public<br />hostnames to 34.36.209.159</div><div style='font-size: 70%'>[DNS A records]</div>" .->13
-    2-. "<div>Inspects logs, metrics, and<br />workload health</div><div style='font-size: 70%'>[Google Cloud Console and gcloud]</div>" .->11
-    5-. "<div>Provides optional federated<br />identity assertions</div><div style='font-size: 70%'>[SAML 2.0 or Microsoft identity]</div>" .->13
+    1-. "<div>Uses document management and<br />viewing capabilities</div><div style='font-size: 70%'>[HTTPS]</div>" .->12
+    2-. "<div>Administers application<br />access and operations</div><div style='font-size: 70%'>[HTTPS and kubectl]</div>" .->12
+    3-. "<div>Stores and retrieves SAP<br />documents</div><div style='font-size: 70%'>[ArchiveLink over HTTPS]</div>" .->12
+    4-. "<div>Stores and retrieves SAP<br />SuccessFactors documents</div><div style='font-size: 70%'>[REST over HTTPS]</div>" .->12
+    12-. "<div>Stores application metadata</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->6
+    12-. "<div>Stores document binaries and<br />manifests</div><div style='font-size: 70%'>[GCS JSON API over HTTPS]</div>" .->7
+    12-. "<div>Emits workload logs and<br />metrics</div><div style='font-size: 70%'>[Cloud Operations agents]</div>" .->10
+    5-. "<div>Resolves seven public<br />hostnames to 34.36.209.159</div><div style='font-size: 70%'>[DNS A records]</div>" .->12
+    2-. "<div>Inspects logs, metrics, and<br />workload health</div><div style='font-size: 70%'>[Google Cloud Console and gcloud]</div>" .->10
 
   end

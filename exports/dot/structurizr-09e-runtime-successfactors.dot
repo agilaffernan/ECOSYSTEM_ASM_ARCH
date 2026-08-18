@@ -3,7 +3,7 @@ digraph {
   graph [fontname="Arial", rankdir=LR, ranksep=0.45, nodesep=0.45, newrank=true, remincross=true, mclimit=8.0, splines=ortho, outputorder=edgesfirst]
   node [fontname="Arial", shape=box, margin="0.4,0.3"]
   edge [fontname="Arial"]
-  label=<<br /><font point-size="34">9D. Runtime Sequence - SAP ArchiveLink Write</font><br /><font point-size="24">SAP ArchiveLink document write flow.</font>>
+  label=<<br /><font point-size="34">9E. Runtime Sequence - SAP SuccessFactors Write</font><br /><font point-size="24">SAP SuccessFactors token and document write flow.</font>>
 
   subgraph cluster_12 {
     margin=25
@@ -22,7 +22,7 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      46 [id=46,shape=hexagon, label=<<font point-size="34">SAP API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3020]</font><br /><br /><font point-size="24">Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
+      54 [id=54,shape=hexagon, label=<<font point-size="34">SAP SuccessFactors<br />API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3030]</font><br /><br /><font point-size="24">Provides SAP SuccessFactors<br />repository/document operations<br />and token issuance.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
     }
 
     subgraph "cluster_group_Storage Core" {
@@ -39,13 +39,13 @@ digraph {
 
   }
 
-  3 [id=3,shape=rect, label=<<font point-size="34">SAP System</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Calls the SAP<br />ArchiveLink-compatible<br />interface for document storage<br />and retrieval.</font>>, style=filled, color="#0070b1", fillcolor="#ffffff", fontcolor="#172033"]
+  4 [id=4,shape=rect, label=<<br /><br /><br /><font point-size="34">SAP SuccessFactors</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Calls the SAP SuccessFactors<br />document/repository<br />integration and token<br />endpoints.</font>>, style=filled, color="#0070b1", fillcolor="#ffffff", fontcolor="#172033"]
   6 [id=6,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
   7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud Storage</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
 
-  3 -> 46 [id=86, label=<<font point-size="18">1. Sends PUT or multipart POST<br />/api/sap</font><br /><font point-size="13">[HTTPS, Basic Auth or certificate]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  46 -> 62 [id=99, label=<<font point-size="18">2. Writes the component with the<br />trusted internal key</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
+  4 -> 54 [id=87, label=<<font point-size="18">1. Requests a token and submits a<br />document operation</font><br /><font point-size="13">[HTTPS, OAuth/JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  54 -> 62 [id=100, label=<<font point-size="18">2. Writes the document or<br />managed-user registry object</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
   62 -> 7 [id=105, label=<<font point-size="18">3. Stores the binary and manifest</font><br /><font point-size="13">[GCS API over HTTPS]</font>>, style="dashed", color="#047857", fontcolor="#047857"]
-  46 -> 6 [id=103, label=<<font point-size="18">4. Persists the SAP<br />system/repository/document hierarchy</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
+  54 -> 6 [id=104, label=<<font point-size="18">4. Persists repository, folder,<br />document, and version metadata</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
 
 }

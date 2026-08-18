@@ -6,7 +6,53 @@ import { manuals } from "./site-content.mjs";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..");
 const manualsDir = path.join(root, "manuals");
+const diagramsDir = path.join(root, "diagrams");
+const assetsDir = path.join(root, "assets");
 fs.mkdirSync(manualsDir, { recursive: true });
+
+const encodedDiagrams = Object.fromEntries(
+  fs.readdirSync(diagramsDir)
+    .filter((file) => file.endsWith(".svg"))
+    .sort()
+    .map((file) => [file, fs.readFileSync(path.join(diagramsDir, file)).toString("base64")])
+);
+
+const diagramDownloadsScript = `(() => {
+  const encodedDiagrams = ${JSON.stringify(encodedDiagrams)};
+
+  function forceSvgDownload(event) {
+    const link = event.currentTarget;
+    const fileName = link.getAttribute("download");
+    const encodedSvg = encodedDiagrams[fileName];
+    if (!encodedSvg) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const binary = atob(encodedSvg);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
+
+    const objectUrl = URL.createObjectURL(new Blob([bytes], { type: "image/svg+xml;charset=utf-8" }));
+    const transfer = document.createElement("a");
+    transfer.href = objectUrl;
+    transfer.download = fileName;
+    transfer.hidden = true;
+    document.body.append(transfer);
+    transfer.click();
+    transfer.remove();
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".diagram-download, #download-svg-link").forEach((link) => {
+      link.addEventListener("click", forceSvgDownload);
+    });
+  });
+})();
+`;
+
+fs.writeFileSync(path.join(assetsDir, "diagram-downloads.js"), diagramDownloadsScript, "utf8");
 
 const observedDate = "August 11, 2026";
 const manualIcons = {
@@ -21,6 +67,34 @@ const manualIcons = {
   "9": "api",
   "10": "observability"
 };
+
+const iconLegendCatalog = [
+  ["user", "user", "User or administrator"],
+  ["system", "system", "System or deployment boundary"],
+  ["api", "api", "API or API client"],
+  ["frontend", "frontend", "Frontend"],
+  ["component", "component", "Internal component"],
+  ["database", "database", "Database or data adapter"],
+  ["object-storage", "object-storage", "Object storage"],
+  ["security", "security", "Identity or security"],
+  ["configuration", "configuration", "Runtime configuration"],
+  ["package", "package", "Artifact package"],
+  ["network", "network", "Network entry or external service"],
+  ["observability", "observability", "Health and telemetry"],
+  ["sap-official", "vendors/sap", "SAP System (official)"],
+  ["kubernetes-official", "vendors/kubernetes", "Kubernetes (official)"],
+  ["helm-official", "vendors/helm", "Helm (official)"],
+  ["gcp-cloud-storage", "vendors/gcp-cloud-storage", "Cloud Storage (official)"],
+  ["gcp-cloud-sql", "vendors/gcp-cloud-sql", "Cloud SQL (official)"],
+  ["gcp-gke", "vendors/gcp-gke", "Google Kubernetes Engine (official)"],
+  ["gcp-artifact-registry", "vendors/gcp-artifact-registry", "Artifact Registry (official)"],
+  ["gcp-secret-manager", "vendors/gcp-secret-manager", "Secret Manager (official)"],
+  ["gcp-load-balancing", "vendors/gcp-cloud-load-balancing", "Cloud Load Balancing (official)"],
+  ["gcp-cloud-monitoring", "vendors/gcp-cloud-monitoring", "Cloud Monitoring (official)"],
+  ["gcp-workload-identity", "vendors/gcp-workload-identity", "Workload Identity (official)"],
+  ["gcp-network", "vendors/gcp-cloud-network", "Google Cloud VPC (official)"],
+  ["gcp-certificate", "vendors/gcp-certificate-manager", "Certificate Manager (official)"]
+];
 
 function escapeHtml(value) {
   return value
@@ -40,7 +114,7 @@ function navigation(current, fromManual) {
 
   return `<aside class="sidebar">
     <a class="brand" href="${prefix}index.html">ASM+ Architecture</a>
-    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="brand-subtitle">Auritas Storage Manager</p>
     <p class="nav-label">Manuals</p>
     <ul class="nav-list">
       <li><a href="${prefix}index.html"${homeCurrent}>Overview</a></li>
@@ -59,6 +133,9 @@ function navigation(current, fromManual) {
 
 function shell({ title, description, current, fromManual, body }) {
   const prefix = fromManual ? "../" : "";
+  const downloadsScript = fromManual
+    ? `  <script src="${prefix}assets/diagram-downloads.js"></script>\n`
+    : "";
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -76,6 +153,7 @@ function shell({ title, description, current, fromManual, body }) {
       <div class="content">${body}</div>
     </main>
   </div>
+${downloadsScript}\
   <script src="${prefix}assets/site.js"></script>
 </body>
 </html>`;
@@ -88,7 +166,10 @@ function diagrams(manual) {
     <section class="diagram-block" aria-labelledby="diagram-${index + 1}">
       <h3 id="diagram-${index + 1}">${escapeHtml(diagram.title)}</h3>
       <div class="diagram-frame">
-        <a href="${viewerHref}" aria-label="Open ${escapeHtml(diagram.title)} in the full-screen diagram viewer"><img src="../diagrams/${diagram.file}" alt="${escapeHtml(diagram.alt)}"></a>
+        <a class="diagram-download" href="../diagrams/${diagram.file}" download="${diagram.file}" aria-label="Download ${escapeHtml(diagram.title)} as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="${viewerHref}" aria-label="Open ${escapeHtml(diagram.title)} in the full-screen diagram viewer"><img src="../diagrams/${diagram.file}" alt="${escapeHtml(diagram.alt)}"></a>
       </div>
       <p class="diagram-caption">${diagram.caption}</p>
       <p class="diagram-links"><a href="${viewerHref}">Open full-screen viewer</a><a href="../structurizr-site/index.html#${diagram.view}">Open this view in Structurizr</a></p>
@@ -96,22 +177,24 @@ function diagrams(manual) {
   }).join("\n");
 }
 
-function iconLegend(prefix = "../") {
-  const entries = [
-    ["api", "API or API client"],
-    ["frontend", "Frontend"],
-    ["database", "Database or data adapter"],
-    ["object-storage", "Object storage"],
-    ["security", "Identity or security"],
-    ["network", "Network entry"],
-    ["observability", "Health and telemetry"],
-    ["vendors/sap", "SAP System (official)"],
-    ["vendors/gcp-cloud-storage", "Cloud Storage (official)"],
-    ["vendors/gcp-cloud-sql", "Cloud SQL (official)"],
-    ["vendors/kubernetes", "Kubernetes (official)"],
-    ["vendors/helm", "Helm (official)"]
-  ];
-  return `<div class="icon-legend" aria-label="Diagram icon key">${entries.map(([icon, label]) => `<span class="icon-legend-item"><img src="${prefix}assets/icons/${icon}.svg" alt="">${label}</span>`).join("")}</div>`;
+function iconCategories(files) {
+  const categories = new Set();
+  for (const file of files) {
+    const svg = fs.readFileSync(path.join(diagramsDir, file), "utf8");
+    for (const match of svg.matchAll(/data-icon="([^"]+)"/g)) categories.add(match[1]);
+  }
+  return categories;
+}
+
+function iconLegend(manual, prefix = "../") {
+  const files = manual ? manual.diagrams.map((diagram) => diagram.file) : Object.keys(encodedDiagrams);
+  const usedCategories = iconCategories(files);
+  const entries = iconLegendCatalog.filter(([category]) => usedCategories.has(category));
+  const mappedCategories = new Set(entries.map(([category]) => category));
+  const missingCategories = [...usedCategories].filter((category) => !mappedCategories.has(category));
+  if (missingCategories.length) throw new Error(`Missing legend definitions for: ${missingCategories.join(", ")}`);
+
+  return `<div class="icon-legend" aria-label="Icon key for the diagrams on this page">${entries.map(([category, icon, label]) => `<span class="icon-legend-item" data-icon-category="${category}"><img src="${prefix}assets/icons/${icon}.svg" alt="">${label}</span>`).join("")}</div>`;
 }
 
 function wrapTables(html) {
@@ -130,7 +213,7 @@ function buildManual(manual) {
       <span class="status recommendation">Recommendation</span>
       <span class="status gap">Observed gap</span>
     </div>
-    ${iconLegend()}
+    ${iconLegend(manual)}
     <section><h2>Architecture View</h2>${diagrams(manual)}</section>
     ${sections}
     <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer>`;
@@ -189,7 +272,7 @@ const indexBody = `
   <section>
     <h2>Evidence Status</h2>
     <div class="status-key"><span class="status observed">Observed live</span><span class="status optional">Optional capability</span><span class="status recommendation">Recommendation</span><span class="status gap">Observed gap</span></div>
-    ${iconLegend("")}
+    ${iconLegend(null, "")}
     <p>Statements in the manuals are deliberately qualified. For example, SAML and OnlyOffice are supported capabilities but were not verified as active, while the lack of custom alert policies was directly observed.</p>
   </section>
   <footer class="page-footer">ASM+ architecture baseline. Generated from read-only GCP, Kubernetes, Helm, database-catalog, and source evidence.</footer>`;
@@ -234,12 +317,16 @@ const viewerHtml = `<!doctype html>
       <a class="icon-button" id="raw-svg-link" href="diagrams/structurizr-01-system-context.svg" target="_blank" rel="noopener" aria-label="Open raw SVG in a new tab" title="Open raw SVG">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
       </a>
+      <a class="icon-button" id="download-svg-link" href="diagrams/structurizr-01-system-context.svg" download="structurizr-01-system-context.svg" aria-label="Download diagram as SVG" title="Download SVG">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+      </a>
     </div>
   </header>
   <main class="viewer-stage" id="viewer-stage" aria-label="Architecture diagram canvas">
     <img id="diagram-image" alt="" draggable="false">
     <p class="viewer-error" id="viewer-error" hidden>Unable to open this diagram.</p>
   </main>
+  <script src="assets/diagram-downloads.js"></script>
   <script src="assets/diagram-viewer.js"></script>
 </body>
 </html>`;

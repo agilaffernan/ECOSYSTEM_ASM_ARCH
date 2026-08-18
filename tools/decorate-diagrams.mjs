@@ -154,6 +154,18 @@ const labels = {
   "gcp-certificate": "Google-managed certificate"
 };
 
+const canonicalCategoryByName = new Map();
+
+function canonicalCategory(name, proposedCategory, context) {
+  const key = name.trim().toLowerCase().replace(/\s+/g, " ");
+  const existing = canonicalCategoryByName.get(key);
+  if (existing && existing.category !== proposedCategory) {
+    throw new Error(`Inconsistent icon assignment for ${name}: ${existing.category} in ${existing.context}, but ${proposedCategory} in ${context}.`);
+  }
+  if (!existing) canonicalCategoryByName.set(key, { category: proposedCategory, context });
+  return proposedCategory;
+}
+
 function numbers(value) {
   return [...value.matchAll(/-?\d+(?:\.\d+)?/g)].map((match) => Number(match[0]));
 }
@@ -162,30 +174,146 @@ function nodeBounds(body) {
   const polygon = body.match(/<polygon\b[^>]*points="([^"]+)"/);
   if (polygon) {
     const values = numbers(polygon[1]);
-    const xs = values.filter((_, index) => index % 2 === 0);
-    const ys = values.filter((_, index) => index % 2 === 1);
-    return { minX: Math.min(...xs), maxX: Math.max(...xs), minY: Math.min(...ys), maxY: Math.max(...ys), hexagon: xs.length === 6 };
+    const points = [];
+    for (let index = 0; index < values.length; index += 2) {
+      points.push({ x: values[index], y: values[index + 1] });
+    }
+    if (points.length > 1 && points[0].x === points.at(-1).x && points[0].y === points.at(-1).y) {
+      points.pop();
+    }
+    const xs = points.map((point) => point.x);
+    const ys = points.map((point) => point.y);
+    const uniqueXs = [...new Set(xs)].sort((a, b) => a - b);
+    const hexagon = points.length === 6 && uniqueXs.length === 4;
+    return {
+      minX: Math.min(...xs),
+      maxX: Math.max(...xs),
+      minY: Math.min(...ys),
+      maxY: Math.max(...ys),
+      innerMinX: hexagon && uniqueXs.length > 2 ? uniqueXs[1] : Math.min(...xs),
+      innerMaxX: hexagon && uniqueXs.length > 2 ? uniqueXs.at(-2) : Math.max(...xs),
+      hexagon
+    };
   }
 
   const ellipse = body.match(/<ellipse\b[^>]*cx="([^"]+)"[^>]*cy="([^"]+)"[^>]*rx="([^"]+)"[^>]*ry="([^"]+)"/);
   if (ellipse) {
     const [, cx, cy, rx, ry] = ellipse.map(Number);
-    return { minX: cx - rx, maxX: cx + rx, minY: cy - ry, maxY: cy + ry, hexagon: false };
+    return { minX: cx - rx, maxX: cx + rx, minY: cy - ry, maxY: cy + ry, innerMinX: cx - rx, innerMaxX: cx + rx, hexagon: false };
   }
 
   const rect = body.match(/<rect\b[^>]*x="([^"]+)"[^>]*y="([^"]+)"[^>]*width="([^"]+)"[^>]*height="([^"]+)"/);
   if (rect) {
     const [, x, y, width, height] = rect.map(Number);
-    return { minX: x, maxX: x + width, minY: y, maxY: y + height, hexagon: false };
+    return { minX: x, maxX: x + width, minY: y, maxY: y + height, innerMinX: x, innerMaxX: x + width, hexagon: false };
   }
 
-  const path = body.match(/<path\b[^>]*fill="(?!none)[^"]+"[^>]*d="([^"]+)"/);
+  const path = body.match(/<path\b[^>]*d="([^"]+)"/);
   if (path) {
     const values = numbers(path[1]);
     const xs = values.filter((_, index) => index % 2 === 0);
     const ys = values.filter((_, index) => index % 2 === 1);
-    return { minX: Math.min(...xs), maxX: Math.max(...xs), minY: Math.min(...ys), maxY: Math.max(...ys), hexagon: false };
+    return { minX: Math.min(...xs), maxX: Math.max(...xs), minY: Math.min(...ys), maxY: Math.max(...ys), innerMinX: Math.min(...xs), innerMaxX: Math.max(...xs), hexagon: false };
   }
+}
+
+function textBoxes(body) {
+  return [...body.matchAll(/<text\b([^>]*)>([\s\S]*?)<\/text>/g)].map((match) => {
+    const attributes = match[1];
+    const x = Number(attributes.match(/\bx="([^"]+)"/)?.[1]);
+    const y = Number(attributes.match(/\by="([^"]+)"/)?.[1]);
+    const fontSize = Number(attributes.match(/\bfont-size="([^"]+)"/)?.[1]) || 16;
+    const anchor = attributes.match(/\btext-anchor="([^"]+)"/)?.[1] || "start";
+    const text = match[2]
+      .replace(/<[^>]+>/g, "")
+      .replace(/&#\d+;|&#x[\da-f]+;|&[a-z]+;/gi, "X")
+      .trim();
+    const estimatedWidth = Math.max(fontSize, [...text].reduce((width, character) => {
+      if (character === " ") return width + fontSize * 0.36;
+      if (/[ilI1.,:;'|]/.test(character)) return width + fontSize * 0.36;
+      if (/[MW@#%]/.test(character)) return width + fontSize * 0.92;
+      return width + fontSize * 0.65;
+    }, 0));
+    const minX = anchor === "middle" ? x - estimatedWidth / 2 : anchor === "end" ? x - estimatedWidth : x;
+    const maxX = anchor === "middle" ? x + estimatedWidth / 2 : anchor === "end" ? x : x + estimatedWidth;
+    return {
+      minX: minX - 10,
+      maxX: maxX + 10,
+      minY: y - fontSize - 6,
+      maxY: y + fontSize * 0.3 + 6
+    };
+  }).filter((box) => Object.values(box).every(Number.isFinite));
+}
+
+function overlapArea(first, second) {
+  const width = Math.max(0, Math.min(first.maxX, second.maxX) - Math.max(first.minX, second.minX));
+  const height = Math.max(0, Math.min(first.maxY, second.maxY) - Math.max(first.minY, second.minY));
+  return width * height;
+}
+
+function placeIcon(body, bounds) {
+  const width = bounds.maxX - bounds.minX;
+  const height = bounds.maxY - bounds.minY;
+  const boxes = textBoxes(body);
+  const preferredSize = Math.max(28, Math.min(42, Math.min(width, height) * 0.18));
+  let best;
+
+  for (let size = preferredSize; size >= 20; size -= 2) {
+    const candidate = {
+      x: bounds.innerMinX + 5,
+      y: bounds.minY + 5
+    };
+    const iconBox = {
+      minX: candidate.x - 6,
+      maxX: candidate.x + size + 6,
+      minY: candidate.y - 6,
+      maxY: candidate.y + size + 6
+    };
+    const overlap = boxes.reduce((total, box) => total + overlapArea(iconBox, box), 0);
+    const score = overlap * 1000 + (preferredSize - size);
+    if (!best || score < best.score) best = { ...candidate, size, overlap, score };
+    if (overlap === 0) return best;
+  }
+
+  return best;
+}
+
+function placeClusterIcon(body, bounds) {
+  const boxes = textBoxes(body);
+  let best;
+
+  for (let size = 20; size >= 14; size -= 2) {
+    const candidate = {
+      x: bounds.innerMinX + 5,
+      y: bounds.minY + 5
+    };
+    const iconBox = {
+      minX: candidate.x - 3,
+      maxX: candidate.x + size + 3,
+      minY: candidate.y - 3,
+      maxY: candidate.y + size + 3
+    };
+    const overlap = boxes.reduce((total, box) => total + overlapArea(iconBox, box), 0);
+    const score = overlap * 1000 + (20 - size);
+    if (!best || score < best.score) best = { ...candidate, size, overlap, score };
+    if (overlap === 0) return best;
+  }
+
+  return best;
+}
+
+function clusterIconIdentity(title) {
+  const elementId = title.match(/^cluster_(\d+)$/)?.[1];
+  if (elementId && elements.has(elementId)) {
+    const element = elements.get(elementId);
+    return { name: element.name, category: iconCategory(element) };
+  }
+  if (/layer_frontend/i.test(title)) return { name: "Frontend Layer", category: "frontend" };
+  if (/layer_backend/i.test(title)) return { name: "Backend and API Layer", category: "api" };
+  if (/layer_data/i.test(title)) return { name: "Data Storage Layer", category: "database" };
+  if (/Application APIs/i.test(title)) return { name: "Application APIs", category: "api" };
+  if (/Storage Core/i.test(title)) return { name: "Storage Core", category: "object-storage" };
+  if (/Web Experience/i.test(title)) return { name: "Web Experience", category: "frontend" };
 }
 
 function foreground(body) {
@@ -214,6 +342,8 @@ function iconMarkup(category, x, y, size, color) {
 }
 
 let total = 0;
+let overlapping = 0;
+let undecoratedClusters = 0;
 for (const file of fs.readdirSync(path.join(root, "diagrams")).filter((name) => name.endsWith(".svg"))) {
   const full = path.join(root, "diagrams", file);
   let svg = fs.readFileSync(full, "utf8");
@@ -221,30 +351,56 @@ for (const file of fs.readdirSync(path.join(root, "diagrams")).filter((name) => 
     .replace(/<!-- architecture-icon:start -->[\s\S]*?<!-- architecture-icon:end -->\s*/g, "")
     .replace(/<g class="architecture-icon"[\s\S]*?<\/g>\s*/g, "");
 
-  let count = 0;
+  let nodeCount = 0;
+  let clusterCount = 0;
   svg = svg.replace(/<g id="(\d+)" class="node">([\s\S]*?)<\/g>/g, (group, id, body) => {
     const element = elements.get(id);
     if (!element) return group;
     const bounds = nodeBounds(body);
     if (!bounds) return group;
 
-    const width = bounds.maxX - bounds.minX;
-    const height = bounds.maxY - bounds.minY;
-    const size = Math.max(50, Math.min(68, Math.min(width, height) * 0.24));
-    const x = bounds.hexagon ? bounds.minX + width * 0.22 : bounds.minX + 4;
-    const y = bounds.minY + 8;
-    const category = iconCategory(element);
+    const placement = placeIcon(body, bounds);
+    if (!placement) return group;
+    const { x, y, size, overlap } = placement;
+    const category = canonicalCategory(element.name, iconCategory(element), `${file} node ${id}`);
     const icon = iconMarkup(category, x, y, size, foreground(body));
-    count += 1;
+    nodeCount += 1;
+    if (overlap > 0) {
+      overlapping += 1;
+      console.warn(`${file}: icon for ${element.name} [id=${id}] has ${overlap.toFixed(1)} px² of estimated text overlap.`);
+    }
     return `<g id="${id}" class="node">${body}\n${icon}</g>`;
+  });
+
+  svg = svg.replace(/<g id="([^"]+)" class="cluster">([\s\S]*?)<\/g>/g, (group, id, body) => {
+    const title = body.match(/<title>([^<]+)<\/title>/)?.[1] ?? "";
+    const identity = clusterIconIdentity(title);
+    const bounds = nodeBounds(body);
+    if (!identity || !bounds) {
+      undecoratedClusters += 1;
+      console.warn(`${file}: no semantic icon mapping was found for cluster ${title || id}.`);
+      return group;
+    }
+
+    const placement = placeClusterIcon(body, bounds);
+    if (!placement) return group;
+    const { x, y, size, overlap } = placement;
+    const category = canonicalCategory(identity.name, identity.category, `${file} cluster ${title}`);
+    const icon = iconMarkup(category, x, y, size, foreground(body));
+    clusterCount += 1;
+    if (overlap > 0) {
+      overlapping += 1;
+      console.warn(`${file}: cluster icon for ${title} has ${overlap.toFixed(1)} px² of estimated text overlap.`);
+    }
+    return `<g id="${id}" class="cluster">${body}\n${icon}</g>`;
   });
 
   if (!svg.includes("Discrete architecture iconography generated")) {
     svg = svg.replace("<!-- Pages: 1 -->", `<!-- Pages: 1 -->\n<!-- Discrete architecture iconography generated from Structurizr element semantics. -->`);
   }
   fs.writeFileSync(full, svg, "utf8");
-  total += count;
-  console.log(`${file}: ${count} icons`);
+  total += nodeCount + clusterCount;
+  console.log(`${file}: ${nodeCount} element icons, ${clusterCount} boundary icons`);
 }
 
-console.log(`Decorated 21 diagrams with ${total} semantic icons.`);
+console.log(`Decorated 21 diagrams with ${total} semantic icons across ${canonicalCategoryByName.size} canonical identities; ${overlapping} estimated text overlaps and ${undecoratedClusters} undecorated semantic boundaries remain.`);

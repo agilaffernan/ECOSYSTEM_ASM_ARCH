@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Documents public endpoints, internal service calls, protocols, and authentication controls used by browser, SAP, Salesforce, database, and object-storage traffic.">
+  <meta name="description" content="Documents public endpoints, internal service calls, protocols, and authentication controls used by browser, SAP, SAP SuccessFactors, database, and object-storage traffic.">
   <title>4. API and Integration Architecture | ASM+ Architecture</title>
   <link rel="stylesheet" href="../assets/styles.css">
 </head>
@@ -12,7 +12,7 @@
   <div class="layout">
     <aside class="sidebar">
     <a class="brand" href="../index.html">ASM+ Architecture</a>
-    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="brand-subtitle">Auritas Storage Manager</p>
     <p class="nav-label">Manuals</p>
     <ul class="nav-list">
       <li><a href="../index.html">Overview</a></li>
@@ -39,7 +39,7 @@
     <main class="main" id="content">
       <div class="content">
     <div class="title-row"><img class="title-icon" src="../assets/icons/api.svg" alt=""><div><p class="eyebrow">Architecture manual 4</p><h1>API and Integration Architecture</h1></div></div>
-    <p class="lead">Documents public endpoints, internal service calls, protocols, and authentication controls used by browser, SAP, Salesforce, database, and object-storage traffic.</p>
+    <p class="lead">Documents public endpoints, internal service calls, protocols, and authentication controls used by browser, SAP, SAP SuccessFactors, database, and object-storage traffic.</p>
     <div class="meta-row"><span><strong>Project:</strong> sap-ecosystem-asmplus</span><span><strong>Environment:</strong> Live GCP</span><span><strong>Observed:</strong> August 11, 2026</span></div>
     <div class="status-key" aria-label="Evidence status key">
       <span class="status observed">Observed live</span>
@@ -47,41 +47,43 @@
       <span class="status recommendation">Recommendation</span>
       <span class="status gap">Observed gap</span>
     </div>
-    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <div class="icon-legend" aria-label="Icon key for the diagrams on this page"><span class="icon-legend-item" data-icon-category="user"><img src="../assets/icons/user.svg" alt="">User or administrator</span><span class="icon-legend-item" data-icon-category="system"><img src="../assets/icons/system.svg" alt="">System or deployment boundary</span><span class="icon-legend-item" data-icon-category="api"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item" data-icon-category="frontend"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item" data-icon-category="object-storage"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item" data-icon-category="sap-official"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span></div>
     <section><h2>Architecture View</h2>
     <section class="diagram-block" aria-labelledby="diagram-1">
       <h3 id="diagram-1">API and Integration Map</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-04-api-integration.svg&title=API%20and%20Integration%20Map" aria-label="Open API and Integration Map in the full-screen diagram viewer"><img src="../diagrams/structurizr-04-api-integration.svg" alt="API and integration architecture diagram"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-04-api-integration.svg" download="structurizr-04-api-integration.svg" aria-label="Download API and Integration Map as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-04-api-integration.svg&title=API%20and%20Integration%20Map" aria-label="Open API and Integration Map in the full-screen diagram viewer"><img src="../diagrams/structurizr-04-api-integration.svg" alt="API and integration architecture diagram"></a>
       </div>
       <p class="diagram-caption">Figure 4. Public HTTPS interfaces, internal storage calls, database connectors, object storage, and optional identity exchange.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-04-api-integration.svg&title=API%20and%20Integration%20Map">Open full-screen viewer</a><a href="../structurizr-site/index.html#04-api-integration">Open this view in Structurizr</a></p>
     </section></section>
-    <section><h2>Public Hostnames</h2><div class="table-scroll"><table><thead><tr><th>Hostname</th><th>Workload</th><th>Primary interface</th></tr></thead><tbody>
-          <tr><td><code>auth.asmplus-demo.auritas.com</code></td><td>Auth Portal</td><td>Browser login, SSO, and administration UI</td></tr>
-          <tr><td><code>api-auth.asmplus-demo.auritas.com</code></td><td>Auth API</td><td>JSON authentication and identity/access administration</td></tr>
-          <tr><td><code>app.asmplus-demo.auritas.com</code></td><td>ASM+ Web</td><td>Main browser application</td></tr>
-          <tr><td><code>api-asm-plus.asmplus-demo.auritas.com</code></td><td>ASM+ API</td><td>JSON and binary document-management API</td></tr>
-          <tr><td><code>viewer.asmplus-demo.auritas.com</code></td><td>Viewer</td><td>Browser document rendering</td></tr>
-          <tr><td><code>api-sap.asmplus-demo.auritas.com</code></td><td>SAP API</td><td>ArchiveLink-compatible operations; five OpenAPI paths observed</td></tr>
-          <tr><td><code>api-sf.asmplus-demo.auritas.com</code></td><td>Salesforce API</td><td>Repository/document/token operations; health and repository paths observed</td></tr>
+    <section><h2>Public Hostnames</h2><div class="table-scroll"><table><thead><tr><th>Hostname</th><th>Layer</th><th>Workload</th><th>Primary interface</th></tr></thead><tbody>
+          <tr><td><code>auth.asmplus-demo.auritas.com</code></td><td>Frontend</td><td>Auth Portal</td><td>Browser login, SSO, and administration UI</td></tr>
+          <tr><td><code>api-auth.asmplus-demo.auritas.com</code></td><td>Backend API</td><td>Auth API</td><td>JSON authentication and identity/access administration</td></tr>
+          <tr><td><code>app.asmplus-demo.auritas.com</code></td><td>Frontend</td><td>ASM+ Web</td><td>Main browser application</td></tr>
+          <tr><td><code>api-asm-plus.asmplus-demo.auritas.com</code></td><td>Backend API</td><td>ASM+ API</td><td>JSON and binary document-management API</td></tr>
+          <tr><td><code>viewer.asmplus-demo.auritas.com</code></td><td>Frontend</td><td>Viewer</td><td>Browser document rendering</td></tr>
+          <tr><td><code>api-sap.asmplus-demo.auritas.com</code></td><td>Backend API</td><td>SAP API</td><td>ArchiveLink-compatible operations; five OpenAPI paths observed</td></tr>
+          <tr><td><code>api-sf.asmplus-demo.auritas.com</code></td><td>Backend API</td><td>SAP SuccessFactors API</td><td>Repository/document/token operations; health and repository paths observed</td></tr>
         </tbody></table></div>
         <p>All names resolve to <code>34.36.209.159</code> and are covered by the active Google-managed certificate <code>asmplus-demo-certificate-v2</code>.</p></section>
 <section><h2>Protocol and Authentication Matrix</h2><div class="table-scroll"><table><thead><tr><th>Integration</th><th>Protocol</th><th>Authentication / trust</th></tr></thead><tbody>
           <tr><td>Browser to frontends/APIs</td><td>HTTPS; JSON, binary, and range requests</td><td>JWT and application access checks</td></tr>
           <tr><td>SAP to SAP API</td><td>ArchiveLink over HTTPS; raw or multipart HTTP</td><td>Basic Auth, certificate, or trusted service key depending on operation</td></tr>
-          <tr><td>Salesforce to SF API</td><td>REST over HTTPS</td><td>OAuth 2.0/JWT and SAML bearer support with managed users</td></tr>
+          <tr><td>SAP SuccessFactors to SF API</td><td>REST over HTTPS</td><td>OAuth 2.0/JWT and SAML bearer support with managed users</td></tr>
           <tr><td>Business APIs to ASM Storage API</td><td>Internal HTTP REST</td><td><code>X-Api-Key</code>; storage service is not on public Ingress</td></tr>
           <tr><td>APIs to Cloud SQL</td><td>PostgreSQL to localhost proxy</td><td>Workload Identity authorizes the Cloud SQL connector</td></tr>
           <tr><td>ASM Storage API to GCS</td><td>GCS JSON API over HTTPS</td><td>Application Default Credentials from Workload Identity</td></tr>
-          <tr><td>Auth to enterprise IdP</td><td>SAML 2.0 or Microsoft identity</td><td>Optional; active provider not verified</td></tr>
         </tbody></table></div></section>
-<section><h2>Internal Contract</h2><p>The central storage contract is the internal <code>/api/asm</code> API. ASM+ API, SAP API, and Salesforce API retain their own domain behavior and metadata persistence, then delegate object storage to <code>asm-api</code>. This keeps GCS credentials and storage-provider selection out of the public integration APIs.</p>
+<section><h2>Internal Contract</h2><p>The central storage contract is the internal <code>/api/asm</code> API. ASM+ API, SAP API, and SAP SuccessFactors API retain their own domain behavior and metadata persistence, then delegate object storage to <code>asm-api</code>. This keeps GCS credentials and storage-provider selection out of the public integration APIs.</p>
         <div class="notice"><strong>Current GCP mode.</strong> The storage service selects GCS when <code>BTP_HYPERSCALER=GCP</code>. The GCS client uses ADC; no JSON key path is required or mounted.</div></section>
-<section><h2>Optional and Inactive Integrations</h2><ul><li>Vector indexing clients are present in several APIs, but their endpoint is empty in the live configuration.</li><li>OnlyOffice is supported by the Viewer, but its server, callback, and proxy values are empty.</li><li>Enterprise SSO adapters exist, but this review did not establish that a provider is active.</li></ul></section>
     <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
     </main>
   </div>
+  <script src="../assets/diagram-downloads.js"></script>
   <script src="../assets/site.js"></script>
 </body>
 </html>

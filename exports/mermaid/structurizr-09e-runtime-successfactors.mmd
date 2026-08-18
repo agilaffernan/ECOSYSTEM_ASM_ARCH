@@ -1,0 +1,12 @@
+sequenceDiagram
+
+  participant 4 as SAP SuccessFactors<br />[Software System]
+  participant 54 as SAP SuccessFactors API<br />[Container: Node.js, TypeScript, Express; port 3030]
+  participant 62 as ASM Storage API<br />[Container: Node.js, TypeScript, Express; port 3000]
+  participant 7 as Cloud Storage<br />[Software System]
+  participant 6 as Cloud SQL for PostgreSQL<br />[Software System]
+
+  4->>54: Requests a token and submits a document operation<br />[HTTPS, OAuth/JWT]
+  54->>62: Writes the document or managed-user registry object<br />[HTTP/REST, X-Api-Key]
+  62->>7: Stores the binary and manifest<br />[GCS API over HTTPS]
+  54->>6: Persists repository, folder, document, and version metadata<br />[PostgreSQL on 127.0.0.1:5432]

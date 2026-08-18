@@ -1,13 +1,13 @@
 digraph {
   compound=true
-  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
-  node [fontname="Arial", shape=box, margin="0.4,0.3"]
+  graph [fontname="Arial", rankdir=TB, ranksep=0.58, nodesep=0.52, newrank=true, remincross=true, mclimit=8.0, splines=ortho, outputorder=edgesfirst]
+  node [fontname="Arial", shape=box, margin="0.24,0.16"]
   edge [fontname="Arial"]
-  label=<<br /><font point-size="34">3E. Component Architecture - Salesforce API</font><br /><font point-size="24">Internal structure of the Salesforce integration.</font>>
+  label=<<br /><font point-size="34">3E. Component Architecture - SAP SuccessFactors API</font><br /><font point-size="24">Internal structure of the SAP SuccessFactors integration.</font>>
 
-  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+  6 [id=6,shape=cylinder, label=<<font point-size="27">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="15">[Software System]</font><br /><br /><font point-size="18">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
 
-  subgraph cluster_13 {
+  subgraph cluster_12 {
     margin=25
     label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
     labelloc=b
@@ -15,33 +15,40 @@ digraph {
     fontcolor="#444444"
     fillcolor="#444444"
 
-    subgraph cluster_55 {
+    subgraph cluster_54 {
       margin=25
-      label=<<font point-size="24"><br />Salesforce API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3030]</font>>
+      label=<<font point-size="24"><br />SAP SuccessFactors API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3030]</font>>
       labelloc=b
       color="#444444"
       fontcolor="#444444"
       fillcolor="#444444"
 
-      56 [id=56,shape=component, label=<<font point-size="34">Salesforce Document<br />Interface</font><br /><font point-size="19">[Component: Express, JSON and binary]</font><br /><br /><font point-size="24">Exposes /api/sf document and<br />repository operations.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      57 [id=57,shape=component, label=<<font point-size="34">OAuth and SAML Bearer<br />Token Service</font><br /><font point-size="19">[Component: JWT, OAuth 2.0, SAML bearer]</font><br /><br /><font point-size="24">Issues bounded access tokens<br />and validates managed<br />Salesforce users.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      58 [id=58,shape=component, label=<<font point-size="34">Managed User Registry</font><br /><font point-size="19">[Component: TypeScript service]</font><br /><br /><font point-size="24">Manages Salesforce public keys<br />and allowed repositories.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      59 [id=59,shape=component, label=<<font point-size="34">Salesforce Metadata<br />Persistence</font><br /><font point-size="19">[Component: pg]</font><br /><br /><font point-size="24">Maps Salesforce repositories,<br />documents, versions, and<br />folders into folders/files.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      60 [id=60,shape=component, label=<<font point-size="34">ASM Storage Client</font><br /><font point-size="19">[Component: HTTP, X-Api-Key]</font><br /><br /><font point-size="24">Delegates document and<br />registry objects to asm-api.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      61 [id=61,shape=component, label=<<font point-size="34">Salesforce Management<br />UI</font><br /><font point-size="19">[Component: Static UI and Express]</font><br /><br /><font point-size="24">Provides managed-user and<br />repository administration.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      62 [id=62,shape=component, label=<<font point-size="34">Vector Integration<br />Client</font><br /><font point-size="19">[Component: HTTP, optional]</font><br /><br /><font point-size="24">Optional indexing adapter;<br />VECTOR_API_URL is empty in the<br />live deployment.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      55 [id=55,shape=component, label=<<br /><br /><font point-size="27">SuccessFactors<br />Document Interface</font><br /><font point-size="15">[Component: Express, JSON and binary]</font><br /><br /><font point-size="18">Exposes /api/sf document and<br />repository operations.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      56 [id=56,shape=component, label=<<br /><br /><br /><font point-size="27">OAuth and SAML Bearer<br />Token Service</font><br /><font point-size="15">[Component: JWT, OAuth 2.0, SAML bearer]</font><br /><br /><font point-size="18">Issues bounded access tokens<br />and validates managed<br />SuccessFactors users.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      57 [id=57,shape=component, label=<<br /><br /><font point-size="27">Managed User Registry</font><br /><font point-size="15">[Component: TypeScript service]</font><br /><br /><font point-size="18">Manages SuccessFactors public<br />keys and allowed repositories.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      58 [id=58,shape=component, label=<<br /><br /><br /><font point-size="27">SuccessFactors<br />Metadata Persistence</font><br /><font point-size="15">[Component: pg]</font><br /><br /><font point-size="18">Maps SuccessFactors<br />repositories, documents,<br />versions, and folders into<br />folders/files.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      59 [id=59,shape=component, label=<<br /><br /><font point-size="27">ASM Storage Client</font><br /><font point-size="15">[Component: HTTP, X-Api-Key]</font><br /><br /><font point-size="18">Delegates document and<br />registry objects to asm-api.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      60 [id=60,shape=component, label=<<font point-size="27">SuccessFactors<br />Management UI</font><br /><font point-size="15">[Component: Static UI and Express]</font><br /><br /><font point-size="18">Provides managed-user and<br />repository administration.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      61 [id=61,shape=component, label=<<font point-size="27">Vector Integration<br />Client</font><br /><font point-size="15">[Component: HTTP, optional]</font><br /><br /><font point-size="18">Optional indexing adapter;<br />VECTOR_API_URL is empty in the<br />live deployment.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
     }
 
-    63 [id=63,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#6d28d9", fillcolor="#7c3aed", fontcolor="#ffffff"]
+    62 [id=62,shape=hexagon, label=<<font point-size="27">ASM Storage API</font><br /><font point-size="15">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="18">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#4c1d95", fillcolor="#6d28d9", fontcolor="#ffffff", penwidth=5, peripheries=2]
   }
 
-  56 -> 57 [id=194, label=<<font point-size="18">Validates access tokens</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  56 -> 59 [id=195, label=<<font point-size="18">Persists successful operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  56 -> 60 [id=196, label=<<font point-size="18">Delegates document operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  57 -> 58 [id=197, label=<<font point-size="18">Validates managed users and keys</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  58 -> 60 [id=198, label=<<font point-size="18">Stores or reads the managed-user<br />registry</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  59 -> 7 [id=199, label=<<font point-size="18">Queries</font><br /><font point-size="13">[PostgreSQL]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  60 -> 63 [id=200, label=<<font point-size="18">Calls</font><br /><font point-size="13">[HTTP, X-Api-Key]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  61 -> 58 [id=201, label=<<font point-size="18">Manages</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  55 -> 56 [id=188, label=<<font point-size="18">Validates access tokens</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  55 -> 58 [id=189, label=<<font point-size="18">Persists successful operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  55 -> 59 [id=190, label=<<font point-size="18">Delegates document operations</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  56 -> 57 [id=191, label=<<font point-size="18">Validates managed users and keys</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  57 -> 59 [id=192, label=<<font point-size="18">Stores or reads the managed-user<br />registry</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  58 -> 6 [id=193, label=<<font point-size="18">Queries</font><br /><font point-size="13">[PostgreSQL]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  59 -> 62 [id=194, label=<<font point-size="18">Calls</font><br /><font point-size="13">[HTTP, X-Api-Key]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  60 -> 57 [id=195, label=<<font point-size="18">Manages</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+
+  asm_storage_balance_03e [label="", shape=box, fixedsize=true, width=4.5, height=0.01, style=invis]
+  { rank=same; 61; 55; 56; 60; }
+  { rank=same; 58; 59; 57; }
+  { rank=same; asm_storage_balance_03e; 62; 6; }
+  6 -> 62 [style=invis, weight=100]
+  62 -> asm_storage_balance_03e [style=invis, weight=100]
 
 }

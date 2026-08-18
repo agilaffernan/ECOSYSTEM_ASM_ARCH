@@ -1,45 +1,45 @@
 graph LR
   linkStyle default fill:#ffffff
 
-  subgraph diagram ["3E. Component Architecture - Salesforce API"]
+  subgraph diagram ["3E. Component Architecture - SAP SuccessFactors API"]
     style diagram fill:#ffffff,stroke:#ffffff
 
-    7[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
-    style 7 fill:#ffffff,stroke:#4285f4,color:#172033
+    6[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
+    style 6 fill:#ffffff,stroke:#4285f4,color:#172033
 
-    subgraph 13 ["ASM+"]
-      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+    subgraph 12 ["ASM+"]
+      style 12 fill:#ffffff,stroke:#991b1b,color:#991b1b
 
-      subgraph 55 ["Salesforce API"]
-        style 55 fill:#ffffff,stroke:#92400e,color:#92400e
+      subgraph 54 ["SAP SuccessFactors API"]
+        style 54 fill:#ffffff,stroke:#92400e,color:#92400e
 
-        56["<div style='font-weight: bold'>Salesforce Document Interface</div><div style='font-size: 70%; margin-top: 0px'>[Component: Express, JSON and binary]</div><div style='font-size: 80%; margin-top:10px'>Exposes /api/sf document and<br />repository operations.</div>"]
+        55["<div style='font-weight: bold'>SuccessFactors Document Interface</div><div style='font-size: 70%; margin-top: 0px'>[Component: Express, JSON and binary]</div><div style='font-size: 80%; margin-top:10px'>Exposes /api/sf document and<br />repository operations.</div>"]
+        style 55 fill:#f8fafc,stroke:#64748b,color:#172033
+        56["<div style='font-weight: bold'>OAuth and SAML Bearer Token Service</div><div style='font-size: 70%; margin-top: 0px'>[Component: JWT, OAuth 2.0, SAML bearer]</div><div style='font-size: 80%; margin-top:10px'>Issues bounded access tokens<br />and validates managed<br />SuccessFactors users.</div>"]
         style 56 fill:#f8fafc,stroke:#64748b,color:#172033
-        57["<div style='font-weight: bold'>OAuth and SAML Bearer Token Service</div><div style='font-size: 70%; margin-top: 0px'>[Component: JWT, OAuth 2.0, SAML bearer]</div><div style='font-size: 80%; margin-top:10px'>Issues bounded access tokens<br />and validates managed<br />Salesforce users.</div>"]
+        57["<div style='font-weight: bold'>Managed User Registry</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript service]</div><div style='font-size: 80%; margin-top:10px'>Manages SuccessFactors public<br />keys and allowed<br />repositories.</div>"]
         style 57 fill:#f8fafc,stroke:#64748b,color:#172033
-        58["<div style='font-weight: bold'>Managed User Registry</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript service]</div><div style='font-size: 80%; margin-top:10px'>Manages Salesforce public<br />keys and allowed<br />repositories.</div>"]
+        58["<div style='font-weight: bold'>SuccessFactors Metadata Persistence</div><div style='font-size: 70%; margin-top: 0px'>[Component: pg]</div><div style='font-size: 80%; margin-top:10px'>Maps SuccessFactors<br />repositories, documents,<br />versions, and folders into<br />folders/files.</div>"]
         style 58 fill:#f8fafc,stroke:#64748b,color:#172033
-        59["<div style='font-weight: bold'>Salesforce Metadata Persistence</div><div style='font-size: 70%; margin-top: 0px'>[Component: pg]</div><div style='font-size: 80%; margin-top:10px'>Maps Salesforce repositories,<br />documents, versions, and<br />folders into folders/files.</div>"]
+        59["<div style='font-weight: bold'>ASM Storage Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: HTTP, X-Api-Key]</div><div style='font-size: 80%; margin-top:10px'>Delegates document and<br />registry objects to asm-api.</div>"]
         style 59 fill:#f8fafc,stroke:#64748b,color:#172033
-        60["<div style='font-weight: bold'>ASM Storage Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: HTTP, X-Api-Key]</div><div style='font-size: 80%; margin-top:10px'>Delegates document and<br />registry objects to asm-api.</div>"]
+        60["<div style='font-weight: bold'>SuccessFactors Management UI</div><div style='font-size: 70%; margin-top: 0px'>[Component: Static UI and Express]</div><div style='font-size: 80%; margin-top:10px'>Provides managed-user and<br />repository administration.</div>"]
         style 60 fill:#f8fafc,stroke:#64748b,color:#172033
-        61["<div style='font-weight: bold'>Salesforce Management UI</div><div style='font-size: 70%; margin-top: 0px'>[Component: Static UI and Express]</div><div style='font-size: 80%; margin-top:10px'>Provides managed-user and<br />repository administration.</div>"]
+        61["<div style='font-weight: bold'>Vector Integration Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: HTTP, optional]</div><div style='font-size: 80%; margin-top:10px'>Optional indexing adapter;<br />VECTOR_API_URL is empty in<br />the live deployment.</div>"]
         style 61 fill:#f8fafc,stroke:#64748b,color:#172033
-        62["<div style='font-weight: bold'>Vector Integration Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: HTTP, optional]</div><div style='font-size: 80%; margin-top:10px'>Optional indexing adapter;<br />VECTOR_API_URL is empty in<br />the live deployment.</div>"]
-        style 62 fill:#f8fafc,stroke:#64748b,color:#172033
       end
 
-      63["<div style='font-weight: bold'>ASM Storage API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</div>"]
-      style 63 fill:#7c3aed,stroke:#6d28d9,color:#ffffff
+      62["<div style='font-weight: bold'>ASM Storage API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</div>"]
+      style 62 fill:#7c3aed,stroke:#6d28d9,color:#ffffff
     end
 
-    56-. "<div>Validates access tokens</div><div style='font-size: 70%'></div>" .->57
-    56-. "<div>Persists successful<br />operations</div><div style='font-size: 70%'></div>" .->59
-    56-. "<div>Delegates document operations</div><div style='font-size: 70%'></div>" .->60
-    57-. "<div>Validates managed users and<br />keys</div><div style='font-size: 70%'></div>" .->58
-    58-. "<div>Stores or reads the<br />managed-user registry</div><div style='font-size: 70%'></div>" .->60
-    59-. "<div>Queries</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->7
-    60-. "<div>Calls</div><div style='font-size: 70%'>[HTTP, X-Api-Key]</div>" .->63
-    61-. "<div>Manages</div><div style='font-size: 70%'></div>" .->58
+    55-. "<div>Validates access tokens</div><div style='font-size: 70%'></div>" .->56
+    55-. "<div>Persists successful<br />operations</div><div style='font-size: 70%'></div>" .->58
+    55-. "<div>Delegates document operations</div><div style='font-size: 70%'></div>" .->59
+    56-. "<div>Validates managed users and<br />keys</div><div style='font-size: 70%'></div>" .->57
+    57-. "<div>Stores or reads the<br />managed-user registry</div><div style='font-size: 70%'></div>" .->59
+    58-. "<div>Queries</div><div style='font-size: 70%'>[PostgreSQL]</div>" .->6
+    59-. "<div>Calls</div><div style='font-size: 70%'>[HTTP, X-Api-Key]</div>" .->62
+    60-. "<div>Manages</div><div style='font-size: 70%'></div>" .->57
 
   end

@@ -12,7 +12,7 @@
   <div class="layout">
     <aside class="sidebar">
     <a class="brand" href="../index.html">ASM+ Architecture</a>
-    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="brand-subtitle">Auritas Storage Manager</p>
     <p class="nav-label">Manuals</p>
     <ul class="nav-list">
       <li><a href="../index.html">Overview</a></li>
@@ -47,24 +47,27 @@
       <span class="status recommendation">Recommendation</span>
       <span class="status gap">Observed gap</span>
     </div>
-    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <div class="icon-legend" aria-label="Icon key for the diagrams on this page"><span class="icon-legend-item" data-icon-category="system"><img src="../assets/icons/system.svg" alt="">System or deployment boundary</span><span class="icon-legend-item" data-icon-category="api"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item" data-icon-category="frontend"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item" data-icon-category="database"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item" data-icon-category="gcp-cloud-storage"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item" data-icon-category="gcp-cloud-sql"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span></div>
     <section><h2>Architecture View</h2>
     <section class="diagram-block" aria-labelledby="diagram-1">
       <h3 id="diagram-1">Deployed Containers and Service Dependencies</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-02-container-microservices.svg&title=Deployed%20Containers%20and%20Service%20Dependencies" aria-label="Open Deployed Containers and Service Dependencies in the full-screen diagram viewer"><img src="../diagrams/structurizr-02-container-microservices.svg" alt="C4 container diagram for the ASM+ microservices"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-02-container-microservices.svg" download="structurizr-02-container-microservices.svg" aria-label="Download Deployed Containers and Service Dependencies as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-02-container-microservices.svg&title=Deployed%20Containers%20and%20Service%20Dependencies" aria-label="Open Deployed Containers and Service Dependencies in the full-screen diagram viewer"><img src="../diagrams/structurizr-02-container-microservices.svg" alt="C4 container diagram for the ASM+ microservices"></a>
       </div>
-      <p class="diagram-caption">Figure 2. Eight deployed workloads, configuration stores, managed data services, and external integrations.</p>
+      <p class="diagram-caption">Figure 2. The deployed workloads are organized into frontend, backend/API, and data-storage layers; ASM Storage API remains the highlighted central storage service.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-02-container-microservices.svg&title=Deployed%20Containers%20and%20Service%20Dependencies">Open full-screen viewer</a><a href="../structurizr-site/index.html#02-container-microservices">Open this view in Structurizr</a></p>
     </section></section>
     <section><h2>Live Workload Inventory</h2><div class="table-scroll"><table><thead><tr><th>Deployment</th><th>Purpose</th><th>Service</th><th>Live image tag</th></tr></thead><tbody>
           <tr><td><code>front-auth</code></td><td>Login, SSO, and identity/access administration portal.</td><td>Public; port 80</td><td><code>front-auth:dockerhub-dev-20260805-195902</code></td></tr>
-          <tr><td><code>api-auth</code></td><td>Authentication, JWT issuance, users, roles, apps, structures, connections, and SSO.</td><td>Public; port 3000</td><td><code>api-auth:dockerhub-dev-20260805-195902</code></td></tr>
           <tr><td><code>front-asm-plus</code></td><td>Main document, workflow, search, report, and audit web application.</td><td>Public; port 8080</td><td><code>front-asm-plus:dockerhub-dev-20260805-195902</code></td></tr>
-          <tr><td><code>api-asm-plus</code></td><td>Document metadata, permissions, workflows, notifications, reports, and storage orchestration.</td><td>Public; port 3000</td><td><code>api-asm-plus:dockerhub-dev-20260805-195902</code></td></tr>
           <tr><td><code>front-viewer</code></td><td>Document display for ASM+ and SAP-origin content.</td><td>Public; port 8080</td><td><code>front-viewer:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>api-auth</code></td><td>Authentication, JWT issuance, users, roles, apps, structures, connections, and SSO.</td><td>Public; port 3000</td><td><code>api-auth:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>api-asm-plus</code></td><td>Document metadata, permissions, workflows, notifications, reports, and storage orchestration.</td><td>Public; port 3000</td><td><code>api-asm-plus:dockerhub-dev-20260805-195902</code></td></tr>
           <tr><td><code>api-sap</code></td><td>SAP ArchiveLink-compatible document integration and viewer launch.</td><td>Public; port 3020</td><td><code>api-sap:dockerhub-dev-20260805-195902</code></td></tr>
-          <tr><td><code>api-sf</code></td><td>Salesforce token, repository, document, and managed-user integration.</td><td>Public; port 3030</td><td><code>api-sf:dockerhub-dev-20260805-195902-sf-managed-users-rootfix</code></td></tr>
+          <tr><td><code>api-sf</code></td><td>SAP SuccessFactors token, repository, document, and managed-user integration.</td><td>Public; port 3030</td><td><code>api-sf:dockerhub-dev-20260805-195902-sf-managed-users-rootfix</code></td></tr>
           <tr><td><code>asm-api</code></td><td>Internal binary, manifest, license, and certificate storage service.</td><td>Internal ClusterIP; port 3000</td><td><code>api-asm:dockerhub-dev-20260805-195902</code></td></tr>
         </tbody></table></div>
         <p>All eight deployments were observed at <code>1/1</code> Ready. The public services are NEG-backed through GKE Ingress. <code>asm-api</code> remains internal.</p></section>
@@ -77,13 +80,10 @@
           <tr><td>Auth, ASM+, SAP, SF APIs</td><td>Cloud SQL</td><td>Metadata persistence</td><td>Local proxy at <code>127.0.0.1:5432</code></td></tr>
           <tr><td>ASM Storage API</td><td>GCS</td><td>Object persistence</td><td>GCS API with ADC / Workload Identity</td></tr>
         </tbody></table></div></section>
-<section><h2>Configuration and Secret Injection</h2><p>Non-secret runtime settings are supplied from Kubernetes ConfigMaps. Sensitive values are injected from the namespace-scoped <code>asmplus-runtime-secrets</code> Secret. The observed key names are documented in the Security manual; values are intentionally excluded.</p>
-        <p>Four database-backed APIs run a Cloud SQL Auth Proxy <code>2.14.1</code> sidecar. The proxy uses private IP and the <code>cloudsql-client</code> Workload Identity mapping. The application process connects only to localhost.</p></section>
-<section><h2>Scaling and Availability Characteristics</h2><p>Each workload currently has one application replica. Three <code>e2-medium</code> nodes were Ready in the zonal GKE cluster. Readiness and liveness probes gate availability, but a single application replica means a rollout or pod disruption can temporarily reduce that workload to zero ready replicas.</p>
-        <div class="notice warning"><strong>Current topology.</strong> The cluster is zonal in <code>us-east1-b</code> and Cloud SQL is zonal. This is a functional deployment, not a multi-zone high-availability design.</div></section>
     <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
     </main>
   </div>
+  <script src="../assets/diagram-downloads.js"></script>
   <script src="../assets/site.js"></script>
 </body>
 </html>

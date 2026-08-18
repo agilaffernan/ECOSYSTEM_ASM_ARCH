@@ -1,14 +1,14 @@
 digraph {
   compound=true
-  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  graph [fontname="Arial", rankdir=TB, ranksep=0.62, nodesep=0.56, newrank=true, remincross=true, mclimit=8.0, splines=ortho, outputorder=edgesfirst]
   node [fontname="Arial", shape=box, margin="0.4,0.3"]
   edge [fontname="Arial"]
   label=<<br /><font point-size="34">5. Data Architecture</font><br /><font point-size="24">Metadata persistence and binary object flows.</font>>
 
-  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
-  8 [id=8,shape=cylinder, label=<<font point-size="34">Cloud Storage</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+  6 [id=6,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud Storage</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
 
-  subgraph cluster_13 {
+  subgraph cluster_12 {
     margin=25
     label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
     labelloc=b
@@ -25,10 +25,10 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      32 [id=32,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
-      38 [id=38,shape=hexagon, label=<<font point-size="34">ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Orchestrates document<br />metadata, access, workflows,<br />notifications, reports, audit,<br />and binary operations.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
-      47 [id=47,shape=hexagon, label=<<font point-size="34">SAP API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3020]</font><br /><br /><font point-size="24">Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
-      55 [id=55,shape=hexagon, label=<<font point-size="34">Salesforce API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3030]</font><br /><br /><font point-size="24">Provides Salesforce<br />repository/document operations<br />and token issuance.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
+      31 [id=31,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+      37 [id=37,shape=hexagon, label=<<font point-size="34">ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Orchestrates document<br />metadata, access, workflows,<br />notifications, reports, audit,<br />and binary operations.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+      46 [id=46,shape=hexagon, label=<<font point-size="34">SAP API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3020]</font><br /><br /><font point-size="24">Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
+      54 [id=54,shape=hexagon, label=<<font point-size="34">SAP SuccessFactors<br />API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3030]</font><br /><br /><font point-size="24">Provides SAP SuccessFactors<br />repository/document operations<br />and token issuance.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
     }
 
     subgraph "cluster_group_Storage Core" {
@@ -40,18 +40,18 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      63 [id=63,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#6d28d9", fillcolor="#7c3aed", fontcolor="#ffffff"]
+      62 [id=62,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#4c1d95", fillcolor="#6d28d9", fontcolor="#ffffff", penwidth=5, peripheries=2]
     }
 
   }
 
-  38 -> 63 [id=101, label=<<font point-size="18">Reads and writes document objects,<br />manifests, licenses, and<br />certificates</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
-  47 -> 63 [id=102, label=<<font point-size="18">Reads and writes SAP document<br />objects and certificates</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
-  55 -> 63 [id=103, label=<<font point-size="18">Reads and writes Salesforce document<br />and registry objects</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
-  32 -> 7 [id=104, label=<<font point-size="18">Reads and writes identity and access<br />tables through a local Cloud SQL<br />Auth Proxy</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
-  38 -> 7 [id=105, label=<<font point-size="18">Reads and writes document metadata,<br />RBAC, workflow, audit, and reporting<br />tables through a local proxy</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
-  47 -> 7 [id=106, label=<<font point-size="18">Persists SAP document hierarchy and<br />metadata through a local proxy</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
-  55 -> 7 [id=107, label=<<font point-size="18">Persists Salesforce document<br />hierarchy and metadata through a<br />local proxy</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
-  63 -> 8 [id=108, label=<<font point-size="18">Stores and retrieves binaries,<br />manifests, licenses, and<br />certificates using ADC</font><br /><font point-size="13">[GCS API over HTTPS]</font>>, style="dashed", color="#047857", fontcolor="#047857"]
+  54 -> 62 [id=100, label=<<font point-size="18">Reads and writes SAP SuccessFactors<br />document and registry objects</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
+  31 -> 6 [id=101, style="dashed", color="#166534", fontcolor="#166534"]
+  37 -> 6 [id=102, style="dashed", color="#166534", fontcolor="#166534"]
+  46 -> 6 [id=103, label=<<font point-size="18">Persists SAP document hierarchy and<br />metadata through a local proxy</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
+  54 -> 6 [id=104, style="dashed", color="#166534", fontcolor="#166534"]
+  62 -> 7 [id=105, style="dashed", color="#047857", fontcolor="#047857"]
+  37 -> 62 [id=98, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
+  46 -> 62 [id=99, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
 
 }

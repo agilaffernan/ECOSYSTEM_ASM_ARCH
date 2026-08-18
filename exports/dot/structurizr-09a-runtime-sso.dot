@@ -1,11 +1,11 @@
 digraph {
   compound=true
-  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  graph [fontname="Arial", rankdir=LR, ranksep=0.45, nodesep=0.45, newrank=true, remincross=true, mclimit=8.0, splines=ortho, outputorder=edgesfirst]
   node [fontname="Arial", shape=box, margin="0.4,0.3"]
   edge [fontname="Arial"]
   label=<<br /><font point-size="34">9A. Runtime Sequence - SSO Login</font><br /><font point-size="24">Interactive SSO login and callback flow.</font>>
 
-  subgraph cluster_13 {
+  subgraph cluster_12 {
     margin=25
     label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
     labelloc=b
@@ -22,7 +22,7 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      32 [id=32,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+      31 [id=31,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
     }
 
     subgraph "cluster_group_Web Experience" {
@@ -34,21 +34,21 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      14 [id=14,shape=rect, label=<<font point-size="34">Auth Portal</font><br /><font point-size="19">[Container: React, Vite, NGINX]</font><br /><br /><font point-size="24">Login, SSO, and<br />access-administration web<br />application.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
-      19 [id=19,shape=rect, label=<<font point-size="34">ASM+ Web Application</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Primary document, workflow,<br />report, search, and<br />administration UI.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
+      13 [id=13,shape=rect, label=<<font point-size="34">Auth Portal</font><br /><font point-size="19">[Container: React, Vite, NGINX]</font><br /><br /><font point-size="24">Login, SSO, and<br />access-administration web<br />application.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
+      18 [id=18,shape=rect, label=<<br /><br /><br /><font point-size="34">ASM+ Web Application</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Primary document, workflow,<br />report, search, and<br />administration UI.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
     }
 
   }
 
   1 [id=1,shape=rect, label=<<font point-size="34">ASM+ User</font><br /><font point-size="19">[Person]</font><br /><br /><font point-size="24">Creates folders, uploads<br />files, searches content, and<br />views documents.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
-  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+  6 [id=6,shape=cylinder, label=<<font point-size="34">Cloud SQL for<br />PostgreSQL</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private PostgreSQL 18 instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
 
-  1 -> 19 [id=82, label=<<font point-size="18">1. Opens the application</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  19 -> 14 [id=92, label=<<font point-size="18">2. Redirects to /sso with callback<br />URL</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#b91c1c", fontcolor="#b91c1c"]
-  1 -> 14 [id=83, label=<<font point-size="18">3. Submits credentials or starts<br />configured federation</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  14 -> 32 [id=91, label=<<font point-size="18">4. Authenticates and requests an<br />application token</font><br /><font point-size="13">[HTTPS/JSON]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  32 -> 7 [id=104, label=<<font point-size="18">5. Validates user and application<br />access</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
-  1 -> 19 [id=82, label=<<font point-size="18">6. Returns to /sso/callback with the<br />token</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  19 -> 32 [id=93, label=<<font point-size="18">7. Loads identity and access context</font><br /><font point-size="13">[HTTPS/JSON, JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  1 -> 18 [id=81, label=<<font point-size="18">1. Opens the application</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  18 -> 13 [id=89, label=<<font point-size="18">2. Redirects to /sso with callback<br />URL</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#b91c1c", fontcolor="#b91c1c"]
+  1 -> 13 [id=82, label=<<font point-size="18">3. Submits credentials or starts<br />configured federation</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  13 -> 31 [id=88, label=<<font point-size="18">4. Authenticates and requests an<br />application token</font><br /><font point-size="13">[HTTPS/JSON]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  31 -> 6 [id=101, label=<<font point-size="18">5. Validates user and application<br />access</font><br /><font point-size="13">[PostgreSQL on 127.0.0.1:5432]</font>>, style="dashed", color="#166534", fontcolor="#166534"]
+  1 -> 18 [id=81, label=<<font point-size="18">6. Returns to /sso/callback with the<br />token</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  18 -> 31 [id=90, label=<<font point-size="18">7. Loads identity and access context</font><br /><font point-size="13">[HTTPS/JSON, JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
 
 }

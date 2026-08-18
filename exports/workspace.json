@@ -10,7 +10,7 @@
     "deploymentNodes" : [ {
       "description" : "External DNS authority for auritas.com.",
       "environment" : "Live GCP",
-      "id" : "211",
+      "id" : "205",
       "instances" : "1",
       "name" : "Auritas DNS Provider",
       "properties" : {
@@ -18,20 +18,20 @@
       },
       "softwareSystemInstances" : [ {
         "environment" : "Live GCP",
-        "id" : "212",
+        "id" : "206",
         "instanceId" : 1,
         "properties" : {
           "structurizr.dsl.identifier" : "dnsInstance"
         },
         "relationships" : [ {
           "description" : "Resolves all public hostnames",
-          "destinationId" : "216",
-          "id" : "308",
-          "sourceId" : "212",
+          "destinationId" : "210",
+          "id" : "302",
+          "sourceId" : "206",
           "tags" : "Relationship",
           "technology" : "DNS A records"
         } ],
-        "softwareSystemId" : "6",
+        "softwareSystemId" : "5",
         "tags" : "Software System Instance"
       } ],
       "tags" : "Element,Deployment Node,External Network",
@@ -43,39 +43,39 @@
             "children" : [ {
               "children" : [ {
                 "containerInstances" : [ {
-                  "containerId" : "14",
+                  "containerId" : "13",
                   "environment" : "Live GCP",
-                  "id" : "225",
+                  "id" : "219",
                   "instanceId" : 1,
                   "properties" : {
                     "structurizr.dsl.identifier" : "frontAuthInstance"
                   },
                   "relationships" : [ {
                     "description" : "Reads startup configuration",
-                    "destinationId" : "222",
-                    "id" : "226",
-                    "linkedRelationshipId" : "143",
-                    "sourceId" : "225"
+                    "destinationId" : "216",
+                    "id" : "220",
+                    "linkedRelationshipId" : "140",
+                    "sourceId" : "219"
                   }, {
                     "description" : "Authenticates users and administers identity/access data",
-                    "destinationId" : "241",
-                    "id" : "244",
-                    "linkedRelationshipId" : "91",
-                    "sourceId" : "225",
+                    "destinationId" : "235",
+                    "id" : "238",
+                    "linkedRelationshipId" : "88",
+                    "sourceId" : "219",
                     "technology" : "HTTPS/JSON"
                   }, {
                     "description" : "Writes web-server logs",
-                    "destinationId" : "290",
-                    "id" : "291",
-                    "linkedRelationshipId" : "125",
-                    "sourceId" : "225",
+                    "destinationId" : "284",
+                    "id" : "285",
+                    "linkedRelationshipId" : "122",
+                    "sourceId" : "219",
                     "technology" : "stdout/stderr"
                   } ],
                   "tags" : "Container Instance"
                 } ],
                 "description" : "One replica; ClusterIP service port 80; NEG-backed public hostname.",
                 "environment" : "Live GCP",
-                "id" : "224",
+                "id" : "218",
                 "instances" : "1",
                 "name" : "front-auth Pod",
                 "properties" : {
@@ -85,60 +85,60 @@
                 "technology" : "Kubernetes Pod"
               }, {
                 "containerInstances" : [ {
-                  "containerId" : "19",
+                  "containerId" : "18",
                   "environment" : "Live GCP",
-                  "id" : "229",
+                  "id" : "223",
                   "instanceId" : 1,
                   "properties" : {
                     "structurizr.dsl.identifier" : "frontAsmInstance"
                   },
                   "relationships" : [ {
                     "description" : "Reads startup configuration",
-                    "destinationId" : "222",
-                    "id" : "230",
-                    "linkedRelationshipId" : "149",
-                    "sourceId" : "229"
+                    "destinationId" : "216",
+                    "id" : "224",
+                    "linkedRelationshipId" : "146",
+                    "sourceId" : "223"
                   }, {
                     "description" : "Redirects the browser to the SSO portal",
-                    "destinationId" : "225",
-                    "id" : "233",
-                    "linkedRelationshipId" : "92",
-                    "sourceId" : "229",
+                    "destinationId" : "219",
+                    "id" : "227",
+                    "linkedRelationshipId" : "89",
+                    "sourceId" : "223",
                     "technology" : "HTTPS"
                   }, {
                     "description" : "Launches the selected document",
-                    "destinationId" : "235",
-                    "id" : "239",
-                    "linkedRelationshipId" : "95",
-                    "sourceId" : "229",
+                    "destinationId" : "229",
+                    "id" : "233",
+                    "linkedRelationshipId" : "92",
+                    "sourceId" : "223",
                     "technology" : "HTTPS"
                   }, {
                     "description" : "Authenticates and checks application access",
-                    "destinationId" : "241",
-                    "id" : "245",
-                    "linkedRelationshipId" : "93",
-                    "sourceId" : "229",
+                    "destinationId" : "235",
+                    "id" : "239",
+                    "linkedRelationshipId" : "90",
+                    "sourceId" : "223",
                     "technology" : "HTTPS/JSON, JWT"
                   }, {
                     "description" : "Performs document, workflow, report, search, and audit operations",
-                    "destinationId" : "249",
-                    "id" : "252",
-                    "linkedRelationshipId" : "94",
-                    "sourceId" : "229",
+                    "destinationId" : "243",
+                    "id" : "246",
+                    "linkedRelationshipId" : "91",
+                    "sourceId" : "223",
                     "technology" : "HTTPS/JSON and binary"
                   }, {
                     "description" : "Writes web-server logs",
-                    "destinationId" : "290",
-                    "id" : "292",
-                    "linkedRelationshipId" : "126",
-                    "sourceId" : "229",
+                    "destinationId" : "284",
+                    "id" : "286",
+                    "linkedRelationshipId" : "123",
+                    "sourceId" : "223",
                     "technology" : "stdout/stderr"
                   } ],
                   "tags" : "Container Instance"
                 } ],
                 "description" : "One replica; ClusterIP service port 8080; NEG-backed public hostname.",
                 "environment" : "Live GCP",
-                "id" : "228",
+                "id" : "222",
                 "instances" : "1",
                 "name" : "front-asm-plus Pod",
                 "properties" : {
@@ -148,60 +148,60 @@
                 "technology" : "Kubernetes Pod"
               }, {
                 "containerInstances" : [ {
-                  "containerId" : "26",
+                  "containerId" : "25",
                   "environment" : "Live GCP",
-                  "id" : "235",
+                  "id" : "229",
                   "instanceId" : 1,
                   "properties" : {
                     "structurizr.dsl.identifier" : "viewerInstance"
                   },
                   "relationships" : [ {
                     "description" : "Reads startup configuration",
-                    "destinationId" : "222",
-                    "id" : "236",
-                    "linkedRelationshipId" : "158",
-                    "sourceId" : "235"
+                    "destinationId" : "216",
+                    "id" : "230",
+                    "linkedRelationshipId" : "155",
+                    "sourceId" : "229"
                   }, {
                     "description" : "Redirects the browser to SSO when a session is absent",
-                    "destinationId" : "225",
-                    "id" : "238",
-                    "linkedRelationshipId" : "96",
-                    "sourceId" : "235",
+                    "destinationId" : "219",
+                    "id" : "232",
+                    "linkedRelationshipId" : "93",
+                    "sourceId" : "229",
                     "technology" : "HTTPS"
                   }, {
                     "description" : "Validates authentication and application access",
-                    "destinationId" : "241",
-                    "id" : "246",
-                    "linkedRelationshipId" : "97",
-                    "sourceId" : "235",
+                    "destinationId" : "235",
+                    "id" : "240",
+                    "linkedRelationshipId" : "94",
+                    "sourceId" : "229",
                     "technology" : "HTTPS/JSON, JWT"
                   }, {
                     "description" : "Retrieves ASM+ metadata and file content",
-                    "destinationId" : "249",
-                    "id" : "253",
-                    "linkedRelationshipId" : "98",
-                    "sourceId" : "235",
+                    "destinationId" : "243",
+                    "id" : "247",
+                    "linkedRelationshipId" : "95",
+                    "sourceId" : "229",
                     "technology" : "HTTPS/JSON and HTTP range"
                   }, {
                     "description" : "Retrieves SAP-origin document components",
-                    "destinationId" : "256",
-                    "id" : "260",
-                    "linkedRelationshipId" : "99",
-                    "sourceId" : "235",
+                    "destinationId" : "250",
+                    "id" : "254",
+                    "linkedRelationshipId" : "96",
+                    "sourceId" : "229",
                     "technology" : "HTTPS/ArchiveLink"
                   }, {
                     "description" : "Writes web-server logs",
-                    "destinationId" : "290",
-                    "id" : "293",
-                    "linkedRelationshipId" : "127",
-                    "sourceId" : "235",
+                    "destinationId" : "284",
+                    "id" : "287",
+                    "linkedRelationshipId" : "124",
+                    "sourceId" : "229",
                     "technology" : "stdout/stderr"
                   } ],
                   "tags" : "Container Instance"
                 } ],
                 "description" : "One replica; ClusterIP service port 8080; NEG-backed public hostname.",
                 "environment" : "Live GCP",
-                "id" : "234",
+                "id" : "228",
                 "instances" : "1",
                 "name" : "front-viewer Pod",
                 "properties" : {
@@ -211,32 +211,32 @@
                 "technology" : "Kubernetes Pod"
               }, {
                 "containerInstances" : [ {
-                  "containerId" : "32",
+                  "containerId" : "31",
                   "environment" : "Live GCP",
-                  "id" : "241",
+                  "id" : "235",
                   "instanceId" : 1,
                   "properties" : {
                     "structurizr.dsl.identifier" : "authApiInstance"
                   },
                   "relationships" : [ {
                     "description" : "Reads and writes identity and access tables through a local Cloud SQL Auth Proxy",
-                    "destinationId" : "276",
-                    "id" : "277",
-                    "linkedRelationshipId" : "104",
-                    "sourceId" : "241",
+                    "destinationId" : "270",
+                    "id" : "271",
+                    "linkedRelationshipId" : "101",
+                    "sourceId" : "235",
                     "technology" : "PostgreSQL on 127.0.0.1:5432"
                   }, {
                     "description" : "Writes structured/application logs",
-                    "destinationId" : "290",
-                    "id" : "294",
-                    "linkedRelationshipId" : "128",
-                    "sourceId" : "241",
+                    "destinationId" : "284",
+                    "id" : "288",
+                    "linkedRelationshipId" : "125",
+                    "sourceId" : "235",
                     "technology" : "stdout/stderr"
                   }, {
                     "description" : "Connects to localhost:5432",
-                    "destinationId" : "247",
-                    "id" : "317",
-                    "sourceId" : "241",
+                    "destinationId" : "241",
+                    "id" : "311",
+                    "sourceId" : "235",
                     "tags" : "Relationship",
                     "technology" : "PostgreSQL"
                   } ],
@@ -244,20 +244,20 @@
                 } ],
                 "description" : "One application container plus one Cloud SQL Auth Proxy sidecar.",
                 "environment" : "Live GCP",
-                "id" : "240",
+                "id" : "234",
                 "infrastructureNodes" : [ {
                   "description" : "Uses private IP and cloudsql-client Workload Identity.",
                   "environment" : "Live GCP",
-                  "id" : "247",
+                  "id" : "241",
                   "name" : "Cloud SQL Auth Proxy",
                   "properties" : {
                     "structurizr.dsl.identifier" : "authProxy"
                   },
                   "relationships" : [ {
                     "description" : "Creates a private encrypted connector channel",
-                    "destinationId" : "276",
-                    "id" : "321",
-                    "sourceId" : "247",
+                    "destinationId" : "270",
+                    "id" : "315",
+                    "sourceId" : "241",
                     "tags" : "Relationship",
                     "technology" : "Cloud SQL Connector"
                   } ],
@@ -273,39 +273,39 @@
                 "technology" : "Kubernetes Pod"
               }, {
                 "containerInstances" : [ {
-                  "containerId" : "38",
+                  "containerId" : "37",
                   "environment" : "Live GCP",
-                  "id" : "249",
+                  "id" : "243",
                   "instanceId" : 1,
                   "properties" : {
                     "structurizr.dsl.identifier" : "apiPlusInstance"
                   },
                   "relationships" : [ {
                     "description" : "Reads and writes document objects, manifests, licenses, and certificates",
-                    "destinationId" : "268",
-                    "id" : "271",
-                    "linkedRelationshipId" : "101",
-                    "sourceId" : "249",
+                    "destinationId" : "262",
+                    "id" : "265",
+                    "linkedRelationshipId" : "98",
+                    "sourceId" : "243",
                     "technology" : "HTTP/REST, X-Api-Key"
                   }, {
                     "description" : "Reads and writes document metadata, RBAC, workflow, audit, and reporting tables through a local proxy",
-                    "destinationId" : "276",
-                    "id" : "278",
-                    "linkedRelationshipId" : "105",
-                    "sourceId" : "249",
+                    "destinationId" : "270",
+                    "id" : "272",
+                    "linkedRelationshipId" : "102",
+                    "sourceId" : "243",
                     "technology" : "PostgreSQL on 127.0.0.1:5432"
                   }, {
                     "description" : "Writes application logs",
-                    "destinationId" : "290",
-                    "id" : "295",
-                    "linkedRelationshipId" : "129",
-                    "sourceId" : "249",
+                    "destinationId" : "284",
+                    "id" : "289",
+                    "linkedRelationshipId" : "126",
+                    "sourceId" : "243",
                     "technology" : "stdout/stderr"
                   }, {
                     "description" : "Connects to localhost:5432",
-                    "destinationId" : "254",
-                    "id" : "318",
-                    "sourceId" : "249",
+                    "destinationId" : "248",
+                    "id" : "312",
+                    "sourceId" : "243",
                     "tags" : "Relationship",
                     "technology" : "PostgreSQL"
                   } ],
@@ -313,20 +313,20 @@
                 } ],
                 "description" : "One application container plus one Cloud SQL Auth Proxy sidecar.",
                 "environment" : "Live GCP",
-                "id" : "248",
+                "id" : "242",
                 "infrastructureNodes" : [ {
                   "description" : "Uses private IP and cloudsql-client Workload Identity.",
                   "environment" : "Live GCP",
-                  "id" : "254",
+                  "id" : "248",
                   "name" : "Cloud SQL Auth Proxy",
                   "properties" : {
                     "structurizr.dsl.identifier" : "plusProxy"
                   },
                   "relationships" : [ {
                     "description" : "Creates a private encrypted connector channel",
-                    "destinationId" : "276",
-                    "id" : "322",
-                    "sourceId" : "254",
+                    "destinationId" : "270",
+                    "id" : "316",
+                    "sourceId" : "248",
                     "tags" : "Relationship",
                     "technology" : "Cloud SQL Connector"
                   } ],
@@ -342,46 +342,46 @@
                 "technology" : "Kubernetes Pod"
               }, {
                 "containerInstances" : [ {
-                  "containerId" : "47",
+                  "containerId" : "46",
                   "environment" : "Live GCP",
-                  "id" : "256",
+                  "id" : "250",
                   "instanceId" : 1,
                   "properties" : {
                     "structurizr.dsl.identifier" : "apiSapInstance"
                   },
                   "relationships" : [ {
                     "description" : "Redirects browser-origin SAP launch requests",
-                    "destinationId" : "235",
-                    "id" : "259",
-                    "linkedRelationshipId" : "100",
-                    "sourceId" : "256",
+                    "destinationId" : "229",
+                    "id" : "253",
+                    "linkedRelationshipId" : "97",
+                    "sourceId" : "250",
                     "technology" : "HTTPS with bounded viewer token"
                   }, {
                     "description" : "Reads and writes SAP document objects and certificates",
-                    "destinationId" : "268",
-                    "id" : "272",
-                    "linkedRelationshipId" : "102",
-                    "sourceId" : "256",
+                    "destinationId" : "262",
+                    "id" : "266",
+                    "linkedRelationshipId" : "99",
+                    "sourceId" : "250",
                     "technology" : "HTTP/REST, X-Api-Key"
                   }, {
                     "description" : "Persists SAP document hierarchy and metadata through a local proxy",
-                    "destinationId" : "276",
-                    "id" : "279",
-                    "linkedRelationshipId" : "106",
-                    "sourceId" : "256",
+                    "destinationId" : "270",
+                    "id" : "273",
+                    "linkedRelationshipId" : "103",
+                    "sourceId" : "250",
                     "technology" : "PostgreSQL on 127.0.0.1:5432"
                   }, {
                     "description" : "Writes trace-aware integration logs",
-                    "destinationId" : "290",
-                    "id" : "296",
-                    "linkedRelationshipId" : "130",
-                    "sourceId" : "256",
+                    "destinationId" : "284",
+                    "id" : "290",
+                    "linkedRelationshipId" : "127",
+                    "sourceId" : "250",
                     "technology" : "stdout/stderr"
                   }, {
                     "description" : "Connects to localhost:5432",
-                    "destinationId" : "261",
-                    "id" : "319",
-                    "sourceId" : "256",
+                    "destinationId" : "255",
+                    "id" : "313",
+                    "sourceId" : "250",
                     "tags" : "Relationship",
                     "technology" : "PostgreSQL"
                   } ],
@@ -389,20 +389,20 @@
                 } ],
                 "description" : "One application container plus one Cloud SQL Auth Proxy sidecar.",
                 "environment" : "Live GCP",
-                "id" : "255",
+                "id" : "249",
                 "infrastructureNodes" : [ {
                   "description" : "Uses private IP and cloudsql-client Workload Identity.",
                   "environment" : "Live GCP",
-                  "id" : "261",
+                  "id" : "255",
                   "name" : "Cloud SQL Auth Proxy",
                   "properties" : {
                     "structurizr.dsl.identifier" : "sapProxy"
                   },
                   "relationships" : [ {
                     "description" : "Creates a private encrypted connector channel",
-                    "destinationId" : "276",
-                    "id" : "323",
-                    "sourceId" : "261",
+                    "destinationId" : "270",
+                    "id" : "317",
+                    "sourceId" : "255",
                     "tags" : "Relationship",
                     "technology" : "Cloud SQL Connector"
                   } ],
@@ -418,39 +418,39 @@
                 "technology" : "Kubernetes Pod"
               }, {
                 "containerInstances" : [ {
-                  "containerId" : "55",
+                  "containerId" : "54",
                   "environment" : "Live GCP",
-                  "id" : "263",
+                  "id" : "257",
                   "instanceId" : 1,
                   "properties" : {
                     "structurizr.dsl.identifier" : "apiSfInstance"
                   },
                   "relationships" : [ {
-                    "description" : "Reads and writes Salesforce document and registry objects",
-                    "destinationId" : "268",
-                    "id" : "273",
-                    "linkedRelationshipId" : "103",
-                    "sourceId" : "263",
+                    "description" : "Reads and writes SAP SuccessFactors document and registry objects",
+                    "destinationId" : "262",
+                    "id" : "267",
+                    "linkedRelationshipId" : "100",
+                    "sourceId" : "257",
                     "technology" : "HTTP/REST, X-Api-Key"
                   }, {
-                    "description" : "Persists Salesforce document hierarchy and metadata through a local proxy",
-                    "destinationId" : "276",
-                    "id" : "280",
-                    "linkedRelationshipId" : "107",
-                    "sourceId" : "263",
+                    "description" : "Persists SAP SuccessFactors document hierarchy and metadata through a local proxy",
+                    "destinationId" : "270",
+                    "id" : "274",
+                    "linkedRelationshipId" : "104",
+                    "sourceId" : "257",
                     "technology" : "PostgreSQL on 127.0.0.1:5432"
                   }, {
                     "description" : "Writes structured integration logs",
-                    "destinationId" : "290",
-                    "id" : "297",
-                    "linkedRelationshipId" : "131",
-                    "sourceId" : "263",
+                    "destinationId" : "284",
+                    "id" : "291",
+                    "linkedRelationshipId" : "128",
+                    "sourceId" : "257",
                     "technology" : "stdout/stderr"
                   }, {
                     "description" : "Connects to localhost:5432",
-                    "destinationId" : "266",
-                    "id" : "320",
-                    "sourceId" : "263",
+                    "destinationId" : "260",
+                    "id" : "314",
+                    "sourceId" : "257",
                     "tags" : "Relationship",
                     "technology" : "PostgreSQL"
                   } ],
@@ -458,20 +458,20 @@
                 } ],
                 "description" : "One application container plus one Cloud SQL Auth Proxy sidecar.",
                 "environment" : "Live GCP",
-                "id" : "262",
+                "id" : "256",
                 "infrastructureNodes" : [ {
                   "description" : "Uses private IP and cloudsql-client Workload Identity.",
                   "environment" : "Live GCP",
-                  "id" : "266",
+                  "id" : "260",
                   "name" : "Cloud SQL Auth Proxy",
                   "properties" : {
                     "structurizr.dsl.identifier" : "sfProxy"
                   },
                   "relationships" : [ {
                     "description" : "Creates a private encrypted connector channel",
-                    "destinationId" : "276",
-                    "id" : "324",
-                    "sourceId" : "266",
+                    "destinationId" : "270",
+                    "id" : "318",
+                    "sourceId" : "260",
                     "tags" : "Relationship",
                     "technology" : "Cloud SQL Connector"
                   } ],
@@ -487,32 +487,32 @@
                 "technology" : "Kubernetes Pod"
               }, {
                 "containerInstances" : [ {
-                  "containerId" : "63",
+                  "containerId" : "62",
                   "environment" : "Live GCP",
-                  "id" : "268",
+                  "id" : "262",
                   "instanceId" : 1,
                   "properties" : {
                     "structurizr.dsl.identifier" : "asmApiInstance"
                   },
                   "relationships" : [ {
                     "description" : "Stores and retrieves binaries, manifests, licenses, and certificates using ADC",
-                    "destinationId" : "282",
-                    "id" : "283",
-                    "linkedRelationshipId" : "108",
-                    "sourceId" : "268",
+                    "destinationId" : "276",
+                    "id" : "277",
+                    "linkedRelationshipId" : "105",
+                    "sourceId" : "262",
                     "technology" : "GCS API over HTTPS"
                   }, {
                     "description" : "Writes storage request and health logs",
-                    "destinationId" : "290",
-                    "id" : "298",
-                    "linkedRelationshipId" : "132",
-                    "sourceId" : "268",
+                    "destinationId" : "284",
+                    "id" : "292",
+                    "linkedRelationshipId" : "129",
+                    "sourceId" : "262",
                     "technology" : "stdout/stderr"
                   }, {
                     "description" : "Obtains short-lived credentials",
-                    "destinationId" : "274",
-                    "id" : "325",
-                    "sourceId" : "268",
+                    "destinationId" : "268",
+                    "id" : "319",
+                    "sourceId" : "262",
                     "tags" : "Relationship",
                     "technology" : "GKE metadata server"
                   } ],
@@ -520,20 +520,20 @@
                 } ],
                 "description" : "One replica using KSA asm-api mapped to GSA asm-api-demo.",
                 "environment" : "Live GCP",
-                "id" : "267",
+                "id" : "261",
                 "infrastructureNodes" : [ {
                   "description" : "Provides short-lived Application Default Credentials; no JSON key is mounted.",
                   "environment" : "Live GCP",
-                  "id" : "274",
+                  "id" : "268",
                   "name" : "Workload Identity / GKE metadata server",
                   "properties" : {
                     "structurizr.dsl.identifier" : "asmIdentity"
                   },
                   "relationships" : [ {
                     "description" : "Authorizes object administration",
-                    "destinationId" : "282",
-                    "id" : "326",
-                    "sourceId" : "274",
+                    "destinationId" : "276",
+                    "id" : "320",
+                    "sourceId" : "268",
                     "tags" : "Relationship",
                     "technology" : "Workload Identity, roles/storage.objectAdmin"
                   } ],
@@ -549,131 +549,131 @@
                 "technology" : "Kubernetes Pod"
               } ],
               "containerInstances" : [ {
-                "containerId" : "71",
+                "containerId" : "70",
                 "environment" : "Live GCP",
-                "id" : "222",
+                "id" : "216",
                 "instanceId" : 1,
                 "properties" : {
                   "structurizr.dsl.identifier" : "configInstance"
                 },
                 "relationships" : [ {
                   "description" : "Injects non-secret runtime configuration",
-                  "destinationId" : "225",
-                  "id" : "227",
-                  "linkedRelationshipId" : "111",
-                  "sourceId" : "222",
+                  "destinationId" : "219",
+                  "id" : "221",
+                  "linkedRelationshipId" : "108",
+                  "sourceId" : "216",
+                  "technology" : "Environment variables"
+                }, {
+                  "description" : "Injects non-secret runtime configuration",
+                  "destinationId" : "223",
+                  "id" : "225",
+                  "linkedRelationshipId" : "109",
+                  "sourceId" : "216",
                   "technology" : "Environment variables"
                 }, {
                   "description" : "Injects non-secret runtime configuration",
                   "destinationId" : "229",
                   "id" : "231",
-                  "linkedRelationshipId" : "112",
-                  "sourceId" : "222",
+                  "linkedRelationshipId" : "110",
+                  "sourceId" : "216",
                   "technology" : "Environment variables"
                 }, {
                   "description" : "Injects non-secret runtime configuration",
                   "destinationId" : "235",
-                  "id" : "237",
+                  "id" : "236",
+                  "linkedRelationshipId" : "111",
+                  "sourceId" : "216",
+                  "technology" : "Environment variables"
+                }, {
+                  "description" : "Injects non-secret runtime configuration",
+                  "destinationId" : "243",
+                  "id" : "244",
+                  "linkedRelationshipId" : "112",
+                  "sourceId" : "216",
+                  "technology" : "Environment variables"
+                }, {
+                  "description" : "Injects non-secret runtime configuration",
+                  "destinationId" : "250",
+                  "id" : "251",
                   "linkedRelationshipId" : "113",
-                  "sourceId" : "222",
+                  "sourceId" : "216",
                   "technology" : "Environment variables"
                 }, {
                   "description" : "Injects non-secret runtime configuration",
-                  "destinationId" : "241",
-                  "id" : "242",
+                  "destinationId" : "257",
+                  "id" : "258",
                   "linkedRelationshipId" : "114",
-                  "sourceId" : "222",
-                  "technology" : "Environment variables"
-                }, {
-                  "description" : "Injects non-secret runtime configuration",
-                  "destinationId" : "249",
-                  "id" : "250",
-                  "linkedRelationshipId" : "115",
-                  "sourceId" : "222",
-                  "technology" : "Environment variables"
-                }, {
-                  "description" : "Injects non-secret runtime configuration",
-                  "destinationId" : "256",
-                  "id" : "257",
-                  "linkedRelationshipId" : "116",
-                  "sourceId" : "222",
-                  "technology" : "Environment variables"
-                }, {
-                  "description" : "Injects non-secret runtime configuration",
-                  "destinationId" : "263",
-                  "id" : "264",
-                  "linkedRelationshipId" : "117",
-                  "sourceId" : "222",
+                  "sourceId" : "216",
                   "technology" : "Environment variables"
                 }, {
                   "description" : "Selects GCP/GCS and supplies bucket/project configuration",
-                  "destinationId" : "268",
-                  "id" : "269",
-                  "linkedRelationshipId" : "118",
-                  "sourceId" : "222",
+                  "destinationId" : "262",
+                  "id" : "263",
+                  "linkedRelationshipId" : "115",
+                  "sourceId" : "216",
                   "technology" : "Environment variables"
                 } ],
                 "tags" : "Container Instance"
               }, {
-                "containerId" : "72",
+                "containerId" : "71",
                 "environment" : "Live GCP",
-                "id" : "223",
+                "id" : "217",
                 "instanceId" : 1,
                 "properties" : {
                   "structurizr.dsl.identifier" : "secretsInstance"
                 },
                 "relationships" : [ {
                   "description" : "Injects the Auth client key",
-                  "destinationId" : "229",
-                  "id" : "232",
-                  "linkedRelationshipId" : "124",
-                  "sourceId" : "223",
+                  "destinationId" : "223",
+                  "id" : "226",
+                  "linkedRelationshipId" : "121",
+                  "sourceId" : "217",
                   "technology" : "Environment variable"
                 }, {
                   "description" : "Injects database, JWT, superadmin, and client-key secrets",
-                  "destinationId" : "241",
-                  "id" : "243",
-                  "linkedRelationshipId" : "119",
-                  "sourceId" : "223",
+                  "destinationId" : "235",
+                  "id" : "237",
+                  "linkedRelationshipId" : "116",
+                  "sourceId" : "217",
                   "technology" : "Environment variables"
                 }, {
                   "description" : "Injects database, JWT, internal API, and optional vector secrets",
-                  "destinationId" : "249",
-                  "id" : "251",
-                  "linkedRelationshipId" : "120",
-                  "sourceId" : "223",
+                  "destinationId" : "243",
+                  "id" : "245",
+                  "linkedRelationshipId" : "117",
+                  "sourceId" : "217",
                   "technology" : "Environment variables"
                 }, {
                   "description" : "Injects database, JWT, internal API, and SAP user secrets",
-                  "destinationId" : "256",
-                  "id" : "258",
-                  "linkedRelationshipId" : "121",
-                  "sourceId" : "223",
+                  "destinationId" : "250",
+                  "id" : "252",
+                  "linkedRelationshipId" : "118",
+                  "sourceId" : "217",
                   "technology" : "Environment variables"
                 }, {
-                  "description" : "Injects database, internal API, Salesforce user, and optional vector secrets",
-                  "destinationId" : "263",
-                  "id" : "265",
-                  "linkedRelationshipId" : "122",
-                  "sourceId" : "223",
+                  "description" : "Injects database, internal API, SuccessFactors managed-user, and optional vector secrets",
+                  "destinationId" : "257",
+                  "id" : "259",
+                  "linkedRelationshipId" : "119",
+                  "sourceId" : "217",
                   "technology" : "Environment variables"
                 }, {
                   "description" : "Injects the internal ASM API key",
-                  "destinationId" : "268",
-                  "id" : "270",
-                  "linkedRelationshipId" : "123",
-                  "sourceId" : "223",
+                  "destinationId" : "262",
+                  "id" : "264",
+                  "linkedRelationshipId" : "120",
+                  "sourceId" : "217",
                   "technology" : "Environment variables"
                 } ],
                 "tags" : "Container Instance"
               } ],
               "description" : "Helm release asm-plus-demo.",
               "environment" : "Live GCP",
-              "id" : "220",
+              "id" : "214",
               "infrastructureNodes" : [ {
                 "description" : "Renders and manages the ASM+ Kubernetes resources from the ecosystem chart and GCP values files.",
                 "environment" : "Live GCP",
-                "id" : "221",
+                "id" : "215",
                 "name" : "Helm Release: asm-plus-demo",
                 "properties" : {
                   "structurizr.dsl.identifier" : "helmRelease"
@@ -691,20 +691,20 @@
             } ],
             "description" : "Three observed e2-medium nodes with autoscaling configured at the node-pool level.",
             "environment" : "Live GCP",
-            "id" : "218",
+            "id" : "212",
             "infrastructureNodes" : [ {
               "description" : "Pulls images, runs containers, reports logs and metrics.",
               "environment" : "Live GCP",
-              "id" : "219",
+              "id" : "213",
               "name" : "Kubelet and containerd",
               "properties" : {
                 "structurizr.dsl.identifier" : "kubelet"
               },
               "relationships" : [ {
                 "description" : "Pulls OCI images",
-                "destinationId" : "288",
-                "id" : "327",
-                "sourceId" : "219",
+                "destinationId" : "282",
+                "id" : "321",
+                "sourceId" : "213",
                 "tags" : "Relationship",
                 "technology" : "HTTPS"
               } ],
@@ -721,7 +721,7 @@
           } ],
           "description" : "Zonal Standard cluster in us-east1-b; release channel Regular; Workload Identity enabled.",
           "environment" : "Live GCP",
-          "id" : "217",
+          "id" : "211",
           "instances" : "1",
           "name" : "GKE: asmplus-demo-gke",
           "properties" : {
@@ -732,7 +732,7 @@
         }, {
           "description" : "Private address 10.61.176.3; zonal db-g1-small; PostgreSQL 18; backups and 7-day PITR enabled.",
           "environment" : "Live GCP",
-          "id" : "275",
+          "id" : "269",
           "instances" : "1",
           "name" : "Cloud SQL: asmplus-demo-postgres",
           "properties" : {
@@ -740,12 +740,12 @@
           },
           "softwareSystemInstances" : [ {
             "environment" : "Live GCP",
-            "id" : "276",
+            "id" : "270",
             "instanceId" : 1,
             "properties" : {
               "structurizr.dsl.identifier" : "sqlInstance"
             },
-            "softwareSystemId" : "7",
+            "softwareSystemId" : "6",
             "tags" : "Software System Instance"
           } ],
           "tags" : "Element,Deployment Node,Managed Data,GCP Cloud SQL",
@@ -753,20 +753,20 @@
         } ],
         "description" : "Regional default subnet in us-east1; VPC-native Pod IP aliases.",
         "environment" : "Live GCP",
-        "id" : "214",
+        "id" : "208",
         "infrastructureNodes" : [ {
           "description" : "Active certificate asmplus-demo-certificate-v2 for all seven hostnames.",
           "environment" : "Live GCP",
-          "id" : "215",
+          "id" : "209",
           "name" : "Managed Certificate",
           "properties" : {
             "structurizr.dsl.identifier" : "managedCert"
           },
           "relationships" : [ {
             "description" : "Provides TLS certificate",
-            "destinationId" : "216",
-            "id" : "309",
-            "sourceId" : "215",
+            "destinationId" : "210",
+            "id" : "303",
+            "sourceId" : "209",
             "tags" : "Relationship",
             "technology" : "Google-managed TLS"
           } ],
@@ -775,58 +775,58 @@
         }, {
           "description" : "Static IPv4 34.36.209.159; HTTP redirects permanently to HTTPS.",
           "environment" : "Live GCP",
-          "id" : "216",
+          "id" : "210",
           "name" : "Global External Application Load Balancer",
           "properties" : {
             "structurizr.dsl.identifier" : "loadBalancer"
           },
           "relationships" : [ {
             "description" : "Routes auth.asmplus-demo.auritas.com",
-            "destinationId" : "225",
-            "id" : "310",
-            "sourceId" : "216",
+            "destinationId" : "219",
+            "id" : "304",
+            "sourceId" : "210",
             "tags" : "Relationship",
             "technology" : "HTTPS to NEG port 80"
           }, {
             "description" : "Routes api-auth.asmplus-demo.auritas.com",
-            "destinationId" : "241",
-            "id" : "311",
-            "sourceId" : "216",
+            "destinationId" : "235",
+            "id" : "305",
+            "sourceId" : "210",
             "tags" : "Relationship",
             "technology" : "HTTPS to NEG port 3000"
           }, {
             "description" : "Routes app.asmplus-demo.auritas.com",
-            "destinationId" : "229",
-            "id" : "312",
-            "sourceId" : "216",
+            "destinationId" : "223",
+            "id" : "306",
+            "sourceId" : "210",
             "tags" : "Relationship",
             "technology" : "HTTPS to NEG port 8080"
           }, {
             "description" : "Routes api-asm-plus.asmplus-demo.auritas.com",
-            "destinationId" : "249",
-            "id" : "313",
-            "sourceId" : "216",
+            "destinationId" : "243",
+            "id" : "307",
+            "sourceId" : "210",
             "tags" : "Relationship",
             "technology" : "HTTPS to NEG port 3000"
           }, {
             "description" : "Routes viewer.asmplus-demo.auritas.com",
-            "destinationId" : "235",
-            "id" : "314",
-            "sourceId" : "216",
+            "destinationId" : "229",
+            "id" : "308",
+            "sourceId" : "210",
             "tags" : "Relationship",
             "technology" : "HTTPS to NEG port 8080"
           }, {
             "description" : "Routes api-sap.asmplus-demo.auritas.com",
-            "destinationId" : "256",
-            "id" : "315",
-            "sourceId" : "216",
+            "destinationId" : "250",
+            "id" : "309",
+            "sourceId" : "210",
             "tags" : "Relationship",
             "technology" : "HTTPS to NEG port 3020"
           }, {
             "description" : "Routes api-sf.asmplus-demo.auritas.com",
-            "destinationId" : "263",
-            "id" : "316",
-            "sourceId" : "216",
+            "destinationId" : "257",
+            "id" : "310",
+            "sourceId" : "210",
             "tags" : "Relationship",
             "technology" : "HTTPS to NEG port 3030"
           } ],
@@ -843,7 +843,7 @@
       }, {
         "description" : "Regional private bucket with uniform access and public access prevention.",
         "environment" : "Live GCP",
-        "id" : "281",
+        "id" : "275",
         "instances" : "1",
         "name" : "Cloud Storage: sap-ecosystem-asmplus-asm-binaries",
         "properties" : {
@@ -851,12 +851,12 @@
         },
         "softwareSystemInstances" : [ {
           "environment" : "Live GCP",
-          "id" : "282",
+          "id" : "276",
           "instanceId" : 1,
           "properties" : {
             "structurizr.dsl.identifier" : "gcsInstance"
           },
-          "softwareSystemId" : "8",
+          "softwareSystemId" : "7",
           "tags" : "Software System Instance"
         } ],
         "tags" : "Element,Deployment Node,Managed Data,GCP Cloud Storage",
@@ -864,7 +864,7 @@
       }, {
         "description" : "Five observed core secret objects; Kubernetes secret also contains SAP/SF managed-user JSON.",
         "environment" : "Live GCP",
-        "id" : "284",
+        "id" : "278",
         "instances" : "1",
         "name" : "Secret Manager",
         "properties" : {
@@ -872,20 +872,20 @@
         },
         "softwareSystemInstances" : [ {
           "environment" : "Live GCP",
-          "id" : "285",
+          "id" : "279",
           "instanceId" : 1,
           "properties" : {
             "structurizr.dsl.identifier" : "secretManagerInstance"
           },
           "relationships" : [ {
             "description" : "Provides approved core secret material during provisioning",
-            "destinationId" : "223",
-            "id" : "286",
-            "linkedRelationshipId" : "109",
-            "sourceId" : "285",
+            "destinationId" : "217",
+            "id" : "280",
+            "linkedRelationshipId" : "106",
+            "sourceId" : "279",
             "technology" : "Administrative provisioning path"
           } ],
-          "softwareSystemId" : "9",
+          "softwareSystemId" : "8",
           "tags" : "Software System Instance"
         } ],
         "tags" : "Element,Deployment Node,Managed Security,GCP Secret Manager",
@@ -893,7 +893,7 @@
       }, {
         "description" : "Eight actively deployed image repositories/tags.",
         "environment" : "Live GCP",
-        "id" : "287",
+        "id" : "281",
         "instances" : "1",
         "name" : "Artifact Registry: asm-plus",
         "properties" : {
@@ -901,12 +901,12 @@
         },
         "softwareSystemInstances" : [ {
           "environment" : "Live GCP",
-          "id" : "288",
+          "id" : "282",
           "instanceId" : 1,
           "properties" : {
             "structurizr.dsl.identifier" : "artifactInstance"
           },
-          "softwareSystemId" : "10",
+          "softwareSystemId" : "9",
           "tags" : "Software System Instance"
         } ],
         "tags" : "Element,Deployment Node,Managed Delivery,GCP Artifact Registry",
@@ -914,7 +914,7 @@
       }, {
         "description" : "GKE workload/system logging, platform metrics, and Managed Service for Prometheus enabled.",
         "environment" : "Live GCP",
-        "id" : "289",
+        "id" : "283",
         "instances" : "1",
         "name" : "Cloud Operations",
         "properties" : {
@@ -922,78 +922,78 @@
         },
         "softwareSystemInstances" : [ {
           "environment" : "Live GCP",
-          "id" : "290",
+          "id" : "284",
           "instanceId" : 1,
           "properties" : {
             "structurizr.dsl.identifier" : "operationsInstance"
           },
-          "softwareSystemId" : "11",
+          "softwareSystemId" : "10",
           "tags" : "Software System Instance"
         }, {
           "environment" : "Live GCP",
-          "id" : "299",
+          "id" : "293",
           "instanceId" : 1,
           "properties" : {
             "structurizr.dsl.identifier" : "healthInstance"
           },
           "relationships" : [ {
             "description" : "Checks /health",
-            "destinationId" : "225",
-            "id" : "300",
-            "linkedRelationshipId" : "133",
-            "sourceId" : "299",
+            "destinationId" : "219",
+            "id" : "294",
+            "linkedRelationshipId" : "130",
+            "sourceId" : "293",
+            "technology" : "HTTP"
+          }, {
+            "description" : "Checks /health",
+            "destinationId" : "223",
+            "id" : "295",
+            "linkedRelationshipId" : "132",
+            "sourceId" : "293",
             "technology" : "HTTP"
           }, {
             "description" : "Checks /health",
             "destinationId" : "229",
-            "id" : "301",
-            "linkedRelationshipId" : "135",
-            "sourceId" : "299",
-            "technology" : "HTTP"
-          }, {
-            "description" : "Checks /health",
-            "destinationId" : "235",
-            "id" : "302",
-            "linkedRelationshipId" : "136",
-            "sourceId" : "299",
+            "id" : "296",
+            "linkedRelationshipId" : "133",
+            "sourceId" : "293",
             "technology" : "HTTP"
           }, {
             "description" : "Checks /health and /health/db",
-            "destinationId" : "241",
-            "id" : "303",
-            "linkedRelationshipId" : "137",
-            "sourceId" : "299",
+            "destinationId" : "235",
+            "id" : "297",
+            "linkedRelationshipId" : "134",
+            "sourceId" : "293",
             "technology" : "HTTP"
           }, {
             "description" : "Checks /health/live and /health/ready",
-            "destinationId" : "249",
-            "id" : "304",
-            "linkedRelationshipId" : "138",
-            "sourceId" : "299",
+            "destinationId" : "243",
+            "id" : "298",
+            "linkedRelationshipId" : "135",
+            "sourceId" : "293",
             "technology" : "HTTP"
           }, {
             "description" : "Checks /health",
-            "destinationId" : "256",
-            "id" : "305",
-            "linkedRelationshipId" : "139",
-            "sourceId" : "299",
+            "destinationId" : "250",
+            "id" : "299",
+            "linkedRelationshipId" : "136",
+            "sourceId" : "293",
             "technology" : "HTTP"
           }, {
             "description" : "Checks /health",
-            "destinationId" : "263",
-            "id" : "306",
-            "linkedRelationshipId" : "140",
-            "sourceId" : "299",
+            "destinationId" : "257",
+            "id" : "300",
+            "linkedRelationshipId" : "137",
+            "sourceId" : "293",
             "technology" : "HTTP"
           }, {
             "description" : "Checks /health and /ready",
-            "destinationId" : "268",
-            "id" : "307",
-            "linkedRelationshipId" : "141",
-            "sourceId" : "299",
+            "destinationId" : "262",
+            "id" : "301",
+            "linkedRelationshipId" : "138",
+            "sourceId" : "293",
             "technology" : "HTTP"
           } ],
-          "softwareSystemId" : "12",
+          "softwareSystemId" : "11",
           "tags" : "Software System Instance"
         } ],
         "tags" : "Element,Deployment Node,Managed Operations,GCP Cloud Monitoring",
@@ -1001,7 +1001,7 @@
       } ],
       "description" : "Live ASM+ Google Cloud project.",
       "environment" : "Live GCP",
-      "id" : "213",
+      "id" : "207",
       "instances" : "1",
       "name" : "GCP Project: sap-ecosystem-asmplus",
       "properties" : {
@@ -1019,29 +1019,29 @@
       },
       "relationships" : [ {
         "description" : "Uses document management and viewing capabilities",
-        "destinationId" : "13",
-        "id" : "73",
+        "destinationId" : "12",
+        "id" : "72",
         "sourceId" : "1",
         "tags" : "Relationship",
         "technology" : "HTTPS"
       }, {
         "description" : "Uses the main application",
-        "destinationId" : "19",
-        "id" : "82",
+        "destinationId" : "18",
+        "id" : "81",
         "sourceId" : "1",
         "tags" : "Relationship,Public HTTPS",
         "technology" : "HTTPS"
       }, {
         "description" : "Signs in and manages a profile",
-        "destinationId" : "14",
-        "id" : "83",
+        "destinationId" : "13",
+        "id" : "82",
         "sourceId" : "1",
         "tags" : "Relationship,Public HTTPS",
         "technology" : "HTTPS"
       }, {
         "description" : "Views document content",
-        "destinationId" : "26",
-        "id" : "84",
+        "destinationId" : "25",
+        "id" : "83",
         "sourceId" : "1",
         "tags" : "Relationship,Public HTTPS",
         "technology" : "HTTPS"
@@ -1056,22 +1056,22 @@
       },
       "relationships" : [ {
         "description" : "Administers application access and operations",
-        "destinationId" : "13",
-        "id" : "74",
+        "destinationId" : "12",
+        "id" : "73",
         "sourceId" : "2",
         "tags" : "Relationship",
         "technology" : "HTTPS and kubectl"
       }, {
         "description" : "Administers users, roles, applications, structures, and connections",
-        "destinationId" : "14",
-        "id" : "85",
+        "destinationId" : "13",
+        "id" : "84",
         "sourceId" : "2",
         "tags" : "Relationship,Public HTTPS",
         "technology" : "HTTPS"
       }, {
         "description" : "Inspects logs, metrics, and workload health",
-        "destinationId" : "11",
-        "id" : "86",
+        "destinationId" : "10",
+        "id" : "85",
         "sourceId" : "2",
         "tags" : "Relationship,Operations",
         "technology" : "Google Cloud Console and gcloud"
@@ -1088,81 +1088,57 @@
       },
       "relationships" : [ {
         "description" : "Stores and retrieves SAP documents",
-        "destinationId" : "13",
-        "id" : "75",
+        "destinationId" : "12",
+        "id" : "74",
         "sourceId" : "3",
         "tags" : "Relationship",
         "technology" : "ArchiveLink over HTTPS"
       }, {
         "description" : "Performs ArchiveLink operations",
-        "destinationId" : "47",
-        "id" : "87",
+        "destinationId" : "46",
+        "id" : "86",
         "sourceId" : "3",
         "tags" : "Relationship,Public HTTPS",
         "technology" : "HTTPS, Basic Auth or certificate"
       } ],
       "tags" : "Element,Software System,External System,SAP Official"
     }, {
-      "description" : "Calls the Salesforce document/repository integration and token endpoints.",
+      "description" : "Calls the SAP SuccessFactors document/repository integration and token endpoints.",
       "documentation" : { },
       "id" : "4",
-      "name" : "Salesforce",
+      "name" : "SAP SuccessFactors",
       "properties" : {
-        "structurizr.dsl.identifier" : "salesforce"
+        "structurizr.dsl.identifier" : "successFactors"
       },
       "relationships" : [ {
-        "description" : "Stores and retrieves Salesforce documents",
-        "destinationId" : "13",
-        "id" : "76",
+        "description" : "Stores and retrieves SAP SuccessFactors documents",
+        "destinationId" : "12",
+        "id" : "75",
         "sourceId" : "4",
         "tags" : "Relationship",
         "technology" : "REST over HTTPS"
       }, {
         "description" : "Requests tokens and performs repository/document operations",
-        "destinationId" : "55",
-        "id" : "88",
+        "destinationId" : "54",
+        "id" : "87",
         "sourceId" : "4",
         "tags" : "Relationship,Public HTTPS",
         "technology" : "HTTPS, OAuth/JWT"
       } ],
-      "tags" : "Element,Software System,External System"
-    }, {
-      "description" : "Optional SAML or Microsoft identity provider supported by Auth; active provider configuration was not verified.",
-      "documentation" : { },
-      "id" : "5",
-      "name" : "Enterprise Identity Provider",
-      "properties" : {
-        "structurizr.dsl.identifier" : "enterpriseIdp"
-      },
-      "relationships" : [ {
-        "description" : "Provides optional federated identity assertions",
-        "destinationId" : "32",
-        "id" : "89",
-        "sourceId" : "5",
-        "tags" : "Relationship,Optional",
-        "technology" : "SAML 2.0 or Microsoft identity"
-      }, {
-        "description" : "Provides optional federated identity assertions",
-        "destinationId" : "13",
-        "id" : "90",
-        "linkedRelationshipId" : "89",
-        "sourceId" : "5",
-        "technology" : "SAML 2.0 or Microsoft identity"
-      } ],
-      "tags" : "Element,Software System,Optional System"
+      "tags" : "Element,Software System,External System,SAP Official"
     }, {
       "description" : "Publishes seven A records under asmplus-demo.auritas.com.",
       "documentation" : { },
-      "id" : "6",
+      "id" : "5",
       "name" : "Auritas DNS",
       "properties" : {
         "structurizr.dsl.identifier" : "corporateDns"
       },
       "relationships" : [ {
         "description" : "Resolves seven public hostnames to 34.36.209.159",
-        "destinationId" : "13",
-        "id" : "81",
-        "sourceId" : "6",
+        "destinationId" : "12",
+        "id" : "80",
+        "sourceId" : "5",
         "tags" : "Relationship",
         "technology" : "DNS A records"
       } ],
@@ -1170,7 +1146,7 @@
     }, {
       "description" : "Private PostgreSQL 18 instance asmplus-demo-postgres; database auritasdemo contains 23 application tables.",
       "documentation" : { },
-      "id" : "7",
+      "id" : "6",
       "name" : "Cloud SQL for PostgreSQL",
       "properties" : {
         "structurizr.dsl.identifier" : "cloudSql"
@@ -1179,7 +1155,7 @@
     }, {
       "description" : "Private bucket sap-ecosystem-asmplus-asm-binaries stores document binaries and ASM manifests.",
       "documentation" : { },
-      "id" : "8",
+      "id" : "7",
       "name" : "Cloud Storage",
       "properties" : {
         "structurizr.dsl.identifier" : "gcs"
@@ -1188,40 +1164,40 @@
     }, {
       "description" : "Stores the five observed core secret objects; secret values are not represented in this model.",
       "documentation" : { },
-      "id" : "9",
+      "id" : "8",
       "name" : "Secret Manager",
       "properties" : {
         "structurizr.dsl.identifier" : "secretManager"
       },
       "relationships" : [ {
         "description" : "Provides approved core secret material during provisioning",
-        "destinationId" : "72",
-        "id" : "109",
-        "sourceId" : "9",
+        "destinationId" : "71",
+        "id" : "106",
+        "sourceId" : "8",
         "tags" : "Relationship,Secret Provisioning",
         "technology" : "Administrative provisioning path"
       }, {
         "description" : "Provides approved core secret material during provisioning",
-        "destinationId" : "13",
-        "id" : "110",
-        "linkedRelationshipId" : "109",
-        "sourceId" : "9",
+        "destinationId" : "12",
+        "id" : "107",
+        "linkedRelationshipId" : "106",
+        "sourceId" : "8",
         "technology" : "Administrative provisioning path"
       } ],
       "tags" : "Element,Software System,Secret Store,GCP Secret Manager"
     }, {
       "description" : "Repository us-east1-docker.pkg.dev/sap-ecosystem-asmplus/asm-plus stores the deployed images.",
       "documentation" : { },
-      "id" : "10",
+      "id" : "9",
       "name" : "Artifact Registry",
       "properties" : {
         "structurizr.dsl.identifier" : "artifactRegistry"
       },
       "relationships" : [ {
         "description" : "Supplies eight deployment images",
-        "destinationId" : "13",
-        "id" : "80",
-        "sourceId" : "10",
+        "destinationId" : "12",
+        "id" : "79",
+        "sourceId" : "9",
         "tags" : "Relationship",
         "technology" : "OCI image pull"
       } ],
@@ -1229,7 +1205,7 @@
     }, {
       "description" : "Receives GKE system/workload logs and platform metrics. No custom alert policies were observed.",
       "documentation" : { },
-      "id" : "11",
+      "id" : "10",
       "name" : "Cloud Logging and Monitoring",
       "properties" : {
         "structurizr.dsl.identifier" : "cloudOperations"
@@ -1238,72 +1214,72 @@
     }, {
       "description" : "Runs Kubernetes readiness and liveness probes and controls rollout availability.",
       "documentation" : { },
-      "id" : "12",
+      "id" : "11",
       "name" : "GKE Health Management",
       "properties" : {
         "structurizr.dsl.identifier" : "gkeHealth"
       },
       "relationships" : [ {
         "description" : "Checks /health",
-        "destinationId" : "14",
-        "id" : "133",
-        "sourceId" : "12",
-        "tags" : "Relationship,Health Check",
-        "technology" : "HTTP"
-      }, {
-        "description" : "Checks /health",
         "destinationId" : "13",
-        "id" : "134",
-        "linkedRelationshipId" : "133",
-        "sourceId" : "12",
-        "technology" : "HTTP"
-      }, {
-        "description" : "Checks /health",
-        "destinationId" : "19",
-        "id" : "135",
-        "sourceId" : "12",
+        "id" : "130",
+        "sourceId" : "11",
         "tags" : "Relationship,Health Check",
         "technology" : "HTTP"
       }, {
         "description" : "Checks /health",
-        "destinationId" : "26",
-        "id" : "136",
-        "sourceId" : "12",
+        "destinationId" : "12",
+        "id" : "131",
+        "linkedRelationshipId" : "130",
+        "sourceId" : "11",
+        "technology" : "HTTP"
+      }, {
+        "description" : "Checks /health",
+        "destinationId" : "18",
+        "id" : "132",
+        "sourceId" : "11",
+        "tags" : "Relationship,Health Check",
+        "technology" : "HTTP"
+      }, {
+        "description" : "Checks /health",
+        "destinationId" : "25",
+        "id" : "133",
+        "sourceId" : "11",
         "tags" : "Relationship,Health Check",
         "technology" : "HTTP"
       }, {
         "description" : "Checks /health and /health/db",
-        "destinationId" : "32",
-        "id" : "137",
-        "sourceId" : "12",
+        "destinationId" : "31",
+        "id" : "134",
+        "sourceId" : "11",
         "tags" : "Relationship,Health Check",
         "technology" : "HTTP"
       }, {
         "description" : "Checks /health/live and /health/ready",
-        "destinationId" : "38",
-        "id" : "138",
-        "sourceId" : "12",
+        "destinationId" : "37",
+        "id" : "135",
+        "sourceId" : "11",
         "tags" : "Relationship,Health Check",
         "technology" : "HTTP"
       }, {
         "description" : "Checks /health",
-        "destinationId" : "47",
-        "id" : "139",
-        "sourceId" : "12",
+        "destinationId" : "46",
+        "id" : "136",
+        "sourceId" : "11",
         "tags" : "Relationship,Health Check",
         "technology" : "HTTP"
       }, {
         "description" : "Checks /health",
-        "destinationId" : "55",
-        "id" : "140",
-        "sourceId" : "12",
+        "destinationId" : "54",
+        "id" : "137",
+        "sourceId" : "11",
         "tags" : "Relationship,Health Check",
         "technology" : "HTTP"
       }, {
         "description" : "Checks /health and /ready",
-        "destinationId" : "63",
-        "id" : "141",
-        "sourceId" : "12",
+        "destinationId" : "62",
+        "id" : "138",
+        "sourceId" : "11",
         "tags" : "Relationship,Health Check",
         "technology" : "HTTP"
       } ],
@@ -1313,16 +1289,16 @@
         "components" : [ {
           "description" : "Loads API_BASE_URL and UI settings from runtime-config.js.",
           "documentation" : { },
-          "id" : "15",
+          "id" : "14",
           "name" : "Runtime Configuration Loader",
           "properties" : {
             "structurizr.dsl.identifier" : "faRuntime"
           },
           "relationships" : [ {
             "description" : "Reads startup configuration",
-            "destinationId" : "71",
-            "id" : "142",
-            "sourceId" : "15",
+            "destinationId" : "70",
+            "id" : "139",
+            "sourceId" : "14",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Configuration",
@@ -1330,22 +1306,22 @@
         }, {
           "description" : "Routes login, users, roles, applications, structures, and connections pages.",
           "documentation" : { },
-          "id" : "16",
+          "id" : "15",
           "name" : "Portal Application",
           "properties" : {
             "structurizr.dsl.identifier" : "faApp"
           },
           "relationships" : [ {
             "description" : "Uses",
-            "destinationId" : "17",
-            "id" : "144",
-            "sourceId" : "16",
+            "destinationId" : "16",
+            "id" : "141",
+            "sourceId" : "15",
             "tags" : "Relationship"
           }, {
             "description" : "Uses",
-            "destinationId" : "18",
-            "id" : "145",
-            "sourceId" : "16",
+            "destinationId" : "17",
+            "id" : "142",
+            "sourceId" : "15",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Frontend Component",
@@ -1353,16 +1329,16 @@
         }, {
           "description" : "Maintains the JWT/session state and coordinates local, SAML, and Microsoft flows.",
           "documentation" : { },
-          "id" : "17",
+          "id" : "16",
           "name" : "Authentication and SSO Context",
           "properties" : {
             "structurizr.dsl.identifier" : "faAuthContext"
           },
           "relationships" : [ {
             "description" : "Authenticates through",
-            "destinationId" : "18",
-            "id" : "146",
-            "sourceId" : "17",
+            "destinationId" : "17",
+            "id" : "143",
+            "sourceId" : "16",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
@@ -1370,16 +1346,16 @@
         }, {
           "description" : "Calls authentication and administration endpoints.",
           "documentation" : { },
-          "id" : "18",
+          "id" : "17",
           "name" : "Auth API Client",
           "properties" : {
             "structurizr.dsl.identifier" : "faApiClient"
           },
           "relationships" : [ {
             "description" : "Calls",
-            "destinationId" : "32",
-            "id" : "147",
-            "sourceId" : "18",
+            "destinationId" : "31",
+            "id" : "144",
+            "sourceId" : "17",
             "tags" : "Relationship",
             "technology" : "HTTPS/JSON"
           } ],
@@ -1389,31 +1365,31 @@
         "description" : "Login, SSO, and access-administration web application.",
         "documentation" : { },
         "group" : "Web Experience",
-        "id" : "14",
+        "id" : "13",
         "name" : "Auth Portal",
         "properties" : {
           "structurizr.dsl.identifier" : "frontAuth"
         },
         "relationships" : [ {
           "description" : "Authenticates users and administers identity/access data",
-          "destinationId" : "32",
-          "id" : "91",
-          "sourceId" : "14",
+          "destinationId" : "31",
+          "id" : "88",
+          "sourceId" : "13",
           "tags" : "Relationship,Public HTTPS",
           "technology" : "HTTPS/JSON"
         }, {
           "description" : "Writes web-server logs",
-          "destinationId" : "11",
-          "id" : "125",
-          "sourceId" : "14",
+          "destinationId" : "10",
+          "id" : "122",
+          "sourceId" : "13",
           "tags" : "Relationship,Telemetry",
           "technology" : "stdout/stderr"
         }, {
           "description" : "Reads startup configuration",
-          "destinationId" : "71",
-          "id" : "143",
-          "linkedRelationshipId" : "142",
-          "sourceId" : "14"
+          "destinationId" : "70",
+          "id" : "140",
+          "linkedRelationshipId" : "139",
+          "sourceId" : "13"
         } ],
         "tags" : "Element,Container,Frontend",
         "technology" : "React, Vite, NGINX"
@@ -1421,16 +1397,16 @@
         "components" : [ {
           "description" : "Loads public endpoint URLs and feature switches from runtime-config.js.",
           "documentation" : { },
-          "id" : "20",
+          "id" : "19",
           "name" : "Runtime Configuration Loader",
           "properties" : {
             "structurizr.dsl.identifier" : "fpRuntime"
           },
           "relationships" : [ {
             "description" : "Reads startup configuration",
-            "destinationId" : "71",
-            "id" : "148",
-            "sourceId" : "20",
+            "destinationId" : "70",
+            "id" : "145",
+            "sourceId" : "19",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Configuration",
@@ -1438,22 +1414,22 @@
         }, {
           "description" : "Coordinates navigation, layouts, notifications, and error handling.",
           "documentation" : { },
-          "id" : "21",
+          "id" : "20",
           "name" : "Application Shell and Router",
           "properties" : {
             "structurizr.dsl.identifier" : "fpApp"
           },
           "relationships" : [ {
             "description" : "Uses",
-            "destinationId" : "22",
-            "id" : "150",
-            "sourceId" : "21",
+            "destinationId" : "21",
+            "id" : "147",
+            "sourceId" : "20",
             "tags" : "Relationship"
           }, {
             "description" : "Hosts",
-            "destinationId" : "23",
-            "id" : "151",
-            "sourceId" : "21",
+            "destinationId" : "22",
+            "id" : "148",
+            "sourceId" : "20",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Frontend Component",
@@ -1461,16 +1437,16 @@
         }, {
           "description" : "Processes SSO callbacks, retains the JWT, and applies client-side authorization.",
           "documentation" : { },
-          "id" : "22",
+          "id" : "21",
           "name" : "Authentication Context",
           "properties" : {
             "structurizr.dsl.identifier" : "fpAuth"
           },
           "relationships" : [ {
             "description" : "Authenticates and checks access",
-            "destinationId" : "32",
-            "id" : "154",
-            "sourceId" : "22",
+            "destinationId" : "31",
+            "id" : "151",
+            "sourceId" : "21",
             "tags" : "Relationship",
             "technology" : "HTTPS/JSON"
           } ],
@@ -1479,22 +1455,22 @@
         }, {
           "description" : "Implements folders, files, recycle bin, workflows, reports, audit, and search experiences.",
           "documentation" : { },
-          "id" : "23",
+          "id" : "22",
           "name" : "Document and Workflow UI",
           "properties" : {
             "structurizr.dsl.identifier" : "fpDocuments"
           },
           "relationships" : [ {
             "description" : "Uses",
-            "destinationId" : "24",
-            "id" : "152",
-            "sourceId" : "23",
+            "destinationId" : "23",
+            "id" : "149",
+            "sourceId" : "22",
             "tags" : "Relationship"
           }, {
             "description" : "Uses",
-            "destinationId" : "25",
-            "id" : "153",
-            "sourceId" : "23",
+            "destinationId" : "24",
+            "id" : "150",
+            "sourceId" : "22",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Frontend Component",
@@ -1502,16 +1478,16 @@
         }, {
           "description" : "Calls the ASM+ API and notification/workflow endpoints.",
           "documentation" : { },
-          "id" : "24",
+          "id" : "23",
           "name" : "ASM+ API Client",
           "properties" : {
             "structurizr.dsl.identifier" : "fpApiClient"
           },
           "relationships" : [ {
             "description" : "Calls",
-            "destinationId" : "38",
-            "id" : "155",
-            "sourceId" : "24",
+            "destinationId" : "37",
+            "id" : "152",
+            "sourceId" : "23",
             "tags" : "Relationship",
             "technology" : "HTTPS/JSON and binary"
           } ],
@@ -1520,16 +1496,16 @@
         }, {
           "description" : "Launches the document viewer with the selected document context.",
           "documentation" : { },
-          "id" : "25",
+          "id" : "24",
           "name" : "Viewer URL Builder",
           "properties" : {
             "structurizr.dsl.identifier" : "fpViewerLink"
           },
           "relationships" : [ {
             "description" : "Launches",
-            "destinationId" : "26",
-            "id" : "156",
-            "sourceId" : "25",
+            "destinationId" : "25",
+            "id" : "153",
+            "sourceId" : "24",
             "tags" : "Relationship",
             "technology" : "HTTPS"
           } ],
@@ -1539,52 +1515,52 @@
         "description" : "Primary document, workflow, report, search, and administration UI.",
         "documentation" : { },
         "group" : "Web Experience",
-        "id" : "19",
+        "id" : "18",
         "name" : "ASM+ Web Application",
         "properties" : {
           "structurizr.dsl.identifier" : "frontAsm"
         },
         "relationships" : [ {
           "description" : "Redirects the browser to the SSO portal",
-          "destinationId" : "14",
-          "id" : "92",
-          "sourceId" : "19",
+          "destinationId" : "13",
+          "id" : "89",
+          "sourceId" : "18",
           "tags" : "Relationship,Authentication",
           "technology" : "HTTPS"
         }, {
           "description" : "Authenticates and checks application access",
-          "destinationId" : "32",
-          "id" : "93",
-          "sourceId" : "19",
+          "destinationId" : "31",
+          "id" : "90",
+          "sourceId" : "18",
           "tags" : "Relationship,Public HTTPS",
           "technology" : "HTTPS/JSON, JWT"
         }, {
           "description" : "Performs document, workflow, report, search, and audit operations",
-          "destinationId" : "38",
-          "id" : "94",
-          "sourceId" : "19",
+          "destinationId" : "37",
+          "id" : "91",
+          "sourceId" : "18",
           "tags" : "Relationship,Public HTTPS",
           "technology" : "HTTPS/JSON and binary"
         }, {
           "description" : "Launches the selected document",
-          "destinationId" : "26",
-          "id" : "95",
-          "sourceId" : "19",
+          "destinationId" : "25",
+          "id" : "92",
+          "sourceId" : "18",
           "tags" : "Relationship,Public HTTPS",
           "technology" : "HTTPS"
         }, {
           "description" : "Writes web-server logs",
-          "destinationId" : "11",
-          "id" : "126",
-          "sourceId" : "19",
+          "destinationId" : "10",
+          "id" : "123",
+          "sourceId" : "18",
           "tags" : "Relationship,Telemetry",
           "technology" : "stdout/stderr"
         }, {
           "description" : "Reads startup configuration",
-          "destinationId" : "71",
-          "id" : "149",
-          "linkedRelationshipId" : "148",
-          "sourceId" : "19"
+          "destinationId" : "70",
+          "id" : "146",
+          "linkedRelationshipId" : "145",
+          "sourceId" : "18"
         } ],
         "tags" : "Element,Container,Frontend",
         "technology" : "React, Vite, Node static server"
@@ -1592,16 +1568,16 @@
         "components" : [ {
           "description" : "Loads Auth, ASM+, SAP, and optional OnlyOffice endpoints.",
           "documentation" : { },
-          "id" : "27",
+          "id" : "26",
           "name" : "Runtime Configuration Loader",
           "properties" : {
             "structurizr.dsl.identifier" : "vwRuntime"
           },
           "relationships" : [ {
             "description" : "Reads startup configuration",
-            "destinationId" : "71",
-            "id" : "157",
-            "sourceId" : "27",
+            "destinationId" : "70",
+            "id" : "154",
+            "sourceId" : "26",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Configuration",
@@ -1609,28 +1585,28 @@
         }, {
           "description" : "Validates route parameters and selects a viewer implementation.",
           "documentation" : { },
-          "id" : "28",
+          "id" : "27",
           "name" : "Viewer Shell and Parameter Parser",
           "properties" : {
             "structurizr.dsl.identifier" : "vwShell"
           },
           "relationships" : [ {
             "description" : "Uses",
-            "destinationId" : "29",
-            "id" : "159",
-            "sourceId" : "28",
+            "destinationId" : "28",
+            "id" : "156",
+            "sourceId" : "27",
             "tags" : "Relationship"
           }, {
             "description" : "Selects for supported content",
-            "destinationId" : "30",
-            "id" : "160",
-            "sourceId" : "28",
+            "destinationId" : "29",
+            "id" : "157",
+            "sourceId" : "27",
             "tags" : "Relationship"
           }, {
             "description" : "Selects when configured",
-            "destinationId" : "31",
-            "id" : "161",
-            "sourceId" : "28",
+            "destinationId" : "30",
+            "id" : "158",
+            "sourceId" : "27",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Frontend Component",
@@ -1638,23 +1614,23 @@
         }, {
           "description" : "Retrieves metadata and binary content from ASM+ or SAP APIs.",
           "documentation" : { },
-          "id" : "29",
+          "id" : "28",
           "name" : "Document API Client",
           "properties" : {
             "structurizr.dsl.identifier" : "vwDocumentApi"
           },
           "relationships" : [ {
             "description" : "Reads ASM+ documents",
-            "destinationId" : "38",
-            "id" : "162",
-            "sourceId" : "29",
+            "destinationId" : "37",
+            "id" : "159",
+            "sourceId" : "28",
             "tags" : "Relationship",
             "technology" : "HTTPS/JSON and range"
           }, {
             "description" : "Reads SAP documents",
-            "destinationId" : "47",
-            "id" : "163",
-            "sourceId" : "29",
+            "destinationId" : "46",
+            "id" : "160",
+            "sourceId" : "28",
             "tags" : "Relationship",
             "technology" : "HTTPS/ArchiveLink"
           } ],
@@ -1663,7 +1639,7 @@
         }, {
           "description" : "Renders supported non-Office content in the browser.",
           "documentation" : { },
-          "id" : "30",
+          "id" : "29",
           "name" : "Native Browser Viewer",
           "properties" : {
             "structurizr.dsl.identifier" : "vwNative"
@@ -1673,7 +1649,7 @@
         }, {
           "description" : "Optional Office document integration; endpoint is empty in the live configuration.",
           "documentation" : { },
-          "id" : "31",
+          "id" : "30",
           "name" : "OnlyOffice Adapter",
           "properties" : {
             "structurizr.dsl.identifier" : "vwOnlyOffice"
@@ -1684,52 +1660,52 @@
         "description" : "Displays files retrieved from ASM+ or SAP integration endpoints.",
         "documentation" : { },
         "group" : "Web Experience",
-        "id" : "26",
+        "id" : "25",
         "name" : "Document Viewer",
         "properties" : {
           "structurizr.dsl.identifier" : "viewer"
         },
         "relationships" : [ {
           "description" : "Redirects the browser to SSO when a session is absent",
-          "destinationId" : "14",
-          "id" : "96",
-          "sourceId" : "26",
+          "destinationId" : "13",
+          "id" : "93",
+          "sourceId" : "25",
           "tags" : "Relationship,Authentication",
           "technology" : "HTTPS"
         }, {
           "description" : "Validates authentication and application access",
-          "destinationId" : "32",
-          "id" : "97",
-          "sourceId" : "26",
+          "destinationId" : "31",
+          "id" : "94",
+          "sourceId" : "25",
           "tags" : "Relationship,Public HTTPS",
           "technology" : "HTTPS/JSON, JWT"
         }, {
           "description" : "Retrieves ASM+ metadata and file content",
-          "destinationId" : "38",
-          "id" : "98",
-          "sourceId" : "26",
+          "destinationId" : "37",
+          "id" : "95",
+          "sourceId" : "25",
           "tags" : "Relationship,Public HTTPS",
           "technology" : "HTTPS/JSON and HTTP range"
         }, {
           "description" : "Retrieves SAP-origin document components",
-          "destinationId" : "47",
-          "id" : "99",
-          "sourceId" : "26",
+          "destinationId" : "46",
+          "id" : "96",
+          "sourceId" : "25",
           "tags" : "Relationship,Public HTTPS",
           "technology" : "HTTPS/ArchiveLink"
         }, {
           "description" : "Writes web-server logs",
-          "destinationId" : "11",
-          "id" : "127",
-          "sourceId" : "26",
+          "destinationId" : "10",
+          "id" : "124",
+          "sourceId" : "25",
           "tags" : "Relationship,Telemetry",
           "technology" : "stdout/stderr"
         }, {
           "description" : "Reads startup configuration",
-          "destinationId" : "71",
-          "id" : "158",
-          "linkedRelationshipId" : "157",
-          "sourceId" : "26"
+          "destinationId" : "70",
+          "id" : "155",
+          "linkedRelationshipId" : "154",
+          "sourceId" : "25"
         } ],
         "tags" : "Element,Container,Frontend",
         "technology" : "React, Vite, Node static server"
@@ -1737,28 +1713,28 @@
         "components" : [ {
           "description" : "Exposes health, auth, users, roles, applications, structures, connections, directory, and access routes.",
           "documentation" : { },
-          "id" : "33",
+          "id" : "32",
           "name" : "HTTP Routes and OpenAPI",
           "properties" : {
             "structurizr.dsl.identifier" : "auHttp"
           },
           "relationships" : [ {
             "description" : "Delegates authentication",
-            "destinationId" : "34",
-            "id" : "164",
-            "sourceId" : "33",
+            "destinationId" : "33",
+            "id" : "161",
+            "sourceId" : "32",
             "tags" : "Relationship"
           }, {
             "description" : "Delegates administration and access",
-            "destinationId" : "35",
-            "id" : "165",
-            "sourceId" : "33",
+            "destinationId" : "34",
+            "id" : "162",
+            "sourceId" : "32",
             "tags" : "Relationship"
           }, {
             "description" : "Delegates SSO operations",
-            "destinationId" : "36",
-            "id" : "166",
-            "sourceId" : "33",
+            "destinationId" : "35",
+            "id" : "163",
+            "sourceId" : "32",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,API Surface",
@@ -1766,16 +1742,16 @@
         }, {
           "description" : "Verifies password hashes, enforces password policy, and signs JWTs.",
           "documentation" : { },
-          "id" : "34",
+          "id" : "33",
           "name" : "Authentication and JWT Service",
           "properties" : {
             "structurizr.dsl.identifier" : "auAuth"
           },
           "relationships" : [ {
             "description" : "Reads users and writes login state",
-            "destinationId" : "37",
-            "id" : "167",
-            "sourceId" : "34",
+            "destinationId" : "36",
+            "id" : "164",
+            "sourceId" : "33",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
@@ -1783,16 +1759,16 @@
         }, {
           "description" : "Manages users, applications, roles, structures, service connections, and generic access.",
           "documentation" : { },
-          "id" : "35",
+          "id" : "34",
           "name" : "Identity and Access Services",
           "properties" : {
             "structurizr.dsl.identifier" : "auAccess"
           },
           "relationships" : [ {
             "description" : "Reads and writes access data",
-            "destinationId" : "37",
-            "id" : "168",
-            "sourceId" : "35",
+            "destinationId" : "36",
+            "id" : "165",
+            "sourceId" : "34",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
@@ -1800,40 +1776,33 @@
         }, {
           "description" : "Stores SSO configuration and supports SAML and Microsoft identity flows.",
           "documentation" : { },
-          "id" : "36",
+          "id" : "35",
           "name" : "SSO Adapter",
           "properties" : {
             "structurizr.dsl.identifier" : "auSso"
           },
           "relationships" : [ {
             "description" : "Reads and writes SSO configuration",
-            "destinationId" : "37",
-            "id" : "169",
-            "sourceId" : "36",
+            "destinationId" : "36",
+            "id" : "166",
+            "sourceId" : "35",
             "tags" : "Relationship"
-          }, {
-            "description" : "Exchanges assertions when configured",
-            "destinationId" : "5",
-            "id" : "170",
-            "sourceId" : "36",
-            "tags" : "Relationship",
-            "technology" : "SAML/Microsoft"
           } ],
           "tags" : "Element,Component,Security Component",
           "technology" : "node-saml, Microsoft integration"
         }, {
           "description" : "Reads and writes Auth and access-control tables.",
           "documentation" : { },
-          "id" : "37",
+          "id" : "36",
           "name" : "PostgreSQL Adapter",
           "properties" : {
             "structurizr.dsl.identifier" : "auDb"
           },
           "relationships" : [ {
             "description" : "Queries",
-            "destinationId" : "7",
-            "id" : "173",
-            "sourceId" : "37",
+            "destinationId" : "6",
+            "id" : "167",
+            "sourceId" : "36",
             "tags" : "Relationship",
             "technology" : "PostgreSQL"
           } ],
@@ -1843,32 +1812,25 @@
         "description" : "Authenticates users, issues JWTs, and administers applications, roles, structures, SSO, and access.",
         "documentation" : { },
         "group" : "Application APIs",
-        "id" : "32",
+        "id" : "31",
         "name" : "Auth API",
         "properties" : {
           "structurizr.dsl.identifier" : "authApi"
         },
         "relationships" : [ {
           "description" : "Reads and writes identity and access tables through a local Cloud SQL Auth Proxy",
-          "destinationId" : "7",
-          "id" : "104",
-          "sourceId" : "32",
+          "destinationId" : "6",
+          "id" : "101",
+          "sourceId" : "31",
           "tags" : "Relationship,Database",
           "technology" : "PostgreSQL on 127.0.0.1:5432"
         }, {
           "description" : "Writes structured/application logs",
-          "destinationId" : "11",
-          "id" : "128",
-          "sourceId" : "32",
+          "destinationId" : "10",
+          "id" : "125",
+          "sourceId" : "31",
           "tags" : "Relationship,Telemetry",
           "technology" : "stdout/stderr"
-        }, {
-          "description" : "Exchanges assertions when configured",
-          "destinationId" : "5",
-          "id" : "171",
-          "linkedRelationshipId" : "170",
-          "sourceId" : "32",
-          "technology" : "SAML/Microsoft"
         } ],
         "tags" : "Element,Container,API",
         "technology" : "Node.js, TypeScript, Express; port 3000"
@@ -1876,34 +1838,34 @@
         "components" : [ {
           "description" : "Exposes file, folder, audit, workflow, report, RBAC, user, and metadata endpoints.",
           "documentation" : { },
-          "id" : "39",
+          "id" : "38",
           "name" : "Routes and Controllers",
           "properties" : {
             "structurizr.dsl.identifier" : "apHttp"
           },
           "relationships" : [ {
             "description" : "Applies authentication and authorization",
-            "destinationId" : "40",
-            "id" : "174",
-            "sourceId" : "39",
+            "destinationId" : "39",
+            "id" : "168",
+            "sourceId" : "38",
             "tags" : "Relationship"
           }, {
             "description" : "Applies license checks",
-            "destinationId" : "41",
-            "id" : "175",
-            "sourceId" : "39",
+            "destinationId" : "40",
+            "id" : "169",
+            "sourceId" : "38",
             "tags" : "Relationship"
           }, {
             "description" : "Delegates document and access operations",
-            "destinationId" : "42",
-            "id" : "176",
-            "sourceId" : "39",
+            "destinationId" : "41",
+            "id" : "170",
+            "sourceId" : "38",
             "tags" : "Relationship"
           }, {
             "description" : "Delegates search and reports",
-            "destinationId" : "43",
-            "id" : "177",
-            "sourceId" : "39",
+            "destinationId" : "42",
+            "id" : "171",
+            "sourceId" : "38",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,API Surface",
@@ -1911,16 +1873,16 @@
         }, {
           "description" : "Validates shared JWTs, role policy, folder capabilities, and service-user home scope.",
           "documentation" : { },
-          "id" : "40",
+          "id" : "39",
           "name" : "JWT and Authorization Middleware",
           "properties" : {
             "structurizr.dsl.identifier" : "apAuth"
           },
           "relationships" : [ {
             "description" : "Loads authorization context",
-            "destinationId" : "45",
-            "id" : "178",
-            "sourceId" : "40",
+            "destinationId" : "44",
+            "id" : "172",
+            "sourceId" : "39",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
@@ -1928,16 +1890,16 @@
         }, {
           "description" : "Blocks licensed operations when the shared ASM license is not valid.",
           "documentation" : { },
-          "id" : "41",
+          "id" : "40",
           "name" : "License Middleware",
           "properties" : {
             "structurizr.dsl.identifier" : "apLicense"
           },
           "relationships" : [ {
             "description" : "Checks the shared ASM license",
-            "destinationId" : "44",
-            "id" : "183",
-            "sourceId" : "41",
+            "destinationId" : "43",
+            "id" : "177",
+            "sourceId" : "40",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
@@ -1945,22 +1907,22 @@
         }, {
           "description" : "Coordinates folders, files, permissions, role groups, notifications, workflows, and audit.",
           "documentation" : { },
-          "id" : "42",
+          "id" : "41",
           "name" : "Document and Access Services",
           "properties" : {
             "structurizr.dsl.identifier" : "apDomain"
           },
           "relationships" : [ {
             "description" : "Reads and writes metadata",
-            "destinationId" : "45",
-            "id" : "179",
-            "sourceId" : "42",
+            "destinationId" : "44",
+            "id" : "173",
+            "sourceId" : "41",
             "tags" : "Relationship"
           }, {
             "description" : "Reads and writes binary objects",
-            "destinationId" : "44",
-            "id" : "180",
-            "sourceId" : "42",
+            "destinationId" : "43",
+            "id" : "174",
+            "sourceId" : "41",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -1968,22 +1930,22 @@
         }, {
           "description" : "Builds reports, durable summaries, and folder/search scopes.",
           "documentation" : { },
-          "id" : "43",
+          "id" : "42",
           "name" : "Search and Reporting Services",
           "properties" : {
             "structurizr.dsl.identifier" : "apReporting"
           },
           "relationships" : [ {
             "description" : "Queries and writes durable summaries",
-            "destinationId" : "45",
-            "id" : "181",
-            "sourceId" : "43",
+            "destinationId" : "44",
+            "id" : "175",
+            "sourceId" : "42",
             "tags" : "Relationship"
           }, {
             "description" : "Reads source objects when required",
-            "destinationId" : "44",
-            "id" : "182",
-            "sourceId" : "43",
+            "destinationId" : "43",
+            "id" : "176",
+            "sourceId" : "42",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Data Adapter",
@@ -1991,16 +1953,16 @@
         }, {
           "description" : "Delegates binary and manifest operations to asm-api with the internal API key.",
           "documentation" : { },
-          "id" : "44",
+          "id" : "43",
           "name" : "ASM Storage Client",
           "properties" : {
             "structurizr.dsl.identifier" : "apAsmClient"
           },
           "relationships" : [ {
             "description" : "Calls",
-            "destinationId" : "63",
-            "id" : "184",
-            "sourceId" : "44",
+            "destinationId" : "62",
+            "id" : "178",
+            "sourceId" : "43",
             "tags" : "Relationship",
             "technology" : "HTTP, X-Api-Key"
           } ],
@@ -2009,16 +1971,16 @@
         }, {
           "description" : "Reads and writes the 23-table application schema.",
           "documentation" : { },
-          "id" : "45",
+          "id" : "44",
           "name" : "PostgreSQL Adapter",
           "properties" : {
             "structurizr.dsl.identifier" : "apDb"
           },
           "relationships" : [ {
             "description" : "Queries",
-            "destinationId" : "7",
-            "id" : "185",
-            "sourceId" : "45",
+            "destinationId" : "6",
+            "id" : "179",
+            "sourceId" : "44",
             "tags" : "Relationship",
             "technology" : "PostgreSQL"
           } ],
@@ -2027,7 +1989,7 @@
         }, {
           "description" : "Optional indexing/reindexing adapter; VECTOR_API_URL is empty in the live deployment.",
           "documentation" : { },
-          "id" : "46",
+          "id" : "45",
           "name" : "Vector Integration Client",
           "properties" : {
             "structurizr.dsl.identifier" : "apVector"
@@ -2038,30 +2000,30 @@
         "description" : "Orchestrates document metadata, access, workflows, notifications, reports, audit, and binary operations.",
         "documentation" : { },
         "group" : "Application APIs",
-        "id" : "38",
+        "id" : "37",
         "name" : "ASM+ API",
         "properties" : {
           "structurizr.dsl.identifier" : "apiPlus"
         },
         "relationships" : [ {
           "description" : "Reads and writes document objects, manifests, licenses, and certificates",
-          "destinationId" : "63",
-          "id" : "101",
-          "sourceId" : "38",
+          "destinationId" : "62",
+          "id" : "98",
+          "sourceId" : "37",
           "tags" : "Relationship,Internal HTTP",
           "technology" : "HTTP/REST, X-Api-Key"
         }, {
           "description" : "Reads and writes document metadata, RBAC, workflow, audit, and reporting tables through a local proxy",
-          "destinationId" : "7",
-          "id" : "105",
-          "sourceId" : "38",
+          "destinationId" : "6",
+          "id" : "102",
+          "sourceId" : "37",
           "tags" : "Relationship,Database",
           "technology" : "PostgreSQL on 127.0.0.1:5432"
         }, {
           "description" : "Writes application logs",
-          "destinationId" : "11",
-          "id" : "129",
-          "sourceId" : "38",
+          "destinationId" : "10",
+          "id" : "126",
+          "sourceId" : "37",
           "tags" : "Relationship,Telemetry",
           "technology" : "stdout/stderr"
         } ],
@@ -2071,34 +2033,34 @@
         "components" : [ {
           "description" : "Exposes GET, PUT, and POST /api/sap plus health and administrative routes.",
           "documentation" : { },
-          "id" : "48",
+          "id" : "47",
           "name" : "ArchiveLink HTTP Interface",
           "properties" : {
             "structurizr.dsl.identifier" : "sapHttp"
           },
           "relationships" : [ {
             "description" : "Authenticates requests",
-            "destinationId" : "49",
-            "id" : "186",
-            "sourceId" : "48",
+            "destinationId" : "48",
+            "id" : "180",
+            "sourceId" : "47",
             "tags" : "Relationship"
           }, {
             "description" : "Persists successful operations",
-            "destinationId" : "50",
-            "id" : "187",
-            "sourceId" : "48",
+            "destinationId" : "49",
+            "id" : "181",
+            "sourceId" : "47",
             "tags" : "Relationship"
           }, {
             "description" : "Creates browser redirects when applicable",
-            "destinationId" : "51",
-            "id" : "188",
-            "sourceId" : "48",
+            "destinationId" : "50",
+            "id" : "182",
+            "sourceId" : "47",
             "tags" : "Relationship"
           }, {
             "description" : "Delegates document operations",
-            "destinationId" : "52",
-            "id" : "189",
-            "sourceId" : "48",
+            "destinationId" : "51",
+            "id" : "183",
+            "sourceId" : "47",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,API Surface",
@@ -2106,7 +2068,7 @@
         }, {
           "description" : "Validates Basic Auth, trusted service keys, and ArchiveLink certificates.",
           "documentation" : { },
-          "id" : "49",
+          "id" : "48",
           "name" : "SAP Authentication",
           "properties" : {
             "structurizr.dsl.identifier" : "sapAuth"
@@ -2116,16 +2078,16 @@
         }, {
           "description" : "Maps SAP systems, repositories, documents, and components into folders/files.",
           "documentation" : { },
-          "id" : "50",
+          "id" : "49",
           "name" : "SAP Metadata Persistence",
           "properties" : {
             "structurizr.dsl.identifier" : "sapPersistence"
           },
           "relationships" : [ {
             "description" : "Queries",
-            "destinationId" : "7",
-            "id" : "190",
-            "sourceId" : "50",
+            "destinationId" : "6",
+            "id" : "184",
+            "sourceId" : "49",
             "tags" : "Relationship",
             "technology" : "PostgreSQL"
           } ],
@@ -2134,16 +2096,16 @@
         }, {
           "description" : "Creates bounded HMAC viewer tokens and redirects browser launches to the Viewer.",
           "documentation" : { },
-          "id" : "51",
+          "id" : "50",
           "name" : "Viewer Token and Redirect Service",
           "properties" : {
             "structurizr.dsl.identifier" : "sapViewer"
           },
           "relationships" : [ {
             "description" : "Redirects",
-            "destinationId" : "26",
-            "id" : "192",
-            "sourceId" : "51",
+            "destinationId" : "25",
+            "id" : "186",
+            "sourceId" : "50",
             "tags" : "Relationship",
             "technology" : "HTTPS"
           } ],
@@ -2152,16 +2114,16 @@
         }, {
           "description" : "Delegates binary and certificate storage to asm-api.",
           "documentation" : { },
-          "id" : "52",
+          "id" : "51",
           "name" : "ASM Storage Client",
           "properties" : {
             "structurizr.dsl.identifier" : "sapAsmClient"
           },
           "relationships" : [ {
             "description" : "Calls",
-            "destinationId" : "63",
-            "id" : "191",
-            "sourceId" : "52",
+            "destinationId" : "62",
+            "id" : "185",
+            "sourceId" : "51",
             "tags" : "Relationship",
             "technology" : "HTTP, X-Api-Key"
           } ],
@@ -2170,16 +2132,16 @@
         }, {
           "description" : "Provides service-user, license, and certificate administration endpoints.",
           "documentation" : { },
-          "id" : "53",
+          "id" : "52",
           "name" : "SAP Management UI and Services",
           "properties" : {
             "structurizr.dsl.identifier" : "sapAdmin"
           },
           "relationships" : [ {
             "description" : "Stores managed objects",
-            "destinationId" : "52",
-            "id" : "193",
-            "sourceId" : "53",
+            "destinationId" : "51",
+            "id" : "187",
+            "sourceId" : "52",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Frontend Component",
@@ -2187,7 +2149,7 @@
         }, {
           "description" : "Optional indexing adapter; VECTOR_API_URL is empty in the live deployment.",
           "documentation" : { },
-          "id" : "54",
+          "id" : "53",
           "name" : "Vector Integration Client",
           "properties" : {
             "structurizr.dsl.identifier" : "sapVector"
@@ -2198,37 +2160,37 @@
         "description" : "Provides SAP ArchiveLink-compatible document operations and SAP viewer launch support.",
         "documentation" : { },
         "group" : "Application APIs",
-        "id" : "47",
+        "id" : "46",
         "name" : "SAP API",
         "properties" : {
           "structurizr.dsl.identifier" : "apiSap"
         },
         "relationships" : [ {
           "description" : "Redirects browser-origin SAP launch requests",
-          "destinationId" : "26",
-          "id" : "100",
-          "sourceId" : "47",
+          "destinationId" : "25",
+          "id" : "97",
+          "sourceId" : "46",
           "tags" : "Relationship,Public HTTPS",
           "technology" : "HTTPS with bounded viewer token"
         }, {
           "description" : "Reads and writes SAP document objects and certificates",
-          "destinationId" : "63",
-          "id" : "102",
-          "sourceId" : "47",
+          "destinationId" : "62",
+          "id" : "99",
+          "sourceId" : "46",
           "tags" : "Relationship,Internal HTTP",
           "technology" : "HTTP/REST, X-Api-Key"
         }, {
           "description" : "Persists SAP document hierarchy and metadata through a local proxy",
-          "destinationId" : "7",
-          "id" : "106",
-          "sourceId" : "47",
+          "destinationId" : "6",
+          "id" : "103",
+          "sourceId" : "46",
           "tags" : "Relationship,Database",
           "technology" : "PostgreSQL on 127.0.0.1:5432"
         }, {
           "description" : "Writes trace-aware integration logs",
-          "destinationId" : "11",
-          "id" : "130",
-          "sourceId" : "47",
+          "destinationId" : "10",
+          "id" : "127",
+          "sourceId" : "46",
           "tags" : "Relationship,Telemetry",
           "technology" : "stdout/stderr"
         } ],
@@ -2238,79 +2200,79 @@
         "components" : [ {
           "description" : "Exposes /api/sf document and repository operations.",
           "documentation" : { },
-          "id" : "56",
-          "name" : "Salesforce Document Interface",
+          "id" : "55",
+          "name" : "SuccessFactors Document Interface",
           "properties" : {
             "structurizr.dsl.identifier" : "sfHttp"
           },
           "relationships" : [ {
             "description" : "Validates access tokens",
-            "destinationId" : "57",
-            "id" : "194",
-            "sourceId" : "56",
+            "destinationId" : "56",
+            "id" : "188",
+            "sourceId" : "55",
             "tags" : "Relationship"
           }, {
             "description" : "Persists successful operations",
-            "destinationId" : "59",
-            "id" : "195",
-            "sourceId" : "56",
+            "destinationId" : "58",
+            "id" : "189",
+            "sourceId" : "55",
             "tags" : "Relationship"
           }, {
             "description" : "Delegates document operations",
-            "destinationId" : "60",
-            "id" : "196",
-            "sourceId" : "56",
+            "destinationId" : "59",
+            "id" : "190",
+            "sourceId" : "55",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,API Surface",
           "technology" : "Express, JSON and binary"
         }, {
-          "description" : "Issues bounded access tokens and validates managed Salesforce users.",
+          "description" : "Issues bounded access tokens and validates managed SuccessFactors users.",
           "documentation" : { },
-          "id" : "57",
+          "id" : "56",
           "name" : "OAuth and SAML Bearer Token Service",
           "properties" : {
             "structurizr.dsl.identifier" : "sfToken"
           },
           "relationships" : [ {
             "description" : "Validates managed users and keys",
-            "destinationId" : "58",
-            "id" : "197",
-            "sourceId" : "57",
+            "destinationId" : "57",
+            "id" : "191",
+            "sourceId" : "56",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
           "technology" : "JWT, OAuth 2.0, SAML bearer"
         }, {
-          "description" : "Manages Salesforce public keys and allowed repositories.",
+          "description" : "Manages SuccessFactors public keys and allowed repositories.",
           "documentation" : { },
-          "id" : "58",
+          "id" : "57",
           "name" : "Managed User Registry",
           "properties" : {
             "structurizr.dsl.identifier" : "sfUsers"
           },
           "relationships" : [ {
             "description" : "Stores or reads the managed-user registry",
-            "destinationId" : "60",
-            "id" : "198",
-            "sourceId" : "58",
+            "destinationId" : "59",
+            "id" : "192",
+            "sourceId" : "57",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
           "technology" : "TypeScript service"
         }, {
-          "description" : "Maps Salesforce repositories, documents, versions, and folders into folders/files.",
+          "description" : "Maps SuccessFactors repositories, documents, versions, and folders into folders/files.",
           "documentation" : { },
-          "id" : "59",
-          "name" : "Salesforce Metadata Persistence",
+          "id" : "58",
+          "name" : "SuccessFactors Metadata Persistence",
           "properties" : {
             "structurizr.dsl.identifier" : "sfPersistence"
           },
           "relationships" : [ {
             "description" : "Queries",
-            "destinationId" : "7",
-            "id" : "199",
-            "sourceId" : "59",
+            "destinationId" : "6",
+            "id" : "193",
+            "sourceId" : "58",
             "tags" : "Relationship",
             "technology" : "PostgreSQL"
           } ],
@@ -2319,16 +2281,16 @@
         }, {
           "description" : "Delegates document and registry objects to asm-api.",
           "documentation" : { },
-          "id" : "60",
+          "id" : "59",
           "name" : "ASM Storage Client",
           "properties" : {
             "structurizr.dsl.identifier" : "sfAsmClient"
           },
           "relationships" : [ {
             "description" : "Calls",
-            "destinationId" : "63",
-            "id" : "200",
-            "sourceId" : "60",
+            "destinationId" : "62",
+            "id" : "194",
+            "sourceId" : "59",
             "tags" : "Relationship",
             "technology" : "HTTP, X-Api-Key"
           } ],
@@ -2337,16 +2299,16 @@
         }, {
           "description" : "Provides managed-user and repository administration.",
           "documentation" : { },
-          "id" : "61",
-          "name" : "Salesforce Management UI",
+          "id" : "60",
+          "name" : "SuccessFactors Management UI",
           "properties" : {
             "structurizr.dsl.identifier" : "sfAdmin"
           },
           "relationships" : [ {
             "description" : "Manages",
-            "destinationId" : "58",
-            "id" : "201",
-            "sourceId" : "61",
+            "destinationId" : "57",
+            "id" : "195",
+            "sourceId" : "60",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Frontend Component",
@@ -2354,7 +2316,7 @@
         }, {
           "description" : "Optional indexing adapter; VECTOR_API_URL is empty in the live deployment.",
           "documentation" : { },
-          "id" : "62",
+          "id" : "61",
           "name" : "Vector Integration Client",
           "properties" : {
             "structurizr.dsl.identifier" : "sfVector"
@@ -2362,33 +2324,33 @@
           "tags" : "Element,Component,API Client",
           "technology" : "HTTP, optional"
         } ],
-        "description" : "Provides Salesforce repository/document operations and token issuance.",
+        "description" : "Provides SAP SuccessFactors repository/document operations and token issuance.",
         "documentation" : { },
         "group" : "Application APIs",
-        "id" : "55",
-        "name" : "Salesforce API",
+        "id" : "54",
+        "name" : "SAP SuccessFactors API",
         "properties" : {
           "structurizr.dsl.identifier" : "apiSf"
         },
         "relationships" : [ {
-          "description" : "Reads and writes Salesforce document and registry objects",
-          "destinationId" : "63",
-          "id" : "103",
-          "sourceId" : "55",
+          "description" : "Reads and writes SAP SuccessFactors document and registry objects",
+          "destinationId" : "62",
+          "id" : "100",
+          "sourceId" : "54",
           "tags" : "Relationship,Internal HTTP",
           "technology" : "HTTP/REST, X-Api-Key"
         }, {
-          "description" : "Persists Salesforce document hierarchy and metadata through a local proxy",
-          "destinationId" : "7",
-          "id" : "107",
-          "sourceId" : "55",
+          "description" : "Persists SAP SuccessFactors document hierarchy and metadata through a local proxy",
+          "destinationId" : "6",
+          "id" : "104",
+          "sourceId" : "54",
           "tags" : "Relationship,Database",
           "technology" : "PostgreSQL on 127.0.0.1:5432"
         }, {
           "description" : "Writes structured integration logs",
-          "destinationId" : "11",
-          "id" : "131",
-          "sourceId" : "55",
+          "destinationId" : "10",
+          "id" : "128",
+          "sourceId" : "54",
           "tags" : "Relationship,Telemetry",
           "technology" : "stdout/stderr"
         } ],
@@ -2398,22 +2360,22 @@
         "components" : [ {
           "description" : "Implements GET, PUT, and POST on /api/asm plus health, readiness, license, and certificate routes.",
           "documentation" : { },
-          "id" : "64",
+          "id" : "63",
           "name" : "ASM HTTP Contract",
           "properties" : {
             "structurizr.dsl.identifier" : "asHttp"
           },
           "relationships" : [ {
             "description" : "Authenticates storage requests",
-            "destinationId" : "65",
-            "id" : "202",
-            "sourceId" : "64",
+            "destinationId" : "64",
+            "id" : "196",
+            "sourceId" : "63",
             "tags" : "Relationship"
           }, {
             "description" : "Delegates certificate administration",
-            "destinationId" : "67",
-            "id" : "205",
-            "sourceId" : "64",
+            "destinationId" : "66",
+            "id" : "199",
+            "sourceId" : "63",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,API Surface",
@@ -2421,22 +2383,22 @@
         }, {
           "description" : "Requires X-Api-Key for storage operations.",
           "documentation" : { },
-          "id" : "65",
+          "id" : "64",
           "name" : "Internal API Key Guard",
           "properties" : {
             "structurizr.dsl.identifier" : "asKeyGuard"
           },
           "relationships" : [ {
             "description" : "Requires a valid license for writes",
-            "destinationId" : "66",
-            "id" : "203",
-            "sourceId" : "65",
+            "destinationId" : "65",
+            "id" : "197",
+            "sourceId" : "64",
             "tags" : "Relationship"
           }, {
             "description" : "Authorizes document operations",
-            "destinationId" : "68",
-            "id" : "204",
-            "sourceId" : "65",
+            "destinationId" : "67",
+            "id" : "198",
+            "sourceId" : "64",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
@@ -2444,16 +2406,16 @@
         }, {
           "description" : "Stores and validates the ASM license before write operations.",
           "documentation" : { },
-          "id" : "66",
+          "id" : "65",
           "name" : "License Service",
           "properties" : {
             "structurizr.dsl.identifier" : "asLicense"
           },
           "relationships" : [ {
             "description" : "Stores and reads the license",
-            "destinationId" : "69",
-            "id" : "206",
-            "sourceId" : "66",
+            "destinationId" : "68",
+            "id" : "200",
+            "sourceId" : "65",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
@@ -2461,16 +2423,16 @@
         }, {
           "description" : "Stores and manages ArchiveLink certificates.",
           "documentation" : { },
-          "id" : "67",
+          "id" : "66",
           "name" : "Certificate Store",
           "properties" : {
             "structurizr.dsl.identifier" : "asCertificate"
           },
           "relationships" : [ {
             "description" : "Stores and reads certificates",
-            "destinationId" : "69",
-            "id" : "207",
-            "sourceId" : "67",
+            "destinationId" : "68",
+            "id" : "201",
+            "sourceId" : "66",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Security Component",
@@ -2478,16 +2440,16 @@
         }, {
           "description" : "Maintains document manifests, versions, components, ranges, and optimistic concurrency.",
           "documentation" : { },
-          "id" : "68",
+          "id" : "67",
           "name" : "Document and Manifest Service",
           "properties" : {
             "structurizr.dsl.identifier" : "asDocument"
           },
           "relationships" : [ {
             "description" : "Stores and reads document objects and manifests",
-            "destinationId" : "69",
-            "id" : "208",
-            "sourceId" : "68",
+            "destinationId" : "68",
+            "id" : "202",
+            "sourceId" : "67",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Storage Adapter",
@@ -2495,16 +2457,16 @@
         }, {
           "description" : "Selects the configured storage provider and exposes a common object contract.",
           "documentation" : { },
-          "id" : "69",
+          "id" : "68",
           "name" : "Object Storage Abstraction",
           "properties" : {
             "structurizr.dsl.identifier" : "asStoragePort"
           },
           "relationships" : [ {
             "description" : "Selects when BTP_HYPERSCALER=GCP",
-            "destinationId" : "70",
-            "id" : "209",
-            "sourceId" : "69",
+            "destinationId" : "69",
+            "id" : "203",
+            "sourceId" : "68",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Storage Adapter",
@@ -2512,16 +2474,16 @@
         }, {
           "description" : "Uses @google-cloud/storage with Application Default Credentials and generation preconditions.",
           "documentation" : { },
-          "id" : "70",
+          "id" : "69",
           "name" : "GCS Repository",
           "properties" : {
             "structurizr.dsl.identifier" : "asGcs"
           },
           "relationships" : [ {
             "description" : "Uses Application Default Credentials",
-            "destinationId" : "8",
-            "id" : "210",
-            "sourceId" : "70",
+            "destinationId" : "7",
+            "id" : "204",
+            "sourceId" : "69",
             "tags" : "Relationship",
             "technology" : "GCS API over HTTPS"
           } ],
@@ -2531,23 +2493,23 @@
         "description" : "Internal storage service for document components, manifests, licenses, and certificates.",
         "documentation" : { },
         "group" : "Storage Core",
-        "id" : "63",
+        "id" : "62",
         "name" : "ASM Storage API",
         "properties" : {
           "structurizr.dsl.identifier" : "asmApi"
         },
         "relationships" : [ {
           "description" : "Stores and retrieves binaries, manifests, licenses, and certificates using ADC",
-          "destinationId" : "8",
-          "id" : "108",
-          "sourceId" : "63",
+          "destinationId" : "7",
+          "id" : "105",
+          "sourceId" : "62",
           "tags" : "Relationship,Object Storage",
           "technology" : "GCS API over HTTPS"
         }, {
           "description" : "Writes storage request and health logs",
-          "destinationId" : "11",
-          "id" : "132",
-          "sourceId" : "63",
+          "destinationId" : "10",
+          "id" : "129",
+          "sourceId" : "62",
           "tags" : "Relationship,Telemetry",
           "technology" : "stdout/stderr"
         } ],
@@ -2556,65 +2518,65 @@
       }, {
         "description" : "Non-secret environment configuration supplied by Kubernetes ConfigMaps.",
         "documentation" : { },
-        "id" : "71",
+        "id" : "70",
         "name" : "Runtime Configuration",
         "properties" : {
           "structurizr.dsl.identifier" : "runtimeConfig"
         },
         "relationships" : [ {
           "description" : "Injects non-secret runtime configuration",
-          "destinationId" : "14",
+          "destinationId" : "13",
+          "id" : "108",
+          "sourceId" : "70",
+          "tags" : "Relationship,Configuration",
+          "technology" : "Environment variables"
+        }, {
+          "description" : "Injects non-secret runtime configuration",
+          "destinationId" : "18",
+          "id" : "109",
+          "sourceId" : "70",
+          "tags" : "Relationship,Configuration",
+          "technology" : "Environment variables"
+        }, {
+          "description" : "Injects non-secret runtime configuration",
+          "destinationId" : "25",
+          "id" : "110",
+          "sourceId" : "70",
+          "tags" : "Relationship,Configuration",
+          "technology" : "Environment variables"
+        }, {
+          "description" : "Injects non-secret runtime configuration",
+          "destinationId" : "31",
           "id" : "111",
-          "sourceId" : "71",
+          "sourceId" : "70",
           "tags" : "Relationship,Configuration",
           "technology" : "Environment variables"
         }, {
           "description" : "Injects non-secret runtime configuration",
-          "destinationId" : "19",
+          "destinationId" : "37",
           "id" : "112",
-          "sourceId" : "71",
+          "sourceId" : "70",
           "tags" : "Relationship,Configuration",
           "technology" : "Environment variables"
         }, {
           "description" : "Injects non-secret runtime configuration",
-          "destinationId" : "26",
+          "destinationId" : "46",
           "id" : "113",
-          "sourceId" : "71",
+          "sourceId" : "70",
           "tags" : "Relationship,Configuration",
           "technology" : "Environment variables"
         }, {
           "description" : "Injects non-secret runtime configuration",
-          "destinationId" : "32",
+          "destinationId" : "54",
           "id" : "114",
-          "sourceId" : "71",
-          "tags" : "Relationship,Configuration",
-          "technology" : "Environment variables"
-        }, {
-          "description" : "Injects non-secret runtime configuration",
-          "destinationId" : "38",
-          "id" : "115",
-          "sourceId" : "71",
-          "tags" : "Relationship,Configuration",
-          "technology" : "Environment variables"
-        }, {
-          "description" : "Injects non-secret runtime configuration",
-          "destinationId" : "47",
-          "id" : "116",
-          "sourceId" : "71",
-          "tags" : "Relationship,Configuration",
-          "technology" : "Environment variables"
-        }, {
-          "description" : "Injects non-secret runtime configuration",
-          "destinationId" : "55",
-          "id" : "117",
-          "sourceId" : "71",
+          "sourceId" : "70",
           "tags" : "Relationship,Configuration",
           "technology" : "Environment variables"
         }, {
           "description" : "Selects GCP/GCS and supplies bucket/project configuration",
-          "destinationId" : "63",
-          "id" : "118",
-          "sourceId" : "71",
+          "destinationId" : "62",
+          "id" : "115",
+          "sourceId" : "70",
           "tags" : "Relationship,Configuration",
           "technology" : "Environment variables"
         } ],
@@ -2623,92 +2585,85 @@
       }, {
         "description" : "Namespace-scoped secret containing the seven keys observed in the live deployment; values are not modeled.",
         "documentation" : { },
-        "id" : "72",
+        "id" : "71",
         "name" : "Runtime Secrets",
         "properties" : {
           "structurizr.dsl.identifier" : "runtimeSecrets"
         },
         "relationships" : [ {
           "description" : "Injects database, JWT, superadmin, and client-key secrets",
-          "destinationId" : "32",
-          "id" : "119",
-          "sourceId" : "72",
+          "destinationId" : "31",
+          "id" : "116",
+          "sourceId" : "71",
           "tags" : "Relationship,Secret Injection",
           "technology" : "Environment variables"
         }, {
           "description" : "Injects database, JWT, internal API, and optional vector secrets",
-          "destinationId" : "38",
-          "id" : "120",
-          "sourceId" : "72",
+          "destinationId" : "37",
+          "id" : "117",
+          "sourceId" : "71",
           "tags" : "Relationship,Secret Injection",
           "technology" : "Environment variables"
         }, {
           "description" : "Injects database, JWT, internal API, and SAP user secrets",
-          "destinationId" : "47",
-          "id" : "121",
-          "sourceId" : "72",
+          "destinationId" : "46",
+          "id" : "118",
+          "sourceId" : "71",
           "tags" : "Relationship,Secret Injection",
           "technology" : "Environment variables"
         }, {
-          "description" : "Injects database, internal API, Salesforce user, and optional vector secrets",
-          "destinationId" : "55",
-          "id" : "122",
-          "sourceId" : "72",
+          "description" : "Injects database, internal API, SuccessFactors managed-user, and optional vector secrets",
+          "destinationId" : "54",
+          "id" : "119",
+          "sourceId" : "71",
           "tags" : "Relationship,Secret Injection",
           "technology" : "Environment variables"
         }, {
           "description" : "Injects the internal ASM API key",
-          "destinationId" : "63",
-          "id" : "123",
-          "sourceId" : "72",
+          "destinationId" : "62",
+          "id" : "120",
+          "sourceId" : "71",
           "tags" : "Relationship,Secret Injection",
           "technology" : "Environment variables"
         }, {
           "description" : "Injects the Auth client key",
-          "destinationId" : "19",
-          "id" : "124",
-          "sourceId" : "72",
+          "destinationId" : "18",
+          "id" : "121",
+          "sourceId" : "71",
           "tags" : "Relationship,Secret Injection",
           "technology" : "Environment variable"
         } ],
         "tags" : "Element,Container,Secret Store,Kubernetes",
         "technology" : "Kubernetes Opaque Secret"
       } ],
-      "description" : "Document management, authentication, viewing, and SAP/Salesforce integrations deployed on GKE.",
+      "description" : "Document management, authentication, viewing, and SAP ArchiveLink/SAP SuccessFactors integrations deployed on GKE.",
       "documentation" : { },
-      "id" : "13",
+      "id" : "12",
       "name" : "ASM+",
       "properties" : {
         "structurizr.dsl.identifier" : "asmPlus"
       },
       "relationships" : [ {
         "description" : "Stores application metadata",
-        "destinationId" : "7",
-        "id" : "77",
-        "sourceId" : "13",
+        "destinationId" : "6",
+        "id" : "76",
+        "sourceId" : "12",
         "tags" : "Relationship",
         "technology" : "PostgreSQL"
       }, {
         "description" : "Stores document binaries and manifests",
-        "destinationId" : "8",
-        "id" : "78",
-        "sourceId" : "13",
+        "destinationId" : "7",
+        "id" : "77",
+        "sourceId" : "12",
         "tags" : "Relationship",
         "technology" : "GCS JSON API over HTTPS"
       }, {
         "description" : "Emits workload logs and metrics",
-        "destinationId" : "11",
-        "id" : "79",
-        "sourceId" : "13",
+        "destinationId" : "10",
+        "id" : "78",
+        "sourceId" : "12",
         "tags" : "Relationship",
         "technology" : "Cloud Operations agents"
-      }, {
-        "description" : "Exchanges assertions when configured",
-        "destinationId" : "5",
-        "id" : "172",
-        "linkedRelationshipId" : "170",
-        "sourceId" : "13",
-        "technology" : "SAML/Microsoft"
       } ],
       "tags" : "Element,Software System,Core System"
     } ]
@@ -2724,15 +2679,19 @@
     "componentViews" : [ {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
+        "nodeSeparation" : 130,
         "rankDirection" : "LeftRight",
-        "rankSeparation" : 260,
+        "rankSeparation" : 160,
         "vertices" : true
       },
-      "containerId" : "63",
+      "containerId" : "62",
       "description" : "Internal structure of asm-api and its GCS adapter.",
       "elements" : [ {
-        "id" : "8",
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "63",
         "x" : 0,
         "y" : 0
       }, {
@@ -2759,47 +2718,47 @@
         "id" : "69",
         "x" : 0,
         "y" : 0
-      }, {
-        "id" : "70",
-        "x" : 0,
-        "y" : 0
       } ],
       "externalContainerBoundariesVisible" : false,
       "key" : "03a-component-asm-api",
       "name" : "Component View: ASM+ - ASM Storage API",
       "order" : 3,
       "relationships" : [ {
+        "id" : "196"
+      }, {
+        "id" : "197"
+      }, {
+        "id" : "198"
+      }, {
+        "id" : "199"
+      }, {
+        "id" : "200"
+      }, {
+        "id" : "201"
+      }, {
         "id" : "202"
       }, {
         "id" : "203"
       }, {
         "id" : "204"
-      }, {
-        "id" : "205"
-      }, {
-        "id" : "206"
-      }, {
-        "id" : "207"
-      }, {
-        "id" : "208"
-      }, {
-        "id" : "209"
-      }, {
-        "id" : "210"
       } ],
       "title" : "3A. Component Architecture - ASM Storage API"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 260,
+        "nodeSeparation" : 130,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 160,
         "vertices" : true
       },
-      "containerId" : "38",
+      "containerId" : "37",
       "description" : "Internal structure of the ASM+ orchestration API.",
       "elements" : [ {
-        "id" : "7",
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "38",
         "x" : 0,
         "y" : 0
       }, {
@@ -2831,11 +2790,7 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "46",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "63",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
@@ -2844,6 +2799,18 @@
       "name" : "Component View: ASM+ - ASM+ API",
       "order" : 4,
       "relationships" : [ {
+        "id" : "168"
+      }, {
+        "id" : "169"
+      }, {
+        "id" : "170"
+      }, {
+        "id" : "171"
+      }, {
+        "id" : "172"
+      }, {
+        "id" : "173"
+      }, {
         "id" : "174"
       }, {
         "id" : "175"
@@ -2855,36 +2822,24 @@
         "id" : "178"
       }, {
         "id" : "179"
-      }, {
-        "id" : "180"
-      }, {
-        "id" : "181"
-      }, {
-        "id" : "182"
-      }, {
-        "id" : "183"
-      }, {
-        "id" : "184"
-      }, {
-        "id" : "185"
       } ],
       "title" : "3B. Component Architecture - ASM+ API"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 260,
+        "nodeSeparation" : 130,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 160,
         "vertices" : true
       },
-      "containerId" : "32",
+      "containerId" : "31",
       "description" : "Internal structure of the Auth API.",
       "elements" : [ {
-        "id" : "5",
+        "id" : "6",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "7",
+        "id" : "32",
         "x" : 0,
         "y" : 0
       }, {
@@ -2903,16 +2858,18 @@
         "id" : "36",
         "x" : 0,
         "y" : 0
-      }, {
-        "id" : "37",
-        "x" : 0,
-        "y" : 0
       } ],
       "externalContainerBoundariesVisible" : false,
       "key" : "03c-component-api-auth",
       "name" : "Component View: ASM+ - Auth API",
       "order" : 5,
       "relationships" : [ {
+        "id" : "161"
+      }, {
+        "id" : "162"
+      }, {
+        "id" : "163"
+      }, {
         "id" : "164"
       }, {
         "id" : "165"
@@ -2920,32 +2877,28 @@
         "id" : "166"
       }, {
         "id" : "167"
-      }, {
-        "id" : "168"
-      }, {
-        "id" : "169"
-      }, {
-        "id" : "170"
-      }, {
-        "id" : "173"
       } ],
       "title" : "3C. Component Architecture - Auth API"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 260,
+        "nodeSeparation" : 130,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 160,
         "vertices" : true
       },
-      "containerId" : "47",
+      "containerId" : "46",
       "description" : "Internal structure of the SAP ArchiveLink integration.",
       "elements" : [ {
-        "id" : "7",
+        "id" : "6",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "26",
+        "id" : "25",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "47",
         "x" : 0,
         "y" : 0
       }, {
@@ -2973,11 +2926,7 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "54",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "63",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
@@ -2986,35 +2935,39 @@
       "name" : "Component View: ASM+ - SAP API",
       "order" : 6,
       "relationships" : [ {
+        "id" : "180"
+      }, {
+        "id" : "181"
+      }, {
+        "id" : "182"
+      }, {
+        "id" : "183"
+      }, {
+        "id" : "184"
+      }, {
+        "id" : "185"
+      }, {
         "id" : "186"
       }, {
         "id" : "187"
-      }, {
-        "id" : "188"
-      }, {
-        "id" : "189"
-      }, {
-        "id" : "190"
-      }, {
-        "id" : "191"
-      }, {
-        "id" : "192"
-      }, {
-        "id" : "193"
       } ],
       "title" : "3D. Component Architecture - SAP API"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
+        "nodeSeparation" : 130,
         "rankDirection" : "LeftRight",
-        "rankSeparation" : 260,
+        "rankSeparation" : 160,
         "vertices" : true
       },
-      "containerId" : "55",
-      "description" : "Internal structure of the Salesforce integration.",
+      "containerId" : "54",
+      "description" : "Internal structure of the SAP SuccessFactors integration.",
       "elements" : [ {
-        "id" : "7",
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "55",
         "x" : 0,
         "y" : 0
       }, {
@@ -3045,44 +2998,44 @@
         "id" : "62",
         "x" : 0,
         "y" : 0
-      }, {
-        "id" : "63",
-        "x" : 0,
-        "y" : 0
       } ],
       "externalContainerBoundariesVisible" : false,
       "key" : "03e-component-api-sf",
-      "name" : "Component View: ASM+ - Salesforce API",
+      "name" : "Component View: ASM+ - SAP SuccessFactors API",
       "order" : 7,
       "relationships" : [ {
+        "id" : "188"
+      }, {
+        "id" : "189"
+      }, {
+        "id" : "190"
+      }, {
+        "id" : "191"
+      }, {
+        "id" : "192"
+      }, {
+        "id" : "193"
+      }, {
         "id" : "194"
       }, {
         "id" : "195"
-      }, {
-        "id" : "196"
-      }, {
-        "id" : "197"
-      }, {
-        "id" : "198"
-      }, {
-        "id" : "199"
-      }, {
-        "id" : "200"
-      }, {
-        "id" : "201"
       } ],
-      "title" : "3E. Component Architecture - Salesforce API"
+      "title" : "3E. Component Architecture - SAP SuccessFactors API"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
+        "nodeSeparation" : 130,
         "rankDirection" : "LeftRight",
-        "rankSeparation" : 260,
+        "rankSeparation" : 160,
         "vertices" : true
       },
-      "containerId" : "19",
+      "containerId" : "18",
       "description" : "Internal structure of the main ASM+ web application.",
       "elements" : [ {
+        "id" : "19",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "20",
         "x" : 0,
         "y" : 0
@@ -3107,19 +3060,15 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "26",
+        "id" : "31",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "32",
+        "id" : "37",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "38",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "71",
+        "id" : "70",
         "x" : 0,
         "y" : 0
       } ],
@@ -3128,13 +3077,19 @@
       "name" : "Component View: ASM+ - ASM+ Web Application",
       "order" : 8,
       "relationships" : [ {
-        "id" : "113"
+        "id" : "110"
       }, {
-        "id" : "114"
+        "id" : "111"
       }, {
-        "id" : "115"
+        "id" : "112"
+      }, {
+        "id" : "145"
+      }, {
+        "id" : "147"
       }, {
         "id" : "148"
+      }, {
+        "id" : "149"
       }, {
         "id" : "150"
       }, {
@@ -3144,30 +3099,28 @@
       }, {
         "id" : "153"
       }, {
-        "id" : "154"
-      }, {
         "id" : "155"
       }, {
-        "id" : "156"
+        "id" : "94"
       }, {
-        "id" : "158"
-      }, {
-        "id" : "97"
-      }, {
-        "id" : "98"
+        "id" : "95"
       } ],
       "title" : "3F. Component Architecture - ASM+ Web Application"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
+        "nodeSeparation" : 130,
         "rankDirection" : "LeftRight",
-        "rankSeparation" : 260,
+        "rankSeparation" : 160,
         "vertices" : true
       },
-      "containerId" : "14",
+      "containerId" : "13",
       "description" : "Internal structure of the Auth Portal.",
       "elements" : [ {
+        "id" : "14",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "15",
         "x" : 0,
         "y" : 0
@@ -3180,15 +3133,11 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "18",
+        "id" : "31",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "32",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "71",
+        "id" : "70",
         "x" : 0,
         "y" : 0
       } ],
@@ -3197,30 +3146,34 @@
       "name" : "Component View: ASM+ - Auth Portal",
       "order" : 9,
       "relationships" : [ {
-        "id" : "114"
+        "id" : "111"
+      }, {
+        "id" : "139"
+      }, {
+        "id" : "141"
       }, {
         "id" : "142"
       }, {
+        "id" : "143"
+      }, {
         "id" : "144"
-      }, {
-        "id" : "145"
-      }, {
-        "id" : "146"
-      }, {
-        "id" : "147"
       } ],
       "title" : "3G. Component Architecture - Auth Portal"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 260,
+        "nodeSeparation" : 130,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 160,
         "vertices" : true
       },
-      "containerId" : "26",
+      "containerId" : "25",
       "description" : "Internal structure of the Document Viewer.",
       "elements" : [ {
+        "id" : "26",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "27",
         "x" : 0,
         "y" : 0
@@ -3237,19 +3190,15 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "31",
+        "id" : "37",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "38",
+        "id" : "46",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "47",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "71",
+        "id" : "70",
         "x" : 0,
         "y" : 0
       } ],
@@ -3258,21 +3207,21 @@
       "name" : "Component View: ASM+ - Document Viewer",
       "order" : 10,
       "relationships" : [ {
-        "id" : "115"
+        "id" : "112"
       }, {
-        "id" : "116"
+        "id" : "113"
+      }, {
+        "id" : "154"
+      }, {
+        "id" : "156"
       }, {
         "id" : "157"
+      }, {
+        "id" : "158"
       }, {
         "id" : "159"
       }, {
         "id" : "160"
-      }, {
-        "id" : "161"
-      }, {
-        "id" : "162"
-      }, {
-        "id" : "163"
       } ],
       "title" : "3H. Component Architecture - Document Viewer"
     } ],
@@ -3468,6 +3417,7 @@
           "icon" : "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTcyMDMzIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICA8cGF0aCBkPSJtOCA1LTUgNyA1IDciLz4KICA8cGF0aCBkPSJtMTYgNSA1IDctNSA3Ii8+CiAgPHBhdGggZD0ibTE0IDQtNCAxNiIvPgo8L3N2Zz4K",
           "shape" : "Hexagon",
           "stroke" : "#6d28d9",
+          "strokeWidth" : 6,
           "tag" : "Internal API"
         }, {
           "background" : "#ffffff",
@@ -3591,22 +3541,14 @@
     "containerViews" : [ {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 220,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 300,
+        "nodeSeparation" : 130,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 160,
         "vertices" : true
       },
       "description" : "The eight deployed workloads and their principal runtime dependencies.",
       "elements" : [ {
-        "id" : "1",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "3",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "4",
+        "id" : "6",
         "x" : 0,
         "y" : 0
       }, {
@@ -3614,47 +3556,35 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "8",
+        "id" : "13",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "14",
+        "id" : "18",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "19",
+        "id" : "25",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "26",
+        "id" : "31",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "32",
+        "id" : "37",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "38",
+        "id" : "46",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "47",
+        "id" : "54",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "55",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "63",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "71",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "72",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
@@ -3675,55 +3605,11 @@
       }, {
         "id" : "105"
       }, {
-        "id" : "106"
-      }, {
-        "id" : "107"
-      }, {
-        "id" : "108"
-      }, {
-        "id" : "111"
-      }, {
-        "id" : "112"
-      }, {
-        "id" : "113"
-      }, {
-        "id" : "114"
-      }, {
-        "id" : "115"
-      }, {
-        "id" : "116"
-      }, {
-        "id" : "117"
-      }, {
-        "id" : "118"
-      }, {
-        "id" : "119"
-      }, {
-        "id" : "120"
-      }, {
-        "id" : "121"
-      }, {
-        "id" : "122"
-      }, {
-        "id" : "123"
-      }, {
-        "id" : "124"
-      }, {
-        "id" : "143"
-      }, {
-        "id" : "149"
-      }, {
-        "id" : "158"
-      }, {
-        "id" : "82"
-      }, {
-        "id" : "83"
-      }, {
-        "id" : "84"
-      }, {
-        "id" : "87"
-      }, {
         "id" : "88"
+      }, {
+        "id" : "89"
+      }, {
+        "id" : "90"
       }, {
         "id" : "91"
       }, {
@@ -3743,14 +3629,14 @@
       }, {
         "id" : "99"
       } ],
-      "softwareSystemId" : "13",
+      "softwareSystemId" : "12",
       "title" : "2. Container and Microservices Architecture"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 220,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 320,
+        "nodeSeparation" : 150,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 180,
         "vertices" : true
       },
       "description" : "Public APIs, internal service calls, protocols, and external integrations.",
@@ -3767,39 +3653,35 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "5",
+        "id" : "13",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "14",
+        "id" : "18",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "19",
+        "id" : "25",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "26",
+        "id" : "31",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "32",
+        "id" : "37",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "38",
+        "id" : "46",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "47",
+        "id" : "54",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "55",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "63",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
@@ -3810,25 +3692,21 @@
       "relationships" : [ {
         "id" : "100"
       }, {
-        "id" : "101"
-      }, {
-        "id" : "102"
-      }, {
-        "id" : "103"
-      }, {
-        "id" : "171"
+        "id" : "81"
       }, {
         "id" : "82"
       }, {
         "id" : "83"
       }, {
-        "id" : "84"
+        "id" : "86"
       }, {
         "id" : "87"
       }, {
         "id" : "88"
       }, {
         "id" : "89"
+      }, {
+        "id" : "90"
       }, {
         "id" : "91"
       }, {
@@ -3848,43 +3726,43 @@
       }, {
         "id" : "99"
       } ],
-      "softwareSystemId" : "13",
+      "softwareSystemId" : "12",
       "title" : "4. API and Integration Architecture"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 240,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 320,
+        "nodeSeparation" : 140,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 170,
         "vertices" : true
       },
       "description" : "Metadata persistence and binary object flows.",
       "elements" : [ {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "7",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "8",
+        "id" : "31",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "32",
+        "id" : "37",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "38",
+        "id" : "46",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "47",
+        "id" : "54",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "55",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "63",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
@@ -3893,6 +3771,8 @@
       "name" : "Container View: ASM+",
       "order" : 12,
       "relationships" : [ {
+        "id" : "100"
+      }, {
         "id" : "101"
       }, {
         "id" : "102"
@@ -3903,20 +3783,18 @@
       }, {
         "id" : "105"
       }, {
-        "id" : "106"
+        "id" : "98"
       }, {
-        "id" : "107"
-      }, {
-        "id" : "108"
+        "id" : "99"
       } ],
-      "softwareSystemId" : "13",
+      "softwareSystemId" : "12",
       "title" : "5. Data Architecture"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 240,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 340,
+        "nodeSeparation" : 140,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 170,
         "vertices" : true
       },
       "description" : "Authentication, secret injection, Workload Identity, TLS, and protected data paths.",
@@ -3929,7 +3807,7 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "5",
+        "id" : "6",
         "x" : 0,
         "y" : 0
       }, {
@@ -3941,43 +3819,39 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "9",
+        "id" : "13",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "14",
+        "id" : "18",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "19",
+        "id" : "25",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "26",
+        "id" : "31",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "32",
+        "id" : "37",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "38",
+        "id" : "46",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "47",
+        "id" : "54",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "55",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "63",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "72",
+        "id" : "71",
         "x" : 0,
         "y" : 0
       } ],
@@ -4000,11 +3874,11 @@
       }, {
         "id" : "106"
       }, {
-        "id" : "107"
+        "id" : "116"
       }, {
-        "id" : "108"
+        "id" : "117"
       }, {
-        "id" : "109"
+        "id" : "118"
       }, {
         "id" : "119"
       }, {
@@ -4012,13 +3886,7 @@
       }, {
         "id" : "121"
       }, {
-        "id" : "122"
-      }, {
-        "id" : "123"
-      }, {
-        "id" : "124"
-      }, {
-        "id" : "171"
+        "id" : "81"
       }, {
         "id" : "82"
       }, {
@@ -4026,9 +3894,11 @@
       }, {
         "id" : "84"
       }, {
-        "id" : "85"
+        "id" : "88"
       }, {
         "id" : "89"
+      }, {
+        "id" : "90"
       }, {
         "id" : "91"
       }, {
@@ -4048,14 +3918,14 @@
       }, {
         "id" : "99"
       } ],
-      "softwareSystemId" : "13",
+      "softwareSystemId" : "12",
       "title" : "8. Security Architecture"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 220,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 340,
+        "nodeSeparation" : 140,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 170,
         "vertices" : true
       },
       "description" : "Health probes, workload logs, platform metrics, and the current monitoring boundary.",
@@ -4064,43 +3934,43 @@
         "x" : 0,
         "y" : 0
       }, {
+        "id" : "10",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "11",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "12",
+        "id" : "13",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "14",
+        "id" : "18",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "19",
+        "id" : "25",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "26",
+        "id" : "31",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "32",
+        "id" : "37",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "38",
+        "id" : "46",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "47",
+        "id" : "54",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "55",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "63",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
@@ -4111,11 +3981,11 @@
       "relationships" : [ {
         "id" : "100"
       }, {
-        "id" : "101"
+        "id" : "122"
       }, {
-        "id" : "102"
+        "id" : "123"
       }, {
-        "id" : "103"
+        "id" : "124"
       }, {
         "id" : "125"
       }, {
@@ -4129,11 +3999,11 @@
       }, {
         "id" : "130"
       }, {
-        "id" : "131"
-      }, {
         "id" : "132"
       }, {
         "id" : "133"
+      }, {
+        "id" : "134"
       }, {
         "id" : "135"
       }, {
@@ -4143,15 +4013,15 @@
       }, {
         "id" : "138"
       }, {
-        "id" : "139"
-      }, {
-        "id" : "140"
-      }, {
-        "id" : "141"
+        "id" : "84"
       }, {
         "id" : "85"
       }, {
-        "id" : "86"
+        "id" : "88"
+      }, {
+        "id" : "89"
+      }, {
+        "id" : "90"
       }, {
         "id" : "91"
       }, {
@@ -4171,19 +4041,43 @@
       }, {
         "id" : "99"
       } ],
-      "softwareSystemId" : "13",
+      "softwareSystemId" : "12",
       "title" : "10. Observability Architecture"
     } ],
     "deploymentViews" : [ {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 240,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 320,
+        "nodeSeparation" : 130,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 160,
         "vertices" : true
       },
       "description" : "Physical deployment of ASM+ in the live Google Cloud project.",
       "elements" : [ {
+        "id" : "205",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "206",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "207",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "208",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "209",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "210",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "211",
         "x" : 0,
         "y" : 0
@@ -4220,27 +4114,11 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "220",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "221",
-        "x" : 0,
-        "y" : 0
-      }, {
         "id" : "222",
         "x" : 0,
         "y" : 0
       }, {
         "id" : "223",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "224",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "225",
         "x" : 0,
         "y" : 0
       }, {
@@ -4260,15 +4138,15 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "240",
-        "x" : 0,
-        "y" : 0
-      }, {
         "id" : "241",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "247",
+        "id" : "242",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "243",
         "x" : 0,
         "y" : 0
       }, {
@@ -4280,7 +4158,7 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "254",
+        "id" : "250",
         "x" : 0,
         "y" : 0
       }, {
@@ -4292,6 +4170,14 @@
         "x" : 0,
         "y" : 0
       }, {
+        "id" : "257",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "260",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "261",
         "x" : 0,
         "y" : 0
@@ -4300,23 +4186,15 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "263",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "266",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "267",
-        "x" : 0,
-        "y" : 0
-      }, {
         "id" : "268",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "274",
+        "id" : "269",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "270",
         "x" : 0,
         "y" : 0
       }, {
@@ -4328,6 +4206,14 @@
         "x" : 0,
         "y" : 0
       }, {
+        "id" : "278",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "279",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "281",
         "x" : 0,
         "y" : 0
@@ -4336,31 +4222,15 @@
         "x" : 0,
         "y" : 0
       }, {
+        "id" : "283",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "284",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "285",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "287",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "288",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "289",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "290",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "299",
+        "id" : "293",
         "x" : 0,
         "y" : 0
       } ],
@@ -4369,6 +4239,14 @@
       "name" : "Deployment View: Live GCP",
       "order" : 13,
       "relationships" : [ {
+        "id" : "220"
+      }, {
+        "id" : "221"
+      }, {
+        "id" : "224"
+      }, {
+        "id" : "225"
+      }, {
         "id" : "226"
       }, {
         "id" : "227"
@@ -4389,9 +4267,7 @@
       }, {
         "id" : "239"
       }, {
-        "id" : "242"
-      }, {
-        "id" : "243"
+        "id" : "240"
       }, {
         "id" : "244"
       }, {
@@ -4399,7 +4275,7 @@
       }, {
         "id" : "246"
       }, {
-        "id" : "250"
+        "id" : "247"
       }, {
         "id" : "251"
       }, {
@@ -4407,21 +4283,21 @@
       }, {
         "id" : "253"
       }, {
-        "id" : "257"
+        "id" : "254"
       }, {
         "id" : "258"
       }, {
         "id" : "259"
       }, {
-        "id" : "260"
+        "id" : "263"
       }, {
         "id" : "264"
       }, {
         "id" : "265"
       }, {
-        "id" : "269"
+        "id" : "266"
       }, {
-        "id" : "270"
+        "id" : "267"
       }, {
         "id" : "271"
       }, {
@@ -4429,23 +4305,27 @@
       }, {
         "id" : "273"
       }, {
+        "id" : "274"
+      }, {
         "id" : "277"
-      }, {
-        "id" : "278"
-      }, {
-        "id" : "279"
       }, {
         "id" : "280"
       }, {
-        "id" : "283"
+        "id" : "285"
       }, {
         "id" : "286"
+      }, {
+        "id" : "287"
+      }, {
+        "id" : "288"
+      }, {
+        "id" : "289"
+      }, {
+        "id" : "290"
       }, {
         "id" : "291"
       }, {
         "id" : "292"
-      }, {
-        "id" : "293"
       }, {
         "id" : "294"
       }, {
@@ -4456,6 +4336,8 @@
         "id" : "297"
       }, {
         "id" : "298"
+      }, {
+        "id" : "299"
       }, {
         "id" : "300"
       }, {
@@ -4500,30 +4382,42 @@
         "id" : "320"
       }, {
         "id" : "321"
-      }, {
-        "id" : "322"
-      }, {
-        "id" : "323"
-      }, {
-        "id" : "324"
-      }, {
-        "id" : "325"
-      }, {
-        "id" : "326"
-      }, {
-        "id" : "327"
       } ],
       "title" : "6. Deployment Architecture"
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 280,
-        "rankDirection" : "LeftRight",
-        "rankSeparation" : 380,
+        "nodeSeparation" : 130,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 160,
         "vertices" : true
       },
       "description" : "Public ingress, VPC, GKE services, sidecars, and private managed-service paths.",
       "elements" : [ {
+        "id" : "205",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "206",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "207",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "208",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "209",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "210",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "211",
         "x" : 0,
         "y" : 0
@@ -4532,23 +4426,7 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "213",
-        "x" : 0,
-        "y" : 0
-      }, {
         "id" : "214",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "215",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "216",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "217",
         "x" : 0,
         "y" : 0
       }, {
@@ -4556,15 +4434,15 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "220",
+        "id" : "219",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "224",
+        "id" : "222",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "225",
+        "id" : "223",
         "x" : 0,
         "y" : 0
       }, {
@@ -4584,15 +4462,15 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "240",
-        "x" : 0,
-        "y" : 0
-      }, {
         "id" : "241",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "247",
+        "id" : "242",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "243",
         "x" : 0,
         "y" : 0
       }, {
@@ -4604,7 +4482,7 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "254",
+        "id" : "250",
         "x" : 0,
         "y" : 0
       }, {
@@ -4616,6 +4494,14 @@
         "x" : 0,
         "y" : 0
       }, {
+        "id" : "257",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "260",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "261",
         "x" : 0,
         "y" : 0
@@ -4624,19 +4510,11 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "263",
+        "id" : "269",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "266",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "267",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "268",
+        "id" : "270",
         "x" : 0,
         "y" : 0
       }, {
@@ -4647,39 +4525,37 @@
         "id" : "276",
         "x" : 0,
         "y" : 0
-      }, {
-        "id" : "281",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "282",
-        "x" : 0,
-        "y" : 0
       } ],
       "environment" : "Live GCP",
       "key" : "07-network-architecture",
       "name" : "Deployment View: Live GCP",
       "order" : 14,
       "relationships" : [ {
+        "id" : "227"
+      }, {
+        "id" : "232"
+      }, {
         "id" : "233"
       }, {
         "id" : "238"
       }, {
         "id" : "239"
       }, {
-        "id" : "244"
-      }, {
-        "id" : "245"
+        "id" : "240"
       }, {
         "id" : "246"
       }, {
-        "id" : "252"
+        "id" : "247"
       }, {
         "id" : "253"
       }, {
-        "id" : "259"
+        "id" : "254"
       }, {
-        "id" : "260"
+        "id" : "265"
+      }, {
+        "id" : "266"
+      }, {
+        "id" : "267"
       }, {
         "id" : "271"
       }, {
@@ -4687,15 +4563,21 @@
       }, {
         "id" : "273"
       }, {
+        "id" : "274"
+      }, {
         "id" : "277"
       }, {
-        "id" : "278"
+        "id" : "302"
       }, {
-        "id" : "279"
+        "id" : "303"
       }, {
-        "id" : "280"
+        "id" : "304"
       }, {
-        "id" : "283"
+        "id" : "305"
+      }, {
+        "id" : "306"
+      }, {
+        "id" : "307"
       }, {
         "id" : "308"
       }, {
@@ -4718,49 +4600,37 @@
         "id" : "317"
       }, {
         "id" : "318"
-      }, {
-        "id" : "319"
-      }, {
-        "id" : "320"
-      }, {
-        "id" : "321"
-      }, {
-        "id" : "322"
-      }, {
-        "id" : "323"
-      }, {
-        "id" : "324"
       } ],
       "title" : "7. Network Architecture"
     } ],
     "dynamicViews" : [ {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
+        "nodeSeparation" : 110,
         "rankDirection" : "LeftRight",
-        "rankSeparation" : 280,
+        "rankSeparation" : 130,
         "vertices" : true
       },
       "description" : "Interactive SSO login and callback flow.",
-      "elementId" : "13",
+      "elementId" : "12",
       "elements" : [ {
         "id" : "1",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "7",
+        "id" : "6",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "14",
+        "id" : "13",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "19",
+        "id" : "18",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "32",
+        "id" : "31",
         "x" : 0,
         "y" : 0
       } ],
@@ -4770,37 +4640,37 @@
       "order" : 16,
       "relationships" : [ {
         "description" : "Opens the application",
-        "id" : "82",
+        "id" : "81",
         "order" : "1",
         "response" : false
       }, {
         "description" : "Redirects to /sso with callback URL",
-        "id" : "92",
+        "id" : "89",
         "order" : "2",
         "response" : false
       }, {
         "description" : "Submits credentials or starts configured federation",
-        "id" : "83",
+        "id" : "82",
         "order" : "3",
         "response" : false
       }, {
         "description" : "Authenticates and requests an application token",
-        "id" : "91",
+        "id" : "88",
         "order" : "4",
         "response" : false
       }, {
         "description" : "Validates user and application access",
-        "id" : "104",
+        "id" : "101",
         "order" : "5",
         "response" : false
       }, {
         "description" : "Returns to /sso/callback with the token",
-        "id" : "82",
+        "id" : "81",
         "order" : "6",
         "response" : false
       }, {
         "description" : "Loads identity and access context",
-        "id" : "93",
+        "id" : "90",
         "order" : "7",
         "response" : false
       } ],
@@ -4808,15 +4678,19 @@
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
+        "nodeSeparation" : 110,
         "rankDirection" : "LeftRight",
-        "rankSeparation" : 280,
+        "rankSeparation" : 130,
         "vertices" : true
       },
       "description" : "Folder creation and document upload flow.",
-      "elementId" : "13",
+      "elementId" : "12",
       "elements" : [ {
         "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
         "x" : 0,
         "y" : 0
       }, {
@@ -4824,19 +4698,15 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "8",
+        "id" : "18",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "19",
+        "id" : "37",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "38",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "63",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
@@ -4846,32 +4716,32 @@
       "order" : 17,
       "relationships" : [ {
         "description" : "Selects a folder and uploads a file",
-        "id" : "82",
+        "id" : "81",
         "order" : "1",
         "response" : false
       }, {
         "description" : "Creates metadata and sends file content",
-        "id" : "94",
+        "id" : "91",
         "order" : "2",
         "response" : false
       }, {
         "description" : "Checks folder access and records metadata/audit data",
-        "id" : "105",
+        "id" : "102",
         "order" : "3",
         "response" : false
       }, {
         "description" : "Writes the document component and manifest",
-        "id" : "101",
+        "id" : "98",
         "order" : "4",
         "response" : false
       }, {
         "description" : "Stores the binary and manifest using ADC",
-        "id" : "108",
+        "id" : "105",
         "order" : "5",
         "response" : false
       }, {
         "description" : "Finalizes file status and workflow data",
-        "id" : "105",
+        "id" : "102",
         "order" : "6",
         "response" : false
       } ],
@@ -4879,39 +4749,39 @@
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
+        "nodeSeparation" : 110,
         "rankDirection" : "LeftRight",
-        "rankSeparation" : 280,
+        "rankSeparation" : 130,
         "vertices" : true
       },
       "description" : "Open and render a document flow.",
-      "elementId" : "13",
+      "elementId" : "12",
       "elements" : [ {
         "id" : "1",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "8",
+        "id" : "7",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "19",
+        "id" : "18",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "26",
+        "id" : "25",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "32",
+        "id" : "31",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "38",
+        "id" : "37",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "63",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
@@ -4921,32 +4791,32 @@
       "order" : 18,
       "relationships" : [ {
         "description" : "Chooses a document",
-        "id" : "82",
+        "id" : "81",
         "order" : "1",
         "response" : false
       }, {
         "description" : "Launches the Viewer with document context",
-        "id" : "95",
+        "id" : "92",
         "order" : "2",
         "response" : false
       }, {
         "description" : "Validates the user/application session",
-        "id" : "97",
+        "id" : "94",
         "order" : "3",
         "response" : false
       }, {
         "description" : "Requests metadata and binary content",
-        "id" : "98",
+        "id" : "95",
         "order" : "4",
         "response" : false
       }, {
         "description" : "Requests the stored component",
-        "id" : "101",
+        "id" : "98",
         "order" : "5",
         "response" : false
       }, {
         "description" : "Streams the object, including HTTP range support",
-        "id" : "108",
+        "id" : "105",
         "order" : "6",
         "response" : false
       } ],
@@ -4954,15 +4824,19 @@
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
+        "nodeSeparation" : 110,
         "rankDirection" : "LeftRight",
-        "rankSeparation" : 280,
+        "rankSeparation" : 130,
         "vertices" : true
       },
       "description" : "SAP ArchiveLink document write flow.",
-      "elementId" : "13",
+      "elementId" : "12",
       "elements" : [ {
         "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
         "x" : 0,
         "y" : 0
       }, {
@@ -4970,15 +4844,11 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "8",
+        "id" : "46",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "47",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "63",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
@@ -4988,22 +4858,22 @@
       "order" : 19,
       "relationships" : [ {
         "description" : "Sends PUT or multipart POST /api/sap",
-        "id" : "87",
+        "id" : "86",
         "order" : "1",
         "response" : false
       }, {
         "description" : "Writes the component with the trusted internal key",
-        "id" : "102",
+        "id" : "99",
         "order" : "2",
         "response" : false
       }, {
         "description" : "Stores the binary and manifest",
-        "id" : "108",
+        "id" : "105",
         "order" : "3",
         "response" : false
       }, {
         "description" : "Persists the SAP system/repository/document hierarchy",
-        "id" : "106",
+        "id" : "103",
         "order" : "4",
         "response" : false
       } ],
@@ -5011,15 +4881,19 @@
     }, {
       "automaticLayout" : {
         "edgeSeparation" : 50,
-        "nodeSeparation" : 180,
+        "nodeSeparation" : 110,
         "rankDirection" : "LeftRight",
-        "rankSeparation" : 280,
+        "rankSeparation" : 130,
         "vertices" : true
       },
-      "description" : "Salesforce token and document write flow.",
-      "elementId" : "13",
+      "description" : "SAP SuccessFactors token and document write flow.",
+      "elementId" : "12",
       "elements" : [ {
         "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
         "x" : 0,
         "y" : 0
       }, {
@@ -5027,44 +4901,40 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "8",
+        "id" : "54",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "55",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "63",
+        "id" : "62",
         "x" : 0,
         "y" : 0
       } ],
       "externalBoundariesVisible" : false,
-      "key" : "09e-runtime-salesforce",
+      "key" : "09e-runtime-successfactors",
       "name" : "Dynamic View: ASM+",
       "order" : 20,
       "relationships" : [ {
         "description" : "Requests a token and submits a document operation",
-        "id" : "88",
+        "id" : "87",
         "order" : "1",
         "response" : false
       }, {
         "description" : "Writes the document or managed-user registry object",
-        "id" : "103",
+        "id" : "100",
         "order" : "2",
         "response" : false
       }, {
         "description" : "Stores the binary and manifest",
-        "id" : "108",
+        "id" : "105",
         "order" : "3",
         "response" : false
       }, {
         "description" : "Persists repository, folder, document, and version metadata",
-        "id" : "107",
+        "id" : "104",
         "order" : "4",
         "response" : false
       } ],
-      "title" : "9E. Runtime Sequence - Salesforce Write"
+      "title" : "9E. Runtime Sequence - SAP SuccessFactors Write"
     } ],
     "systemContextViews" : [ {
       "automaticLayout" : {
@@ -5104,15 +4974,11 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "8",
+        "id" : "10",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "11",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "13",
+        "id" : "12",
         "x" : 0,
         "y" : 0
       } ],
@@ -5121,7 +4987,7 @@
       "name" : "System Context View: ASM+",
       "order" : 1,
       "relationships" : [ {
-        "id" : "172"
+        "id" : "72"
       }, {
         "id" : "73"
       }, {
@@ -5135,15 +5001,11 @@
       }, {
         "id" : "78"
       }, {
-        "id" : "79"
+        "id" : "80"
       }, {
-        "id" : "81"
-      }, {
-        "id" : "86"
-      }, {
-        "id" : "90"
+        "id" : "85"
       } ],
-      "softwareSystemId" : "13",
+      "softwareSystemId" : "12",
       "title" : "1. System Context"
     } ]
   }
