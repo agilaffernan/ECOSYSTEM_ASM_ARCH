@@ -12,7 +12,7 @@
   <div class="layout">
     <aside class="sidebar">
     <a class="brand" href="../index.html">ASM+ Architecture</a>
-    <p class="brand-subtitle">Google Cloud deployment</p>
+    <p class="brand-subtitle">Auritas Storage Manager</p>
     <p class="nav-label">Manuals</p>
     <ul class="nav-list">
       <li><a href="../index.html">Overview</a></li>
@@ -47,12 +47,15 @@
       <span class="status recommendation">Recommendation</span>
       <span class="status gap">Observed gap</span>
     </div>
-    <div class="icon-legend" aria-label="Diagram icon key"><span class="icon-legend-item"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item"><img src="../assets/icons/frontend.svg" alt="">Frontend</span><span class="icon-legend-item"><img src="../assets/icons/database.svg" alt="">Database or data adapter</span><span class="icon-legend-item"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item"><img src="../assets/icons/security.svg" alt="">Identity or security</span><span class="icon-legend-item"><img src="../assets/icons/network.svg" alt="">Network entry</span><span class="icon-legend-item"><img src="../assets/icons/observability.svg" alt="">Health and telemetry</span><span class="icon-legend-item"><img src="../assets/icons/vendors/sap.svg" alt="">SAP System (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/kubernetes.svg" alt="">Kubernetes (official)</span><span class="icon-legend-item"><img src="../assets/icons/vendors/helm.svg" alt="">Helm (official)</span></div>
+    <div class="icon-legend" aria-label="Icon key for the diagrams on this page"><span class="icon-legend-item" data-icon-category="system"><img src="../assets/icons/system.svg" alt="">System or deployment boundary</span><span class="icon-legend-item" data-icon-category="api"><img src="../assets/icons/api.svg" alt="">API or API client</span><span class="icon-legend-item" data-icon-category="object-storage"><img src="../assets/icons/object-storage.svg" alt="">Object storage</span><span class="icon-legend-item" data-icon-category="gcp-cloud-storage"><img src="../assets/icons/vendors/gcp-cloud-storage.svg" alt="">Cloud Storage (official)</span><span class="icon-legend-item" data-icon-category="gcp-cloud-sql"><img src="../assets/icons/vendors/gcp-cloud-sql.svg" alt="">Cloud SQL (official)</span></div>
     <section><h2>Architecture View</h2>
     <section class="diagram-block" aria-labelledby="diagram-1">
       <h3 id="diagram-1">Metadata and Binary Data Paths</h3>
       <div class="diagram-frame">
-        <a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-05-data-architecture.svg&title=Metadata%20and%20Binary%20Data%20Paths" aria-label="Open Metadata and Binary Data Paths in the full-screen diagram viewer"><img src="../diagrams/structurizr-05-data-architecture.svg" alt="ASM+ data architecture diagram"></a>
+        <a class="diagram-download" href="../diagrams/structurizr-05-data-architecture.svg" download="structurizr-05-data-architecture.svg" aria-label="Download Metadata and Binary Data Paths as SVG" title="Download SVG">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        </a>
+        <a class="diagram-open-link" href="../diagram-viewer.html?src=diagrams%2Fstructurizr-05-data-architecture.svg&title=Metadata%20and%20Binary%20Data%20Paths" aria-label="Open Metadata and Binary Data Paths in the full-screen diagram viewer"><img src="../diagrams/structurizr-05-data-architecture.svg" alt="ASM+ data architecture diagram"></a>
       </div>
       <p class="diagram-caption">Figure 5. Database-backed APIs persist metadata while the internal storage API persists objects and manifests in GCS.</p>
       <p class="diagram-links"><a href="../diagram-viewer.html?src=diagrams%2Fstructurizr-05-data-architecture.svg&title=Metadata%20and%20Binary%20Data%20Paths">Open full-screen viewer</a><a href="../structurizr-site/index.html#05-data-architecture">Open this view in Structurizr</a></p>
@@ -78,6 +81,7 @@
     <footer class="page-footer">ASM+ architecture baseline. Generated from the validated Structurizr model and read-only deployment evidence. No secret values are included.</footer></div>
     </main>
   </div>
+  <script src="../assets/diagram-downloads.js"></script>
   <script src="../assets/site.js"></script>
 </body>
 </html>

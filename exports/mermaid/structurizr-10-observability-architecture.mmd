@@ -1,4 +1,4 @@
-graph LR
+graph TB
   linkStyle default fill:#ffffff
 
   subgraph diagram ["10. Observability Architecture"]
@@ -6,77 +6,77 @@ graph LR
 
     2["<div style='font-weight: bold'>Platform Administrator</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Operates ASM+, Kubernetes,<br />and Google Cloud resources.</div>"]
     style 2 fill:#334155,stroke:#1e293b,color:#ffffff
-    11["<div style='font-weight: bold'>Cloud Logging and Monitoring</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Receives GKE system/workload<br />logs and platform metrics. No<br />custom alert policies were<br />observed.</div>"]
+    10["<div style='font-weight: bold'>Cloud Logging and Monitoring</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Receives GKE system/workload<br />logs and platform metrics. No<br />custom alert policies were<br />observed.</div>"]
+    style 10 fill:#ffffff,stroke:#4285f4,color:#172033
+    11["<div style='font-weight: bold'>GKE Health Management</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Runs Kubernetes readiness and<br />liveness probes and controls<br />rollout availability.</div>"]
     style 11 fill:#ffffff,stroke:#4285f4,color:#172033
-    12["<div style='font-weight: bold'>GKE Health Management</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Runs Kubernetes readiness and<br />liveness probes and controls<br />rollout availability.</div>"]
-    style 12 fill:#ffffff,stroke:#4285f4,color:#172033
 
-    subgraph 13 ["ASM+"]
-      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+    subgraph 12 ["ASM+"]
+      style 12 fill:#ffffff,stroke:#991b1b,color:#991b1b
 
       subgraph group1 ["Application APIs"]
         style group1 fill:#ffffff,stroke:#cccccc,color:#cccccc,stroke-dasharray:5
 
-        32["<div style='font-weight: bold'>Auth API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</div>"]
-        style 32 fill:#0f766e,stroke:#115e59,color:#ffffff
-        38["<div style='font-weight: bold'>ASM+ API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Orchestrates document<br />metadata, access, workflows,<br />notifications, reports,<br />audit, and binary operations.</div>"]
-        style 38 fill:#0f766e,stroke:#115e59,color:#ffffff
-        47["<div style='font-weight: bold'>SAP API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3020]</div><div style='font-size: 80%; margin-top:10px'>Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</div>"]
-        style 47 fill:#b45309,stroke:#92400e,color:#ffffff
-        55["<div style='font-weight: bold'>Salesforce API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3030]</div><div style='font-size: 80%; margin-top:10px'>Provides Salesforce<br />repository/document<br />operations and token<br />issuance.</div>"]
-        style 55 fill:#b45309,stroke:#92400e,color:#ffffff
+        31["<div style='font-weight: bold'>Auth API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</div>"]
+        style 31 fill:#0f766e,stroke:#115e59,color:#ffffff
+        37["<div style='font-weight: bold'>ASM+ API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Orchestrates document<br />metadata, access, workflows,<br />notifications, reports,<br />audit, and binary operations.</div>"]
+        style 37 fill:#0f766e,stroke:#115e59,color:#ffffff
+        46["<div style='font-weight: bold'>SAP API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3020]</div><div style='font-size: 80%; margin-top:10px'>Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</div>"]
+        style 46 fill:#b45309,stroke:#92400e,color:#ffffff
+        54["<div style='font-weight: bold'>SAP SuccessFactors API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3030]</div><div style='font-size: 80%; margin-top:10px'>Provides SAP SuccessFactors<br />repository/document<br />operations and token<br />issuance.</div>"]
+        style 54 fill:#b45309,stroke:#92400e,color:#ffffff
       end
 
       subgraph group2 ["Storage Core"]
         style group2 fill:#ffffff,stroke:#cccccc,color:#cccccc,stroke-dasharray:5
 
-        63["<div style='font-weight: bold'>ASM Storage API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</div>"]
-        style 63 fill:#7c3aed,stroke:#6d28d9,color:#ffffff
+        62["<div style='font-weight: bold'>ASM Storage API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</div>"]
+        style 62 fill:#7c3aed,stroke:#6d28d9,color:#ffffff
       end
 
       subgraph group3 ["Web Experience"]
         style group3 fill:#ffffff,stroke:#cccccc,color:#cccccc,stroke-dasharray:5
 
-        14["<div style='font-weight: bold'>Auth Portal</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, NGINX]</div><div style='font-size: 80%; margin-top:10px'>Login, SSO, and<br />access-administration web<br />application.</div>"]
-        style 14 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
-        19["<div style='font-weight: bold'>ASM+ Web Application</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Primary document, workflow,<br />report, search, and<br />administration UI.</div>"]
-        style 19 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
-        26["<div style='font-weight: bold'>Document Viewer</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</div>"]
-        style 26 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+        13["<div style='font-weight: bold'>Auth Portal</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, NGINX]</div><div style='font-size: 80%; margin-top:10px'>Login, SSO, and<br />access-administration web<br />application.</div>"]
+        style 13 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+        18["<div style='font-weight: bold'>ASM+ Web Application</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Primary document, workflow,<br />report, search, and<br />administration UI.</div>"]
+        style 18 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+        25["<div style='font-weight: bold'>Document Viewer</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</div>"]
+        style 25 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
       end
 
     end
 
-    47-. "<div>Redirects browser-origin SAP<br />launch requests</div><div style='font-size: 70%'>[HTTPS with bounded viewer token]</div>" .->26
-    38-. "<div>Reads and writes document<br />objects, manifests, licenses,<br />and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->63
-    47-. "<div>Reads and writes SAP document<br />objects and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->63
-    55-. "<div>Reads and writes Salesforce<br />document and registry objects</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->63
-    14-. "<div>Writes web-server logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->11
-    19-. "<div>Writes web-server logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->11
-    26-. "<div>Writes web-server logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->11
-    32-. "<div>Writes structured/application<br />logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->11
-    38-. "<div>Writes application logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->11
-    47-. "<div>Writes trace-aware<br />integration logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->11
-    55-. "<div>Writes structured integration<br />logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->11
-    63-. "<div>Writes storage request and<br />health logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->11
-    12-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->14
-    12-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->19
-    12-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->26
-    12-. "<div>Checks /health and /health/db</div><div style='font-size: 70%'>[HTTP]</div>" .->32
-    12-. "<div>Checks /health/live and<br />/health/ready</div><div style='font-size: 70%'>[HTTP]</div>" .->38
-    12-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->47
-    12-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->55
-    12-. "<div>Checks /health and /ready</div><div style='font-size: 70%'>[HTTP]</div>" .->63
-    2-. "<div>Administers users, roles,<br />applications, structures, and<br />connections</div><div style='font-size: 70%'>[HTTPS]</div>" .->14
-    2-. "<div>Inspects logs, metrics, and<br />workload health</div><div style='font-size: 70%'>[Google Cloud Console and gcloud]</div>" .->11
-    14-. "<div>Authenticates users and<br />administers identity/access<br />data</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->32
-    19-. "<div>Redirects the browser to the<br />SSO portal</div><div style='font-size: 70%'>[HTTPS]</div>" .->14
-    19-. "<div>Authenticates and checks<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->32
-    19-. "<div>Performs document, workflow,<br />report, search, and audit<br />operations</div><div style='font-size: 70%'>[HTTPS/JSON and binary]</div>" .->38
-    19-. "<div>Launches the selected<br />document</div><div style='font-size: 70%'>[HTTPS]</div>" .->26
-    26-. "<div>Redirects the browser to SSO<br />when a session is absent</div><div style='font-size: 70%'>[HTTPS]</div>" .->14
-    26-. "<div>Validates authentication and<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->32
-    26-. "<div>Retrieves ASM+ metadata and<br />file content</div><div style='font-size: 70%'>[HTTPS/JSON and HTTP range]</div>" .->38
-    26-. "<div>Retrieves SAP-origin document<br />components</div><div style='font-size: 70%'>[HTTPS/ArchiveLink]</div>" .->47
+    54-. "<div>Reads and writes SAP<br />SuccessFactors document and<br />registry objects</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->62
+    13-. "<div>Writes web-server logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->10
+    18-. "<div>Writes web-server logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->10
+    25-. "<div>Writes web-server logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->10
+    31-. "<div>Writes structured/application<br />logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->10
+    37-. "<div>Writes application logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->10
+    46-. "<div>Writes trace-aware<br />integration logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->10
+    54-. "<div>Writes structured integration<br />logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->10
+    62-. "<div>Writes storage request and<br />health logs</div><div style='font-size: 70%'>[stdout/stderr]</div>" .->10
+    11-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->13
+    11-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->18
+    11-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->25
+    11-. "<div>Checks /health and /health/db</div><div style='font-size: 70%'>[HTTP]</div>" .->31
+    11-. "<div>Checks /health/live and<br />/health/ready</div><div style='font-size: 70%'>[HTTP]</div>" .->37
+    11-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->46
+    11-. "<div>Checks /health</div><div style='font-size: 70%'>[HTTP]</div>" .->54
+    11-. "<div>Checks /health and /ready</div><div style='font-size: 70%'>[HTTP]</div>" .->62
+    2-. "<div>Administers users, roles,<br />applications, structures, and<br />connections</div><div style='font-size: 70%'>[HTTPS]</div>" .->13
+    2-. "<div>Inspects logs, metrics, and<br />workload health</div><div style='font-size: 70%'>[Google Cloud Console and gcloud]</div>" .->10
+    13-. "<div>Authenticates users and<br />administers identity/access<br />data</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->31
+    18-. "<div>Redirects the browser to the<br />SSO portal</div><div style='font-size: 70%'>[HTTPS]</div>" .->13
+    18-. "<div>Authenticates and checks<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->31
+    18-. "<div>Performs document, workflow,<br />report, search, and audit<br />operations</div><div style='font-size: 70%'>[HTTPS/JSON and binary]</div>" .->37
+    18-. "<div>Launches the selected<br />document</div><div style='font-size: 70%'>[HTTPS]</div>" .->25
+    25-. "<div>Redirects the browser to SSO<br />when a session is absent</div><div style='font-size: 70%'>[HTTPS]</div>" .->13
+    25-. "<div>Validates authentication and<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->31
+    25-. "<div>Retrieves ASM+ metadata and<br />file content</div><div style='font-size: 70%'>[HTTPS/JSON and HTTP range]</div>" .->37
+    25-. "<div>Retrieves SAP-origin document<br />components</div><div style='font-size: 70%'>[HTTPS/ArchiveLink]</div>" .->46
+    46-. "<div>Redirects browser-origin SAP<br />launch requests</div><div style='font-size: 70%'>[HTTPS with bounded viewer token]</div>" .->25
+    37-. "<div>Reads and writes document<br />objects, manifests, licenses,<br />and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->62
+    46-. "<div>Reads and writes SAP document<br />objects and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->62
 
   end

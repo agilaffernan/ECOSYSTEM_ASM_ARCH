@@ -1,11 +1,11 @@
 digraph {
   compound=true
-  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  graph [fontname="Arial", rankdir=LR, ranksep=0.45, nodesep=0.45, newrank=true, remincross=true, mclimit=8.0, splines=ortho, outputorder=edgesfirst]
   node [fontname="Arial", shape=box, margin="0.4,0.3"]
   edge [fontname="Arial"]
   label=<<br /><font point-size="34">9C. Runtime Sequence - View a Document</font><br /><font point-size="24">Open and render a document flow.</font>>
 
-  subgraph cluster_13 {
+  subgraph cluster_12 {
     margin=25
     label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
     labelloc=b
@@ -22,8 +22,8 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      32 [id=32,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
-      38 [id=38,shape=hexagon, label=<<font point-size="34">ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Orchestrates document<br />metadata, access, workflows,<br />notifications, reports, audit,<br />and binary operations.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+      31 [id=31,shape=hexagon, label=<<font point-size="34">Auth API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+      37 [id=37,shape=hexagon, label=<<font point-size="34">ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Orchestrates document<br />metadata, access, workflows,<br />notifications, reports, audit,<br />and binary operations.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
     }
 
     subgraph "cluster_group_Storage Core" {
@@ -35,7 +35,7 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      63 [id=63,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#6d28d9", fillcolor="#7c3aed", fontcolor="#ffffff"]
+      62 [id=62,shape=hexagon, label=<<font point-size="34">ASM Storage API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</font>>, style=filled, color="#4c1d95", fillcolor="#6d28d9", fontcolor="#ffffff", penwidth=5, peripheries=2]
     }
 
     subgraph "cluster_group_Web Experience" {
@@ -47,20 +47,20 @@ digraph {
       fillcolor="#ffffff"
       style="dashed"
 
-      19 [id=19,shape=rect, label=<<font point-size="34">ASM+ Web Application</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Primary document, workflow,<br />report, search, and<br />administration UI.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
-      26 [id=26,shape=rect, label=<<font point-size="34">Document Viewer</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
+      18 [id=18,shape=rect, label=<<br /><br /><br /><font point-size="34">ASM+ Web Application</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Primary document, workflow,<br />report, search, and<br />administration UI.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
+      25 [id=25,shape=rect, label=<<font point-size="34">Document Viewer</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font><br /><br /><font point-size="24">Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
     }
 
   }
 
   1 [id=1,shape=rect, label=<<font point-size="34">ASM+ User</font><br /><font point-size="19">[Person]</font><br /><br /><font point-size="24">Creates folders, uploads<br />files, searches content, and<br />views documents.</font>>, style=filled, color="#1d4ed8", fillcolor="#2563eb", fontcolor="#ffffff"]
-  8 [id=8,shape=cylinder, label=<<font point-size="34">Cloud Storage</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
+  7 [id=7,shape=cylinder, label=<<font point-size="34">Cloud Storage</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</font>>, style=filled, color="#4285f4", fillcolor="#ffffff", fontcolor="#172033"]
 
-  1 -> 19 [id=82, label=<<font point-size="18">1. Chooses a document</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  19 -> 26 [id=95, label=<<font point-size="18">2. Launches the Viewer with document<br />context</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  26 -> 32 [id=97, label=<<font point-size="18">3. Validates the user/application<br />session</font><br /><font point-size="13">[HTTPS/JSON, JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  26 -> 38 [id=98, label=<<font point-size="18">4. Requests metadata and binary<br />content</font><br /><font point-size="13">[HTTPS/JSON and HTTP range]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
-  38 -> 63 [id=101, label=<<font point-size="18">5. Requests the stored component</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
-  63 -> 8 [id=108, label=<<font point-size="18">6. Streams the object, including<br />HTTP range support</font><br /><font point-size="13">[GCS API over HTTPS]</font>>, style="dashed", color="#047857", fontcolor="#047857"]
+  1 -> 18 [id=81, label=<<font point-size="18">1. Chooses a document</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  18 -> 25 [id=92, label=<<font point-size="18">2. Launches the Viewer with document<br />context</font><br /><font point-size="13">[HTTPS]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  25 -> 31 [id=94, label=<<font point-size="18">3. Validates the user/application<br />session</font><br /><font point-size="13">[HTTPS/JSON, JWT]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  25 -> 37 [id=95, label=<<font point-size="18">4. Requests metadata and binary<br />content</font><br /><font point-size="13">[HTTPS/JSON and HTTP range]</font>>, style="dashed", color="#2563eb", fontcolor="#2563eb"]
+  37 -> 62 [id=98, label=<<font point-size="18">5. Requests the stored component</font><br /><font point-size="13">[HTTP/REST, X-Api-Key]</font>>, style="dashed", color="#7c3aed", fontcolor="#7c3aed"]
+  62 -> 7 [id=105, label=<<font point-size="18">6. Streams the object, including<br />HTTP range support</font><br /><font point-size="13">[GCS API over HTTPS]</font>>, style="dashed", color="#047857", fontcolor="#047857"]
 
 }

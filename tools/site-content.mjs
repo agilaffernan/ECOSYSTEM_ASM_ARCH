@@ -20,7 +20,7 @@ export const manuals = [
         html: `<p>ASM+ is a document-management and integration platform running in project <code>sap-ecosystem-asmplus</code>. Users reach its web applications and APIs through seven HTTPS hostnames. The application tier runs on GKE; Cloud SQL stores metadata; Cloud Storage stores binaries and ASM objects; Cloud Operations receives platform and workload telemetry.</p>
         <div class="fact-grid">
           <article class="fact"><h3>Primary users</h3><p>Business users manage and view documents. Platform administrators operate application access, Kubernetes workloads, and GCP resources.</p></article>
-          <article class="fact"><h3>Enterprise integrations</h3><p>SAP uses the ArchiveLink-compatible API. Salesforce uses repository, document, and token endpoints.</p></article>
+          <article class="fact"><h3>Enterprise integrations</h3><p>SAP business systems use the ArchiveLink-compatible API, while SAP SuccessFactors uses its repository, document, and token endpoints.</p></article>
           <article class="fact"><h3>Data services</h3><p>Private Cloud SQL PostgreSQL stores application metadata. A private GCS bucket stores binary objects and manifests.</p></article>
           <article class="fact"><h3>Entry point</h3><p>Auritas DNS resolves seven A records to the external load balancer at <code>34.36.209.159</code>.</p></article>
         </div>`
@@ -31,15 +31,13 @@ export const manuals = [
           <tr><td>ASM+ User</td><td>Creates folders, uploads files, searches content, and opens the document viewer.</td><td>Observed use case</td></tr>
           <tr><td>Platform Administrator</td><td>Administers applications, roles, users, GKE, Cloud SQL, GCS, and operational evidence.</td><td>Observed use case</td></tr>
           <tr><td>SAP System</td><td>Calls the SAP ArchiveLink-compatible integration over HTTPS.</td><td>Deployed API</td></tr>
-          <tr><td>Salesforce</td><td>Calls Salesforce document/repository endpoints and obtains bounded tokens.</td><td>Deployed API</td></tr>
-          <tr><td>Enterprise Identity Provider</td><td>Can provide SAML or Microsoft identity assertions to Auth.</td><td>Optional; active provider not verified</td></tr>
+          <tr><td>SAP SuccessFactors</td><td>Calls SuccessFactors document/repository endpoints and obtains bounded tokens.</td><td>Deployed API</td></tr>
           <tr><td>Auritas DNS</td><td>Publishes the public <code>asmplus-demo.auritas.com</code> names.</td><td>Observed live</td></tr>
         </tbody></table>`
       },
       {
         title: "System Boundary and Ownership",
-        html: `<p>The ASM+ boundary includes the eight application workloads, their runtime configuration, and the Kubernetes secret used by those workloads. GKE, Cloud SQL, GCS, Artifact Registry, Secret Manager, the external load balancer, DNS, and Cloud Operations are platform dependencies outside the software-system boundary.</p>
-        <div class="notice warning"><strong>Important distinction.</strong> Product support for SAML, Microsoft identity, vector indexing, and OnlyOffice does not prove that those options are active. The live runtime configuration left the vector and OnlyOffice endpoints empty, and no active enterprise identity provider was verified.</div>`
+        html: `<p>The ASM+ boundary includes the eight application workloads, their runtime configuration, and the Kubernetes secret used by those workloads. GKE, Cloud SQL, GCS, Artifact Registry, Secret Manager, the external load balancer, DNS, and Cloud Operations are platform dependencies outside the software-system boundary.</p>`
       },
       {
         title: "Evidence Basis",
@@ -59,7 +57,7 @@ export const manuals = [
         view: "02-container-microservices",
         title: "Deployed Containers and Service Dependencies",
         alt: "C4 container diagram for the ASM+ microservices",
-        caption: "Figure 2. Eight deployed workloads, configuration stores, managed data services, and external integrations."
+        caption: "Figure 2. The deployed workloads are organized into frontend, backend/API, and data-storage layers; ASM Storage API remains the highlighted central storage service."
       }
     ],
     sections: [
@@ -67,12 +65,12 @@ export const manuals = [
         title: "Live Workload Inventory",
         html: `<table><thead><tr><th>Deployment</th><th>Purpose</th><th>Service</th><th>Live image tag</th></tr></thead><tbody>
           <tr><td><code>front-auth</code></td><td>Login, SSO, and identity/access administration portal.</td><td>Public; port 80</td><td><code>front-auth:dockerhub-dev-20260805-195902</code></td></tr>
-          <tr><td><code>api-auth</code></td><td>Authentication, JWT issuance, users, roles, apps, structures, connections, and SSO.</td><td>Public; port 3000</td><td><code>api-auth:dockerhub-dev-20260805-195902</code></td></tr>
           <tr><td><code>front-asm-plus</code></td><td>Main document, workflow, search, report, and audit web application.</td><td>Public; port 8080</td><td><code>front-asm-plus:dockerhub-dev-20260805-195902</code></td></tr>
-          <tr><td><code>api-asm-plus</code></td><td>Document metadata, permissions, workflows, notifications, reports, and storage orchestration.</td><td>Public; port 3000</td><td><code>api-asm-plus:dockerhub-dev-20260805-195902</code></td></tr>
           <tr><td><code>front-viewer</code></td><td>Document display for ASM+ and SAP-origin content.</td><td>Public; port 8080</td><td><code>front-viewer:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>api-auth</code></td><td>Authentication, JWT issuance, users, roles, apps, structures, connections, and SSO.</td><td>Public; port 3000</td><td><code>api-auth:dockerhub-dev-20260805-195902</code></td></tr>
+          <tr><td><code>api-asm-plus</code></td><td>Document metadata, permissions, workflows, notifications, reports, and storage orchestration.</td><td>Public; port 3000</td><td><code>api-asm-plus:dockerhub-dev-20260805-195902</code></td></tr>
           <tr><td><code>api-sap</code></td><td>SAP ArchiveLink-compatible document integration and viewer launch.</td><td>Public; port 3020</td><td><code>api-sap:dockerhub-dev-20260805-195902</code></td></tr>
-          <tr><td><code>api-sf</code></td><td>Salesforce token, repository, document, and managed-user integration.</td><td>Public; port 3030</td><td><code>api-sf:dockerhub-dev-20260805-195902-sf-managed-users-rootfix</code></td></tr>
+          <tr><td><code>api-sf</code></td><td>SAP SuccessFactors token, repository, document, and managed-user integration.</td><td>Public; port 3030</td><td><code>api-sf:dockerhub-dev-20260805-195902-sf-managed-users-rootfix</code></td></tr>
           <tr><td><code>asm-api</code></td><td>Internal binary, manifest, license, and certificate storage service.</td><td>Internal ClusterIP; port 3000</td><td><code>api-asm:dockerhub-dev-20260805-195902</code></td></tr>
         </tbody></table>
         <p>All eight deployments were observed at <code>1/1</code> Ready. The public services are NEG-backed through GKE Ingress. <code>asm-api</code> remains internal.</p>`
@@ -88,16 +86,6 @@ export const manuals = [
           <tr><td>Auth, ASM+, SAP, SF APIs</td><td>Cloud SQL</td><td>Metadata persistence</td><td>Local proxy at <code>127.0.0.1:5432</code></td></tr>
           <tr><td>ASM Storage API</td><td>GCS</td><td>Object persistence</td><td>GCS API with ADC / Workload Identity</td></tr>
         </tbody></table>`
-      },
-      {
-        title: "Configuration and Secret Injection",
-        html: `<p>Non-secret runtime settings are supplied from Kubernetes ConfigMaps. Sensitive values are injected from the namespace-scoped <code>asmplus-runtime-secrets</code> Secret. The observed key names are documented in the Security manual; values are intentionally excluded.</p>
-        <p>Four database-backed APIs run a Cloud SQL Auth Proxy <code>2.14.1</code> sidecar. The proxy uses private IP and the <code>cloudsql-client</code> Workload Identity mapping. The application process connects only to localhost.</p>`
-      },
-      {
-        title: "Scaling and Availability Characteristics",
-        html: `<p>Each workload currently has one application replica. Three <code>e2-medium</code> nodes were Ready in the zonal GKE cluster. Readiness and liveness probes gate availability, but a single application replica means a rollout or pod disruption can temporarily reduce that workload to zero ready replicas.</p>
-        <div class="notice warning"><strong>Current topology.</strong> The cluster is zonal in <code>us-east1-b</code> and Cloud SQL is zonal. This is a functional deployment, not a multi-zone high-availability design.</div>`
       }
     ]
   },
@@ -112,7 +100,7 @@ export const manuals = [
       { file: "structurizr-03b-component-api-asm-plus.svg", view: "03b-component-api-asm-plus", title: "ASM+ API Components", alt: "Component diagram of api-asm-plus", caption: "Figure 3b. API routing, authorization, domain services, reporting, persistence, and storage delegation." },
       { file: "structurizr-03c-component-api-auth.svg", view: "03c-component-api-auth", title: "Auth API Components", alt: "Component diagram of api-auth", caption: "Figure 3c. Authentication, access administration, SSO, and PostgreSQL persistence." },
       { file: "structurizr-03d-component-api-sap.svg", view: "03d-component-api-sap", title: "SAP API Components", alt: "Component diagram of api-sap", caption: "Figure 3d. ArchiveLink HTTP, SAP authentication, metadata persistence, viewer tokens, and ASM storage calls." },
-      { file: "structurizr-03e-component-api-sf.svg", view: "03e-component-api-sf", title: "Salesforce API Components", alt: "Component diagram of api-sf", caption: "Figure 3e. Salesforce API, token service, managed users, persistence, and ASM storage calls." },
+      { file: "structurizr-03e-component-api-sf.svg", view: "03e-component-api-sf", title: "SAP SuccessFactors API Components", alt: "Component diagram of api-sf", caption: "Figure 3e. SAP SuccessFactors API, token service, managed users, persistence, and ASM storage calls." },
       { file: "structurizr-03f-component-front-asm-plus.svg", view: "03f-component-front-asm-plus", title: "ASM+ Web Components", alt: "Component diagram of front-asm-plus", caption: "Figure 3f. Runtime configuration, application shell, authentication, document UI, API client, and Viewer launch." },
       { file: "structurizr-03g-component-front-auth.svg", view: "03g-component-front-auth", title: "Auth Portal Components", alt: "Component diagram of front-auth", caption: "Figure 3g. Runtime configuration, portal routes, authentication context, and Auth API client." },
       { file: "structurizr-03h-component-front-viewer.svg", view: "03h-component-front-viewer", title: "Document Viewer Components", alt: "Component diagram of front-viewer", caption: "Figure 3h. Runtime configuration, parameter parsing, document retrieval, native rendering, and optional OnlyOffice integration." }
@@ -123,9 +111,9 @@ export const manuals = [
         html: `<table><thead><tr><th>Service</th><th>Core responsibilities</th><th>Data / downstream dependency</th></tr></thead><tbody>
           <tr><td>ASM Storage API</td><td>Internal API-key guard, license validation, certificates, document components, manifests, versions, ranges, and optimistic concurrency.</td><td>GCS via <code>@google-cloud/storage</code> and ADC.</td></tr>
           <tr><td>ASM+ API</td><td>Folders, files, authorization, role groups, workflows, notifications, reports, audit, search, and metadata mappings.</td><td>Cloud SQL plus ASM Storage API.</td></tr>
-          <tr><td>Auth API</td><td>Password verification, JWT signing, users, applications, roles, structures, connections, access, and optional SSO.</td><td>Cloud SQL and optional enterprise IdP.</td></tr>
+          <tr><td>Auth API</td><td>Password verification, JWT signing, users, applications, roles, structures, connections, access, and optional SSO.</td><td>Cloud SQL.</td></tr>
           <tr><td>SAP API</td><td>ArchiveLink interface, Basic/certificate authentication, SAP hierarchy persistence, HMAC viewer launch, and administration.</td><td>Cloud SQL, ASM Storage API, Viewer.</td></tr>
-          <tr><td>Salesforce API</td><td>Repository/document interface, OAuth/SAML bearer token handling, managed users, public keys, repository scope, and administration.</td><td>Cloud SQL and ASM Storage API.</td></tr>
+          <tr><td>SAP SuccessFactors API</td><td>Repository/document interface, OAuth/SAML bearer token handling, managed users, public keys, repository scope, and administration.</td><td>Cloud SQL and ASM Storage API.</td></tr>
         </tbody></table>`
       },
       {
@@ -138,7 +126,7 @@ export const manuals = [
       },
       {
         title: "Cross-Cutting Controls",
-        html: `<ul><li>JWT validation and application access are shared concepts between Auth, ASM+ API, and the frontends.</li><li>The internal <code>X-Api-Key</code> separates business APIs from the storage API.</li><li>License checks protect write paths that depend on the ASM storage service.</li><li>Database access is isolated behind a Cloud SQL Auth Proxy sidecar for each database-backed API.</li><li>Optional vector adapters exist in the ASM+, SAP, and Salesforce APIs, but <code>VECTOR_API_URL</code> was empty in the live configuration.</li></ul>`
+        html: `<ul><li>JWT validation and application access are shared concepts between Auth, ASM+ API, and the frontends.</li><li>The internal <code>X-Api-Key</code> separates business APIs from the storage API.</li><li>License checks protect write paths that depend on the ASM storage service.</li><li>Database access is isolated behind a Cloud SQL Auth Proxy sidecar for each database-backed API.</li><li>Optional vector adapters exist in the ASM+, SAP, and SAP SuccessFactors APIs, but <code>VECTOR_API_URL</code> was empty in the live configuration.</li></ul>`
       },
       {
         title: "Source Alignment",
@@ -151,21 +139,21 @@ export const manuals = [
     slug: "04-api-integration",
     shortTitle: "API / Integration",
     title: "API and Integration Architecture",
-    summary: "Documents public endpoints, internal service calls, protocols, and authentication controls used by browser, SAP, Salesforce, database, and object-storage traffic.",
+    summary: "Documents public endpoints, internal service calls, protocols, and authentication controls used by browser, SAP, SAP SuccessFactors, database, and object-storage traffic.",
     diagrams: [
       { file: "structurizr-04-api-integration.svg", view: "04-api-integration", title: "API and Integration Map", alt: "API and integration architecture diagram", caption: "Figure 4. Public HTTPS interfaces, internal storage calls, database connectors, object storage, and optional identity exchange." }
     ],
     sections: [
       {
         title: "Public Hostnames",
-        html: `<table><thead><tr><th>Hostname</th><th>Workload</th><th>Primary interface</th></tr></thead><tbody>
-          <tr><td><code>auth.asmplus-demo.auritas.com</code></td><td>Auth Portal</td><td>Browser login, SSO, and administration UI</td></tr>
-          <tr><td><code>api-auth.asmplus-demo.auritas.com</code></td><td>Auth API</td><td>JSON authentication and identity/access administration</td></tr>
-          <tr><td><code>app.asmplus-demo.auritas.com</code></td><td>ASM+ Web</td><td>Main browser application</td></tr>
-          <tr><td><code>api-asm-plus.asmplus-demo.auritas.com</code></td><td>ASM+ API</td><td>JSON and binary document-management API</td></tr>
-          <tr><td><code>viewer.asmplus-demo.auritas.com</code></td><td>Viewer</td><td>Browser document rendering</td></tr>
-          <tr><td><code>api-sap.asmplus-demo.auritas.com</code></td><td>SAP API</td><td>ArchiveLink-compatible operations; five OpenAPI paths observed</td></tr>
-          <tr><td><code>api-sf.asmplus-demo.auritas.com</code></td><td>Salesforce API</td><td>Repository/document/token operations; health and repository paths observed</td></tr>
+        html: `<table><thead><tr><th>Hostname</th><th>Layer</th><th>Workload</th><th>Primary interface</th></tr></thead><tbody>
+          <tr><td><code>auth.asmplus-demo.auritas.com</code></td><td>Frontend</td><td>Auth Portal</td><td>Browser login, SSO, and administration UI</td></tr>
+          <tr><td><code>api-auth.asmplus-demo.auritas.com</code></td><td>Backend API</td><td>Auth API</td><td>JSON authentication and identity/access administration</td></tr>
+          <tr><td><code>app.asmplus-demo.auritas.com</code></td><td>Frontend</td><td>ASM+ Web</td><td>Main browser application</td></tr>
+          <tr><td><code>api-asm-plus.asmplus-demo.auritas.com</code></td><td>Backend API</td><td>ASM+ API</td><td>JSON and binary document-management API</td></tr>
+          <tr><td><code>viewer.asmplus-demo.auritas.com</code></td><td>Frontend</td><td>Viewer</td><td>Browser document rendering</td></tr>
+          <tr><td><code>api-sap.asmplus-demo.auritas.com</code></td><td>Backend API</td><td>SAP API</td><td>ArchiveLink-compatible operations; five OpenAPI paths observed</td></tr>
+          <tr><td><code>api-sf.asmplus-demo.auritas.com</code></td><td>Backend API</td><td>SAP SuccessFactors API</td><td>Repository/document/token operations; health and repository paths observed</td></tr>
         </tbody></table>
         <p>All names resolve to <code>34.36.209.159</code> and are covered by the active Google-managed certificate <code>asmplus-demo-certificate-v2</code>.</p>`
       },
@@ -174,21 +162,16 @@ export const manuals = [
         html: `<table><thead><tr><th>Integration</th><th>Protocol</th><th>Authentication / trust</th></tr></thead><tbody>
           <tr><td>Browser to frontends/APIs</td><td>HTTPS; JSON, binary, and range requests</td><td>JWT and application access checks</td></tr>
           <tr><td>SAP to SAP API</td><td>ArchiveLink over HTTPS; raw or multipart HTTP</td><td>Basic Auth, certificate, or trusted service key depending on operation</td></tr>
-          <tr><td>Salesforce to SF API</td><td>REST over HTTPS</td><td>OAuth 2.0/JWT and SAML bearer support with managed users</td></tr>
+          <tr><td>SAP SuccessFactors to SF API</td><td>REST over HTTPS</td><td>OAuth 2.0/JWT and SAML bearer support with managed users</td></tr>
           <tr><td>Business APIs to ASM Storage API</td><td>Internal HTTP REST</td><td><code>X-Api-Key</code>; storage service is not on public Ingress</td></tr>
           <tr><td>APIs to Cloud SQL</td><td>PostgreSQL to localhost proxy</td><td>Workload Identity authorizes the Cloud SQL connector</td></tr>
           <tr><td>ASM Storage API to GCS</td><td>GCS JSON API over HTTPS</td><td>Application Default Credentials from Workload Identity</td></tr>
-          <tr><td>Auth to enterprise IdP</td><td>SAML 2.0 or Microsoft identity</td><td>Optional; active provider not verified</td></tr>
         </tbody></table>`
       },
       {
         title: "Internal Contract",
-        html: `<p>The central storage contract is the internal <code>/api/asm</code> API. ASM+ API, SAP API, and Salesforce API retain their own domain behavior and metadata persistence, then delegate object storage to <code>asm-api</code>. This keeps GCS credentials and storage-provider selection out of the public integration APIs.</p>
+        html: `<p>The central storage contract is the internal <code>/api/asm</code> API. ASM+ API, SAP API, and SAP SuccessFactors API retain their own domain behavior and metadata persistence, then delegate object storage to <code>asm-api</code>. This keeps GCS credentials and storage-provider selection out of the public integration APIs.</p>
         <div class="notice"><strong>Current GCP mode.</strong> The storage service selects GCS when <code>BTP_HYPERSCALER=GCP</code>. The GCS client uses ADC; no JSON key path is required or mounted.</div>`
-      },
-      {
-        title: "Optional and Inactive Integrations",
-        html: `<ul><li>Vector indexing clients are present in several APIs, but their endpoint is empty in the live configuration.</li><li>OnlyOffice is supported by the Viewer, but its server, callback, and proxy values are empty.</li><li>Enterprise SSO adapters exist, but this review did not establish that a provider is active.</li></ul>`
       }
     ]
   },
@@ -269,14 +252,6 @@ export const manuals = [
       {
         title: "Delivery Path",
         html: `<ol><li>Application images are stored in the regional Artifact Registry repository.</li><li>Helm renders Deployments, Services, ConfigMaps, service accounts, Ingress, BackendConfig, FrontendConfig, and ManagedCertificate resources.</li><li>GKE nodes pull OCI images and start application and proxy containers.</li><li>Readiness probes determine when NEG endpoints can receive traffic.</li><li>The Google-managed certificate and load balancer expose the ready services over HTTPS.</li></ol>`
-      },
-      {
-        title: "Live Deployment Versus Reusable Terraform Target",
-        html: `<div class="notice warning"><strong>Do not merge these baselines.</strong> The live deployment uses the <code>default</code> VPC, PostgreSQL 18, and <code>e2-medium</code> nodes. The reusable Terraform package under <code>DeploymentDocs/GCPTerraform</code> describes a future/portable target with a dedicated VPC, PostgreSQL 16, and different node sizing. This manual depicts the live deployment.</div>`
-      },
-      {
-        title: "Availability Implications",
-        html: `<ul><li>The GKE control plane and node pool are zonal in <code>us-east1-b</code>.</li><li>Cloud SQL is a zonal instance, not regional HA.</li><li>One application replica per deployment simplifies the demonstration footprint but limits disruption tolerance.</li><li>Cloud SQL backups and PITR protect database recovery; they do not make the runtime highly available.</li></ul>`
       }
     ]
   },
@@ -299,7 +274,7 @@ export const manuals = [
         html: `<table><thead><tr><th>Host class</th><th>Destinations</th></tr></thead><tbody>
           <tr><td>Web</td><td>Auth Portal, ASM+ Web, Document Viewer</td></tr>
           <tr><td>Core APIs</td><td>Auth API, ASM+ API</td></tr>
-          <tr><td>Integration APIs</td><td>SAP API, Salesforce API</td></tr>
+          <tr><td>Integration APIs</td><td>SAP API, SAP SuccessFactors API</td></tr>
           <tr><td>Internal only</td><td><code>asm-api</code> ClusterIP; not present in public Ingress</td></tr>
         </tbody></table>`
       },
@@ -335,7 +310,7 @@ export const manuals = [
           <tr><td>Auth API</td><td>Password hashes with bcrypt, password policy, signed JWTs, and optional SSO adapters.</td></tr>
           <tr><td>Business APIs to storage API</td><td>Internal <code>X-Api-Key</code> plus license enforcement for protected writes.</td></tr>
           <tr><td>SAP integration</td><td>Basic Auth, ArchiveLink certificates, or trusted service key depending on route.</td></tr>
-          <tr><td>Salesforce integration</td><td>OAuth/JWT and SAML bearer support with managed-user public keys and repository restrictions.</td></tr>
+          <tr><td>SAP SuccessFactors integration</td><td>OAuth/JWT and SAML bearer support with managed-user public keys and repository restrictions.</td></tr>
         </tbody></table>`
       },
       {
@@ -365,7 +340,7 @@ export const manuals = [
           <tr><td>GKE application-layer secret encryption state was <code>DECRYPTED</code>.</td><td>Kubernetes secrets are not protected with a customer-controlled application-layer key.</td></tr>
           <tr><td>Default VPC firewall rules remain.</td><td>The network perimeter is broader than a dedicated least-privilege VPC baseline.</td></tr>
         </tbody></table>
-        <div class="notice risk"><strong>Change discipline.</strong> These are observations, not automatic remediation instructions. Security hardening should be applied in an isolated environment and validated against GKE health checks, Ingress, Cloud SQL, GCS, SAP, Salesforce, and SSO flows before production rollout.</div>`
+        <div class="notice risk"><strong>Change discipline.</strong> These are observations, not automatic remediation instructions. Security hardening should be applied in an isolated environment and validated against GKE health checks, Ingress, Cloud SQL, GCS, SAP ArchiveLink, SAP SuccessFactors, and SSO flows before production rollout.</div>`
       }
     ]
   },
@@ -374,13 +349,13 @@ export const manuals = [
     slug: "09-runtime-sequences",
     shortTitle: "Runtime / Sequence",
     title: "Runtime and Sequence Architecture",
-    summary: "Walks through the principal interactive and integration flows: SSO, document upload, document viewing, SAP ArchiveLink writes, and Salesforce writes.",
+    summary: "Walks through the principal interactive and integration flows: SSO, document upload, document viewing, SAP ArchiveLink writes, and SAP SuccessFactors writes.",
     diagrams: [
       { file: "structurizr-09a-runtime-sso.svg", view: "09a-runtime-sso", title: "SSO Login Flow", alt: "Dynamic diagram of ASM+ SSO login", caption: "Figure 9a. Browser redirection to Auth, credential exchange, token callback, and application API use." },
       { file: "structurizr-09b-runtime-upload.svg", view: "09b-runtime-upload", title: "Folder and Document Upload Flow", alt: "Dynamic diagram of ASM+ upload", caption: "Figure 9b. Metadata validation and persistence combined with internal GCS-backed object storage." },
       { file: "structurizr-09c-runtime-view.svg", view: "09c-runtime-view", title: "Document View Flow", alt: "Dynamic diagram of ASM+ document viewing", caption: "Figure 9c. Viewer access validation, metadata lookup, and ranged binary retrieval." },
       { file: "structurizr-09d-runtime-sap.svg", view: "09d-runtime-sap", title: "SAP ArchiveLink Write Flow", alt: "Dynamic diagram of SAP document write", caption: "Figure 9d. SAP authentication, object storage, and metadata persistence." },
-      { file: "structurizr-09e-runtime-salesforce.svg", view: "09e-runtime-salesforce", title: "Salesforce Token and Write Flow", alt: "Dynamic diagram of Salesforce document write", caption: "Figure 9e. Managed-user token issuance followed by repository-scoped document persistence." }
+      { file: "structurizr-09e-runtime-successfactors.svg", view: "09e-runtime-successfactors", title: "SAP SuccessFactors Token and Write Flow", alt: "Dynamic diagram of a SAP SuccessFactors document write", caption: "Figure 9e. Managed-user token issuance followed by repository-scoped document persistence." }
     ],
     sections: [
       {
@@ -401,8 +376,8 @@ export const manuals = [
         html: `<ol><li>SAP sends an ArchiveLink request to the SAP API public hostname.</li><li>The API validates Basic Auth, certificate, or service-key context.</li><li>The SAP API delegates object storage to <code>asm-api</code>.</li><li>The storage API writes the document object and manifest to GCS.</li><li>The SAP API maps repository/document information into Cloud SQL folders/files and returns the ArchiveLink response.</li></ol>`
       },
       {
-        title: "Salesforce Token and Write",
-        html: `<ol><li>Salesforce obtains a bounded token through the configured JWT/OAuth or SAML-bearer flow.</li><li>The SF API validates the managed user, public key, and allowed repository scope.</li><li>The document operation is delegated to <code>asm-api</code> for object storage.</li><li>The SF API persists repository, version, folder, and document metadata in Cloud SQL.</li><li>The integration response is returned to Salesforce.</li></ol>`
+        title: "SAP SuccessFactors Token and Write",
+        html: `<ol><li>SAP SuccessFactors obtains a bounded token through the configured JWT/OAuth or SAML-bearer flow.</li><li>The SF API validates the managed user, public key, and allowed repository scope.</li><li>The document operation is delegated to <code>asm-api</code> for object storage.</li><li>The SF API persists repository, version, folder, and document metadata in Cloud SQL.</li><li>The integration response is returned to SAP SuccessFactors.</li></ol>`
       },
       {
         title: "Failure Boundaries",
@@ -455,7 +430,7 @@ export const manuals = [
       },
       {
         title: "Recommended Monitoring Baseline",
-        html: `<p class="status recommendation">Recommendation</p><ul><li>Create HTTPS uptime checks for the three frontends and health endpoints for the four public APIs.</li><li>Alert on Deployment unavailable replicas, repeated container restarts, and failed readiness probes.</li><li>Alert on load-balancer 5xx rate and latency, Cloud SQL CPU/connections/storage, backup failure, and GCS permission errors.</li><li>Create log-based metrics for authentication failures, license failures, internal API-key failures, and integration 5xx responses.</li><li>Configure notification channels and an operational ownership matrix before relying on alerts.</li><li>Define service-level objectives for login, document upload, document retrieval, SAP integration, and Salesforce integration.</li></ul>
+        html: `<p class="status recommendation">Recommendation</p><ul><li>Create HTTPS uptime checks for the three frontends and health endpoints for the four public APIs.</li><li>Alert on Deployment unavailable replicas, repeated container restarts, and failed readiness probes.</li><li>Alert on load-balancer 5xx rate and latency, Cloud SQL CPU/connections/storage, backup failure, and GCS permission errors.</li><li>Create log-based metrics for authentication failures, license failures, internal API-key failures, and integration 5xx responses.</li><li>Configure notification channels and an operational ownership matrix before relying on alerts.</li><li>Define service-level objectives for login, document upload, document retrieval, SAP ArchiveLink integration, and SAP SuccessFactors integration.</li></ul>
         <div class="notice"><strong>Not applied.</strong> These recommendations are documentation only. No monitoring resources or alert policies were created during this work.</div>`
       }
     ]

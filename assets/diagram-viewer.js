@@ -4,6 +4,7 @@ const error = document.querySelector("#viewer-error");
 const title = document.querySelector("#viewer-title");
 const zoomValue = document.querySelector("#zoom-value");
 const rawLink = document.querySelector("#raw-svg-link");
+const downloadLink = document.querySelector("#download-svg-link");
 
 const params = new URLSearchParams(window.location.search);
 const requestedSource = params.get("src") || "";
@@ -131,5 +132,7 @@ if (!validSource) {
     error.hidden = false;
   }, { once: true });
   rawLink.href = requestedSource;
+  downloadLink.href = requestedSource;
+  downloadLink.download = requestedSource.split("/").at(-1);
   image.src = requestedSource;
 }

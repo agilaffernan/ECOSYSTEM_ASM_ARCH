@@ -12,7 +12,7 @@ The table maps each Structurizr view to the evidence types used to build it. All
 | `03b-component-api-asm-plus` | ASM+ API components | `ECOSYSTEM_API_ASM_PLUS` source, routes/controllers/services, DB schema | High |
 | `03c-component-api-auth` | Auth API components | `ECOSYSTEM_API_AUTH` source, routes/services, DB schema | High |
 | `03d-component-api-sap` | SAP API components | `ECOSYSTEM_API_SAP` source, live OpenAPI, environment configuration | High |
-| `03e-component-api-sf` | Salesforce API components | `ECOSYSTEM_API_SF` source, live OpenAPI, environment configuration | High |
+| `03e-component-api-sf` | SAP SuccessFactors API components | `ECOSYSTEM_API_SF` source, live OpenAPI, environment configuration | High |
 | `03f-component-front-asm-plus` | ASM+ Web components | `ECOSYSTEM_FRONT_ASM_PLUS` source and live `runtime-config.js` | High |
 | `03g-component-front-auth` | Auth Portal components | `ECOSYSTEM_FRONT_AUTH` source and live runtime configuration | High |
 | `03h-component-front-viewer` | Viewer components | `ECOSYSTEM_FRONT_VIEWER` source and live `runtime-config.js` | High; OnlyOffice marked optional |
@@ -25,7 +25,7 @@ The table maps each Structurizr view to the evidence types used to build it. All
 | `09b-runtime-upload` | Upload sequence | Frontend/API routes, database adapter, ASM client, GCS repository | High |
 | `09c-runtime-view` | View sequence | Frontend Viewer source, ASM+/SAP APIs, range support, GCS repository | High |
 | `09d-runtime-sap` | SAP write sequence | SAP OpenAPI/source, ASM storage client, DB and GCS configuration | High |
-| `09e-runtime-salesforce` | Salesforce write sequence | SF OpenAPI/source, token/user services, DB and GCS configuration | High |
+| `09e-runtime-successfactors` | SAP SuccessFactors write sequence | SF OpenAPI/source, token/user services, DB and GCS configuration | High |
 | `10-observability-architecture` | Observability | Probe specs, GKE logging/monitoring configuration, Monitoring inventory | High |
 
 ## Evidence Types

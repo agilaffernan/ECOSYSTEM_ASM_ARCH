@@ -12,11 +12,8 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
         sapSystem = softwareSystem "SAP System" "Calls the SAP ArchiveLink-compatible interface for document storage and retrieval." {
             tags "External System,SAP Official"
         }
-        salesforce = softwareSystem "Salesforce" "Calls the Salesforce document/repository integration and token endpoints." {
-            tags "External System"
-        }
-        enterpriseIdp = softwareSystem "Enterprise Identity Provider" "Optional SAML or Microsoft identity provider supported by Auth; active provider configuration was not verified." {
-            tags "Optional System"
+        successFactors = softwareSystem "SAP SuccessFactors" "Calls the SAP SuccessFactors document/repository integration and token endpoints." {
+            tags "External System,SAP Official"
         }
         corporateDns = softwareSystem "Auritas DNS" "Publishes seven A records under asmplus-demo.auritas.com." {
             tags "External Service"
@@ -41,7 +38,7 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
             tags "Platform Service,GCP GKE"
         }
 
-        asmPlus = softwareSystem "ASM+" "Document management, authentication, viewing, and SAP/Salesforce integrations deployed on GKE." {
+        asmPlus = softwareSystem "ASM+" "Document management, authentication, viewing, and SAP ArchiveLink/SAP SuccessFactors integrations deployed on GKE." {
             tags "Core System"
 
             group "Web Experience" {
@@ -106,14 +103,14 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
                     sapVector = component "Vector Integration Client" "Optional indexing adapter; VECTOR_API_URL is empty in the live deployment." "HTTP, optional" "API Client"
                 }
 
-                apiSf = container "Salesforce API" "Provides Salesforce repository/document operations and token issuance." "Node.js, TypeScript, Express; port 3030" {
+                apiSf = container "SAP SuccessFactors API" "Provides SAP SuccessFactors repository/document operations and token issuance." "Node.js, TypeScript, Express; port 3030" {
                     tags "Integration API"
-                    sfHttp = component "Salesforce Document Interface" "Exposes /api/sf document and repository operations." "Express, JSON and binary" "API Surface"
-                    sfToken = component "OAuth and SAML Bearer Token Service" "Issues bounded access tokens and validates managed Salesforce users." "JWT, OAuth 2.0, SAML bearer" "Security Component"
-                    sfUsers = component "Managed User Registry" "Manages Salesforce public keys and allowed repositories." "TypeScript service" "Security Component"
-                    sfPersistence = component "Salesforce Metadata Persistence" "Maps Salesforce repositories, documents, versions, and folders into folders/files." "pg" "Data Adapter"
+                    sfHttp = component "SuccessFactors Document Interface" "Exposes /api/sf document and repository operations." "Express, JSON and binary" "API Surface"
+                    sfToken = component "OAuth and SAML Bearer Token Service" "Issues bounded access tokens and validates managed SuccessFactors users." "JWT, OAuth 2.0, SAML bearer" "Security Component"
+                    sfUsers = component "Managed User Registry" "Manages SuccessFactors public keys and allowed repositories." "TypeScript service" "Security Component"
+                    sfPersistence = component "SuccessFactors Metadata Persistence" "Maps SuccessFactors repositories, documents, versions, and folders into folders/files." "pg" "Data Adapter"
                     sfAsmClient = component "ASM Storage Client" "Delegates document and registry objects to asm-api." "HTTP, X-Api-Key" "API Client"
-                    sfAdmin = component "Salesforce Management UI" "Provides managed-user and repository administration." "Static UI and Express" "Frontend Component"
+                    sfAdmin = component "SuccessFactors Management UI" "Provides managed-user and repository administration." "Static UI and Express" "Frontend Component"
                     sfVector = component "Vector Integration Client" "Optional indexing adapter; VECTOR_API_URL is empty in the live deployment." "HTTP, optional" "API Client"
                 }
             }
@@ -142,7 +139,7 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
         businessUser -> asmPlus "Uses document management and viewing capabilities" "HTTPS"
         platformAdmin -> asmPlus "Administers application access and operations" "HTTPS and kubectl"
         sapSystem -> asmPlus "Stores and retrieves SAP documents" "ArchiveLink over HTTPS"
-        salesforce -> asmPlus "Stores and retrieves Salesforce documents" "REST over HTTPS"
+        successFactors -> asmPlus "Stores and retrieves SAP SuccessFactors documents" "REST over HTTPS"
         asmPlus -> cloudSql "Stores application metadata" "PostgreSQL"
         asmPlus -> gcs "Stores document binaries and manifests" "GCS JSON API over HTTPS"
         asmPlus -> cloudOperations "Emits workload logs and metrics" "Cloud Operations agents"
@@ -156,9 +153,7 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
         platformAdmin -> cloudOperations "Inspects logs, metrics, and workload health" "Google Cloud Console and gcloud" "Operations"
 
         sapSystem -> apiSap "Performs ArchiveLink operations" "HTTPS, Basic Auth or certificate" "Public HTTPS"
-        salesforce -> apiSf "Requests tokens and performs repository/document operations" "HTTPS, OAuth/JWT" "Public HTTPS"
-        enterpriseIdp -> authApi "Provides optional federated identity assertions" "SAML 2.0 or Microsoft identity" "Optional"
-
+        successFactors -> apiSf "Requests tokens and performs repository/document operations" "HTTPS, OAuth/JWT" "Public HTTPS"
         frontAuth -> authApi "Authenticates users and administers identity/access data" "HTTPS/JSON" "Public HTTPS"
         frontAsm -> frontAuth "Redirects the browser to the SSO portal" "HTTPS" "Authentication"
         frontAsm -> authApi "Authenticates and checks application access" "HTTPS/JSON, JWT" "Public HTTPS"
@@ -172,12 +167,12 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
 
         apiPlus -> asmApi "Reads and writes document objects, manifests, licenses, and certificates" "HTTP/REST, X-Api-Key" "Internal HTTP"
         apiSap -> asmApi "Reads and writes SAP document objects and certificates" "HTTP/REST, X-Api-Key" "Internal HTTP"
-        apiSf -> asmApi "Reads and writes Salesforce document and registry objects" "HTTP/REST, X-Api-Key" "Internal HTTP"
+        apiSf -> asmApi "Reads and writes SAP SuccessFactors document and registry objects" "HTTP/REST, X-Api-Key" "Internal HTTP"
 
         authApi -> cloudSql "Reads and writes identity and access tables through a local Cloud SQL Auth Proxy" "PostgreSQL on 127.0.0.1:5432" "Database"
         apiPlus -> cloudSql "Reads and writes document metadata, RBAC, workflow, audit, and reporting tables through a local proxy" "PostgreSQL on 127.0.0.1:5432" "Database"
         apiSap -> cloudSql "Persists SAP document hierarchy and metadata through a local proxy" "PostgreSQL on 127.0.0.1:5432" "Database"
-        apiSf -> cloudSql "Persists Salesforce document hierarchy and metadata through a local proxy" "PostgreSQL on 127.0.0.1:5432" "Database"
+        apiSf -> cloudSql "Persists SAP SuccessFactors document hierarchy and metadata through a local proxy" "PostgreSQL on 127.0.0.1:5432" "Database"
         asmApi -> gcs "Stores and retrieves binaries, manifests, licenses, and certificates using ADC" "GCS API over HTTPS" "Object Storage"
 
         secretManager -> runtimeSecrets "Provides approved core secret material during provisioning" "Administrative provisioning path" "Secret Provisioning"
@@ -193,7 +188,7 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
         runtimeSecrets -> authApi "Injects database, JWT, superadmin, and client-key secrets" "Environment variables" "Secret Injection"
         runtimeSecrets -> apiPlus "Injects database, JWT, internal API, and optional vector secrets" "Environment variables" "Secret Injection"
         runtimeSecrets -> apiSap "Injects database, JWT, internal API, and SAP user secrets" "Environment variables" "Secret Injection"
-        runtimeSecrets -> apiSf "Injects database, internal API, Salesforce user, and optional vector secrets" "Environment variables" "Secret Injection"
+        runtimeSecrets -> apiSf "Injects database, internal API, SuccessFactors managed-user, and optional vector secrets" "Environment variables" "Secret Injection"
         runtimeSecrets -> asmApi "Injects the internal ASM API key" "Environment variables" "Secret Injection"
         runtimeSecrets -> frontAsm "Injects the Auth client key" "Environment variable" "Secret Injection"
 
@@ -243,7 +238,6 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
         auAuth -> auDb "Reads users and writes login state"
         auAccess -> auDb "Reads and writes access data"
         auSso -> auDb "Reads and writes SSO configuration"
-        auSso -> enterpriseIdp "Exchanges assertions when configured" "SAML/Microsoft"
         auDb -> cloudSql "Queries" "PostgreSQL"
 
         apHttp -> apAuth "Applies authentication and authorization"
@@ -423,85 +417,85 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
     views {
         systemContext asmPlus "01-system-context" "ASM+ users, integrations, and managed service dependencies." {
             title "1. System Context"
-            include businessUser platformAdmin asmPlus sapSystem salesforce enterpriseIdp corporateDns cloudSql gcs cloudOperations
+            include businessUser platformAdmin asmPlus sapSystem successFactors corporateDns cloudSql gcs cloudOperations
             autoLayout lr 300 220
         }
 
         container asmPlus "02-container-microservices" "The eight deployed workloads and their principal runtime dependencies." {
             title "2. Container and Microservices Architecture"
-            include businessUser sapSystem salesforce frontAuth frontAsm viewer authApi apiPlus apiSap apiSf asmApi runtimeConfig runtimeSecrets cloudSql gcs
-            autoLayout lr 300 220
+            include frontAuth frontAsm viewer authApi apiPlus apiSap apiSf asmApi cloudSql gcs
+            autoLayout tb 160 130
         }
 
         component asmApi "03a-component-asm-api" "Internal structure of asm-api and its GCS adapter." {
             title "3A. Component Architecture - ASM Storage API"
             include *
-            autoLayout lr 260 180
+            autoLayout lr 160 130
         }
         component apiPlus "03b-component-api-asm-plus" "Internal structure of the ASM+ orchestration API." {
             title "3B. Component Architecture - ASM+ API"
             include *
-            autoLayout lr 260 180
+            autoLayout tb 160 130
         }
         component authApi "03c-component-api-auth" "Internal structure of the Auth API." {
             title "3C. Component Architecture - Auth API"
             include *
-            autoLayout lr 260 180
+            autoLayout tb 160 130
         }
         component apiSap "03d-component-api-sap" "Internal structure of the SAP ArchiveLink integration." {
             title "3D. Component Architecture - SAP API"
             include *
-            autoLayout lr 260 180
+            autoLayout tb 160 130
         }
-        component apiSf "03e-component-api-sf" "Internal structure of the Salesforce integration." {
-            title "3E. Component Architecture - Salesforce API"
+        component apiSf "03e-component-api-sf" "Internal structure of the SAP SuccessFactors integration." {
+            title "3E. Component Architecture - SAP SuccessFactors API"
             include *
-            autoLayout lr 260 180
+            autoLayout lr 160 130
         }
         component frontAsm "03f-component-front-asm-plus" "Internal structure of the main ASM+ web application." {
             title "3F. Component Architecture - ASM+ Web Application"
             include *
-            autoLayout lr 260 180
+            autoLayout lr 160 130
         }
         component frontAuth "03g-component-front-auth" "Internal structure of the Auth Portal." {
             title "3G. Component Architecture - Auth Portal"
             include *
-            autoLayout lr 260 180
+            autoLayout lr 160 130
         }
         component viewer "03h-component-front-viewer" "Internal structure of the Document Viewer." {
             title "3H. Component Architecture - Document Viewer"
             include *
-            autoLayout lr 260 180
+            autoLayout tb 160 130
         }
 
         container asmPlus "04-api-integration" "Public APIs, internal service calls, protocols, and external integrations." {
             title "4. API and Integration Architecture"
-            include businessUser sapSystem salesforce enterpriseIdp frontAuth frontAsm viewer authApi apiPlus apiSap apiSf asmApi
-            autoLayout lr 320 220
+            include businessUser sapSystem successFactors frontAuth frontAsm viewer authApi apiPlus apiSap apiSf asmApi
+            autoLayout tb 180 150
         }
 
         container asmPlus "05-data-architecture" "Metadata persistence and binary object flows." {
             title "5. Data Architecture"
             include authApi apiPlus apiSap apiSf asmApi cloudSql gcs
-            autoLayout lr 320 240
+            autoLayout tb 170 140
         }
 
         deployment * live "06-deployment-architecture" "Physical deployment of ASM+ in the live Google Cloud project." {
             title "6. Deployment Architecture"
             include *
-            autoLayout lr 320 240
+            autoLayout tb 160 130
         }
 
         deployment * live "07-network-architecture" "Public ingress, VPC, GKE services, sidecars, and private managed-service paths." {
             title "7. Network Architecture"
             include dnsInstance managedCert loadBalancer frontAuthInstance frontAsmInstance viewerInstance authApiInstance authProxy apiPlusInstance plusProxy apiSapInstance sapProxy apiSfInstance sfProxy asmApiInstance sqlInstance gcsInstance
-            autoLayout lr 380 280
+            autoLayout tb 160 130
         }
 
         container asmPlus "08-security-architecture" "Authentication, secret injection, Workload Identity, TLS, and protected data paths." {
             title "8. Security Architecture"
-            include businessUser platformAdmin enterpriseIdp frontAuth frontAsm viewer authApi apiPlus apiSap apiSf asmApi runtimeSecrets secretManager cloudSql gcs
-            autoLayout lr 340 240
+            include businessUser platformAdmin frontAuth frontAsm viewer authApi apiPlus apiSap apiSf asmApi runtimeSecrets secretManager cloudSql gcs
+            autoLayout tb 170 140
         }
 
         dynamic asmPlus "09a-runtime-sso" "Interactive SSO login and callback flow." {
@@ -513,7 +507,7 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
             authApi -> cloudSql "Validates user and application access"
             businessUser -> frontAsm "Returns to /sso/callback with the token"
             frontAsm -> authApi "Loads identity and access context"
-            autoLayout lr 280 180
+            autoLayout lr 130 110
         }
 
         dynamic asmPlus "09b-runtime-upload" "Folder creation and document upload flow." {
@@ -524,7 +518,7 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
             apiPlus -> asmApi "Writes the document component and manifest"
             asmApi -> gcs "Stores the binary and manifest using ADC"
             apiPlus -> cloudSql "Finalizes file status and workflow data"
-            autoLayout lr 280 180
+            autoLayout lr 130 110
         }
 
         dynamic asmPlus "09c-runtime-view" "Open and render a document flow." {
@@ -535,7 +529,7 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
             viewer -> apiPlus "Requests metadata and binary content"
             apiPlus -> asmApi "Requests the stored component"
             asmApi -> gcs "Streams the object, including HTTP range support"
-            autoLayout lr 280 180
+            autoLayout lr 130 110
         }
 
         dynamic asmPlus "09d-runtime-sap" "SAP ArchiveLink document write flow." {
@@ -544,22 +538,22 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
             apiSap -> asmApi "Writes the component with the trusted internal key"
             asmApi -> gcs "Stores the binary and manifest"
             apiSap -> cloudSql "Persists the SAP system/repository/document hierarchy"
-            autoLayout lr 280 180
+            autoLayout lr 130 110
         }
 
-        dynamic asmPlus "09e-runtime-salesforce" "Salesforce token and document write flow." {
-            title "9E. Runtime Sequence - Salesforce Write"
-            salesforce -> apiSf "Requests a token and submits a document operation"
+        dynamic asmPlus "09e-runtime-successfactors" "SAP SuccessFactors token and document write flow." {
+            title "9E. Runtime Sequence - SAP SuccessFactors Write"
+            successFactors -> apiSf "Requests a token and submits a document operation"
             apiSf -> asmApi "Writes the document or managed-user registry object"
             asmApi -> gcs "Stores the binary and manifest"
             apiSf -> cloudSql "Persists repository, folder, document, and version metadata"
-            autoLayout lr 280 180
+            autoLayout lr 130 110
         }
 
         container asmPlus "10-observability-architecture" "Health probes, workload logs, platform metrics, and the current monitoring boundary." {
             title "10. Observability Architecture"
             include platformAdmin gkeHealth frontAuth frontAsm viewer authApi apiPlus apiSap apiSf asmApi cloudOperations
-            autoLayout lr 340 220
+            autoLayout tb 170 140
         }
 
         styles {
@@ -618,6 +612,7 @@ workspace "ASM+ on Google Cloud" "Evidence-grounded architecture of the live sap
                 background #7C3AED
                 color #FFFFFF
                 stroke #6D28D9
+                strokeWidth 6
             }
             element "Data Store" {
                 shape Cylinder

@@ -1,11 +1,11 @@
 digraph {
   compound=true
-  graph [fontname="Arial", rankdir=LR, ranksep=1.08, nodesep=1.08, newrank=true, remincross=true, mclimit=8.0, splines=spline, outputorder=edgesfirst]
+  graph [fontname="Arial", rankdir=TB, ranksep=0.58, nodesep=0.52, newrank=true, remincross=true, mclimit=8.0, splines=ortho, outputorder=edgesfirst]
   node [fontname="Arial", shape=box, margin="0.4,0.3"]
   edge [fontname="Arial"]
   label=<<br /><font point-size="34">3H. Component Architecture - Document Viewer</font><br /><font point-size="24">Internal structure of the Document Viewer.</font>>
 
-  subgraph cluster_13 {
+  subgraph cluster_12 {
     margin=25
     label=<<font point-size="24"><br />ASM+</font><br /><font point-size="19">[Software System]</font>>
     labelloc=b
@@ -13,7 +13,7 @@ digraph {
     fontcolor="#444444"
     fillcolor="#444444"
 
-    subgraph cluster_26 {
+    subgraph cluster_25 {
       margin=25
       label=<<font point-size="24"><br />Document Viewer</font><br /><font point-size="19">[Container: React, Vite, Node static server]</font>>
       labelloc=b
@@ -21,25 +21,25 @@ digraph {
       fontcolor="#444444"
       fillcolor="#444444"
 
-      27 [id=27,shape=folder, label=<<font point-size="34">Runtime Configuration<br />Loader</font><br /><font point-size="19">[Component: JavaScript]</font><br /><br /><font point-size="24">Loads Auth, ASM+, SAP, and<br />optional OnlyOffice endpoints.</font>>, style=filled, color="#64748b", fillcolor="#e2e8f0", fontcolor="#172033"]
-      28 [id=28,shape=component, label=<<font point-size="34">Viewer Shell and<br />Parameter Parser</font><br /><font point-size="19">[Component: React]</font><br /><br /><font point-size="24">Validates route parameters and<br />selects a viewer<br />implementation.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      29 [id=29,shape=component, label=<<font point-size="34">Document API Client</font><br /><font point-size="19">[Component: Fetch/HTTP range]</font><br /><br /><font point-size="24">Retrieves metadata and binary<br />content from ASM+ or SAP APIs.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      30 [id=30,shape=component, label=<<font point-size="34">Native Browser Viewer</font><br /><font point-size="19">[Component: React]</font><br /><br /><font point-size="24">Renders supported non-Office<br />content in the browser.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
-      31 [id=31,shape=component, label=<<font point-size="34">OnlyOffice Adapter</font><br /><font point-size="19">[Component: React, optional]</font><br /><br /><font point-size="24">Optional Office document<br />integration; endpoint is empty<br />in the live configuration.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      26 [id=26,shape=folder, label=<<br /><br /><br /><font point-size="34">Runtime Configuration<br />Loader</font><br /><font point-size="19">[Component: JavaScript]</font><br /><br /><font point-size="24">Loads Auth, ASM+, SAP, and<br />optional OnlyOffice endpoints.</font>>, style=filled, color="#64748b", fillcolor="#e2e8f0", fontcolor="#172033"]
+      27 [id=27,shape=component, label=<<font point-size="34">Viewer Shell and<br />Parameter Parser</font><br /><font point-size="19">[Component: React]</font><br /><br /><font point-size="24">Validates route parameters and<br />selects a viewer<br />implementation.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      28 [id=28,shape=component, label=<<font point-size="34">Document API Client</font><br /><font point-size="19">[Component: Fetch/HTTP range]</font><br /><br /><font point-size="24">Retrieves metadata and binary<br />content from ASM+ or SAP APIs.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      29 [id=29,shape=component, label=<<br /><br /><br /><font point-size="34">Native Browser Viewer</font><br /><font point-size="19">[Component: React]</font><br /><br /><font point-size="24">Renders supported non-Office<br />content in the browser.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
+      30 [id=30,shape=component, label=<<font point-size="34">OnlyOffice Adapter</font><br /><font point-size="19">[Component: React, optional]</font><br /><br /><font point-size="24">Optional Office document<br />integration; endpoint is empty<br />in the live configuration.</font>>, style=filled, color="#64748b", fillcolor="#f8fafc", fontcolor="#172033"]
     }
 
-    38 [id=38,shape=hexagon, label=<<font point-size="34">ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Orchestrates document<br />metadata, access, workflows,<br />notifications, reports, audit,<br />and binary operations.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
-    47 [id=47,shape=hexagon, label=<<font point-size="34">SAP API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3020]</font><br /><br /><font point-size="24">Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
-    71 [id=71,shape=folder, label=<<font point-size="34">Runtime Configuration</font><br /><font point-size="19">[Container: Kubernetes ConfigMaps]</font><br /><br /><font point-size="24">Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</font>>, style=filled, color="#326ce5", fillcolor="#ffffff", fontcolor="#172033"]
+    37 [id=37,shape=hexagon, label=<<font point-size="34">ASM+ API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3000]</font><br /><br /><font point-size="24">Orchestrates document<br />metadata, access, workflows,<br />notifications, reports, audit,<br />and binary operations.</font>>, style=filled, color="#115e59", fillcolor="#0f766e", fontcolor="#ffffff"]
+    46 [id=46,shape=hexagon, label=<<font point-size="34">SAP API</font><br /><font point-size="19">[Container: Node.js, TypeScript, Express; port 3020]</font><br /><br /><font point-size="24">Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</font>>, style=filled, color="#92400e", fillcolor="#b45309", fontcolor="#ffffff"]
+    70 [id=70,shape=folder, label=<<br /><br /><br /><font point-size="34">Runtime Configuration</font><br /><font point-size="19">[Container: Kubernetes ConfigMaps]</font><br /><br /><font point-size="24">Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</font>>, style=filled, color="#326ce5", fillcolor="#ffffff", fontcolor="#172033"]
   }
 
-  71 -> 38 [id=115, label=<<font point-size="18">Injects non-secret runtime<br />configuration</font><br /><font point-size="13">[Environment variables]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  71 -> 47 [id=116, label=<<font point-size="18">Injects non-secret runtime<br />configuration</font><br /><font point-size="13">[Environment variables]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  27 -> 71 [id=157, label=<<font point-size="18">Reads startup configuration</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  28 -> 29 [id=159, label=<<font point-size="18">Uses</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  28 -> 30 [id=160, label=<<font point-size="18">Selects for supported content</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  28 -> 31 [id=161, label=<<font point-size="18">Selects when configured</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  29 -> 38 [id=162, label=<<font point-size="18">Reads ASM+ documents</font><br /><font point-size="13">[HTTPS/JSON and range]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
-  29 -> 47 [id=163, label=<<font point-size="18">Reads SAP documents</font><br /><font point-size="13">[HTTPS/ArchiveLink]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  70 -> 37 [id=112, label=<<font point-size="18">Injects non-secret runtime<br />configuration</font><br /><font point-size="13">[Environment variables]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  70 -> 46 [id=113, label=<<font point-size="18">Injects non-secret runtime<br />configuration</font><br /><font point-size="13">[Environment variables]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  26 -> 70 [id=154, label=<<font point-size="18">Reads startup configuration</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  27 -> 28 [id=156, label=<<font point-size="18">Uses</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  27 -> 29 [id=157, label=<<font point-size="18">Selects for supported content</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  27 -> 30 [id=158, label=<<font point-size="18">Selects when configured</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  28 -> 37 [id=159, label=<<font point-size="18">Reads ASM+ documents</font><br /><font point-size="13">[HTTPS/JSON and range]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
+  28 -> 46 [id=160, label=<<font point-size="18">Reads SAP documents</font><br /><font point-size="13">[HTTPS/ArchiveLink]</font>>, style="dashed", color="#64748b", fontcolor="#64748b"]
 
 }

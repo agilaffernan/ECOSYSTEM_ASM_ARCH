@@ -4,49 +4,49 @@ graph LR
   subgraph diagram ["3F. Component Architecture - ASM+ Web Application"]
     style diagram fill:#ffffff,stroke:#ffffff
 
-    subgraph 13 ["ASM+"]
-      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+    subgraph 12 ["ASM+"]
+      style 12 fill:#ffffff,stroke:#991b1b,color:#991b1b
 
-      subgraph 19 ["ASM+ Web Application"]
-        style 19 fill:#ffffff,stroke:#1d4ed8,color:#1d4ed8
+      subgraph 18 ["ASM+ Web Application"]
+        style 18 fill:#ffffff,stroke:#1d4ed8,color:#1d4ed8
 
-        20["<div style='font-weight: bold'>Runtime Configuration Loader</div><div style='font-size: 70%; margin-top: 0px'>[Component: JavaScript]</div><div style='font-size: 80%; margin-top:10px'>Loads public endpoint URLs<br />and feature switches from<br />runtime-config.js.</div>"]
-        style 20 fill:#e2e8f0,stroke:#64748b,color:#172033
-        21["<div style='font-weight: bold'>Application Shell and Router</div><div style='font-size: 70%; margin-top: 0px'>[Component: React]</div><div style='font-size: 80%; margin-top:10px'>Coordinates navigation,<br />layouts, notifications, and<br />error handling.</div>"]
+        19["<div style='font-weight: bold'>Runtime Configuration Loader</div><div style='font-size: 70%; margin-top: 0px'>[Component: JavaScript]</div><div style='font-size: 80%; margin-top:10px'>Loads public endpoint URLs<br />and feature switches from<br />runtime-config.js.</div>"]
+        style 19 fill:#e2e8f0,stroke:#64748b,color:#172033
+        20["<div style='font-weight: bold'>Application Shell and Router</div><div style='font-size: 70%; margin-top: 0px'>[Component: React]</div><div style='font-size: 80%; margin-top:10px'>Coordinates navigation,<br />layouts, notifications, and<br />error handling.</div>"]
+        style 20 fill:#f8fafc,stroke:#64748b,color:#172033
+        21["<div style='font-weight: bold'>Authentication Context</div><div style='font-size: 70%; margin-top: 0px'>[Component: React Context]</div><div style='font-size: 80%; margin-top:10px'>Processes SSO callbacks,<br />retains the JWT, and applies<br />client-side authorization.</div>"]
         style 21 fill:#f8fafc,stroke:#64748b,color:#172033
-        22["<div style='font-weight: bold'>Authentication Context</div><div style='font-size: 70%; margin-top: 0px'>[Component: React Context]</div><div style='font-size: 80%; margin-top:10px'>Processes SSO callbacks,<br />retains the JWT, and applies<br />client-side authorization.</div>"]
+        22["<div style='font-weight: bold'>Document and Workflow UI</div><div style='font-size: 70%; margin-top: 0px'>[Component: React]</div><div style='font-size: 80%; margin-top:10px'>Implements folders, files,<br />recycle bin, workflows,<br />reports, audit, and search<br />experiences.</div>"]
         style 22 fill:#f8fafc,stroke:#64748b,color:#172033
-        23["<div style='font-weight: bold'>Document and Workflow UI</div><div style='font-size: 70%; margin-top: 0px'>[Component: React]</div><div style='font-size: 80%; margin-top:10px'>Implements folders, files,<br />recycle bin, workflows,<br />reports, audit, and search<br />experiences.</div>"]
+        23["<div style='font-weight: bold'>ASM+ API Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: Fetch/JSON and binary]</div><div style='font-size: 80%; margin-top:10px'>Calls the ASM+ API and<br />notification/workflow<br />endpoints.</div>"]
         style 23 fill:#f8fafc,stroke:#64748b,color:#172033
-        24["<div style='font-weight: bold'>ASM+ API Client</div><div style='font-size: 70%; margin-top: 0px'>[Component: Fetch/JSON and binary]</div><div style='font-size: 80%; margin-top:10px'>Calls the ASM+ API and<br />notification/workflow<br />endpoints.</div>"]
+        24["<div style='font-weight: bold'>Viewer URL Builder</div><div style='font-size: 70%; margin-top: 0px'>[Component: JavaScript]</div><div style='font-size: 80%; margin-top:10px'>Launches the document viewer<br />with the selected document<br />context.</div>"]
         style 24 fill:#f8fafc,stroke:#64748b,color:#172033
-        25["<div style='font-weight: bold'>Viewer URL Builder</div><div style='font-size: 70%; margin-top: 0px'>[Component: JavaScript]</div><div style='font-size: 80%; margin-top:10px'>Launches the document viewer<br />with the selected document<br />context.</div>"]
-        style 25 fill:#f8fafc,stroke:#64748b,color:#172033
       end
 
-      26["<div style='font-weight: bold'>Document Viewer</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</div>"]
-      style 26 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
-      32["<div style='font-weight: bold'>Auth API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</div>"]
-      style 32 fill:#0f766e,stroke:#115e59,color:#ffffff
-      38["<div style='font-weight: bold'>ASM+ API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Orchestrates document<br />metadata, access, workflows,<br />notifications, reports,<br />audit, and binary operations.</div>"]
-      style 38 fill:#0f766e,stroke:#115e59,color:#ffffff
-      71["<div style='font-weight: bold'>Runtime Configuration</div><div style='font-size: 70%; margin-top: 0px'>[Container: Kubernetes ConfigMaps]</div><div style='font-size: 80%; margin-top:10px'>Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</div>"]
-      style 71 fill:#ffffff,stroke:#326ce5,color:#172033
+      25["<div style='font-weight: bold'>Document Viewer</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</div>"]
+      style 25 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+      31["<div style='font-weight: bold'>Auth API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</div>"]
+      style 31 fill:#0f766e,stroke:#115e59,color:#ffffff
+      37["<div style='font-weight: bold'>ASM+ API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Orchestrates document<br />metadata, access, workflows,<br />notifications, reports,<br />audit, and binary operations.</div>"]
+      style 37 fill:#0f766e,stroke:#115e59,color:#ffffff
+      70["<div style='font-weight: bold'>Runtime Configuration</div><div style='font-size: 70%; margin-top: 0px'>[Container: Kubernetes ConfigMaps]</div><div style='font-size: 80%; margin-top:10px'>Non-secret environment<br />configuration supplied by<br />Kubernetes ConfigMaps.</div>"]
+      style 70 fill:#ffffff,stroke:#326ce5,color:#172033
     end
 
-    71-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->26
-    71-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->32
-    71-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->38
-    20-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->71
-    21-. "<div>Uses</div><div style='font-size: 70%'></div>" .->22
-    21-. "<div>Hosts</div><div style='font-size: 70%'></div>" .->23
-    23-. "<div>Uses</div><div style='font-size: 70%'></div>" .->24
-    23-. "<div>Uses</div><div style='font-size: 70%'></div>" .->25
-    22-. "<div>Authenticates and checks<br />access</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->32
-    24-. "<div>Calls</div><div style='font-size: 70%'>[HTTPS/JSON and binary]</div>" .->38
-    25-. "<div>Launches</div><div style='font-size: 70%'>[HTTPS]</div>" .->26
-    26-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->71
-    26-. "<div>Validates authentication and<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->32
-    26-. "<div>Retrieves ASM+ metadata and<br />file content</div><div style='font-size: 70%'>[HTTPS/JSON and HTTP range]</div>" .->38
+    70-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->25
+    70-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->31
+    70-. "<div>Injects non-secret runtime<br />configuration</div><div style='font-size: 70%'>[Environment variables]</div>" .->37
+    19-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->70
+    20-. "<div>Uses</div><div style='font-size: 70%'></div>" .->21
+    20-. "<div>Hosts</div><div style='font-size: 70%'></div>" .->22
+    22-. "<div>Uses</div><div style='font-size: 70%'></div>" .->23
+    22-. "<div>Uses</div><div style='font-size: 70%'></div>" .->24
+    21-. "<div>Authenticates and checks<br />access</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->31
+    23-. "<div>Calls</div><div style='font-size: 70%'>[HTTPS/JSON and binary]</div>" .->37
+    24-. "<div>Launches</div><div style='font-size: 70%'>[HTTPS]</div>" .->25
+    25-. "<div>Reads startup configuration</div><div style='font-size: 70%'></div>" .->70
+    25-. "<div>Validates authentication and<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->31
+    25-. "<div>Retrieves ASM+ metadata and<br />file content</div><div style='font-size: 70%'>[HTTPS/JSON and HTTP range]</div>" .->37
 
   end

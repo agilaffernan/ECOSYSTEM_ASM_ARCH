@@ -1,4 +1,4 @@
-graph LR
+graph TB
   linkStyle default fill:#ffffff
 
   subgraph diagram ["8. Security Architecture"]
@@ -8,83 +8,79 @@ graph LR
     style 1 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
     2["<div style='font-weight: bold'>Platform Administrator</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Operates ASM+, Kubernetes,<br />and Google Cloud resources.</div>"]
     style 2 fill:#334155,stroke:#1e293b,color:#ffffff
-    5["<div style='font-weight: bold'>Enterprise Identity Provider</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Optional SAML or Microsoft<br />identity provider supported<br />by Auth; active provider<br />configuration was not<br />verified.</div>"]
-    style 5 fill:#f8fafc,stroke:#94a3b8,color:#475569
-    7[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
+    6[("<div style='font-weight: bold'>Cloud SQL for PostgreSQL</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private PostgreSQL 18<br />instance<br />asmplus-demo-postgres;<br />database auritasdemo contains<br />23 application tables.</div>")]
+    style 6 fill:#ffffff,stroke:#4285f4,color:#172033
+    7[("<div style='font-weight: bold'>Cloud Storage</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</div>")]
     style 7 fill:#ffffff,stroke:#4285f4,color:#172033
-    8[("<div style='font-weight: bold'>Cloud Storage</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Private bucket<br />sap-ecosystem-asmplus-asm-binaries<br />stores document binaries and<br />ASM manifests.</div>")]
+    8[("<div style='font-weight: bold'>Secret Manager</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Stores the five observed core<br />secret objects; secret values<br />are not represented in this<br />model.</div>")]
     style 8 fill:#ffffff,stroke:#4285f4,color:#172033
-    9[("<div style='font-weight: bold'>Secret Manager</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Stores the five observed core<br />secret objects; secret values<br />are not represented in this<br />model.</div>")]
-    style 9 fill:#ffffff,stroke:#4285f4,color:#172033
 
-    subgraph 13 ["ASM+"]
-      style 13 fill:#ffffff,stroke:#991b1b,color:#991b1b
+    subgraph 12 ["ASM+"]
+      style 12 fill:#ffffff,stroke:#991b1b,color:#991b1b
 
       subgraph group1 ["Application APIs"]
         style group1 fill:#ffffff,stroke:#cccccc,color:#cccccc,stroke-dasharray:5
 
-        32["<div style='font-weight: bold'>Auth API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</div>"]
-        style 32 fill:#0f766e,stroke:#115e59,color:#ffffff
-        38["<div style='font-weight: bold'>ASM+ API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Orchestrates document<br />metadata, access, workflows,<br />notifications, reports,<br />audit, and binary operations.</div>"]
-        style 38 fill:#0f766e,stroke:#115e59,color:#ffffff
-        47["<div style='font-weight: bold'>SAP API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3020]</div><div style='font-size: 80%; margin-top:10px'>Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</div>"]
-        style 47 fill:#b45309,stroke:#92400e,color:#ffffff
-        55["<div style='font-weight: bold'>Salesforce API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3030]</div><div style='font-size: 80%; margin-top:10px'>Provides Salesforce<br />repository/document<br />operations and token<br />issuance.</div>"]
-        style 55 fill:#b45309,stroke:#92400e,color:#ffffff
+        31["<div style='font-weight: bold'>Auth API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Authenticates users, issues<br />JWTs, and administers<br />applications, roles,<br />structures, SSO, and access.</div>"]
+        style 31 fill:#0f766e,stroke:#115e59,color:#ffffff
+        37["<div style='font-weight: bold'>ASM+ API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Orchestrates document<br />metadata, access, workflows,<br />notifications, reports,<br />audit, and binary operations.</div>"]
+        style 37 fill:#0f766e,stroke:#115e59,color:#ffffff
+        46["<div style='font-weight: bold'>SAP API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3020]</div><div style='font-size: 80%; margin-top:10px'>Provides SAP<br />ArchiveLink-compatible<br />document operations and SAP<br />viewer launch support.</div>"]
+        style 46 fill:#b45309,stroke:#92400e,color:#ffffff
+        54["<div style='font-weight: bold'>SAP SuccessFactors API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3030]</div><div style='font-size: 80%; margin-top:10px'>Provides SAP SuccessFactors<br />repository/document<br />operations and token<br />issuance.</div>"]
+        style 54 fill:#b45309,stroke:#92400e,color:#ffffff
       end
 
       subgraph group2 ["Storage Core"]
         style group2 fill:#ffffff,stroke:#cccccc,color:#cccccc,stroke-dasharray:5
 
-        63["<div style='font-weight: bold'>ASM Storage API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</div>"]
-        style 63 fill:#7c3aed,stroke:#6d28d9,color:#ffffff
+        62["<div style='font-weight: bold'>ASM Storage API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Node.js, TypeScript, Express; port 3000]</div><div style='font-size: 80%; margin-top:10px'>Internal storage service for<br />document components,<br />manifests, licenses, and<br />certificates.</div>"]
+        style 62 fill:#7c3aed,stroke:#6d28d9,color:#ffffff
       end
 
       subgraph group3 ["Web Experience"]
         style group3 fill:#ffffff,stroke:#cccccc,color:#cccccc,stroke-dasharray:5
 
-        14["<div style='font-weight: bold'>Auth Portal</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, NGINX]</div><div style='font-size: 80%; margin-top:10px'>Login, SSO, and<br />access-administration web<br />application.</div>"]
-        style 14 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
-        19["<div style='font-weight: bold'>ASM+ Web Application</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Primary document, workflow,<br />report, search, and<br />administration UI.</div>"]
-        style 19 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
-        26["<div style='font-weight: bold'>Document Viewer</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</div>"]
-        style 26 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+        13["<div style='font-weight: bold'>Auth Portal</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, NGINX]</div><div style='font-size: 80%; margin-top:10px'>Login, SSO, and<br />access-administration web<br />application.</div>"]
+        style 13 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+        18["<div style='font-weight: bold'>ASM+ Web Application</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Primary document, workflow,<br />report, search, and<br />administration UI.</div>"]
+        style 18 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
+        25["<div style='font-weight: bold'>Document Viewer</div><div style='font-size: 70%; margin-top: 0px'>[Container: React, Vite, Node static server]</div><div style='font-size: 80%; margin-top:10px'>Displays files retrieved from<br />ASM+ or SAP integration<br />endpoints.</div>"]
+        style 25 fill:#2563eb,stroke:#1d4ed8,color:#ffffff
       end
 
-      72[("<div style='font-weight: bold'>Runtime Secrets</div><div style='font-size: 70%; margin-top: 0px'>[Container: Kubernetes Opaque Secret]</div><div style='font-size: 80%; margin-top:10px'>Namespace-scoped secret<br />containing the seven keys<br />observed in the live<br />deployment; values are not<br />modeled.</div>")]
-      style 72 fill:#ffffff,stroke:#326ce5,color:#172033
+      71[("<div style='font-weight: bold'>Runtime Secrets</div><div style='font-size: 70%; margin-top: 0px'>[Container: Kubernetes Opaque Secret]</div><div style='font-size: 80%; margin-top:10px'>Namespace-scoped secret<br />containing the seven keys<br />observed in the live<br />deployment; values are not<br />modeled.</div>")]
+      style 71 fill:#ffffff,stroke:#326ce5,color:#172033
     end
 
-    47-. "<div>Redirects browser-origin SAP<br />launch requests</div><div style='font-size: 70%'>[HTTPS with bounded viewer token]</div>" .->26
-    38-. "<div>Reads and writes document<br />objects, manifests, licenses,<br />and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->63
-    47-. "<div>Reads and writes SAP document<br />objects and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->63
-    55-. "<div>Reads and writes Salesforce<br />document and registry objects</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->63
-    32-. "<div>Reads and writes identity and<br />access tables through a local<br />Cloud SQL Auth Proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->7
-    38-. "<div>Reads and writes document<br />metadata, RBAC, workflow,<br />audit, and reporting tables<br />through a local proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->7
-    47-. "<div>Persists SAP document<br />hierarchy and metadata<br />through a local proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->7
-    55-. "<div>Persists Salesforce document<br />hierarchy and metadata<br />through a local proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->7
-    63-. "<div>Stores and retrieves<br />binaries, manifests,<br />licenses, and certificates<br />using ADC</div><div style='font-size: 70%'>[GCS API over HTTPS]</div>" .->8
-    9-. "<div>Provides approved core secret<br />material during provisioning</div><div style='font-size: 70%'>[Administrative provisioning path]</div>" .->72
-    72-. "<div>Injects database, JWT,<br />superadmin, and client-key<br />secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->32
-    72-. "<div>Injects database, JWT,<br />internal API, and optional<br />vector secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->38
-    72-. "<div>Injects database, JWT,<br />internal API, and SAP user<br />secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->47
-    72-. "<div>Injects database, internal<br />API, Salesforce user, and<br />optional vector secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->55
-    72-. "<div>Injects the internal ASM API<br />key</div><div style='font-size: 70%'>[Environment variables]</div>" .->63
-    72-. "<div>Injects the Auth client key</div><div style='font-size: 70%'>[Environment variable]</div>" .->19
-    32-. "<div>Exchanges assertions when<br />configured</div><div style='font-size: 70%'>[SAML/Microsoft]</div>" .->5
-    1-. "<div>Uses the main application</div><div style='font-size: 70%'>[HTTPS]</div>" .->19
-    1-. "<div>Signs in and manages a<br />profile</div><div style='font-size: 70%'>[HTTPS]</div>" .->14
-    1-. "<div>Views document content</div><div style='font-size: 70%'>[HTTPS]</div>" .->26
-    2-. "<div>Administers users, roles,<br />applications, structures, and<br />connections</div><div style='font-size: 70%'>[HTTPS]</div>" .->14
-    5-. "<div>Provides optional federated<br />identity assertions</div><div style='font-size: 70%'>[SAML 2.0 or Microsoft identity]</div>" .->32
-    14-. "<div>Authenticates users and<br />administers identity/access<br />data</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->32
-    19-. "<div>Redirects the browser to the<br />SSO portal</div><div style='font-size: 70%'>[HTTPS]</div>" .->14
-    19-. "<div>Authenticates and checks<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->32
-    19-. "<div>Performs document, workflow,<br />report, search, and audit<br />operations</div><div style='font-size: 70%'>[HTTPS/JSON and binary]</div>" .->38
-    19-. "<div>Launches the selected<br />document</div><div style='font-size: 70%'>[HTTPS]</div>" .->26
-    26-. "<div>Redirects the browser to SSO<br />when a session is absent</div><div style='font-size: 70%'>[HTTPS]</div>" .->14
-    26-. "<div>Validates authentication and<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->32
-    26-. "<div>Retrieves ASM+ metadata and<br />file content</div><div style='font-size: 70%'>[HTTPS/JSON and HTTP range]</div>" .->38
-    26-. "<div>Retrieves SAP-origin document<br />components</div><div style='font-size: 70%'>[HTTPS/ArchiveLink]</div>" .->47
+    54-. "<div>Reads and writes SAP<br />SuccessFactors document and<br />registry objects</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->62
+    31-. "<div>Reads and writes identity and<br />access tables through a local<br />Cloud SQL Auth Proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->6
+    37-. "<div>Reads and writes document<br />metadata, RBAC, workflow,<br />audit, and reporting tables<br />through a local proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->6
+    46-. "<div>Persists SAP document<br />hierarchy and metadata<br />through a local proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->6
+    54-. "<div>Persists SAP SuccessFactors<br />document hierarchy and<br />metadata through a local<br />proxy</div><div style='font-size: 70%'>[PostgreSQL on 127.0.0.1:5432]</div>" .->6
+    62-. "<div>Stores and retrieves<br />binaries, manifests,<br />licenses, and certificates<br />using ADC</div><div style='font-size: 70%'>[GCS API over HTTPS]</div>" .->7
+    8-. "<div>Provides approved core secret<br />material during provisioning</div><div style='font-size: 70%'>[Administrative provisioning path]</div>" .->71
+    71-. "<div>Injects database, JWT,<br />superadmin, and client-key<br />secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->31
+    71-. "<div>Injects database, JWT,<br />internal API, and optional<br />vector secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->37
+    71-. "<div>Injects database, JWT,<br />internal API, and SAP user<br />secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->46
+    71-. "<div>Injects database, internal<br />API, SuccessFactors<br />managed-user, and optional<br />vector secrets</div><div style='font-size: 70%'>[Environment variables]</div>" .->54
+    71-. "<div>Injects the internal ASM API<br />key</div><div style='font-size: 70%'>[Environment variables]</div>" .->62
+    71-. "<div>Injects the Auth client key</div><div style='font-size: 70%'>[Environment variable]</div>" .->18
+    1-. "<div>Uses the main application</div><div style='font-size: 70%'>[HTTPS]</div>" .->18
+    1-. "<div>Signs in and manages a<br />profile</div><div style='font-size: 70%'>[HTTPS]</div>" .->13
+    1-. "<div>Views document content</div><div style='font-size: 70%'>[HTTPS]</div>" .->25
+    2-. "<div>Administers users, roles,<br />applications, structures, and<br />connections</div><div style='font-size: 70%'>[HTTPS]</div>" .->13
+    13-. "<div>Authenticates users and<br />administers identity/access<br />data</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->31
+    18-. "<div>Redirects the browser to the<br />SSO portal</div><div style='font-size: 70%'>[HTTPS]</div>" .->13
+    18-. "<div>Authenticates and checks<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->31
+    18-. "<div>Performs document, workflow,<br />report, search, and audit<br />operations</div><div style='font-size: 70%'>[HTTPS/JSON and binary]</div>" .->37
+    18-. "<div>Launches the selected<br />document</div><div style='font-size: 70%'>[HTTPS]</div>" .->25
+    25-. "<div>Redirects the browser to SSO<br />when a session is absent</div><div style='font-size: 70%'>[HTTPS]</div>" .->13
+    25-. "<div>Validates authentication and<br />application access</div><div style='font-size: 70%'>[HTTPS/JSON, JWT]</div>" .->31
+    25-. "<div>Retrieves ASM+ metadata and<br />file content</div><div style='font-size: 70%'>[HTTPS/JSON and HTTP range]</div>" .->37
+    25-. "<div>Retrieves SAP-origin document<br />components</div><div style='font-size: 70%'>[HTTPS/ArchiveLink]</div>" .->46
+    46-. "<div>Redirects browser-origin SAP<br />launch requests</div><div style='font-size: 70%'>[HTTPS with bounded viewer token]</div>" .->25
+    37-. "<div>Reads and writes document<br />objects, manifests, licenses,<br />and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->62
+    46-. "<div>Reads and writes SAP document<br />objects and certificates</div><div style='font-size: 70%'>[HTTP/REST, X-Api-Key]</div>" .->62
 
   end

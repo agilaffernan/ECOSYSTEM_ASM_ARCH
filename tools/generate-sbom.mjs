@@ -86,9 +86,9 @@ const buildTools = [
   {
     type: "application",
     name: "Graphviz",
-    version: "15.1.1",
-    "bom-ref": "pkg:generic/graphviz@15.1.1?scope=build",
-    purl: "pkg:generic/graphviz@15.1.1",
+    version: "15.1.0",
+    "bom-ref": "pkg:generic/graphviz@15.1.0?scope=build",
+    purl: "pkg:generic/graphviz@15.1.0",
     scope: "excluded",
     properties: [{ name: "auritas:usage", value: "Build-time SVG rendering only" }]
   },
